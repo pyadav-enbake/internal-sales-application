@@ -1,0 +1,84 @@
+		<div id="page-heading">
+			<ol class="breadcrumb">
+				<li><a href="index.htm">Administrators</a></li>
+				<li class="active">Edit Administrators</li>
+			</ol>
+
+			<h1>Edit Administrators</h1>
+			<div class="options">
+                    <div class="btn-toolbar">
+                        <div class="btn-group hidden-xs">
+                            <a href='#' class="btn btn-default dropdown-toggle" data-toggle='dropdown'><i class="fa fa-cloud-download"></i><span class="hidden-sm"> Export as  </span><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Text File (*.txt)</a></li>
+                                <li><a href="#">Excel File (*.xlsx)</a></li>
+                                <li><a href="#">PDF File (*.pdf)</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn btn-default"><i class="fa fa-cog"></i></a>
+                    </div>
+                </div>
+		</div>
+		<div class="container">
+
+
+			<%= form_tag("/rcadmin/administrators/#{@administrator.id}",:method => :PUT,:class=>"form-horizontal row-border") do  %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-orange">
+						<div class="panel-heading">
+							<h4>Edit Administrators</h4>
+							<div class="options">
+						
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Username</label>
+							                <div class="col-sm-6">
+												<%= text_field_tag :"rcadmin_admin[username]","", :class=>"form-control",:placeholder=>"Username",:value=>"#{@administrator.username}"%>
+							                    <!--p style="margin-top:5px; margin-bottom:0;"><buttn class="btn-link">Check Availability</a></p-->
+							                </div>
+							                <div class="col-sm-3"><p class="help-block">16 characters maximum</p></div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Email Address</label>
+							                <div class="col-sm-6">
+												<%= text_field_tag "rcadmin_admin[email]","", :class=>"form-control",:placeholder=>"Email",:value=>"#{@administrator.email}"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Password</label>
+							                <div class="col-sm-6">
+												<%= password_field_tag "rcadmin_admin[password]" , "",:class=>"form-control",:placeholder=>"Password"%>
+							                </div>
+							                <div class="col-sm-3"><p class="help-block">8 characters minimum</p></div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Confirm Password</label>
+							                <div class="col-sm-6">
+							                <%= password_field_tag "rcadmin_admin[password_confirmation]","", :class=>"form-control",:placeholder=>"Repet Password" %>
+							                </div>
+							            </div>
+
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-6 col-sm-offset-3">
+				      			<div class="btn-toolbar">
+									<%= submit_tag "Update Admin" ,:class=>"btn-primary btn"%>
+									<%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
+					      			<%=link_to "Back","/rcadmin/administrators",:class=>"btn-default btn"%>
+				      			</div>
+				      		</div>
+				      	</div>
+				      </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>

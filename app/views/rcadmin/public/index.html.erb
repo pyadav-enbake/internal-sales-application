@@ -1,0 +1,49 @@
+<div class="verticalcenter">
+
+	<a href="#"><%=image_tag('logo-big.png',:alt=>"Logo",:class=>"brand")%></a>
+	<div class="panel panel-primary">
+		<div class="panel-body">
+			<h4 class="text-center" style="margin-bottom: 25px;">Log in to get started or <a href="/admins/sign_up">Sign Up</a></h4>
+				<form method="post" id="new_admin" class="new_admin" action="/admins/sign_in" accept-charset="UTF-8">
+					<div style="margin:0;padding:0;display:inline">
+						<input type="hidden" value="✓" name="utf8">
+						<input type="hidden" value="+scnj7QPHGHf/4EB9bLgyDAUQAA7P5QEadRSdcgQIUY=" name="authenticity_token">
+					</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+									<input type="email" value="" name="admin[email]" id="admin_email" autofocus="autofocus" class="form-control" placeholder="Email" reqiured>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+									<input type="password" name="admin[password]" id="admin_password" class="form-control" placeholder="Password">
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="pull-right">
+								<input type="hidden" value="0" name="admin[remember_me]">
+								<input type="checkbox" value="1" name="admin[remember_me]" id="admin_remember_me" style="margin-bottom: 20px">
+								<label for="admin_remember_me">Remember me</label>
+							</div>
+							
+						</div>
+					
+					
+		</div>
+		<div class="panel-footer">
+			<a href="/admins/password/new" class="pull-left btn btn-link" style="padding-left:0">Forgot password?</a>
+			
+			<div class="pull-right">
+				<a href="#" class="btn btn-default">Reset</a>
+				<input type="submit" value="Log In" name="commit" class="btn btn-primary">
+			</div>
+		</div>
+		</form>
+	</div>
+ </div>

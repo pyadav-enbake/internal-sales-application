@@ -52,4 +52,4 @@ gem 'therubyracer'
 gem "font-awesome-rails"
 gem "protected_attributes"
 gem 'sanitize'
-gem 'pg', group: [:development, :test]
+gem 'pg'

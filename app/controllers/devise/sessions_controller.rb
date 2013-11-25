@@ -6,7 +6,6 @@ class Devise::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
-  render :text => 'call' and return false
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     respond_with(resource, serialize_options(resource))

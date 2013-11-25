@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
 	end
   
   def after_sign_in_path_for(resource)
-	render :text => 'call' and return false
+    session[:username] = resource[:username]
+    session[:email] = resource[:email]
+    session[:admin_id] = resource[:id]
+    session[:first_name] = resource[:first_name]
+    session[:last_name] = resource[:last_name]
 	dashboard_url_path
   end
   def after_sign_up_path_for(resource)

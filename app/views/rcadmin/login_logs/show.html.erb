@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @rcadmin_login_log.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @rcadmin_login_log.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @rcadmin_login_log.email %>
+</p>
+
+<p>
+  <strong>Login time:</strong>
+  <%= @rcadmin_login_log.login_time %>
+</p>
+
+<p>
+  <strong>Logout time:</strong>
+  <%= @rcadmin_login_log.logout_time %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @rcadmin_login_log.ip %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_login_log_path(@rcadmin_login_log) %> |
+<%= link_to 'Back', rcadmin_login_logs_path %>

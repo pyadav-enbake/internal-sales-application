@@ -1,4 +1,8 @@
 RomarCabinates::Application.routes.draw do
+  namespace :rcadmin do
+    resources :login_logs
+  end
+
 	root "rcadmin/public#index"
 	namespace :rcadmin do
 		get "/admins" => "devise/resistrations#new"

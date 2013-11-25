@@ -13,16 +13,27 @@ class Devise::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
+     
+
+    if params[:admin]["email"].blank? 
+		flash[:error] = "Email should n't Blank"
+    end
+    if params[:admin]["password"].blank? 
+		flash[:error] = "Password should n't Blank"
+    end
+    if resource.nil? 
+		flash[:error] = "Invalid Email or Password"
+    end
+    
+    
     self.resource = warden.authenticate!(auth_options)
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    set_flash_message(:notice, :signed_in) 
+    
     sign_in(resource_name, resource)
-    #render :text => resource[:username].inspect and return false
-    session[:username] = resource[:username]
-    session[:email] = resource[:email]
-    session[:admin_id] = resource[:id]
-    session[:first_name] = resource[:first_name]
-    session[:last_name] = resource[:last_name]
+	
     yield resource if block_given?
+
+
     #respond_with resource,redirect_to :controller => 'rcadmin/dashboard', :action => 'index'
     respond_with resource, :location => after_sign_in_path_for(resource)
   end

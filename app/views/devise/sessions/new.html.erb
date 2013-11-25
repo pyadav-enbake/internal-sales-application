@@ -5,6 +5,12 @@
 			<h4 class="text-center" style="margin-bottom: 25px;">Log in to get started or <a href="/admins/sign_up">Sign Up</a></h4>
 			   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html=>{:style=>"margin-bottom: 0px !important;"}) do |f| %>
 				<%= devise_error_messages! %>
+		<%if flash[:error] %>
+		<div class="alert alert-dismissable alert-danger">
+			<%=flash[:error]%>
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		</div>
+		<%end%>
 						<div class="form-group">
 							<div class="col-sm-12">
 								<div class="input-group">

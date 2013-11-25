@@ -18,10 +18,31 @@ class ApplicationController < ActionController::Base
     session[:admin_id] = resource[:id]
     session[:first_name] = resource[:first_name]
     session[:last_name] = resource[:last_name]
+
+	@loginlogs = Rcadmin::LoginLog.new
+	@loginlogs.email = resource[:email]
+	@loginlogs.login_time = Time.now
+	@loginlogs.first_name = resource[:first_name]
+	@loginlogs.last_name = resource[:last_name]
+	@loginlogs.logout_time = ""
+	@loginlogs.ip = request.remote_ip
+	@loginlogs.save
+	session[:login_log_id] = @loginlogs.id    
+    
+    
 	dashboard_url_path
   end
   def after_sign_up_path_for(resource)
 	new_admin_session_path
   end
+  
+  def check_auth
+  
+	if !admin_signed_in?
+		redirect_to "/"
+	end
+  end
+  
+
 
 end

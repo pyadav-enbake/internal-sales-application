@@ -1,4 +1,5 @@
 class Rcadmin::AdministratorsController < ApplicationController
+  before_filter :check_auth
   def index
 	flash[:notice] = nil
 	@administrators =  Rcadmin::Admin.all
@@ -9,11 +10,14 @@ class Rcadmin::AdministratorsController < ApplicationController
   end
 
   def create
+  
 	@administrator =  Rcadmin::Admin.new(params[:rcadmin_admin])
 	if @administrator.save
+	render :text => 'in' and return false
 		flash[:notice] = 'Record added successfully.'
 		redirect_to  :controller => "rcadmin/administrators",:action => "index"
 	else
+	#render :text => @administrator.errors.full_messages and return false
 		render :action => "new"
 	end
   end
@@ -33,7 +37,6 @@ class Rcadmin::AdministratorsController < ApplicationController
   end
 
   def destroy
-  render :text => params.inspect and return false
 		@administrator = Rcadmin::Admin.find(params[:id])
 		@administrator.destroy
 		flash[:notice] = 'Record deleted successfully.'

@@ -31,7 +31,14 @@
 							<div class="options">
 						
 							</div>
-						</div>
+						</div><br>
+						<%if @administrator.errors.any? %>
+						<div class="alert alert-dismissable alert-danger">
+								<%=@administrator.errors.full_messages[0] %>.
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							</div>
+
+						<%end%>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -42,6 +49,18 @@
 							                    <!--p style="margin-top:5px; margin-bottom:0;"><buttn class="btn-link">Check Availability</a></p-->
 							                </div>
 							                <div class="col-sm-3"><p class="help-block">16 characters maximum</p></div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">First Name</label>
+							                <div class="col-sm-6">
+												<%= text_field_tag "rcadmin_admin[first_name]","", :class=>"form-control",:placeholder=>"Email"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Last Name</label>
+							                <div class="col-sm-6">
+												<%= text_field_tag "rcadmin_admin[last_name]","", :class=>"form-control",:placeholder=>"Email"%>
+							                </div>
 							            </div>
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Email Address</label>

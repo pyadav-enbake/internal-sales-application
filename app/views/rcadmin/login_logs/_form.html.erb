@@ -1,0 +1,41 @@
+<%= form_for(@rcadmin_login_log) do |f| %>
+  <% if @rcadmin_login_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rcadmin_login_log.errors.count, "error") %> prohibited this rcadmin_login_log from being saved:</h2>
+
+      <ul>
+      <% @rcadmin_login_log.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :login_time %><br>
+    <%= f.datetime_select :login_time %>
+  </div>
+  <div class="field">
+    <%= f.label :logout_time %><br>
+    <%= f.datetime_select :logout_time %>
+  </div>
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

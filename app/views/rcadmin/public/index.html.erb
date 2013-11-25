@@ -9,6 +9,12 @@
 						<input type="hidden" value="✓" name="utf8">
 						<input type="hidden" value="+scnj7QPHGHf/4EB9bLgyDAUQAA7P5QEadRSdcgQIUY=" name="authenticity_token">
 					</div>
+					<%if flash[:error] %>
+					<div class="alert alert-dismissable alert-danger">
+						<%=flash[:error]%>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					</div>
+					<%end%>
 						<div class="form-group">
 							<div class="col-sm-12">
 								<div class="input-group">

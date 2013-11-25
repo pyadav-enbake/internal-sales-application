@@ -15,11 +15,11 @@ class Devise::RegistrationsController < DeviseController
     if resource.save
       yield resource if block_given?
       if resource.active_for_authentication?
-		session[:username] = resource[:username]
-		session[:email] = resource[:email]
-		session[:admin_id] = resource[:id]
-		session[:first_name] = resource[:first_name]
-		session[:last_name] = resource[:last_name]
+#		session[:username] = resource[:username]
+#		session[:email] = resource[:email]
+#		session[:admin_id] = resource[:id]
+#		session[:first_name] = resource[:first_name]
+#		session[:last_name] = resource[:last_name]
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, :location => after_sign_up_path_for(resource)

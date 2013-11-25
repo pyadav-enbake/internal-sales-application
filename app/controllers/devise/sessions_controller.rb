@@ -23,9 +23,10 @@ class Devise::SessionsController < DeviseController
     session[:first_name] = resource[:first_name]
     session[:last_name] = resource[:last_name]
     render :text => session[:username].inspect and return false
-    yield resource if block_given?
+    #yield resource if block_given?
     #respond_with resource,redirect_to :controller => 'rcadmin/dashboard', :action => 'index'
-    respond_with resource, :location => after_sign_in_path_for(resource)
+    
+    #respond_with resource, :location => after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out

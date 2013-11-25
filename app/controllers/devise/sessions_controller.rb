@@ -6,6 +6,7 @@ class Devise::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
+  render :text => 'call' and return false
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     respond_with(resource, serialize_options(resource))
@@ -22,11 +23,9 @@ class Devise::SessionsController < DeviseController
     session[:admin_id] = resource[:id]
     session[:first_name] = resource[:first_name]
     session[:last_name] = resource[:last_name]
-    render :text => session[:username].inspect and return false
-    #yield resource if block_given?
+    yield resource if block_given?
     #respond_with resource,redirect_to :controller => 'rcadmin/dashboard', :action => 'index'
-    
-    #respond_with resource, :location => after_sign_in_path_for(resource)
+    respond_with resource, :location => after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out

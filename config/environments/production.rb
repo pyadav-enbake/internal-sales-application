@@ -77,4 +77,21 @@ RomarCabinates::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+    config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => "gmail.com",
+    :authentication       => "plain",
+    :enable_starttls_auto => true,
+    :user_name            => "sandboxtest1987",
+    :password             => "sandboxtest1987"
+  }
+  
+  
+  config.action_mailer.default_url_options = {
+    :host => "http://romarcabinates.herokuapp.com/",
+  }
+  
+  
 end

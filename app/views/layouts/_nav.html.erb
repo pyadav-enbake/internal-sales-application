@@ -103,7 +103,7 @@
 				<li><a href="extras-blank.htm">Blank Page</a></li>
 			</ul>
 		</li-->
-		<li><a href="javascript:;"><i class="fa fa-sitemap"></i> <span>Administrator</span></a>
+		<li><a href="javascript:;"><i class="fa fa-user"></i> <span>Administrator</span></a>
 			<ul class="acc-menu">
 				<li><%=link_to "Administrator",rcadmin_administrators_path%></li>
 				<li><%=link_to "Login Logs",rcadmin_login_logs_path%>
@@ -123,6 +123,16 @@
 				</li>
 			</ul>
 		</li>
+
+		<li><a href="javascript:;"><i class="fa fa-sitemap"></i> <span>Category</span></a>
+			<ul class="acc-menu">
+				<li><%=link_to "Category",rcadmin_categories_path%></li>
+				<!--li><%=link_to "Login Logs",rcadmin_login_logs_path%>
+				</li-->
+			</ul>
+		</li>
+
+
 	</ul>
 	<!-- END SIDEBAR MENU -->
 </nav>

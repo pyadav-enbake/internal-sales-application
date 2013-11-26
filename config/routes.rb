@@ -1,5 +1,9 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :categories
+  end
+
+  namespace :rcadmin do
     resources :login_logs
   end
 

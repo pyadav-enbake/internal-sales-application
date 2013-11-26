@@ -26,7 +26,12 @@
 			</div>
 		</div-->
 	</div>
-
+		<%if flash[:notice] %>
+		<div class="alert alert-dismissable alert-success">
+			<strong>Well done!</strong> <%=flash[:notice]%>
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		</div>
+		<%end%>
 
 	<div class="container">
 		<div class="row">
@@ -519,7 +524,7 @@
 							<div class="tab-pane active" id="threads">
 								<ul class="panel-threads">
 									<li>
-										<img src="assets/demo/avatar/aniss.png" alt="Aniss">
+										<%=image_tag('demo/avatar/aniss.png',:alt => "Aniss")%>
 										<div class="content">
 											<span class="time">20 mins</span>
 											<a href="#" class="title">Envato’s Most Wanted – $5,000 Reward for Music & Band Themes and Templates</a>
@@ -527,7 +532,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/corbett.png" alt="Corbett">
+										<%=image_tag('demo/avatar/corbett.png',:alt => "Corbett")%>
 										<div class="content">
 											<span class="time">2 hrs</span>
 											<a href="#" class="title">How to create a corporate wordpress theme?</a>
@@ -535,7 +540,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/dangerfield.png" alt="Dangerfield">
+										<%=image_tag('demo/avatar/dangerfield.png',:alt => "Dangerfield")%>
 										<div class="content">
 											<span class="time">4 hrs</span>
 											<a href="#" class="title">Which cart is growing in popularity - WOOCOMMERCE or OPENCART? And which one would you choose?</a>
@@ -543,7 +548,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/doyle.png" alt="Doyle">
+										<%=image_tag('demo/avatar/doyle.png',:alt => "Doyle")%>
 										<div class="content">
 											<span class="time">13 hrs</span>
 											<a href="#" class="title">Pros and Cons of Using Grids in Responsive Web Design</a>
@@ -551,7 +556,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/jackson.png" alt="Jackson">
+										<%=image_tag('demo/avatar/jackson.png',:alt => "Jackson")%>
 										<div class="content">
 											<span class="time">19 hrs</span>
 											<a href="#" class="title">Best Web & Graphic Design Proposal Software</a>
@@ -559,7 +564,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/aniss.png" alt="Aniss">
+										<%=image_tag('demo/avatar/aniss.png',:alt => "Aniss")%>
 										<div class="content">
 											<span class="time">20 mins</span>
 											<a href="#" class="title">Envato’s Most Wanted – $5,000 Reward for Music & Band Themes and Templates</a>
@@ -567,7 +572,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/corbett.png" alt="Corbett">
+										<%=image_tag('demo/avatar/corbett.png',:alt => "Corbett")%>
 										<div class="content">
 											<span class="time">2 hrs</span>
 											<a href="#" class="title">How to create a corporate wordpress theme?</a>
@@ -575,7 +580,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/dangerfield.png" alt="Dangerfield">
+										<%=image_tag('demo/avatar/dangerfield.png',:alt => "Dangerfield")%>
 										<div class="content">
 											<span class="time">4 hrs</span>
 											<a href="#" class="title">Which cart is growing in popularity - WOOCOMMERCE or OPENCART? And which one would you choose?</a>
@@ -583,7 +588,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/doyle.png" alt="Doyle">
+										<%=image_tag('demo/avatar/doyle.png',:alt => "Doyle")%>
 										<div class="content">
 											<span class="time">13 hrs</span>
 											<a href="#" class="title">Pros and Cons of Using Grids in Responsive Web Design</a>
@@ -591,7 +596,7 @@
 										</div>
 									</li>
 									<li>
-										<img src="assets/demo/avatar/jackson.png" alt="Jackson">
+										<%=image_tag('demo/avatar/jackson.png',:alt => "Jackson")%>
 										<div class="content">
 											<span class="time">19 hrs</span>
 											<a href="#" class="title">Best Web & Graphic Design Proposal Software</a>

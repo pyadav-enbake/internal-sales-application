@@ -51,7 +51,7 @@
 										<%else%>
 											<tr class="odd gradeX">
 										<%end%>
-											<td><%if d.dimension_category.category_type == 'upper_cabinates'%>Upper Cabinates<%else%>Base Cabinates<%end%></td>
+											<td><%if d.dimension_category.category_type == '0'%>Upper Cabinates<%else%>Base Cabinates<%end%></td>
 											<td><%=d.dimension_category.name%></td>
 											<td><%=d.lower_range%></td>
 											<td><%=d.upper_range%></td>

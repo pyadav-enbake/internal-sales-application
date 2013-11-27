@@ -15,7 +15,7 @@ class Rcadmin::DimensionsController < ApplicationController
   # GET /rcadmin/dimensions/new
   def new
     @rcadmin_dimension = Rcadmin::Dimension.new
-    @rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type IN (?)", ['upper_cabintes']).to_a
+    @rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type = ? ", '0')
     #render :text => @rcadmin_dimension_categories.inspect and return false
   end
 

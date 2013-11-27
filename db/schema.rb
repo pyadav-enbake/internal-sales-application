@@ -45,13 +45,13 @@ ActiveRecord::Schema.define(version: 20131127141119) do
 
   create_table "dimension_categories", force: true do |t|
     t.string   "name"
-    t.string   "category_type", limit: 14
+    t.integer  "category_type", limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "dimensions", force: true do |t|
-    t.integer  "dimension_categotry_id"
+    t.integer  "dimension_category_id"
     t.float    "lower_range"
     t.float    "upper_range"
     t.datetime "created_at"

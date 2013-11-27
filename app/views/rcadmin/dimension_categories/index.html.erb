@@ -49,7 +49,7 @@
 											<tr class="odd gradeX">
 										<%end%>
 											<td><%=dc.name%></td>
-											<td><%if dc.category_type == 'upper_cabintes'%>Upper Cabintes<%else%>Base Cabintes<%end%></td>
+											<td><%if dc.category_type == 0%>Upper Cabintes<%else%>Base Cabintes<%end%></td>
 											<td><%=dc.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
 											<td><%=dc.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
 											<td><%= link_to 'Edit', edit_rcadmin_dimension_category_path(dc),:class=>"btn btn-info" %> <%= link_to 'Delete', dc, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>

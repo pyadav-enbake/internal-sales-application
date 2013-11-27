@@ -1,0 +1,57 @@
+		<div class="container">
+
+
+			<%= form_for(@rcadmin_dimension_category,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-orange">
+						<div class="panel-heading">
+							<h4><%if @rcadmin_dimension_category.id.nil? %>Add<%else%>Edit<%end%> Dimension Category</h4>
+							<div class="options">
+						
+							</div>
+						</div><br>
+						<%if @rcadmin_dimension_category.errors.any? %>
+						<div class="alert alert-dismissable alert-danger">
+								<%=@rcadmin_dimension_category.errors.full_messages[0] %>.
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							</div>
+
+						<%end%>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Name</label>
+							                <div class="col-sm-6">
+												<%= f.text_field :name ,:class=>"form-control",:placeholder=>"Dimension Category Name"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Type</label>
+							                <div class="col-sm-6">
+												<%= select(:rcadmin_dimension_category, :category_type, [['Upper Cabintes', 'upper_cabintes'], ['Base Cabintes', 'base_cabintes']], {}, {:class => 'form-control'}) %>
+							                </div>
+							            </div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-6 col-sm-offset-3">
+				      			<div class="btn-toolbar">
+									<%if @rcadmin_dimension_category.id.nil? %>
+										<%= f.submit "Add Dimension Category" ,:class=>"btn-primary btn"%>
+									<%else%>
+										<%= f.submit "Update Dimension Category" ,:class=>"btn-primary btn"%>
+									<%end%>
+									<%=link_to "Back",rcadmin_dimension_categories_path,:class=>"btn-default btn"%>
+				      			</div>
+				      		</div>
+				      	</div>
+				      </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>

@@ -1,0 +1,32 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><%=link_to "Dimension",rcadmin_dimensions_path%></li>
+		<li class="active">Add Dimension</li>
+	</ol>
+
+	<h1>Add Dimension</h1>
+</div>
+
+<%= render 'form' %>
+
+<%#= link_to 'Back', rcadmin_dimensions_path %>
+<script>
+  $(document).ready(function() {
+    $("#__category_type_").change(function() {
+      $.ajax({
+        url: "/rcadmin/aka",
+        type: "get",
+        data: {},
+
+    
+      success: function( strData ){
+							//ShowStatus( "AJAX - success()" );
+							
+							// Load the content in to the page.
+							alert( strData );
+		
+		 				}
+		 				 });
+    });
+  });
+</script>

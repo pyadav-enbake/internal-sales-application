@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126115112) do
+ActiveRecord::Schema.define(version: 20131127141119) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 20131126115112) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",      limit: 1
+  end
+
+  create_table "dimension_categories", force: true do |t|
+    t.string   "name"
+    t.string   "category_type", limit: 14
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dimensions", force: true do |t|
+    t.integer  "dimension_categotry_id"
+    t.float    "lower_range"
+    t.float    "upper_range"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "login_logs", force: true do |t|

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dimension_categotry_id: 
+  lower_limit: 1.5
+  upper_limit: 1.5
+
+two:
+  dimension_categotry_id: 
+  lower_limit: 1.5
+  upper_limit: 1.5

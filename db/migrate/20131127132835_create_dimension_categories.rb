@@ -6,6 +6,6 @@ class CreateDimensionCategories < ActiveRecord::Migration
 
       t.timestamps
     end
-    execute "ALTER TABLE dimension_categories MODIFY COLUMN category_type ENUM('upper_cabintes', 'base_cabinates');"
+    execute "ALTER TABLE dimension_categories add category_type ENUM('upper_cabintes', 'base_cabinates');"
   end
 end

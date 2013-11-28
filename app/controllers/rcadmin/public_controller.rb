@@ -1,6 +1,5 @@
 class Rcadmin::PublicController < ApplicationController
-
-  layout 'devise'
+  layout :resolve_layout
   def index
   end
   def destroy
@@ -10,4 +9,33 @@ class Rcadmin::PublicController < ApplicationController
 	session.clear
 	redirect_to :controller => 'devise/sessions', :action => 'new'
   end
+  
+  def category_dimension_name
+	@rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type=?",params[:val])
+	respond_to do |format|
+	  format.html {}
+	end  
+  end
+
+  def dc_name
+	@dimension_categories =  Rcadmin::DimensionCategory.where("category_type=?",params[:val])
+	#render :text => @dimension_categories.inspect and return false
+	respond_to do |format|
+	  format.html {}
+	end  
+  end
+
+  
+  
+  private
+  def resolve_layout
+    case action_name
+    when 'index'
+      'devise'
+    else
+      'nolayout'
+    end
+  end
+
+  
 end

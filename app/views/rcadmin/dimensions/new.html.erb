@@ -10,23 +10,3 @@
 <%= render 'form' %>
 
 <%#= link_to 'Back', rcadmin_dimensions_path %>
-<script>
-  $(document).ready(function() {
-    $("#__category_type_").change(function() {
-      $.ajax({
-        url: "/rcadmin/aka",
-        type: "get",
-        data: {},
-
-    
-      success: function( strData ){
-							//ShowStatus( "AJAX - success()" );
-							
-							// Load the content in to the page.
-							alert( strData );
-		
-		 				}
-		 				 });
-    });
-  });
-</script>

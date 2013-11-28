@@ -1,0 +1,8 @@
+	<label class="col-sm-3 control-label">Dimension Category Name</label>
+	<div class="col-sm-6" >
+		<%#if @rcadmin_dimension_categories.nil? or @rcadmin_dimension_categories.blank? %>
+			<%#= select_tag("rcadmin_dimension[dimension_category_id]",options_from_collection_for_select(@rcadmin_dimension_categories, 'id', 'name'),:prompt => 'No Dimension Category Found',:class => 'form-control' )%>
+		<%#else%>
+			<%=select_tag "rcadmin_product[dimension_id]", option_groups_from_collection_for_select(@dimension_categories, :dimensions, :name, :id, :fullrange),:prompt=>"Select Dimension Range",:class=>'form-control'%>
+		<%#end%>
+	</div>

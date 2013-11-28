@@ -15,20 +15,25 @@ class Rcadmin::DimensionsController < ApplicationController
   # GET /rcadmin/dimensions/new
   def new
     @rcadmin_dimension = Rcadmin::Dimension.new
-    @rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type = ? ", '0')
+    @rcadmin_dimension_categories =  []
     #render :text => @rcadmin_dimension_categories.inspect and return false
   end
 
   # GET /rcadmin/dimensions/1/edit
   def edit
+	
+	@rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type=?",@rcadmin_dimension.dimension_category.name)
   end
 
   # POST /rcadmin/dimensions
   # POST /rcadmin/dimensions.json
   def create
-  #render :text => rcadmin_dimension_params.inspect and return false
     @rcadmin_dimension = Rcadmin::Dimension.new(rcadmin_dimension_params)
-
+    @rcadmin_dimension_categories = []
+   if params[:dimension][:category_type] == ""
+    flash[:errors] = "Dimension category type can't blank."
+    #render action: 'new'
+   end
     respond_to do |format|
       if @rcadmin_dimension.save
        flash[:notice] = 'Dimension was successfully created.'

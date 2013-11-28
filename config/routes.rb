@@ -1,5 +1,9 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :products
+  end
+
+  namespace :rcadmin do
     resources :dimensions
   end
 
@@ -32,7 +36,8 @@ RomarCabinates::Application.routes.draw do
 	devise_for :admins, :class_name => "Rcadmin::Admin"
 	get 'admins/dashboard' => 'rcadmin/dashboard#index',:as=> 'dashboard_url'
 	get 'rcadmin/administrators/destroy/:id' => 'rcadmin/administrators#destroy'
-	get '/rcadmin/ajax_call' => 'rcadmin/dimensions#ajax_call'
+	get '/rcadmin/catdimen_name' => 'rcadmin/public#category_dimension_name'
+	get '/rcadmin/dc_name' => 'rcadmin/public#dc_name'
 
 
 #authenticated :admins do

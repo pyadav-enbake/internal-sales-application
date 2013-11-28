@@ -32,3 +32,4 @@
 // = require placeholdr.js
 // = require applicationn.js
 // = require demo/demo.js
+// = require general.js

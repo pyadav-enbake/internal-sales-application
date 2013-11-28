@@ -11,13 +11,18 @@
 						
 							</div>
 						</div><br>
-						<%if @rcadmin_dimension.errors.any? %>
+						<%if @rcadmin_dimension.errors.any? || flash[:errors] %>
 						<div class="alert alert-dismissable alert-danger">
-								<%=@rcadmin_dimension.errors.full_messages[0] %>.
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							</div>
+							<%if flash[:errors]%>
+									<%=flash[:errors]%>
+							<%else%>
+								<%=@rcadmin_dimension.errors.full_messages[0] %>
+							<%end%>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
 
 						<%end%>
+
 						<div class="panel-body">
 							<div class="row">
 							
@@ -25,25 +30,36 @@
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Type</label>
 							                <div class="col-sm-6">
-												<%= select_tag(["category_type"],options_for_select([['Upper Cabintes', 'upper_cabintes'], ['Base Cabintes', 'base_cabintes']]), {:class => 'form-control'}) %>
+												<%if @rcadmin_dimension.id.nil? %>
+													<%= select_tag("dimension[category_type]",options_for_select([['Upper Cabintes', 0], ['Base Cabintes', 1]]), {:prompt => "Select Category Dimension Type",:class => 'form-control'}) %>
+												<%else%>
+													<%= select_tag("dimension[category_type]",options_for_select([['Upper Cabintes', 0], ['Base Cabintes', 1]],:selected => @rcadmin_dimension.dimension_category.category_type), {:prompt => "Select Category Dimension Type",:class => 'form-control'}) %>
+												<%end%>
 							                </div>
 							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Dimension Category Name</label>
-							                <div class="col-sm-6">
-												<%= select_tag("rcadmin_dimension[dimension_category_id]",options_from_collection_for_select(@rcadmin_dimension_categories, 'id', 'name'), {:class => 'form-control'}) %>
-							                </div>
-							            </div>
+							            <%if @rcadmin_dimension.id.nil? %>
+											<div class="" id="ctype">
+											</div>
+							            <%else%>
+							             <div class="form-group">
+							                <label class="col-sm-3 control-label">Dimension</label>
+											<div class="col-sm-6" id="ctype">
+												<%= select_tag("rcadmin_dimension[dimension_category_id]",options_from_collection_for_select(@rcadmin_dimension_categories, 'id', 'name',:selected=>"@rcadmin_dimension.dimension_category.name"), {:class => 'form-control'}) %>
+											</div>
+							             </div>
+							            <%end%>
+
+							           
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Lower Range</label>
 							                <div class="col-sm-6">
-												<%= f.text_field :lower_range ,:class=>"form-control",:placeholder=>"Category Name"%>
+												<%= f.text_field :lower_range ,:class=>"form-control",:placeholder=>"Lower Range"%>
 							                </div>
 							            </div>
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Upper Range</label>
 							                <div class="col-sm-6">
-												<%= f.text_field :upper_range ,:class=>"form-control",:placeholder=>"Category Name"%>
+												<%= f.text_field :upper_range ,:class=>"form-control",:placeholder=>"Upper Range"%>
 							                </div>
 							            </div>
 								</div>

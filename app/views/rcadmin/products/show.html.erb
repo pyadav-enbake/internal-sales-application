@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Categotry:</strong>
+  <%= @rcadmin_product.categotry_id %>
+</p>
+
+<p>
+  <strong>Dimension:</strong>
+  <%= @rcadmin_product.dimension_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rcadmin_product.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @rcadmin_product.price %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_product_path(@rcadmin_product) %> |
+<%= link_to 'Back', rcadmin_products_path %>

@@ -51,7 +51,7 @@
 											<td><%=sp.name%></td>
 											<td><%=sp.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
 											<td><%=sp.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
-											<td><%= link_to 'Edit', edit_rcadmin_static_page_path(sp),:class=>"btn btn-info" %> <%= link_to 'Delete', sp, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
+											<td><%= link_to 'Edit', edit_rcadmin_static_page_path(sp),:class=>"btn btn-info" %> <%#= link_to 'Delete', sp, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
 										</tr>
 									<%end%>
                                 <%end%>

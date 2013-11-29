@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rcadmin_static_page.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @rcadmin_static_page.content %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_static_page_path(@rcadmin_static_page) %> |
+<%= link_to 'Back', rcadmin_static_pages_path %>

@@ -10366,7 +10366,8 @@ footer #back-to-top {
 }
 /*Fixed*/
 .fixed-layout {
-  background: rgba(0, 0, 0, 0.9);
+ # background: rgba(0, 0, 0, 0.9);
+ background-image:url('patterns/grey_wash_wall.png') !important;
 }
 .fixed-layout #page-container,
 .fixed-layout header {

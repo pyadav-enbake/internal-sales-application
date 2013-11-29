@@ -1,5 +1,11 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :static_pages
+  end
+
+  resources :home
+  match ':action', :controller => "home",:via=>'get'
+  namespace :rcadmin do
     resources :products
   end
 
@@ -18,8 +24,8 @@ RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
     resources :login_logs
   end
-
-	root "rcadmin/public#index"
+	root "home#index"
+	#root "rcadmin/public#index"
 	namespace :rcadmin do
 		get "/admins" => "devise/resistrations#new"
 		

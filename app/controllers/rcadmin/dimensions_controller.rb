@@ -21,8 +21,7 @@ class Rcadmin::DimensionsController < ApplicationController
 
   # GET /rcadmin/dimensions/1/edit
   def edit
-	
-	@rcadmin_dimension_categories =  Rcadmin::DimensionCategory.where("category_type=?",@rcadmin_dimension.dimension_category.category_type)
+	@rcadmin_dimension_categories =  Rcadmin::DimensionCategory.find_by_ctype(@rcadmin_dimension.dimension_category.category_type)
   end
 
   # POST /rcadmin/dimensions

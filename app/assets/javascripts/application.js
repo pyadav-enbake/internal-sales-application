@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ckeditor-jquery
 // = require jquery-1.10.2.min.js
 // = require jqueryui-1.10.3.min.js
 // = require bootstrap.min.js
@@ -33,3 +34,5 @@
 // = require applicationn.js
 // = require demo/demo.js
 // = require general.js
+
+

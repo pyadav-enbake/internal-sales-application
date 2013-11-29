@@ -6,6 +6,8 @@ class Rcadmin::Dimension < ActiveRecord::Base
 	 
 	belongs_to :dimension_category 
 	has_many :products,dependent: :destroy
+
+	
 	
 	def fullrange
 		if(upper_range == nil)

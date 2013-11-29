@@ -19,7 +19,7 @@ class Rcadmin::ProductsController < ApplicationController
 
   # GET /rcadmin/products/1/edit
   def edit
-	@dimension_categories =  Rcadmin::DimensionCategory.where("category_type=?",@rcadmin_product.dimension.dimension_category.category_type)
+	@dimension_categories =Rcadmin::DimensionCategory.find_by_ctype(@rcadmin_product.dimension.dimension_category.category_type)
   end
 
   # POST /rcadmin/products

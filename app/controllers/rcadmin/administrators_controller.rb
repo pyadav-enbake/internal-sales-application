@@ -13,7 +13,7 @@ class Rcadmin::AdministratorsController < ApplicationController
   
 	@administrator =  Rcadmin::Admin.new(params[:rcadmin_admin])
 	if @administrator.save
-	render :text => 'in' and return false
+	#render :text => 'in' and return false
 		flash[:notice] = 'Record added successfully.'
 		redirect_to  :controller => "rcadmin/administrators",:action => "index"
 	else

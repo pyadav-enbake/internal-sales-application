@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RomarCabinates</title>
+  <%= stylesheet_link_tag    "front_end", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tag %>
+</head>
+<style type="text/css">
+  body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+  }
+</style>
+<body >
+	<%= render partial: "layouts/front_header" %>
+	<div class="container">
+		<%= yield %>
+		<%= render partial: "layouts/front_footer" %>
+	</div>
+	
+</body>
+</html>

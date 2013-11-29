@@ -53,3 +53,4 @@ gem "font-awesome-rails"
 gem "protected_attributes"
 gem 'sanitize'
 gem 'pg'
+gem 'ckeditor_rails'

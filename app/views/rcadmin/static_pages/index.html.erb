@@ -1,0 +1,66 @@
+        <div id="page-heading">
+            <ol class="breadcrumb">
+                <li><%=link_to "General Setting","#"%></li>
+                 <li><%=link_to "Staic Page",rcadmin_static_pages_path%></li>
+            </ol>
+
+            <h1>Staic Page</h1>
+        </div>
+		<%if flash[:notice] %>
+		<div class="alert alert-dismissable alert-success">
+			<strong>Well done!</strong> <%=flash[:notice]%>
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		</div>
+		<%end%>
+        <div class="container">
+        
+            <div class="row">
+            
+              <div class="col-md-12">
+              
+                    <div class="panel panel-sky">
+                        <div class="panel-heading">
+                        
+                            <h4>Staic Page</h4>
+                            <div class="options"> 
+								<div class="pull-right"><%=link_to 'New Staic Page', new_rcadmin_static_page_path,:class=>"btn btn-info btn-lg"%></div>
+                                <!--a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a-->
+                            </div>
+                        </div>
+                        
+                        <div class="panel-body collapse in">
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                                <thead>
+                                    <tr>
+										<th>Name</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <% if @rcadmin_static_pages.size > 0 %>
+									<% @rcadmin_static_pages.each_with_index do |sp,index|%>
+										<%if index%2 == 0 %>
+											 <tr class="even gradeC">
+										<%else%>
+											<tr class="odd gradeX">
+										<%end%>
+											<td><%=sp.name%></td>
+											<td><%=sp.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
+											<td><%=sp.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
+											<td><%= link_to 'Edit', edit_rcadmin_static_page_path(sp),:class=>"btn btn-info" %> <%= link_to 'Delete', sp, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
+										</tr>
+									<%end%>
+                                <%end%>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- container -->

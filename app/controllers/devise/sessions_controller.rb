@@ -43,7 +43,8 @@ class Devise::SessionsController < DeviseController
 	@admin =  Rcadmin::LoginLog.find(session[:login_log_id])
 	@admin.logout_time= Time.now
 	@admin.save
-	redirect_path = after_sign_out_path_for(resource_name)
+	#redirect_path = after_sign_out_path_for(resource_name)
+	redirect_path = new_admin_session_path
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
     set_flash_message :notice, :signed_out if signed_out && is_flashing_format?
     yield resource if block_given?

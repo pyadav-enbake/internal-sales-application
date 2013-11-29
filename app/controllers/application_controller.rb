@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
 	new_admin_session_path
   end
   
+
   def check_auth
   
 	if !admin_signed_in?

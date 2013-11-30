@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rcadmin_faq_category.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @rcadmin_faq_category.description %>
+</p>
+
+<p>
+  <strong>Display order:</strong>
+  <%= @rcadmin_faq_category.display_order %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @rcadmin_faq_category.status %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_faq_category_path(@rcadmin_faq_category) %> |
+<%= link_to 'Back', rcadmin_faq_categories_path %>

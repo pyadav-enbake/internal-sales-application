@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Template name:</strong>
+  <%= @rcadmin_email_template.template_name %>
+</p>
+
+<p>
+  <strong>Message body:</strong>
+  <%= @rcadmin_email_template.message_body %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_email_template_path(@rcadmin_email_template) %> |
+<%= link_to 'Back', rcadmin_email_templates_path %>

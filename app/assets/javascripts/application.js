@@ -36,3 +36,40 @@
 // = require general.js
 
 
+$(document).ready(function() {
+$('.quantity').click(function() {
+	var id = $(this).attr('id');
+	var oprice = $("#oprice"+id).val();
+	console.log(oprice);
+	var text = $(this).text();
+	var input = $('<input id="attribute" onkeypress="return isNumber(event)" value="' + text + '" />')
+	$(this).text('').append(input);
+	input.select();
+	
+	
+	input.blur(function() {
+		var text = $('#attribute').val();
+		var modify_price = (oprice*text).toFixed(2);
+		$('#price'+id).text(modify_price);
+		$('#cprice'+id).val(modify_price);
+		$('#cq'+id).val(text);
+		$('#attribute').parent().text(text);
+		$('#attribute').remove();
+	});
+});	
+
+});
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+function formSubmit(id)
+{
+document.getElementById(id).submit();
+}

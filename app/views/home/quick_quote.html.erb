@@ -30,12 +30,35 @@
 			<tr>
 			  <th>Title</th>
 			  <th>Price</th>
-			  <th>Descriptions</th>
+			  <!--th>Descriptions</th-->
 			  <th>Enter Qty.</th>
 			</tr>
 		  </thead>
 		  <tbody>
+		   <% if @all_products.size <= 0 %>
 			<tr>
+			<td>No Product available</td>
+			</tr>
+		   <%else%>
+		   
+			<% @all_products.each_with_index do |product,index|%>
+			<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
+			<tr>
+			<form action="/mycart" id="cart_frm_<%=product.id%>" method="post">
+				<%= token_tag form_authenticity_token %>
+				<input type="hidden" name="cart[name]" value="<%=product.name%>">
+				<input type="hidden" name="cart[price]" value="<%=product.price%>" id="cprice<%=product.id%>">
+				<input type="hidden" name="cart[quantity]" value="1" id="cq<%=product.id%>">
+				<td><%=product.name%></td>
+				<td id="price<%=product.id%>"><%=product.price%></td>
+				<td class="quantity" id="<%=product.id%>">1</td>
+				<td><i onClick="$('#cart_frm_<%=product.id%>').submit();" class="fa fa-shopping-cart fa-lg  fa-border"></i></td>
+			</form>
+			</tr>
+			<%end%>
+			
+		   <%end%>
+			<!--tr>
 			  <td>...</td>
 			  <td>...</td>
 			  <td>...</td>
@@ -55,7 +78,7 @@
 			  <td>...</td>
 			  <td>...</td>
 			  <td><a style="text-decoration:none;" href=""><i class="fa fa-shopping-cart fa-lg fa-border"></i></a></td>
-			</tr>
+			</tr-->
 		  </tbody>
 		</table>
 

@@ -1,10 +1,24 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :email_templates
+  end
+
+  namespace :rcadmin do
+    resources :faqs
+  end
+
+  namespace :rcadmin do
+    resources :faq_categories
+  end
+
+  namespace :rcadmin do
     resources :static_pages
   end
 
   resources :home
   match ':action', :controller => "home",:via=>'get'
+  match ':action', :controller => "home",:via=>'post'
+  match '/clearcart/:id' => "home#clear_cart",:via=>'get'
   namespace :rcadmin do
     resources :products
   end

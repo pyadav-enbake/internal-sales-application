@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  faqs_category_id: 1
+  question: MyText
+  answer: MyText
+  display_order: 1
+  status: 1
+
+two:
+  faqs_category_id: 1
+  question: MyText
+  answer: MyText
+  display_order: 1
+  status: 1

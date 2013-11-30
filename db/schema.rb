@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129123548) do
+ActiveRecord::Schema.define(version: 20131130050539) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -54,6 +54,32 @@ ActiveRecord::Schema.define(version: 20131129123548) do
     t.integer  "dimension_category_id"
     t.float    "lower_range"
     t.float    "upper_range"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "email_templates", force: true do |t|
+    t.string   "template_name"
+    t.text     "message_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "faq_categories", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "display_order"
+    t.integer  "status",        limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "faqs", force: true do |t|
+    t.integer  "faq_category_id"
+    t.text     "question"
+    t.text     "answer"
+    t.integer  "display_order"
+    t.integer  "status",          limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

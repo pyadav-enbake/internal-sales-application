@@ -1,0 +1,91 @@
+		<div class="container">
+
+
+			<%= form_for(@rcadmin_faq,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-orange">
+						<div class="panel-heading">
+							<h4><%if @rcadmin_faq.id.nil? %>Add<%else%>Edit<%end%> Faq</h4>
+							<div class="options">
+						
+							</div>
+						</div><br>
+						<%if @rcadmin_faq.errors.any? || flash[:errors] %>
+						<div class="alert alert-dismissable alert-danger">
+							<%if flash[:errors]%>
+									<%=flash[:errors]%>
+							<%else%>
+								<%=@rcadmin_faq.errors.full_messages[0] %>
+							<%end%>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						</div>
+
+						<%end%>
+
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+							             <div class="form-group">
+							                <label class="col-sm-3 control-label">Faq</label>
+											<div class="col-sm-6" id="ctype">
+												<%= select_tag("rcadmin_faq[faq_category_id]",options_from_collection_for_select(Rcadmin::FaqCategory.all, 'id', 'name',:selected=>"@rcadmin_faq.faq_category.name"), {:class => 'form-control'}) %>
+											</div>
+							             </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Question</label>
+							                <div class="col-sm-6">
+												<%= f.text_area :question ,:class=>"form-control",:placeholder=>"Question"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Answer</label>
+							                <div class="col-sm-6">
+												<%= f.text_area :answer ,:class=>"form-control",:placeholder=>"Answer"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Status</label>
+							                <div class="col-sm-6">
+												<%= select(:rcadmin_faq, :status, [['Active', 0], ['Inactive', 1]], {}, {:class => 'form-control'}) %>
+							                </div>
+							            </div>
+							            <div class="form-group">
+											<label class="col-sm-3 control-label">Display Order</label>
+											<div class="col-sm-6">
+											<select name="rcadmin_faq[display_order]"  class="form-control">
+												<%if @rcadmin_faq.id.nil? %>
+													<%for i in 1..Rcadmin::Faq.count+1%>
+														<option value = "<%=i%>"><%=i%></option>
+													<%end%>
+												<%else%>
+													<%for i in 1..Rcadmin::Faq.count%>
+														<option value = "<%=i%>"><%=i%></option>
+													<%end%>
+												<%end%>
+											</select>
+											</div>							            
+							            </div>
+							            
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-6 col-sm-offset-3">
+				      			<div class="btn-toolbar">
+									<%if @rcadmin_faq.id.nil? %>
+										<%= f.submit "Add Faq" ,:class=>"btn-primary btn"%>
+									<%else%>
+										<%= f.submit "Update Faq" ,:class=>"btn-primary btn"%>
+									<%end%>
+									<%=link_to "Back",rcadmin_faqs_path,:class=>"btn-default btn"%>
+				      			</div>
+				      		</div>
+				      	</div>
+				      </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>

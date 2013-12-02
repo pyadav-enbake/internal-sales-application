@@ -22,3 +22,9 @@
 	</div>
   </div>
 </div>
+<%if params['action'] != 'index'%>
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider">/</span></li>
+  <li class="active"><%=params['action'].sub('_',' ').capitalize if params['action'] != 'index'%></li>
+</ul>
+<%end%>

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+	<div class="span3">
+	  <!--Sidebar content-->
+	</div>
+	<div class="span9">
+	  <!--Body content-->
+	  <h3>Mycart</h3>
+
+		<% if @mycart_products.size <= 0 %>
+			<h3>You have empty cart</h3>
+		<%else%>
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th>Title</th>
+			  <th>Price</th>
+			  <!--th>Descriptions</th-->
+			  <th>Enter Qty.</th>
+			</tr>
+		  </thead>
+		  <tbody>		   
+		  <%@total_price =0%>
+			<% @mycart_products.each_with_index do |my_cart,index|%>
+			<%@total_price +=my_cart[:price].to_f %>
+			<%if !my_cart.nil?%>
+			
+			<tr>
+			<form action="update_cart" method="post" id="update_cart<%=index%>">
+			<%= token_tag form_authenticity_token %>
+			<input type="hidden" name="cart[name]" value="<%=my_cart[:name]%>" >
+				<td><%=my_cart[:name]%></td>
+				<td><%=my_cart[:price]%></td>
+				<td ><input type="text" name="cart[quantity]" id="" value="<%=my_cart[:quantity]%>" style="width: 20px;" onkeypress="return isNumber(event)">&nbsp;&nbsp;<a onClick="$('#update_cart<%=index%>').submit();"href="#">Update</a></td>
+				<td><a href="/clearcart/<%=my_cart[:name]%>" style="text-decoration:none;"><i  class="fa fa-trash-o fa-lg  fa-border"></i></td>
+				</form>
+			</tr>
+
+			<%end%>
+			<%end%>
+		  </tbody>
+		</table>
+		<hr>
+		<div>
+		<a href="/quick_quote" class="btn btn-primary"> <-Continue Shopping</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span style="text-align: center;">Total Price <%=@total_price%></span>
+		</div>
+		<%end%>
+	</div>
+  </div>
+</div>
+

@@ -21,23 +21,11 @@ class HomeController < ClientController
 	@privacy_policy_details = Rcadmin::StaticPage.privacy_policy
   end
   
-  def mycart
-   @cart_details = Hash.new
-	if session[:cart]
-		@cart_details = session[:cart]
-	end
-	@cart_details[params[:cart][:name]] = params[:cart] if params[:cart]
-	
-	session[:cart] = @cart_details
-	
-	@mycart_products = session[:cart].values 
-	@mycart_products.delete_if {|x| x == nil } 
+  
+  def help
   end
   
-  def clear_cart
-   session[:cart][params[:id]] = nil
-   redirect_to :action=>"mycart"
-  end
+  
 
 
   

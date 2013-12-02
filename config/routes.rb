@@ -16,9 +16,10 @@ RomarCabinates::Application.routes.draw do
   end
 
   resources :home
+  match '/mycart' => "carts#mycart",:via=>'get'
   match ':action', :controller => "home",:via=>'get'
-  match ':action', :controller => "home",:via=>'post'
-  match '/clearcart/:id' => "home#clear_cart",:via=>'get'
+  match ':action', :controller => "carts",:via=>'post'
+  match '/clearcart/:id' => "carts#clear_cart",:via=>'get'
   namespace :rcadmin do
     resources :products
   end

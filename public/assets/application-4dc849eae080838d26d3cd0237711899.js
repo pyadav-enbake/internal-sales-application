@@ -12208,7 +12208,11 @@ $(document).ready(function() {
 	 });
    });
 
-
+//fAQ
+	$('.showSingle').click(function(){
+		  $('.targetDiv').hide();
+		  $('#div'+$(this).attr('target')).show();
+	});
 
 });
 // This is a manifest file that'll be compiled into application.js, which will include all the files

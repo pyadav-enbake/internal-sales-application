@@ -1,0 +1,25 @@
+<div class="row-fluid">
+<div class="span12">
+  <h2>Help Faq</h2>
+  <%#=@contactus_details[0].content.html_safe%>
+  <% Rcadmin::FaqCategory.all.each_with_index do |faq_cat,index|%>
+	<a  class="showSingle" target="<%=faq_cat.id%>"><%=faq_cat.name%></a><br>
+	<%if index == 0%>
+		<div id="div<%=faq_cat.id%>" class="targetDiv">
+	<%else%>
+		<div id="div<%=faq_cat.id%>" class="targetDiv" style="display:none">
+	<%end%>
+	<% Rcadmin::Faq.by_category("#{faq_cat.id}").each_with_index do |faq,index|%>
+		<b><%=faq.question%></b><br>
+		<%=faq.answer%><br><br>
+	<%end%>
+	</div>
+  <%end%>
+</div>
+
+</div>
+
+
+
+
+

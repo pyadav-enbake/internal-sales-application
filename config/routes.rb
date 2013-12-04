@@ -16,6 +16,7 @@ RomarCabinates::Application.routes.draw do
   end
 
   resources :home
+  match '/quick_quote' => "home#quick_quote",:via=>'post'
   match '/mycart' => "carts#mycart",:via=>'get'
   match ':action', :controller => "home",:via=>'get'
   match ':action', :controller => "carts",:via=>'post'

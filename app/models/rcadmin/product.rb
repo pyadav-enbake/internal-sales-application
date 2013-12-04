@@ -5,4 +5,5 @@ class Rcadmin::Product < ActiveRecord::Base
 	belongs_to :category 
 	belongs_to :dimension
 	
+	scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 end

@@ -2,8 +2,16 @@ class HomeController < ClientController
   def index
 	@products = Rcadmin::Product.all
   end
+
   def quick_quote
-	@all_products = Rcadmin::Product.all
+	if params['rcadmin_product'] 
+		if  params['rcadmin_product']['category_id']
+			@category_id = params['rcadmin_product']['category_id']
+			@all_products = Rcadmin::Product.find_by_category(@category_id)
+		end 
+	else
+		@all_products = Rcadmin::Product.all
+	end
   end
   
   def aboutus

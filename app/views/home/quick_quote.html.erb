@@ -3,17 +3,21 @@
 	<div class="span3">
 	  <!--Sidebar content-->
 	  <h3>Search</h3>
-	  <form class="">
+	  <%= form_tag("/quick_quote", method: "post") do %>
 		<div class="controls">
 		  <input type="text" id="inputEmail" placeholder="Enter Dimensions">
 		</div>	
 		<div class="controls">
-			<%= select(:rcadmin_product,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
+			<%if @category_id%>
+				<%= select(:rcadmin_product,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected => @category_id},:class => 'form-control') %>
+			<%else%>
+				<%= select(:rcadmin_product,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
+			<%end%>
 		</div>
 		<div class="controls">
 			<button type="submit" class="btn btn-primary">Search</button>
 		</div>
-		</form>		  
+		<%end%>
 	</div>
 	<div class="span9">
 	  <!--Body content-->
@@ -37,8 +41,7 @@
 			<% @all_products.each_with_index do |product,index|%>
 			<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
 			<tr>
-			<form action="/mycart" id="cart_frm_<%=product.id%>" method="post">
-				<%= token_tag form_authenticity_token %>
+			<%= form_tag("/mycart", method: "post", :id=>"cart_frm_#{product.id}") do %>
 				<input type="hidden" name="cart[name]" value="<%=product.name%>">
 				<input type="hidden" name="cart[price]" value="<%=product.price%>" id="cprice<%=product.id%>">
 				<input type="hidden" name="cart[quantity]" value="1" id="cq<%=product.id%>">
@@ -46,32 +49,10 @@
 				<td id="price<%=product.id%>"><%=product.price%></td>
 				<td class="quantity1" id="<%=product.id%>">1</td>
 				<td><i onClick="$('#cart_frm_<%=product.id%>').submit();" class="fa fa-shopping-cart fa-lg  fa-border" style="cursor:pointer;"></i></td>
-			</form>
+			<%end%>
 			</tr>
 			<%end%>
-			
 		   <%end%>
-			<!--tr>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td><a style="text-decoration:none;" href=""><i class="fa fa-shopping-cart fa-lg  fa-border"></i></a></td>
-			</tr>
-			<tr>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td><a style="text-decoration:none;" href=""><i class="fa fa-shopping-cart fa-lg fa-border"></i></a></td>
-			</tr>
-			<tr>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td>...</td>
-			  <td><a style="text-decoration:none;" href=""><i class="fa fa-shopping-cart fa-lg fa-border"></i></a></td>
-			</tr-->
 		  </tbody>
 		</table>
 

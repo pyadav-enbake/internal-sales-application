@@ -48,6 +48,31 @@
 		</div>
 		<%end%>
 	</div>
+
+	<!-- Button to trigger modal -->
+	<a href="#myModal" role="button" class="btn pull-right" data-toggle="modal">Request for Quote</a>
+	 
+	<!-- Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Request for Quote</h3>
+	  </div>
+	  <div class="modal-body">
+		<%= form_tag("", method: "post") do %>
+			<%= text_field_tag 'name','',:placeholder => "Your Name" %><br>
+			<%= telephone_field_tag 'phone','',:placeholder => "Your Phone" %><br>
+			<%= email_field_tag 'email','',:placeholder => "Your Email" %><br>
+			<%= text_area_tag 'address','',:placeholder => "Your Address" %>
+		<%end%>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Send</button>
+	  </div>
+	</div>
+
+
+
   </div>
 </div>
-

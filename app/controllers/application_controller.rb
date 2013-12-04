@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   layout Proc.new { |controller| controller.devise_controller? ? 'devise' : 'application' }
-
+	#WelcomeMailer.testmail().deliver
 	def configure_permitted_parameters
 	  devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :email) }
 	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation,:first_name,:last_name,:terms_and_conditions) }

@@ -1,22 +1,26 @@
 <div class="row-fluid">
-<div class="span12">
-  <h2>Help Faq</h2>
-  <%#=@contactus_details[0].content.html_safe%>
-  <% Rcadmin::FaqCategory.all.each_with_index do |faq_cat,index|%>
-	<a  class="showSingle" target="<%=faq_cat.id%>"><%=faq_cat.name%></a><br>
-	<%if index == 0%>
-		<div id="div<%=faq_cat.id%>" class="targetDiv">
-	<%else%>
-		<div id="div<%=faq_cat.id%>" class="targetDiv" style="display:none">
-	<%end%>
-	<% Rcadmin::Faq.by_category("#{faq_cat.id}").each_with_index do |faq,index|%>
-		<b><%=faq.question%></b><br>
-		<%=faq.answer%><br><br>
-	<%end%>
+	<div class="span12">
+	  <h2>Help Faq</h2>
+		<div class="accordion" id="accordion2">
+		  <% Rcadmin::FaqCategory.all.each_with_index do |faq_cat,index|%>
+			<div class="accordion-group">
+			  <div class="accordion-heading">
+				<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%=faq_cat.id%>">
+				  <%=faq_cat.name%>
+				</a>
+			  </div>
+			  <div id="collapse<%=faq_cat.id%>" class="accordion-body collapse" style="height: 0px;">
+				<div class="accordion-inner">
+				<% Rcadmin::Faq.by_category("#{faq_cat.id}").each_with_index do |faq,index|%>
+					<b><%=faq.question%></b><br>
+					<%=faq.answer%><br><br>
+				<%end%>
+				</div>
+			  </div>
+			</div>
+		  <%end%>
+		</div>
 	</div>
-  <%end%>
-</div>
-
 </div>
 
 

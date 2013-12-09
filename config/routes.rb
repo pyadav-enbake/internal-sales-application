@@ -1,5 +1,9 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :customers
+  end
+
+  namespace :rcadmin do
     resources :email_templates
   end
 
@@ -19,7 +23,8 @@ RomarCabinates::Application.routes.draw do
   match '/quick_quote' => "home#quick_quote",:via=>'post'
   match '/mycart' => "carts#mycart",:via=>'get'
   match ':action', :controller => "home",:via=>'get'
-  match ':action', :controller => "carts",:via=>'post'
+  match '/update_cart' => "carts#update_cart",:via=>'post'
+ # match ':action', :controller => "carts",:via=>'post'
   match '/clearcart/:id' => "carts#clear_cart",:via=>'get'
   namespace :rcadmin do
     resources :products

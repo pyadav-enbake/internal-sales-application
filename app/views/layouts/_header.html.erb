@@ -7,6 +7,7 @@
 	<div class="navbar-header pull-left">
 		<a class="navbar-brand" href="/">Avant</a>
 	</div>
+	<%#=@current_user.inspect%>
 	<%if session[:first_name]%>
 	<ul class="nav navbar-nav pull-right toolbar">
 		<li class="dropdown">
@@ -15,7 +16,7 @@
 				<li class="username">
 					<a href="#">
 						<div class="pull-left"><%=image_tag('demo/avatar/dangerfield.png',:class=>"userimg",:alt=>"Jeff Dangerfield")%></div>
-						<div class="pull-right"><h5><%=session[:username]%></h5><small>Logged in as <br><span><%=session[:email]%></span></small></div>
+						<div class="pull-right"><h5><%=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=session[:email]%></span></small></div>
 					</a>
 				</li>
 				<li class="userlinks">

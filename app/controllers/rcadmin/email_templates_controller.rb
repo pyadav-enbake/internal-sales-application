@@ -1,4 +1,5 @@
 class Rcadmin::EmailTemplatesController < ApplicationController
+  before_filter :check_auth,:authenticate
   before_action :set_rcadmin_email_template, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/email_templates

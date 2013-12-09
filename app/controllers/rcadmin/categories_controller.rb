@@ -1,5 +1,5 @@
 class Rcadmin::CategoriesController < ApplicationController
-  before_filter :check_auth
+  before_filter :check_auth,:authenticate
   before_action :set_rcadmin_category, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/categories

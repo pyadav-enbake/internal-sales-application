@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130050539) do
+ActiveRecord::Schema.define(version: 20131209111308) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131130050539) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "terms_and_conditions",   default: false
+    t.string   "role"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 20131130050539) do
     t.string   "ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
   end
 
   create_table "products", force: true do |t|
@@ -100,6 +102,21 @@ ActiveRecord::Schema.define(version: 20131130050539) do
     t.integer  "dimension_id"
     t.string   "name"
     t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rcadmin_customers", force: true do |t|
+    t.integer  "admin_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "adress"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "email"
+    t.integer  "phone"
+    t.integer  "status",     limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

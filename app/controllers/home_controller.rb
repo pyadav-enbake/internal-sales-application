@@ -33,6 +33,10 @@ class HomeController < ClientController
   def help
   end
   
+  def error404
+	render :layout => 'nolayout'
+  end
+  
   
 
 

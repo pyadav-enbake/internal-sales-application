@@ -1,4 +1,5 @@
 class Rcadmin::ProductsController < ApplicationController
+	before_filter :check_auth,:authenticate
   before_action :set_rcadmin_product, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/products

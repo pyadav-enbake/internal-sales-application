@@ -27,13 +27,13 @@
 			
 			<tr>
 			<form action="update_cart" method="post" id="update_cart<%=index%>">
-			<%= token_tag form_authenticity_token %>
-			<input type="hidden" name="cart[name]" value="<%=my_cart[:name]%>" >
+				<%= token_tag form_authenticity_token %>
+				<input type="hidden" name="cart[name]" value="<%=my_cart[:name]%>" >
 				<td><%=my_cart[:name]%></td>
 				<td><%=my_cart[:price]%></td>
 				<td ><input type="text" name="cart[quantity]" id="" value="<%=my_cart[:quantity]%>" style="width: 20px;" onkeypress="return isNumber(event)">&nbsp;&nbsp;<a onClick="$('#update_cart<%=index%>').submit();"href="#">Update</a></td>
 				<td><a href="/clearcart/<%=my_cart[:name]%>" style="text-decoration:none;"><i  class="fa fa-trash-o fa-lg  fa-border"></i></td>
-				</form>
+			</form>
 			</tr>
 
 			<%end%>
@@ -52,25 +52,7 @@
 	<!-- Button to trigger modal -->
 	<a href="#myModal" role="button" class="btn pull-right" data-toggle="modal">Request for Quote</a>
 	 
-	<!-- Modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Request for Quote</h3>
-	  </div>
-	  <div class="modal-body">
-		<%= form_tag("", method: "post") do %>
-			<%= text_field_tag 'name','',:placeholder => "Your Name" %><br>
-			<%= telephone_field_tag 'phone','',:placeholder => "Your Phone" %><br>
-			<%= email_field_tag 'email','',:placeholder => "Your Email" %><br>
-			<%= text_area_tag 'address','',:placeholder => "Your Address" %>
-		<%end%>
-	  </div>
-	  <div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button class="btn btn-primary">Send</button>
-	  </div>
-	</div>
+	<%= render partial: "request_quote" %>
 
 
 

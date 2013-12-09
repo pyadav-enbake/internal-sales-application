@@ -1,5 +1,5 @@
 class Rcadmin::AdministratorsController < ApplicationController
-  before_filter :check_auth
+  before_filter :check_auth,:authenticate
   def index
 	flash[:notice] = nil
 	@administrators =  Rcadmin::Admin.all
@@ -10,8 +10,9 @@ class Rcadmin::AdministratorsController < ApplicationController
   end
 
   def create
-  
+  #render :text => params[:rcadmin_admin].inspect and return false
 	@administrator =  Rcadmin::Admin.new(params[:rcadmin_admin])
+	@administrator.terms_and_conditions = 1
 	if @administrator.save
 	#render :text => 'in' and return false
 		flash[:notice] = 'Record added successfully.'

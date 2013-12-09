@@ -3,16 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
+  helper_method :current_user
+ # before_filter :authenticate
+  
   layout Proc.new { |controller| controller.devise_controller? ? 'devise' : 'application' }
 	#WelcomeMailer.testmail().deliver
 	def configure_permitted_parameters
 	  devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :email) }
-	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation,:first_name,:last_name,:terms_and_conditions) }
+	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation,:first_name,:last_name,:terms_and_conditions,:role) }
 	  devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
 	end
   
   def after_sign_in_path_for(resource)
+	current_user = Rcadmin::Admin.find(resource[:id])
     session[:username] = resource[:username]
     session[:email] = resource[:email]
     session[:admin_id] = resource[:id]
@@ -26,9 +29,9 @@ class ApplicationController < ActionController::Base
 	@loginlogs.last_name = resource[:last_name]
 	@loginlogs.logout_time = ""
 	@loginlogs.ip = request.remote_ip
+	@loginlogs.role = current_user.role
 	@loginlogs.save
 	session[:login_log_id] = @loginlogs.id    
-    
     
 	dashboard_url_path
   end
@@ -43,7 +46,26 @@ class ApplicationController < ActionController::Base
 		redirect_to "/"
 	end
   end
+
+  def authenticate
+  	if current_user
+		if current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard')
+			redirect_to "/error404"
+		end
+		if current_user.role == 'admin' && params[:controller] == 'rcadmin/customers'
+			redirect_to "/error404"
+		end
+	end
+  end
   
+  private
+  
+  def current_user
+ # render :text =>params[:controller] and return false
+	if admin_signed_in?
+	@current_user = Rcadmin::Admin.find(session[:admin_id])
+	end
+  end
 
 
 end

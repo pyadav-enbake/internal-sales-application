@@ -1,4 +1,5 @@
 class Rcadmin::DimensionCategoriesController < ApplicationController
+  before_filter :check_auth,:authenticate
   before_action :set_rcadmin_dimension_category, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/dimension_categories

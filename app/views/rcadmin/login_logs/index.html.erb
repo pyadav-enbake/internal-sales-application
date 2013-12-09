@@ -43,6 +43,7 @@
                                     <tr>
 										<th>First Name</th>
 										<th>Last Name</th>
+										<th>Role</th>
                                         <th>Email</th>
                                         <th>Login Ip</th>
                                         <th>Login Time</th>
@@ -60,6 +61,7 @@
 										<%end%>
 											<td><%=ll.first_name%></td>
 											<td><%=ll.last_name%></td>
+											<td><%if ll.role=='sales_admin'%>Sales Admin<%else%><%=ll.role.capitalize%><%end%></td>
 											<td><%=ll.email%></td>
 											<td><%=ll.ip%></td>
 											<td><%=ll.login_time.strftime(" %dth %b %Y at %I:%M%p") %></td>

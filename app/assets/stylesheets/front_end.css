@@ -14,3 +14,9 @@
  */
 
 a {cursor:pointer;}
+#request_quote input {
+	width: 500px;
+}
+#request_quote textarea{
+	width: 500px;
+}

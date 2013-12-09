@@ -1,4 +1,5 @@
 class Rcadmin::FaqCategoriesController < ApplicationController
+before_filter :check_auth,:authenticate
   before_action :set_rcadmin_faq_category, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/faq_categories

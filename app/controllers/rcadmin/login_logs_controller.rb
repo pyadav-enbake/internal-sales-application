@@ -1,5 +1,5 @@
 class Rcadmin::LoginLogsController < ApplicationController
-  before_filter :check_auth
+  before_filter :check_auth,:authenticate
   before_action :set_rcadmin_login_log, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/login_logs

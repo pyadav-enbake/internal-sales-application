@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @rcadmin_customer.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @rcadmin_customer.last_name %>
+</p>
+
+<p>
+  <strong>Adress:</strong>
+  <%= @rcadmin_customer.adress %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @rcadmin_customer.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @rcadmin_customer.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @rcadmin_customer.zip %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @rcadmin_customer.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @rcadmin_customer.phone %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @rcadmin_customer.status %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_customer_path(@rcadmin_customer) %> |
+<%= link_to 'Back', rcadmin_customers_path %>

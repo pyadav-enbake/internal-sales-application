@@ -51,6 +51,7 @@
 										<th>Last Name</th>
                                         <th>Username</th>
                                         <th>Email</th>
+                                         <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -66,6 +67,7 @@
 											<td><%=a.last_name%></td>
 											<td><%=a.username%></td>
 											<td><%=a.email%></td>
+											<td><%if a.role=='sales_admin'%>Sales Admin<%else%><%=a.role.capitalize%><%end%></td>
 											<td><%=link_to "Edit","/rcadmin/administrators/#{a.id}/edit" ,:class=>"btn btn-info"%>    <%=link_to "Delete","/rcadmin/administrators/destroy/#{a.id}",:method=>"DELETE",:class=>"btn btn-brown"%></td>
 										</tr>
 									<%end%>

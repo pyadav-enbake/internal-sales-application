@@ -1,4 +1,5 @@
 class Rcadmin::FaqsController < ApplicationController
+before_filter :check_auth,:authenticate
   before_action :set_rcadmin_faq, only: [:show, :edit, :update, :destroy]
 
   # GET /rcadmin/faqs

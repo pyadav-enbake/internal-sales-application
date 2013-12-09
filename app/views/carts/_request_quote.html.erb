@@ -1,0 +1,25 @@
+	<!-- Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Request for Quote</h3>
+	  </div>
+	  <div class="modal-body">
+		<%= form_tag("", method: "post",:id=>"request_quote") do %>
+			<%= text_field_tag 'first_name','',:placeholder => "Your First Name" ,:class=>"xlarge"%><br>
+			<%= text_field_tag 'last_name','',:placeholder => "Your Last Name" %><br>
+			<%= telephone_field_tag 'phone','',:placeholder => "Your Phone" %><br>
+			<%= email_field_tag 'email','',:placeholder => "Your Email" %><br>
+			<%= text_field_tag 'state','',:placeholder => "Your State" %><br>
+			<%= text_field_tag 'city','',:placeholder => "Your City" %><br>
+			<%= text_field_tag 'zip','',:placeholder => "Your Zip" %><br>
+			<%= text_area_tag 'address','',:placeholder => "Your Address" %>
+		<%end%>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Send</button>
+	  </div>
+	</div>
+<style>
+</style>

@@ -1,10 +1,10 @@
 		<div id="page-heading">
 			<ol class="breadcrumb">
-				<li><a href="index.htm">Administrators</a></li>
+				<li><a href="#">Administrators</a></li>
 				<li class="active">Edit Administrators</li>
 			</ol>
 
-			<h1>Edit Administrators</h1>
+			<h1><%if @administrator.role == 'sales_admin' && session['admin_id'] == @administrator.id%>Update Profile<%else%>Edit Administrators<%end%></h1>
 			<div class="options">
                     <div class="btn-toolbar">
                         <div class="btn-group hidden-xs">
@@ -19,6 +19,12 @@
                     </div>
                 </div>
 		</div>
+		<%if flash[:notice] %>
+		<div class="alert alert-dismissable alert-success">
+			<strong>Well done!</strong> <%=flash[:notice]%>
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		</div>
+		<%end%>
 		<div class="container">
 
 
@@ -27,7 +33,7 @@
 				<div class="col-md-12">
 					<div class="panel panel-orange">
 						<div class="panel-heading">
-							<h4>Edit Administrators</h4>
+							<h4><%if @administrator.role == 'sales_admin' && session['admin_id'] == @administrator.id%>Update Profile<%else%>Edit Administrators<%end%></h4>
 							<div class="options">
 						
 							</div>
@@ -78,9 +84,19 @@
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Role</label>
 							                <div class="col-sm-6">
+							                <%if @administrator.role == 'sales_admin' && session['admin_id'] == @administrator.id%>
+												<%= select(:rcadmin_admin, :role, [['Admin', 'admin'], ['Sales Admin', 'sales_admin']], {:selected=>"#{@administrator.role}"}, {:disabled=>true,:class => 'form-control'}) %>
+											<%else%>
 												<%= select(:rcadmin_admin, :role, [['Admin', 'admin'], ['Sales Admin', 'sales_admin']], {:selected=>"#{@administrator.role}"}, {:selected=>"#{@administrator.role}",:class => 'form-control'}) %>
+											<%end%>
 							                </div>
 							            </div>
+							            <!--div class="form-group">
+							                <label class="col-sm-3 control-label">Choose Category For Quote</label>
+							                <div class="col-sm-6">
+												<%#= select(:rcadmin_admin,:quote_category, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected=>@administrator.quote_category.split(',')},:multiple => true,:class => 'form-control') %>
+							                </div>
+							            </div-->
 
 								</div>
 							</div>
@@ -89,9 +105,15 @@
 				      	<div class="row">
 				      		<div class="col-sm-6 col-sm-offset-3">
 				      			<div class="btn-toolbar">
-									<%= submit_tag "Update Admin" ,:class=>"btn-primary btn"%>
+									<%if @administrator.role == 'sales_admin' && session['admin_id'] == @administrator.id%>
+										<%= submit_tag "Update Profile" ,:class=>"btn-primary btn"%>
+									<%else%>
+										<%= submit_tag "Update Admin" ,:class=>"btn-primary btn"%>
+										<%=link_to "Back","/rcadmin/administrators",:class=>"btn-default btn"%>
+									<%end%>
+									<%#= submit_tag "Update Admin" ,:class=>"btn-primary btn"%>
 									<%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
-					      			<%=link_to "Back","/rcadmin/administrators",:class=>"btn-default btn"%>
+					      			
 				      			</div>
 				      		</div>
 				      	</div>
@@ -101,3 +123,16 @@
 			</div>
 		</div>
 		<%end%>
+  <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $("#rcadmin_admin_quote_category").chosen(config[selector]);
+    }
+
+  </script>

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 	def configure_permitted_parameters
 	  devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :email) }
 	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation,:first_name,:last_name,:terms_and_conditions,:role) }
-	  devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
+	  devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation,:first_name,:last_name,:role,:quote_category) }
 	end
   
   def after_sign_in_path_for(resource)
@@ -49,7 +49,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate
   	if current_user
-		if current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard')
+#render :text => params.inspect and return false
+		if current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard') &&( params[:controller] == 'rcadmin/administrators' && current_user.id != params[:id].to_i)
 			redirect_to "/error404"
 		end
 		if current_user.role == 'admin' && params[:controller] == 'rcadmin/customers'

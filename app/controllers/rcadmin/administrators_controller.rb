@@ -10,15 +10,12 @@ class Rcadmin::AdministratorsController < ApplicationController
   end
 
   def create
-  #render :text => params[:rcadmin_admin].inspect and return false
 	@administrator =  Rcadmin::Admin.new(params[:rcadmin_admin])
 	@administrator.terms_and_conditions = 1
 	if @administrator.save
-	#render :text => 'in' and return false
 		flash[:notice] = 'Record added successfully.'
 		redirect_to  :controller => "rcadmin/administrators",:action => "index"
 	else
-	#render :text => @administrator.errors.full_messages and return false
 		render :action => "new"
 	end
   end
@@ -28,10 +25,25 @@ class Rcadmin::AdministratorsController < ApplicationController
   end
 
   def update
+		
+		#if params[:rcadmin_admin][:quote_category]
+		#	params["rcadmin_admin"]["quote_category"].reject!{|a| a==""} 
+		#	params[:rcadmin_admin][:quote_category] = params[:rcadmin_admin][:quote_category].join(',')
+		#end
+		#render :text =>params[:rcadmin_admin].inspect and return false
 		@administrator = Rcadmin::Admin.find(params[:id])
+		if(params[:rcadmin_admin][:password] == "" && params[:rcadmin_admin][:password_confirmation] == "")
+			params[:rcadmin_admin].delete('password')
+			params[:rcadmin_admin].delete('password_confirmation')
+		end
 		if @administrator.update_attributes(params[:rcadmin_admin])
+		   sign_in(@administrator, :bypass => true) 
 			flash[:notice] = 'Record updated successfully.'
-			redirect_to :action => "index"
+			if(@administrator.role == 'sales_admin')
+				redirect_to "/rcadmin/administrators/#{@administrator.id}/edit"
+			else
+				redirect_to :action => "index"
+			end
 		else
 			render :action => "edit"
 		end  

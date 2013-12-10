@@ -16,4 +16,5 @@
  *= require codeprettifier/prettify
  *= require form-toggle/toggles
  *= require font-awesome
+ *= require autocomplete/chosen
  */

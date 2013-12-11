@@ -1,0 +1,4 @@
+	<label class="col-sm-3 control-label">Sub Category Name</label>
+	<div class="col-sm-6" >
+		<%= select("rcadmin_product","subcategory_id", @sub_categories.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Sub Category"},:class => 'form-control') %>	</div>
+	</div>

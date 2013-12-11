@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210085905) do
+ActiveRecord::Schema.define(version: 20131211082246) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20131210085905) do
     t.string   "last_name"
     t.boolean  "terms_and_conditions",   default: false
     t.string   "role"
-    t.string   "quote_category"
   end
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
@@ -56,21 +55,6 @@ ActiveRecord::Schema.define(version: 20131210085905) do
     t.string   "email"
     t.integer  "phone"
     t.integer  "status",     limit: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "dimension_categories", force: true do |t|
-    t.string   "name"
-    t.integer  "category_type", limit: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "dimensions", force: true do |t|
-    t.integer  "dimension_category_id"
-    t.float    "lower_range"
-    t.float    "upper_range"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,10 +98,12 @@ ActiveRecord::Schema.define(version: 20131210085905) do
   end
 
   create_table "products", force: true do |t|
-    t.integer  "category_id"
+    t.integer  "subcategory_id"
     t.integer  "dimension_id"
-    t.string   "name"
+    t.string   "title"
+    t.text     "description"
     t.float    "price"
+    t.integer  "status",         limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,6 +111,14 @@ ActiveRecord::Schema.define(version: 20131210085905) do
   create_table "static_pages", force: true do |t|
     t.string   "name"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subcategories", force: true do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.integer  "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

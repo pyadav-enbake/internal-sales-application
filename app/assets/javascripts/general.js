@@ -22,6 +22,19 @@ $(document).ready(function() {
 		}
 	 });
    });
+   
+   
+	$("#products_category_id").change(function() {
+	  $.ajax({
+		url: "/rcadmin/subcat",
+		type: "get",
+		data: {cat_id:$(this).val()},
+		success: function( data ){
+				$("#scat").addClass('form-group');
+				$("#scat").html(data);
+		}
+	 });
+   });   
 
 //fAQ
 	$('.showSingle').click(function(){

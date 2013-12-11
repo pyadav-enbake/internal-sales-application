@@ -26,6 +26,13 @@ class Rcadmin::PublicController < ApplicationController
 	end  
   end
 
+  def subcat
+	@sub_categories =  Rcadmin::Subcategory.where("category_id=?",params[:cat_id])
+	#render :text => @dimension_categories.inspect and return false
+	respond_to do |format|
+	  format.html {}
+	end  
+  end
   
   
   private

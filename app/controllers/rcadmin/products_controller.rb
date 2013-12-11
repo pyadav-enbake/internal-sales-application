@@ -27,7 +27,7 @@ class Rcadmin::ProductsController < ApplicationController
   # POST /rcadmin/products.json
   def create
     @rcadmin_product = Rcadmin::Product.new(rcadmin_product_params)
-
+	
     respond_to do |format|
       if @rcadmin_product.save
 		flash[:notice] = 'Product was successfully created.'
@@ -74,6 +74,6 @@ class Rcadmin::ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rcadmin_product_params
-      params.require(:rcadmin_product).permit(:category_id, :dimension_id, :name, :price)
+      params.require(:rcadmin_product).permit(:subcategory_id, :title,:description,:price,:status)
     end
 end

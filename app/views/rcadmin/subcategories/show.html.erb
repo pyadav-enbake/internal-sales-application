@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @rcadmin_subcategory.category_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rcadmin_subcategory.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @rcadmin_subcategory.status %>
+</p>
+
+<%= link_to 'Edit', edit_rcadmin_subcategory_path(@rcadmin_subcategory) %> |
+<%= link_to 'Back', rcadmin_subcategories_path %>

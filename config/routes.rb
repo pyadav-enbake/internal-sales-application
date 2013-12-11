@@ -1,5 +1,9 @@
 RomarCabinates::Application.routes.draw do
   namespace :rcadmin do
+    resources :subcategories
+  end
+
+  namespace :rcadmin do
     resources :customers
   end
 
@@ -65,6 +69,7 @@ RomarCabinates::Application.routes.draw do
 	get 'rcadmin/administrators/destroy/:id' => 'rcadmin/administrators#destroy'
 	get '/rcadmin/catdimen_name' => 'rcadmin/public#category_dimension_name'
 	get '/rcadmin/dc_name' => 'rcadmin/public#dc_name'
+	get '/rcadmin/subcat' => 'rcadmin/public#subcat'
 
 
 #authenticated :admins do

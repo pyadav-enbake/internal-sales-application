@@ -24,7 +24,7 @@ $(document).ready(function() {
    });
    
    
-	$("#products_category_id").change(function() {
+	$("#rcadmin_product_category_id").change(function() {
 	  $.ajax({
 		url: "/rcadmin/subcat",
 		type: "get",
@@ -34,7 +34,13 @@ $(document).ready(function() {
 				$("#scat").html(data);
 		}
 	 });
-   });   
+   }); 
+
+
+
+  $( "#accordion" ).accordion();
+
+
 
 //fAQ
 	$('.showSingle').click(function(){

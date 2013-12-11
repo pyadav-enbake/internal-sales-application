@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 	end
   
   def after_sign_in_path_for(resource)
-	current_user = Rcadmin::Admin.find(resource[:id])
+	@current_user = Rcadmin::Admin.find(resource[:id])
     session[:username] = resource[:username]
     session[:email] = resource[:email]
     session[:admin_id] = resource[:id]

@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<div id="tabs">
+  <ul class="tabs">
+    <li class=""><a href="#tabs-1">Create Customer</a></li>
+    <li ><a  href="#tabs-2">Select Category</a></li>
+    <li><a href="#tabs-3">Product List</a></li>
+  </ul>
+  <div id="tabs-1">
+	<%#= render 'customer_form' %>
+  </div>
+  <div id="tabs-2">
+    <%#= render 'category' %>
+  </div>
+  <div id="tabs-3">
+	<%= render 'product' %>  </div>
+</div>
+<script>
+$(document).ready(function() {
+$( "#tabs" ).tabs({ active: 2 });
+	$('#ui-id-1').click(function(){
+		window.location = "/rcadmin/createquote";//hardcoded link but you could pull this from the tab
+	})
+	$('#ui-id-2').click(function(){
+		window.location = "/rcadmin/quote/category";//hardcoded link but you could pull this from the tab
+	})
+	$('#ui-id-3').click(function(){
+		window.location = "/rcadmin/quote/product";//hardcoded link but you could pull this from the tab
+	})	
+})
+</script>

@@ -1,7 +1,6 @@
 		<div class="container">
 
-
-			<%= form_for(@rcadmin_customer,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+			<%= form_for(@rcadmin_customer,:url => {:action=>"save_customer_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-orange">
@@ -63,7 +62,7 @@
 												<%= f.text_field :zip ,:class=>"form-control",:placeholder=>"Zipcode"%>
 							                </div>
 							            </div>
-							            <%= f.hidden_field :admin_id ,:value=>"#{@current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
+							            <%= f.hidden_field :admin_id ,:value=>"#{current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Phone</label>
 							                <div class="col-sm-6">
@@ -88,7 +87,7 @@
 									<%else%>
 										<%= f.submit "Update Customer" ,:class=>"btn-primary btn"%>
 									<%end%>
-									<%=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
+									<%#=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
 				      			</div>
 				      		</div>
 				      	</div>

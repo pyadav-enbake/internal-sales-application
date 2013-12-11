@@ -1,6 +1,6 @@
 class Rcadmin::Product < ActiveRecord::Base
-	validates_presence_of :subcategory_id,:title,:price,:status
-	attr_accessible :title,:price,:subcategory_id,:description,:status
+	validates_presence_of :category_id,:subcategory_id,:title,:price,:status
+	attr_accessible :title,:price,:subcategory_id,:description,:status,:category_id
 	
 	belongs_to :subcategory 
 	

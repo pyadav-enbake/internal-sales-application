@@ -7,7 +7,6 @@ class Rcadmin::PublicController < ApplicationController
 	@admin.logout_time= Time.now
 	@admin.save
 	session.clear
-	render :text=> 'asdasda'.inspect and return false
 	redirect_to :controller => 'devise/sessions', :action => 'new'
   end
   

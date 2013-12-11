@@ -1,0 +1,41 @@
+<div id="accordion">
+<% @all_subcategories.each_with_index do |subcat,index|%>
+	<h3><%=subcat.name%></h3>
+	<div>
+	<%@all_products = Rcadmin::Product.where(["subcategory_id =?", subcat.id])%>
+	<table class="table">
+	  <thead>
+		<tr>
+		  <th>Title</th>
+		  <th>Price per unit</th>
+		  <!--th>Descriptions</th-->
+		  <th>Enter Qty.</th>
+		  <th>Total Price</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	   <% if @all_products.size <= 0 %>
+		<tr>
+		<td>No Product available</td>
+		</tr>
+	   <%else%>
+	   
+		<% @all_products.each_with_index do |product,index|%>
+		<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
+		<tr>
+		<%= form_tag("/mycart", method: "post", :id=>"cart_frm_#{product.id}") do %>
+				<td><%=product.title%></td>
+				<td id="price"><%=product.price%></td>
+				<td class="quantity" id="<%=product.id%>">1</td>
+				<td id="price<%=product.id%>"><%=product.price%></td>
+		<%end%>
+		</tr>
+		<%end%>
+	   <%end%>
+	  </tbody>
+	</table>
+	</div>
+<%end%>
+
+
+</div>

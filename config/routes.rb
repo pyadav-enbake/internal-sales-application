@@ -1,4 +1,5 @@
 RomarCabinates::Application.routes.draw do
+
   namespace :rcadmin do
     resources :subcategories
   end
@@ -70,6 +71,11 @@ RomarCabinates::Application.routes.draw do
 	get '/rcadmin/catdimen_name' => 'rcadmin/public#category_dimension_name'
 	get '/rcadmin/dc_name' => 'rcadmin/public#dc_name'
 	get '/rcadmin/subcat' => 'rcadmin/public#subcat'
+	get '/rcadmin/createquote' => 'rcadmin/quote#index',:as => 'create_quote'
+	get '/rcadmin/quote/category' => 'rcadmin/quote#show_category',:as => 'select_quote_category'
+	get '/rcadmin/quote/product' => 'rcadmin/quote#show_product',:as => 'select_quote_product'
+	post '/save_customer_deatils' => 'rcadmin/quote#save_customer_deatils'
+	post 'save_category_deatils' => 'rcadmin/quote#save_category_deatils'
 
 
 #authenticated :admins do

@@ -10,7 +10,7 @@ class Rcadmin::Admin < ActiveRecord::Base
 	validates_uniqueness_of :email,:on => :create
 	validates_presence_of :password ,:on => :create
 	validates_confirmation_of :password_confirmation
-	validates_acceptance_of :terms_and_conditions, :accept => true
+	#validates_acceptance_of :terms_and_conditions, :accept => true
    attr_accessible :first_name,:last_name,:email,:username, :password, :password_confirmation, :remember_me,:terms_and_conditions,:role,:quote_category
   #validates :username, :presence => true
 	

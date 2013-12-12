@@ -1,4 +1,11 @@
 		<div class="container">
+		<%if flash[:error] %>
+		<div class="alert alert-dismissable alert-danger">
+			<%=flash[:error]%>
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		</div>
+		<%end%>
+
 		<%= form_for("",:url => {:action=>"save_category_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
 			<div class="row">
 				<div class="col-md-12">
@@ -15,7 +22,7 @@
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Choose Category For Quote</label>
 							                <div class="col-sm-6">
-												<%= select("quote","category", Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {},:multiple => true,:class => 'form-control') %>
+												<%= select("quote","category", Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected=>@selected_category},:multiple => true,:class => 'form-control') %>
 							                </div>
 							            </div>
 

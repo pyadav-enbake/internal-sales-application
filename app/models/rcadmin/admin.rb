@@ -7,6 +7,7 @@ class Rcadmin::Admin < ActiveRecord::Base
 
 	validates_presence_of :first_name,:last_name,:username
 	#validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i , :message => "Invalid Format" 
+	validates :email, :presence => true, :email => true
 	validates_uniqueness_of :email,:on => :create
 	validates_presence_of :password ,:on => :create
 	validates_confirmation_of :password_confirmation

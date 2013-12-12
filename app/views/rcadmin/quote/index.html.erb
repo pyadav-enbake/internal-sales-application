@@ -18,13 +18,8 @@
 </div>
 <script>
 $(document).ready(function() {
-	$( "#tabs" ).tabs();
-	$('#ui-id-1').click(function(){
-		window.location = "/rcadmin/createquote";//hardcoded link but you could pull this from the tab
-	})
-	$('#ui-id-2').click(function(){
-		window.location = "/rcadmin/quote/category";//hardcoded link but you could pull this from the tab
-	})
+	$( "#tabs" ).tabs({ active: 0 });
+	$( "#tabs" ).tabs({ disabled: [1,2] });
 	
 })
 </script>

@@ -1,41 +1,67 @@
-<div id="accordion">
-<% @all_subcategories.each_with_index do |subcat,index|%>
-	<h3><%=subcat.name%></h3>
-	<div>
-	<%@all_products = Rcadmin::Product.where(["subcategory_id =?", subcat.id])%>
-	<table class="table">
-	  <thead>
-		<tr>
-		  <th>Title</th>
-		  <th>Price per unit</th>
-		  <!--th>Descriptions</th-->
-		  <th>Enter Qty.</th>
-		  <th>Total Price</th>
-		</tr>
-	  </thead>
-	  <tbody>
-	   <% if @all_products.size <= 0 %>
-		<tr>
-		<td>No Product available</td>
-		</tr>
-	   <%else%>
-	   
-		<% @all_products.each_with_index do |product,index|%>
-		<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
-		<tr>
-		<%= form_tag("/mycart", method: "post", :id=>"cart_frm_#{product.id}") do %>
-				<td><%=product.title%></td>
-				<td id="price"><%=product.price%></td>
-				<td class="quantity" id="<%=product.id%>">1</td>
-				<td id="price<%=product.id%>"><%=product.price%></td>
+<div id="subtabs">
+  <ul class="tabs">
+	  <% @all_categories.each_with_index do |cat,index|%>
+		<li class=""><a href="#subtabs-<%=index%>"><%=cat.name%></a></li>
+	  <%end%>
+  </ul>
+  <% if @all_categories.size > 0 %>
+	  <% @all_categories.each_with_index do |cat,index|%>
+		  <div id="subtabs-<%=index%>">
+			<div id="accordion" class="accordion">
+				<%@all_subcategories = Rcadmin::Subcategory.where(["category_id =?", cat.id])%>
+				<% if @all_subcategories.size > 0 %>
+				<% @all_subcategories.each_with_index do |subcat,index|%>
+					<h3><%=subcat.name%></h3>
+					<div>
+					<%@all_products = Rcadmin::Product.where(["subcategory_id =?", subcat.id])%>
+					<table class="table">
+					  <thead>
+						<tr>
+						  <th></th>
+						  <th>Title</th>
+						  <th>Price per unit</th>
+						  <!--th>Descriptions</th-->
+						  <th>Enter Qty.</th>
+						  <th>Total Price</th>
+						</tr>
+					  </thead>
+					  <tbody>
+					   <% if @all_products.size <= 0 %>
+						<tr>
+						<td>No Product available</td>
+						</tr>
+					   <%else%>
+					   
+						<% @all_products.each_with_index do |product,index|%>
+						<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
+						<tr>
+						<%= form_tag("/mycart", method: "post", :id=>"cart_frm_#{product.id}") do %>
+								<td><input type="checkbox" name="chk<%=product.id%>" value="" class="chkpro" id="chk<%=product.id%>"></td>
+								<td><%=product.title%></td>
+								<td id="price">$<%=product.price%></td>
+								<td><input type="text" name="product_price" id="<%=product.id%>" style="width: 30px;" value="0" class="quantity1" onkeypress="return isNumber(event)"></td>
+								<td >$ <span id="price<%=product.id%>">0.00</span><%#=product.price%></td>
+						<%end%>
+						</tr>
+						<%end%>
+					   <%end%>
+					  </tbody>
+					</table>
+					</div>
+					<%end%>
+				<%else%>
+				<p>No product Available<p>
+				<%end%>
+			</div>
+		  </div>
 		<%end%>
-		</tr>
-		<%end%>
-	   <%end%>
-	  </tbody>
-	</table>
-	</div>
-<%end%>
-
-
+	<%else%>
+	<p>No product Available<p>
+  <%end%>
 </div>
+
+
+
+
+
+

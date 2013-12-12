@@ -17,15 +17,18 @@
 <script>
 $(document).ready(function() {
 $( "#tabs" ).tabs({ active: 1 });
-	$('#ui-id-1').click(function(){
-		window.location = "/rcadmin/createquote";//hardcoded link but you could pull this from the tab
+	$('.ui-tabs-anchor').click(function(){
+		var tabname = $(this).html();
+		if(tabname == 'Select Category'){
+			window.location = "/rcadmin/quote/category";
+		}
+		if(tabname == 'Create Customer'){
+			window.location = "/rcadmin/createquote";
+		}
+		if(tabname == 'Product List'){
+			window.location = "/rcadmin/quote/product";
+		}
 	})
-	$('#ui-id-2').click(function(){
-		window.location = "/rcadmin/quote/category";//hardcoded link but you could pull this from the tab
-	})
-	$('#ui-id-3').click(function(){
-		window.location = "/rcadmin/quote/product";//hardcoded link but you could pull this from the tab
-	})	
 	
 })
 </script>

@@ -35,7 +35,7 @@
 							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Email</label>
 							                <div class="col-sm-6">
-												<%= f.text_field :email ,:class=>"form-control",:placeholder=>"Email"%>
+												<%= f.email_field :email ,:class=>"form-control",:placeholder=>"Email"%>
 							                </div>
 							            </div>
 							            <div class="form-group">
@@ -82,11 +82,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-6 col-sm-offset-3">
 				      			<div class="btn-toolbar">
-									<%if @rcadmin_customer.id.nil? %>
-										<%= f.submit "Add Customer" ,:class=>"btn-primary btn"%>
-									<%else%>
-										<%= f.submit "Update Customer" ,:class=>"btn-primary btn"%>
-									<%end%>
+										<%= f.submit "Save Customer & Continue" ,:class=>"btn-primary btn"%>
 									<%#=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
 				      			</div>
 				      		</div>

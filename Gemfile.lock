@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 5b6f1e8f8099ca2824fa9cab50ce14c8e49a04ce
+  revision: 380ab682c5208b70913d80b13d15c7619a5ca0d1
   specs:
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
@@ -40,7 +40,6 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
-    cancan (1.6.10)
     ckeditor_rails (4.2.2)
       railties (>= 3.0)
     coffee-rails (4.0.1)
@@ -51,6 +50,8 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
+    email_validator (1.4.0)
+      activemodel
     erubis (2.7.0)
     execjs (2.0.2)
     font-awesome-rails (4.0.3.0)
@@ -105,7 +106,6 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    role_model (0.8.1)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
     sass (3.2.12)
@@ -148,10 +148,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cancan
   ckeditor_rails
   coffee-rails (~> 4.0.0)
   devise!
+  email_validator
   font-awesome-rails
   jbuilder (~> 1.2)
   jquery-rails
@@ -160,7 +160,6 @@ DEPENDENCIES
   pg
   protected_attributes
   rails (= 4.0.0)
-  role_model
   sanitize
   sass-rails (~> 4.0.0)
   sdoc

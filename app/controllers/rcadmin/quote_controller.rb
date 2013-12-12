@@ -4,17 +4,20 @@ class Rcadmin::QuoteController < ApplicationController
 	end
 
 	def save_customer_deatils
-	#render :text => params.inspect and return false
+	
 		@rcadmin_customer = Rcadmin::Customer.new(params[:rcadmin_customer])
+		
 		if @rcadmin_customer.save
 			@quote = Rcadmin::Quote.new
 			@quote.customer_id = @rcadmin_customer.id
 			
 			if @quote.save
+			
 				session[:quote_id] = @quote.id
 				redirect_to :action => 'show_category'
 			end
 		else
+		render :action=> 'index'
 		end
 		
 	end
@@ -23,7 +26,6 @@ class Rcadmin::QuoteController < ApplicationController
 
 	def show_category
 
-	#render :text => params.inspect and return false
 		
 	end
 	

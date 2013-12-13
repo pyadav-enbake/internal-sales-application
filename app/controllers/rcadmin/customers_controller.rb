@@ -20,6 +20,7 @@ class Rcadmin::CustomersController < ApplicationController
 
   # GET /rcadmin/customers/1/edit
   def edit
+	@quote = Rcadmin::Quote.find_by_customer(params[:id])
   end
 
   # POST /rcadmin/customers

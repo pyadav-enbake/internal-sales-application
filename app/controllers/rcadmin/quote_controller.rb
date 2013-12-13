@@ -51,14 +51,33 @@ class Rcadmin::QuoteController < ApplicationController
 	end
 	
 	def show_product
-	#render :text => 'call' and return false
 		@quote = Rcadmin::Quote.find(session[:quote_id] )
 		@categories = @quote.category.split(',')
 		@all_categories =  Rcadmin::Category.where(["id in (?)", @categories])
 		@all_products =  Rcadmin::Product.where(["category_id in (?)", @categories])
 		@all_subcategories =  Rcadmin::Subcategory.where(["category_id in (?)", @categories])
 		
-		#render :text => @all_subcategories.inspect and return false
+	end
+	
+	def send_quote
+		if params[:product].size > 0
+			@quote = Rcadmin::Quote.find(session[:quote_id] )
+			@quote.delivery_date = params["extra_info"]['delivery_date']
+			@quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
+			@quote.status = 0
+			@quote.save
+			params[:product].each do |key,val|
+				@quota_product = {}
+				@quota_product['quote_id'] = session[:quote_id]
+				@quota_product['product_id'] = key.to_i
+				@quota_product['quantity'] = params['quantity'][key]
+				@quota_product['total_price'] = params['tot_price'][key]
+				@quota_product['status'] = 0
+				@rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product)
+				@rcadmin_quota_product.save
+			end
+		end
+		redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
 	end
   
 end

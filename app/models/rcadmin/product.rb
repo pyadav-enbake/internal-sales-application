@@ -3,6 +3,7 @@ class Rcadmin::Product < ActiveRecord::Base
 	attr_accessible :title,:price,:subcategory_id,:description,:status,:category_id
 	
 	belongs_to :subcategory 
+	has_many :quote_product,dependent: :destroy
 	
 	#scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 end

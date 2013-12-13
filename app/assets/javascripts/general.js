@@ -58,6 +58,7 @@ $(document).ready(function() {
 		
 		var modify_price = (oprice*text).toFixed(2);
 		$('#price'+id).text(modify_price);
+		$('#tprice'+id).val(modify_price);
 		var total_item_price = total_item_price_count();
 		$("#total_price").text(total_item_price);
 	});
@@ -82,8 +83,31 @@ $(document).ready(function() {
 		});
 		total_price = total_price.toFixed(2);
 		return total_price
-	}	
+	}
+	$( "#extra_info_delivery_date" ).datepicker({dateFormat: 'yy-mm-dd',minDate: 0});	
+
+//send_quote
+	$('#send_quote').click(function(){
+			if ($("#extra_info_delivery_date").val() == ""){
+				$("#err_msg").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Please select Delivery Date</p></div>');
+				return false;
+			}else{
+				$("#err_msg").html('');
+				 $('#send_quote_frm').submit();
+			}
+		 
+	});
+		
 
 });
 
-
+function check_product(){
+	var totp = $("#total_price").text();
+	if(parseInt(totp) == 0){
+		$('#myModal1').modal('show');
+		return false;
+	}else{
+		$('#myModal').modal('show');
+		return true;
+	}
+}

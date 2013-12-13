@@ -1,3 +1,4 @@
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <div id="page-heading">
 	<ol class="breadcrumb">
 		<li><%=link_to "Customer",rcadmin_customers_path%></li>
@@ -7,4 +8,47 @@
 	<h1>Edit Customer</h1>
 </div>
 <%= render 'form' %>
-
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-orange">
+			<div class="panel-heading">
+				<h4>All Quote</h4>
+				<div style="clear:both;"></div>
+				<div style="color:black;">
+					<!--div id="accordion" class="accordion"-->
+					<%if @quote.size > 0%>
+						<% @quote.each_with_index do |qt,index|%>
+							<h3>RC<%=qt.id%></h3>
+							<%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
+							<div>
+							<table class="table">
+							  <thead>
+								<tr>
+								  <th>Product Name</th>
+								  <th>Price per unit</th>
+								  <th>Enter Qty.</th>
+								  <th>Total Price</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<% @qt_pro.each_with_index do |qtp,index|%>
+								<tr>
+									<td><%=qtp.product.title%></td>
+									<td><%=qtp.product.price%></td>
+									<td><%=qtp.quantity%></td>
+									<td><%=qtp.total_price%></td>
+								</tr>
+								<%end%>
+							</tbody>
+							</table>
+							</div>
+						<%end%>
+					<%else%>
+					<h4>No Quota Available</h4>
+					<%end%>
+					<!--/div-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -37,6 +37,7 @@
 // = require general.js
 // = require autocomplete/chosen.jquery.js
 
+
 $(document).ready(function() {
 $('.quantity').click(function() {
 	var id = $(this).attr('id');

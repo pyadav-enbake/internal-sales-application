@@ -76,6 +76,7 @@ RomarCabinates::Application.routes.draw do
 	get '/rcadmin/quote/product' => 'rcadmin/quote#show_product',:as => 'select_quote_product'
 	post '/save_customer_deatils' => 'rcadmin/quote#save_customer_deatils'
 	post 'save_category_deatils' => 'rcadmin/quote#save_category_deatils'
+	post '/rcadmin/quote/send_quote' => 'rcadmin/quote#send_quote'
 
 
 #authenticated :admins do

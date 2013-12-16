@@ -76,8 +76,11 @@ class Rcadmin::QuoteController < ApplicationController
 				@rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product)
 				@rcadmin_quota_product.save
 			end
+			#render :text => @quote.inspect and return false
+			WelcomeMailer.send_quote_mail(@quote.customer_id).deliver
 		end
-		redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
+		render :text => 'ok'
+		#redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
 	end
   
 end

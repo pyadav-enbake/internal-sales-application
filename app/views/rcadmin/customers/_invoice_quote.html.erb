@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-orange">
+			<div class="panel-heading">
+				<h4>All Quote</h4>
+				<div style="clear:both;"></div>
+				<div style="color:black;">
+					<!--div id="accordion" class="accordion"-->
+					<%if @quote.size > 0%>
+					<%@tot_amt = 0%>
+						<% @quote.each_with_index do |qt,index|%>
+							<h3>Quote no - RC<%=qt.id%></h3>
+							<%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
+							<div>
+							<table class="table">
+							  <thead>
+								<tr>
+								  <th>Product Name</th>
+								  <th>Category Name</th>
+								  <th>Price per unit</th>
+								  <th>Enter Qty.</th>
+								  <th>Total Price</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<% @qt_pro.each_with_index do |qtp,index|%>
+								<%@tot_amt += qtp.total_price%>
+								<tr>
+									<td><%=qtp.product.title%></td>
+									<td><%=qtp.product.category.name%></td>
+									<td>$<%=qtp.product.price%></td>
+									<td><%=qtp.quantity%></td>
+									<td>$<%=qtp.total_price%></td>
+								</tr>
+								<%end%>
+							</tbody>
+							</table>
+							<hr>
+								<div class="pull-right">Total Price = $<%=@tot_amt.round(2)%></div>
+							</div>
+						<%end%>
+					<%else%>
+					<h4>No Quota Available</h4>
+					<%end%>
+					<!--/div-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

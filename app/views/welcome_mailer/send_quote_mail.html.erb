@@ -1,0 +1,74 @@
+<%@customer = Rcadmin::Customer.find(@customer_id)%>
+<%#@sales_admin = Rcadmin::Admin.find(@customer.admin_id)%>
+<%@quote = Rcadmin::Quote.find_by_customer(@customer_id)%>
+Dear Administrator,
+
+	A customer has been request a quote.
+	
+	Below are the customer Details<br><br>
+	
+	Customer Deatils<br>
+	====================<br>
+	Customer Name - <%=@customer.first_name%>  <%=@customer.last_name%><br>
+	Customer Email - <%=@customer.email%><br>
+	Customer Address - <%=@customer.address%> <br>
+	Customer city - <%=@customer.city%><br>
+	Customer State - <%=@customer.state%> <br>
+	Customer Zipcode - <%=@customer.zip%> <br>
+	Customer Phone - <%=@customer.phone%> <br><br>
+	
+	
+	 
+	Quote Details<br>
+	======================<br>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-orange">
+			<div class="panel-heading">
+				<!--h4>All Quote</h4-->
+				<div style="clear:both;"></div>
+				<div style="color:black;">
+					<!--div id="accordion" class="accordion"-->
+					<%if @quote.size > 0%>
+					<%@tot_amt = 0.0%>
+						<% @quote.each_with_index do |qt,index|%>
+							<h3>Quote no - RC<%=qt.id%></h3>
+							<%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
+							<div>
+							<table class="table table-bordered">
+							  <thead>
+								<tr>
+								  <th>Product Name</th>
+								  <th>Category Name</th>
+								  <th>Price per unit</th>
+								  <th>Enter Qty.</th>
+								  <th>Total Price</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<% @qt_pro.each_with_index do |qtp,index|%>
+								<%@tot_amt += qtp.total_price%>
+								<tr>
+									<td><%=qtp.product.title%></td>
+									<td><%=qtp.product.category.name%></td>
+									<td>$<%=qtp.product.price%></td>
+									<td><%=qtp.quantity%></td>
+									<td>$<%=qtp.total_price%></td>
+								</tr>
+								<%end%>
+							</tbody>
+							</table>
+							<hr>
+								<div class="pull-right">Total Price = $<%=@tot_amt.round(2)%></div>
+							</div>
+						<%end%>
+					<%else%>
+					<h4>No Quota Available</h4>
+					<%end%>
+					<!--/div-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

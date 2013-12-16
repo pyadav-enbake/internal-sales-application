@@ -3,4 +3,10 @@ class WelcomeMailer < ActionMailer::Base
   def testmail()
 	mail :to => 'akankshita009@gmail.com', :from => "email@domain.com", :subject => "Subject line"
   end
+
+  def send_quote_mail(customer_id)
+  @customer_id = customer_id
+	mail :to => 'akankshita009@gmail.com', :from => "email@domain.com", :subject => "Quote Request"
+  end
+  
 end

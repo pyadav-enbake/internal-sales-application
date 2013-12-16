@@ -3,4 +3,5 @@ class Rcadmin::Category < ActiveRecord::Base
 	attr_accessible :name,:description,:status
 	
 	has_many :subcategories,dependent: :destroy
+	has_many :products,dependent: :destroy
 end

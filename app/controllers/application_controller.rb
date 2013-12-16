@@ -53,9 +53,9 @@ class ApplicationController < ActionController::Base
 		if current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard') &&( params[:controller] == 'rcadmin/administrators' && current_user.id != params[:id].to_i)
 			redirect_to "/error404"
 		end
-		if current_user.role == 'admin' && params[:controller] == 'rcadmin/customers'
-			redirect_to "/error404"
-		end
+		#if current_user.role == 'admin' && params[:controller] == 'rcadmin/customers'
+		#	redirect_to "/error404"
+		#end
 	end
   end
   

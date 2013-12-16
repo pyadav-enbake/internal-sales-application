@@ -93,10 +93,25 @@ $(document).ready(function() {
 				return false;
 			}else{
 				$("#err_msg").html('');
-				 $('#send_quote_frm').submit();
+				var frm = $('#send_quote_frm');
+				$("#myModal").modal('hide');
+				$("#myModalsend").modal({ backdrop: 'static',keyboard: false});
+				$.ajax({
+					type: frm.attr('method'),
+					url: frm.attr('action'),
+					data: frm.serialize(),
+					success: function (data) {
+						$("#myModalsend").modal('hide');
+						$('#myModal2').modal({ backdrop: 'static',keyboard: false});
+					}
+				});
+    
 			}
 		 
 	});
+	
+	
+
 		
 
 });
@@ -104,6 +119,7 @@ $(document).ready(function() {
 function check_product(){
 	var totp = $("#total_price").text();
 	if(parseInt(totp) == 0){
+		//$("#myModal1").modal({ backdrop: 'static',keyboard: false});
 		$('#myModal1').modal('show');
 		return false;
 	}else{

@@ -1,4 +1,5 @@
 <!-- Modal -->
+<div id="sending"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -39,6 +40,35 @@
 			<div style="clear:both"></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
+				<h4 class="modal-title">You have successfully sent your quote to Admin</h4>
+			</div>
+			<div class="modal-body">
+				<a href="/rcadmin/createquote"><strong>Create Quote</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				 <a href="/rcadmin/customers/<%=@quote.customer_id%>/edit"><strong>Review all past quotes</strong> </a>
+			</div>
+			<div style="clear:both"></div>
+			<!--div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
+			</div-->
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModalsend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div style="text-align:center;"><%=image_tag('sending.gif')%></div>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

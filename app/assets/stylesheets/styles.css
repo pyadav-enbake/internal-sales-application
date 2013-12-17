@@ -11997,7 +11997,7 @@ body.collapse-leftbar #sidebar > li.hasChild:hover > a:before {
   margin-left: 230px;
 }
 #wrap {
-  /*overflow: auto;*/
+  overflow: auto;
 }
 @media (max-width: 767px) {
   #page-leftbar {

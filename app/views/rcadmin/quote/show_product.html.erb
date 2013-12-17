@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<div id="tabs">
-  <ul class="tabs">
+<div id="tabs"  class="bottom-tabs" style="position: relative;">
+  <ul class="tabs tab-last">
     <li class=""><a href="#tabs-1">Create Customer</a></li>
     <li ><a  href="#tabs-2">Select Category</a></li>
     <li><a href="#tabs-3">Product List</a></li>
@@ -37,3 +37,23 @@ $( "#tabs" ).tabs({ active: 2 });
 	})
 })
 </script>
+  <script>
+  $(function() {
+    // fix the classes
+    $( ".tabs-bottom .ui-tabs-nav, .bottom-tabs .ui-tabs-nav > *" )
+      .removeClass( "ui-corner-all ui-corner-top" )
+      .addClass( "ui-corner-bottom" );
+ 
+    // move the nav to the bottom
+    $( ".bottom-tabs .ui-tabs-nav" ).appendTo( ".bottom-tabs" );
+  });
+  </script>
+
+  <style>
+  /* force a height so the tabs don't jump as content height changes */
+  #tabs .tabs-spacer { float: left; height: 200px; }
+  .bottom-tabs .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
+  .bottom-tabs .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
+  .bottom-tabs .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
+  .tab-last{ margin: 55px 0 0 !important;}
+  </style>

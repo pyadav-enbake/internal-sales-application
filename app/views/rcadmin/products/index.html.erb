@@ -35,9 +35,10 @@
                                 <thead>
                                     <tr>
 										<th>Category Name</th>
-										<th>Sub Category Name</th>
+										<!--th>Sub Category Name</th-->
 										<th>Product Title</th>
 										<th>Product Price</th>
+										<th>Measurement Type</th>
                                         <!--th>Created At</th>
                                         <th>Updated At</th-->
                                         <th>Action</th>
@@ -52,9 +53,10 @@
 											<tr class="odd gradeX">
 										<%end%>
 											<td><%=p.subcategory.category.name%></td>
-											<td><%=p.subcategory.name%></td>
+											<!--td><%#=p.subcategory.name%></td-->
 											<td><%=p.title%></td>
 											<td><%=p.price%></td>
+											<td><%=p.measurement_type%></td>
 											<!--td><%#=d.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
 											<td><%#=d.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td-->
 											<td><%= link_to 'Edit', edit_rcadmin_product_path(p),:class=>"btn btn-info" %> <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>

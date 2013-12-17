@@ -109,8 +109,58 @@ $(document).ready(function() {
 			}
 		 
 	});
+
+//resend_quote
+
+	$(".quantity2").keyup(function(event){
+		var id = $(this).attr('id');
+		var oprice = $("#oprice"+id).val();
+		var text = event.target.value;
+		
+		var modify_price = (oprice*text).toFixed(2);
+		$('#price'+id).text(modify_price);
+		$('#tprice'+id).val(modify_price);
+		var form = $(this).parents('form')[0];
+		var formid = form.id;
+		console.log(formid);		
+		var total_item_price = total_resend_item_price_count(formid);
+		console.log(total_item_price);
+		$("#tot_qut_"+formid).text(total_item_price);
+	});
 	
-	
+	//$(".resend_frm input:text").each(function() {
+	//	$(this).attr('disabled',true);
+//	});			
+	$('.edit_quote').click(function(){
+		
+		var form = $(this).parents('form')[0];
+		var formid = form.id;
+		$("#"+form.id+" input:text:disabled").each(function() {
+			$(this).attr('disabled',false);
+		});	
+		if ($(this).val() == 'Edit'){
+			$(this).val('Resend Quote');
+			$(this).attr('type','submit');
+			return false;	
+		}
+
+	});
+
+
+	function total_resend_item_price_count(formid){
+		var total_price = 0.00;
+		//$('#'+formid+' span[id^="price"]').each(function(index) {
+			//this.id = "id_" + (index + 1);
+			//console.log(this.val()+'kkkkkkk');	
+		//});
+		$('#'+formid+' span[id^="price"]').map(function() {
+			//console.log($(this).text()+'kkkkkkk');
+			total_price += Number($(this).text());
+		})			
+
+	total_price = total_price.toFixed(2);
+		return total_price
+	}
 
 		
 

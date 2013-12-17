@@ -1,4 +1,5 @@
 class Rcadmin::Quote < ActiveRecord::Base
+	validates_presence_of :customer_id
 	attr_accessible :customer_id,:category,:status,:delivery_date,:sales_closing_potential
 	
 	belongs_to :customer

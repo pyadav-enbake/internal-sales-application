@@ -12,5 +12,13 @@ class Rcadmin::Customer < ActiveRecord::Base
 	belongs_to :admin
 	has_many :quotes,dependent: :destroy
 	scope :default, -> {  where(:status => 0)  }
+	#composed_of :name, :mapping => %w(first_name last_name)
+
+	def fullname
+	  "#{self.first_name+' '+self.last_name}"
+	end
+
+
+
 	
 end

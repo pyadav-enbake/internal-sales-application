@@ -1,0 +1,48 @@
+		<div class="container">
+
+			<%= form_for(@quote,:url => {:action=>"save_customer_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-orange">
+						<div class="panel-heading">
+							<h4>Select Customer</h4>
+							<div class="options">
+						
+							</div>
+						</div><br>
+						<%if @quote.errors.any? %>
+						<div class="alert alert-dismissable alert-danger">
+								<%=@quote.errors.full_messages[0] %>.
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							</div>
+
+						<%end%>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Select Customer</label>
+							                <div class="col-sm-6">
+
+												<%= select(:rcadmin_quote,:customer_id, Rcadmin::Customer.all.collect {|c| [ c.fullname, c.id ] }, {:prompt => "Select Customer"},:class => 'form-control') %>
+							                </div>
+							            </div>
+							            <%= f.hidden_field :admin_id ,:value=>"#{current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-6 col-sm-offset-3">
+				      			<div class="btn-toolbar">
+										<%= f.submit "Next step" ,:class=>"btn-primary btn"%>
+									<%#=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
+				      			</div>
+				      		</div>
+				      	</div>
+				      </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>

@@ -1,10 +1,12 @@
 <%= form_tag("send_quote", method: "post", :id=>"send_quote_frm") do %>
-<div id="subtabs">
-  <ul class="tabs">
+<div id="subtabs" class="tabs-bottom">
+<div>
+  <ul class="tabs tab-sec-last">
 	  <% @all_categories.each_with_index do |cat,index|%>
 		<li class=""><a href="#subtabs-<%=index%>"><%=cat.name%></a></li>
 	  <%end%>
   </ul>
+  </div>
   <% if @all_categories.size > 0 %>
 	  <% @all_categories.each_with_index do |cat,index|%>
 		  <div id="subtabs-<%=index%>">
@@ -18,11 +20,11 @@
 					<table class="table">
 					  <thead>
 						<tr>
+						  <th>Enter Qty.</th>
 						  <th></th>
 						  <th>Title</th>
 						  <th>Price per unit</th>
-						  <!--th>Descriptions</th-->
-						  <th>Enter Qty.</th>
+						  <th>Measure Type</th>
 						  <th>Total Price</th>
 						</tr>
 					  </thead>
@@ -36,10 +38,11 @@
 						<% @all_products.each_with_index do |product,index|%>
 						<input type="hidden" id="oprice<%=product.id%>" value="<%=product.price%>">
 						<tr>
+								<td><input type="text" name="quantity[<%=product.id%>]" id="<%=product.id%>" style="width: 30px;" value="0" class="quantity1" onkeypress="return isNumber(event)"></td>
 								<td><input type="checkbox" name="product[<%=product.id%>]" value="" class="chkpro" id="chk<%=product.id%>"></td>
 								<td><%=product.title%></td>
 								<td id="price">$<%=product.price%></td>
-								<td><input type="text" name="quantity[<%=product.id%>]" id="<%=product.id%>" style="width: 30px;" value="0" class="quantity1" onkeypress="return isNumber(event)"></td>
+								<td id="measure"><%=product.measurement_type%></td>
 								<input type="hidden" name="tot_price[<%=product.id%>]" id="tprice<%=product.id%>" value="">
 								<td >$ <span id="price<%=product.id%>">0.00</span><%#=product.price%></td>
 						</tr>
@@ -64,6 +67,25 @@
 
 
 
-
+ <script>
+  $(function() {
+ 
+    // fix the classes
+    $( ".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *" )
+      .removeClass( "ui-corner-all ui-corner-top" )
+      .addClass( "ui-corner-bottom" );
+ 
+    // move the nav to the bottom
+    $( ".tabs-bottom .ui-tabs-nav" ).appendTo( ".tabs-bottom" );
+  });
+  </script>
+  <style>
+  /* force a height so the tabs don't jump as content height changes */
+  #subtabs .tabs-spacer { float: left; height: 200px; }
+  .tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
+  .tabs-bottom .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
+  .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
+  .tab-sec-last{bottom: 46px;position: absolute;width: 99.5%;}
+  </style>
 
 

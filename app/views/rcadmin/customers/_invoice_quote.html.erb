@@ -1,48 +1,60 @@
-<div class="row">
+<div class="container">
 	<div class="col-md-12">
 		<div class="panel panel-orange">
 			<div class="panel-heading">
 				<h4>All Quote</h4>
 				<div style="clear:both;"></div>
 				<div style="color:black;">
-					<!--div id="accordion" class="accordion"-->
+					<div id="accordion" class="accordion">
 					<%if @quote.size > 0%>
-					<%@tot_amt = 0%>
+					
 						<% @quote.each_with_index do |qt,index|%>
 							<h3>Quote no - RC<%=qt.id%></h3>
 							<%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
 							<div>
-							<table class="table">
-							  <thead>
-								<tr>
-								  <th>Product Name</th>
-								  <th>Category Name</th>
-								  <th>Price per unit</th>
-								  <th>Enter Qty.</th>
-								  <th>Total Price</th>
-								</tr>
-							  </thead>
-							  <tbody>
-								<% @qt_pro.each_with_index do |qtp,index|%>
-								<%@tot_amt += qtp.total_price%>
-								<tr>
-									<td><%=qtp.product.title%></td>
-									<td><%=qtp.product.category.name%></td>
-									<td>$<%=qtp.product.price%></td>
-									<td><%=qtp.quantity%></td>
-									<td>$<%=qtp.total_price%></td>
-								</tr>
-								<%end%>
-							</tbody>
-							</table>
+							<%= form_tag('/rcadmin/quote/resend_quote',:method=>:post,:id=>"resend_frm_#{qt.id}",:class=>"resend_frm") do %>
+								<table class="table">
+								  <thead>
+									<tr>
+									  <th>Product Name</th>
+									  <th>Measure Type</th>
+									  <th>Category Name</th>
+									  <th>Price per unit</th>
+									  <th>Quantity</th>
+									  <th>Total Price</th>
+									</tr>
+								  </thead>
+								  <tbody>
+								  <%@tot_amt = 0%>
+									<% @qt_pro.each_with_index do |qtp,index|%>
+									<input type="hidden" name="quote_id"value="<%=qt.id%>">
+									<input type="hidden" name="customer_id"value="<%= @rcadmin_customer.id%>">
+									<input type="hidden" id="oprice<%=qtp.id%>" value="<%=qtp.product.price%>">
+									
+									<%@tot_amt += qtp.total_price%>
+									<tr>
+										<td><%=qtp.product.title%></td>
+										<td><%=qtp.product.measurement_type%></td>
+										<td><%=qtp.product.category.name%></td>
+										<td>$<%=qtp.product.price%></td>
+										<td><input type="text" name="quantity[<%=qtp.product.id%>]" id="<%=qtp.id%>" style="width: 30px;"  class="quantity2" onkeypress="return isNumber(event)" value="<%=qtp.quantity%>" disabled="disabled"><%#=qtp.quantity%></td>
+										<!--td>$<%#=qtp.total_price%></td-->
+										<td >$ <span id="price<%=qtp.id%>"><%=qtp.total_price%></span></td>
+									</tr>
+									<%end%>
+								</tbody>
+								</table>
+								<input type="button" name="edit" value="Edit" class="btn-primary btn edit_quote" >
+							<%end%>
 							<hr>
-								<div class="pull-right">Total Price = $<%=@tot_amt.round(2)%></div>
+								<div class="pull-right">Total Price = $<span id="tot_qut_resend_frm_<%=qt.id%>"><%=@tot_amt.round(2)%></span></div>
+								
 							</div>
 						<%end%>
 					<%else%>
 					<h4>No Quota Available</h4>
 					<%end%>
-					<!--/div-->
+					</div>
 				</div>
 			</div>
 		</div>

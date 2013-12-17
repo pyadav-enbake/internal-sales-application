@@ -54,6 +54,12 @@
 							                </div>
 							            </div>
 							            <div class="form-group">
+							                <label class="col-sm-3 control-label">Measurement Type</label>
+							                <div class="col-sm-6">
+												<%= f.text_field :measurement_type ,:class=>"form-control",:placeholder=>"Measurement Type"%>
+							                </div>
+							            </div>
+							            <div class="form-group">
 							                <label class="col-sm-3 control-label">Status</label>
 							                <div class="col-sm-6">
 												<%= select(:rcadmin_product, :status, [['Active', 0], ['Inactive', 1]], {}, {:class => 'form-control'}) %>

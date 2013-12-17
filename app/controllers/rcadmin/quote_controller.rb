@@ -1,24 +1,16 @@
 class Rcadmin::QuoteController < ApplicationController
 	def index
-	session[:quote_id] = nil
-	@rcadmin_customer = Rcadmin::Customer.new
+		session[:quote_id] = nil
+		@quote = Rcadmin::Quote.new
 	end
 
 	def save_customer_deatils
-	
-		@rcadmin_customer = Rcadmin::Customer.new(params[:rcadmin_customer])
-		
-		if @rcadmin_customer.save
-			@quote = Rcadmin::Quote.new
-			@quote.customer_id = @rcadmin_customer.id
-			
-			if @quote.save
-			
+		@quote = Rcadmin::Quote.new( params[:rcadmin_quote])
+		if @quote.save
 				session[:quote_id] = @quote.id
 				redirect_to :action => 'show_category'
-			end
 		else
-		render :action=> 'index'
+			render :action=> 'index'
 		end
 		
 	end
@@ -73,14 +65,57 @@ class Rcadmin::QuoteController < ApplicationController
 				@quota_product['quantity'] = params['quantity'][key]
 				@quota_product['total_price'] = params['tot_price'][key]
 				@quota_product['status'] = 0
-				@rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product)
-				@rcadmin_quota_product.save
+				if @quota_product['quantity'].to_i > 0
+					@rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+					@rcadmin_quota_product.save if params['quantity'][key] 
+				end
 			end
+			@customer = Rcadmin::Customer.find(@quote.customer_id)
 			#render :text => @quote.inspect and return false
 			WelcomeMailer.send_quote_mail(@quote.customer_id).deliver
+			WelcomeMailer.send_quote_mail_customer(@customer).deliver
 		end
 		render :text => 'ok'
 		#redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
+	end
+	
+	def resend_quote
+		@qid = params["quote_id"]
+		@existquote = Rcadmin::Quote.find(@qid)
+		@quote = Rcadmin::Quote.new
+		@quote.customer_id = params["customer_id"]
+		@quote.category = @existquote.category
+		@quote.	status = @existquote.status
+		@quote.delivery_date = @existquote.delivery_date
+		@quote.sales_closing_potential = @existquote.sales_closing_potential
+		if @quote.save
+			params[:quantity].each do |key,val|
+				@quota_product = {}
+				@quota_product['quote_id'] = @quote.id
+				@quota_product['product_id'] = key.to_i
+				@product_details =  Rcadmin::Product.find(@quota_product['product_id'])
+				@quota_product['quantity'] = val.to_i
+				@quota_product['total_price'] = @product_details.price * @quota_product['quantity']
+				@quota_product['status'] = 0
+				if @quota_product['quantity'].to_i > 0
+					@rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+					@rcadmin_quota_product.save  
+				end
+
+				
+			end
+			@customer = Rcadmin::Customer.find(@quote.customer_id)
+			#render :text => @quote.inspect and return false
+			WelcomeMailer.send_quote_mail(@quote.customer_id).deliver
+			WelcomeMailer.send_quote_mail_customer(@customer).deliver
+
+			
+		else
+			render :text => 'Some thing went Wornge' and return false
+		end
+		redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
+		#render :text => params.inspect and return false
+	
 	end
   
 end

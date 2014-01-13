@@ -2,7 +2,9 @@
   <ul>
     <li><a href="#tabs-1">Select Customer</a></li>
     <li><a href="#tabs-2">Select Category</a></li>
-    <li><a href="#tabs-3">Product List</a></li>
+    <li><a href="#tabs-3">Cabinet Selections</a></li>
+     <li><a href="#tabs-4">Countertop Design</a></li>
+    <li><a href="#tabs-5">Product List</a></li>
   </ul>
   <div id="tabs-1">
 	<%= render 'exist_customer_form' %>
@@ -11,14 +13,16 @@
     <%= render 'category' %>
   </div>
   <div id="tabs-3">
-    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+  </div>
+  <div id="tabs-4">
+  </div>
+  <div id="tabs-5">
   </div>
 </div>
 <script>
 $(document).ready(function() {
 	$( "#tabs" ).tabs({ active: 0 });
-	$( "#tabs" ).tabs({ disabled: [1,2] });
+	$( "#tabs" ).tabs({ disabled: [1,2,3,4] });
 	
 })
 </script>

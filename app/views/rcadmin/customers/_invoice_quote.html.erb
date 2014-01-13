@@ -12,6 +12,9 @@
 							<h3>Quote no - RC<%=qt.id%></h3>
 							<%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
 							<div>
+							
+							Cabinet Type : <%if qt.cabinet_type.blank? or qt.cabinet_type.nil? %>Not Selected<%else%><%=qt.cabinet_type.name%><%end%><br>
+							Countertop Design : <%if qt.countertop_design.blank? or qt.countertop_design.nil? %>Not Selected<%else%><%=qt.countertop_design.name%><%end%>
 							<%= form_tag('/rcadmin/quote/resend_quote',:method=>:post,:id=>"resend_frm_#{qt.id}",:class=>"resend_frm") do %>
 								<table class="table">
 								  <thead>

@@ -1,5 +1,5 @@
-<div id="tabs"  class="bottom-tabs" style="position: relative;">
-  <ul class="tabs tab-last">
+<div id="tabs" class="tabs-bottom">
+  <ul class="tabs">
     <li class=""><a href="#tabs-1">Create Customer</a></li>
     <li ><a  href="#tabs-2">Select Category</a></li>
     <li><a href="#tabs-3">Cabinet Selection</a></li>
@@ -7,28 +7,23 @@
     <li><a href="#tabs-5">Product List</a></li>
   </ul>
   <div id="tabs-1">
-	<%#= render 'customer_form' %>
+
   </div>
   <div id="tabs-2">
-    <%#= render 'category' %>
+
   </div>
   <div id="tabs-3">
-	
+      <%= render 'cabinet' %>
   </div>
   <div id="tabs-4">
+    
   </div>
   <div id="tabs-5">
-  <%= render 'product' %>
-  </div>  
-  <div style="text-align:center"><strong>Total Price</strong> $  <span id="total_price">0.00</span>&nbsp;&nbsp;&nbsp;&nbsp;<a data-toggle="modal" onclick="return check_product();"  class="btn btn-primary">Send Quote</a></div>
-  
+  </div>
 </div>
 <script>
 $(document).ready(function() {
-$('#tabs input[type=checkbox]').prop('checked',false);
-$('#tabs input[type=text]').attr('disabled',false);
-$('.quantity1').val(0);
-$( "#tabs" ).tabs({ active: 4 });
+$( "#tabs" ).tabs({ active: 2 });
 	$('.ui-tabs-anchor').click(function(){
 		var tabname = $(this).html();
 		if(tabname == 'Select Category'){
@@ -48,25 +43,25 @@ $( "#tabs" ).tabs({ active: 4 });
 		}
 		
 	})
+	
 })
 </script>
   <script>
   $(function() {
     // fix the classes
-    $( ".tabs-bottom .ui-tabs-nav, .bottom-tabs .ui-tabs-nav > *" )
+    $( ".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *" )
       .removeClass( "ui-corner-all ui-corner-top" )
       .addClass( "ui-corner-bottom" );
  
     // move the nav to the bottom
-    $( ".bottom-tabs .ui-tabs-nav" ).appendTo( ".bottom-tabs" );
+    $( ".tabs-bottom .ui-tabs-nav" ).appendTo( ".tabs-bottom" );
   });
   </script>
 
   <style>
   /* force a height so the tabs don't jump as content height changes */
   #tabs .tabs-spacer { float: left; height: 200px; }
-  .bottom-tabs .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
-  .bottom-tabs .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
-  .bottom-tabs .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
-  .tab-last{ margin: 55px 0 0 !important;}
+  .tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
+  .tabs-bottom .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
+  .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
   </style>

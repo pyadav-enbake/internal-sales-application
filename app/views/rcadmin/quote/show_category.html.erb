@@ -2,16 +2,22 @@
   <ul class="tabs">
     <li class=""><a href="#tabs-1">Create Customer</a></li>
     <li ><a  href="#tabs-2">Select Category</a></li>
-    <li><a href="#tabs-3">Product List</a></li>
+    <li><a href="#tabs-3">Cabinet Selection</a></li>
+    <li><a href="#tabs-4">Countertop Design</a></li>
+    <li><a href="#tabs-5">Product List</a></li>
   </ul>
   <div id="tabs-1">
-	<%#= render 'customer_form' %>
   </div>
   <div id="tabs-2">
     <%= render 'category' %>
   </div>
   <div id="tabs-3">
   </div>
+  <div id="tabs-4">
+  </div>
+  <div id="tabs-5">
+  </div>
+
 </div>
 <script>
 $(document).ready(function() {
@@ -26,6 +32,12 @@ $( "#tabs" ).tabs({ active: 1 });
 		}
 		if(tabname == 'Product List'){
 			window.location = "/rcadmin/quote/product";
+		}
+		if(tabname == 'Cabinet Selection'){
+			window.location = "/rcadmin/quote/cabinet_selection";
+		}
+		if(tabname == 'Countertop Design'){
+			window.location = "/rcadmin/quote/countertop_design";
 		}
 	})
 	

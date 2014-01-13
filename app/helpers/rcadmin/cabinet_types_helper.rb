@@ -1,0 +1,2 @@
+module Rcadmin::CabinetTypesHelper
+end

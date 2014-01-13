@@ -1,0 +1,65 @@
+<div id="page-heading">
+  <ol class="breadcrumb">
+      <li><%=link_to "Countertop Design",new_rcadmin_countertop_design_path%></li>
+  </ol>
+
+  <h1>Countertop Design</h1>
+</div>
+      <%if flash[:notice] %>
+      <div class="alert alert-dismissable alert-success">
+	      <strong>Well done!</strong> <%=flash[:notice]%>
+	      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      </div>
+      <%end%>
+<div class="container">
+
+  <div class="row">
+  
+    <div class="col-md-12">
+    
+	  <div class="panel panel-sky">
+	      <div class="panel-heading">
+	      
+		  <h4>Countertop Design</h4>
+		  <div class="options"> 
+		      <div class="pull-right"><%=link_to 'New Countertop Design', new_rcadmin_countertop_design_path,:class=>"btn btn-info btn-lg"%></div>
+		      <!--a href="javascript:;"><i class="fa fa-cog"></i></a>
+		      <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+		      <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a-->
+		  </div>
+	      </div>
+	      
+	      <div class="panel-body collapse in">
+		  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+		      <thead>
+			  <tr>
+			      <th>Name</th>
+			      <th>Created At</th>
+			      <th>Updated At</th>
+			      <th>Action</th>
+			  </tr>
+		      </thead>
+		      <tbody>
+		      <% if @rcadmin_countertop_designs.size > 0 %>
+			<% @rcadmin_countertop_designs.each_with_index do |cd,index|%>
+				<%if index%2 == 0 %>
+					 <tr class="even gradeC">
+				<%else%>
+					<tr class="odd gradeX">
+				<%end%>
+					<td><%=cd.name%></td>
+					<td><%=cd.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
+					<td><%=cd.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
+					<td><%= link_to 'Edit', edit_rcadmin_countertop_design_path(cd),:class=>"btn btn-info" %> <%= link_to 'Delete', cd, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
+				</tr>
+			<%end%>
+		      <%end%>
+
+		      </tbody>
+		  </table>
+	      </div>
+	  </div>
+      </div>
+  </div>
+
+</div> <!-- container -->

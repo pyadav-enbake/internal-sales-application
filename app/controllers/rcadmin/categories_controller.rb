@@ -30,7 +30,7 @@ class Rcadmin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @rcadmin_category.save
-		flash[:notice] = 'Category was successfully created.'
+	flash[:notice] = 'Category was successfully created.'
         format.html { redirect_to rcadmin_categories_url  }
         format.json { render action: 'show', status: :created, location: @rcadmin_category }
       else

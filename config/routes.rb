@@ -1,28 +1,16 @@
 RomarCabinates::Application.routes.draw do
 
   namespace :rcadmin do
+    resources :countertop_designs
+    resources :cabinet_types
     resources :subcategories
-  end
-
-  namespace :rcadmin do
     resources :customers
-  end
-
-  namespace :rcadmin do
     resources :email_templates
-  end
-
-  namespace :rcadmin do
     resources :faqs
-  end
-
-  namespace :rcadmin do
     resources :faq_categories
-  end
-
-  namespace :rcadmin do
     resources :static_pages
   end
+
 
   resources :home
   match '/quick_quote' => "home#quick_quote",:via=>'post'
@@ -78,6 +66,10 @@ RomarCabinates::Application.routes.draw do
 	post 'save_category_deatils' => 'rcadmin/quote#save_category_deatils'
 	post '/rcadmin/quote/send_quote' => 'rcadmin/quote#send_quote'
 	post '/rcadmin/quote/resend_quote' => 'rcadmin/quote#resend_quote'
+	get '/rcadmin/quote/cabinet_selection' => 'rcadmin/quote#show_cabinet_selection'
+	post '/rcadmin/quote/save_cabinet' => 'rcadmin/quote#save_cabinet'
+	get '/rcadmin/quote/countertop_design' => 'rcadmin/quote#show_countertop_design'
+	post '/rcadmin/quote/save_countertop' => 'rcadmin/quote#save_countertop'
 
 
 #authenticated :admins do

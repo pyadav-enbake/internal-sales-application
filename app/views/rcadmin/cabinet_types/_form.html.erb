@@ -1,0 +1,56 @@
+<div class="container">
+	<%= form_for(@rcadmin_cabinet_type,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-orange">
+				<div class="panel-heading">
+					<h4><%if @rcadmin_cabinet_type.id.nil? %>Add<%else%>Edit<%end%> Cabinet Type</h4>
+					<div class="options">
+				
+					</div>
+				</div><br>
+				<%if @rcadmin_cabinet_type.errors.any? %>
+				<div class="alert alert-dismissable alert-danger">
+						<%=@rcadmin_cabinet_type.errors.full_messages[0] %>.
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					</div>
+
+				<%end%>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+						    <div class="form-group">
+							<label class="col-sm-3 control-label">Name</label>
+							<div class="col-sm-6">
+							      <%= f.text_field :name ,:class=>"form-control",:placeholder=>"Cabinet Type name"%>
+							</div>
+						    </div>
+						    <div class="form-group">
+							<label class="col-sm-3 control-label">Status</label>
+							<div class="col-sm-6">
+							      <%= select(:rcadmin_cabinet_type, :status, [['Active', 0], ['Inactive', 1]], {}, {:class => 'form-control'}) %>
+							</div>
+						    </div>
+						    
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="btn-toolbar">
+							<%if @rcadmin_cabinet_type.id.nil? %>
+								<%= f.submit "Add Cabinet Type" ,:class=>"btn-primary btn"%>
+							<%else%>
+								<%= f.submit "Update Cabinet Type" ,:class=>"btn-primary btn"%>
+							<%end%>
+							<%=link_to "Back",rcadmin_cabinet_types_path,:class=>"btn-default btn"%>
+					</div>
+				</div>
+			</div>
+		      </div>
+			</div>
+		</div>
+	</div>
+</div>
+<%end%>

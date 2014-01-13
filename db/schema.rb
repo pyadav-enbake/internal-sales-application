@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217085924) do
+ActiveRecord::Schema.define(version: 20140113101807) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -36,12 +36,26 @@ ActiveRecord::Schema.define(version: 20131217085924) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+  create_table "cabinet_types", force: true do |t|
+    t.string   "name"
+    t.integer  "status",     limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",      limit: 1
+    t.integer  "status"
+  end
+
+  create_table "countertop_designs", force: true do |t|
+    t.string   "name"
+    t.integer  "status",     limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "customers", force: true do |t|
@@ -54,7 +68,7 @@ ActiveRecord::Schema.define(version: 20131217085924) do
     t.integer  "zip"
     t.string   "email"
     t.string   "phone"
-    t.integer  "status",     limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -70,7 +84,7 @@ ActiveRecord::Schema.define(version: 20131217085924) do
     t.string   "name"
     t.text     "description"
     t.integer  "display_order"
-    t.integer  "status",        limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,7 +94,7 @@ ActiveRecord::Schema.define(version: 20131217085924) do
     t.text     "question"
     t.text     "answer"
     t.integer  "display_order"
-    t.integer  "status",          limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,13 +112,13 @@ ActiveRecord::Schema.define(version: 20131217085924) do
   end
 
   create_table "products", force: true do |t|
+    t.integer  "category_id"
     t.integer  "subcategory_id"
-    t.integer  "category_id",                null: false
     t.integer  "dimension_id"
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.integer  "status",           limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "measurement_type"
@@ -115,7 +129,7 @@ ActiveRecord::Schema.define(version: 20131217085924) do
     t.integer  "product_id"
     t.integer  "quantity"
     t.float    "total_price"
-    t.integer  "status",      limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,9 +139,11 @@ ActiveRecord::Schema.define(version: 20131217085924) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                  limit: 1, default: 1
+    t.integer  "status",                  default: 1
     t.date     "delivery_date"
     t.string   "sales_closing_potential"
+    t.integer  "cabinet_type_id"
+    t.integer  "countertop_design_id"
   end
 
   create_table "static_pages", force: true do |t|
@@ -140,7 +156,7 @@ ActiveRecord::Schema.define(version: 20131217085924) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status",      limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

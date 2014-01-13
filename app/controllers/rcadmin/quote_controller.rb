@@ -37,7 +37,8 @@ class Rcadmin::QuoteController < ApplicationController
 			params[:quote][:category] = params[:quote][:category].join(',')
 			@quote.category = params[:quote][:category]
 			if @quote.save
-				redirect_to :action => 'show_product'
+				#redirect_to :action => 'show_product'
+				redirect_to :action => 'show_cabinet_selection'
 			end
 		end		
 	end
@@ -117,5 +118,45 @@ class Rcadmin::QuoteController < ApplicationController
 		#render :text => params.inspect and return false
 	
 	end
+
+  def show_cabinet_selection
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+  end
+  
+  def save_cabinet
+   # params["quote"]["cabinet_type_id"].reject!{|a| a==""} 
+    if params[:quote][:cabinet_type_id].nil? or params["quote"]["cabinet_type_id"].blank?
+      flash[:error] = 'Please select one cabinet type'
+      render :action => 'show_cabinet_selection'
+    else
+      @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @quote.cabinet_type_id = params[:quote][:cabinet_type_id]
+      if @quote.save
+	      #redirect_to :action => 'show_product'
+	      redirect_to :action => 'show_countertop_design'
+      end
+    end  
+  end
+
+  def show_countertop_design
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+  end
+  
+  def save_countertop
+   # params["quote"]["cabinet_type_id"].reject!{|a| a==""} 
+    if params[:quote][:countertop_design_id].nil? or params["quote"]["countertop_design_id"].blank?
+      flash[:error] = 'Please select one countertop design'
+      render :action => 'show_countertop_design'
+    else
+      @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @quote.countertop_design_id = params[:quote][:countertop_design_id]
+      if @quote.save
+	      #redirect_to :action => 'show_product'
+	      redirect_to :action => 'show_product'
+      end
+    end  
+  end
+
+
   
 end

@@ -54,7 +54,7 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'less-rails'
-gem 'therubyracer', group: [:development, :test]
+gem 'therubyracer'
 gem "font-awesome-rails"
 gem "protected_attributes"
 gem 'sanitize'

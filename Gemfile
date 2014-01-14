@@ -8,7 +8,7 @@ gem 'rails', '4.0.0'
 gem 'devise', git: 'git://github.com/plataformatec/devise.git'
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
+# gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -48,7 +48,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'less-rails'
-gem 'therubyracer'
+gem 'therubyracer', group: [:development, :test]
 gem "font-awesome-rails"
 gem "protected_attributes"
 gem 'sanitize'

@@ -5,6 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
+* Styling
+  - DO NOT use tabs and USE 2 spaces to indent code(configure your text editor for 2 spaces)
+
 * Ruby version
 
 * System dependencies
@@ -12,6 +15,7 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
+  - Edit config/database.yml file and use postgresql in development 
 
 * Database initialization
 

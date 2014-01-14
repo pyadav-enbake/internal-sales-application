@@ -14,3 +14,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+
+# gemset and ruby version file ignore
+.ruby-*
+DS_Store

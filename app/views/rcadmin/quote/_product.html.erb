@@ -1,7 +1,7 @@
 <%= form_tag("send_quote", method: "post", :id=>"send_quote_frm") do %>
   <div id="subtabs" class="tabs-bottom">
     <div>
-      <ul class="tabs tab-sec-last">
+      <ul class="tabs">
         <% @categories.each_with_index do |cat, index|%>
           <li class=""><a href="#subtabs-<%= index %>"><%= cat.name %></a></li>
         <% end %>

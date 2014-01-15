@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113101807) do
+ActiveRecord::Schema.define(version: 20140115072300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(version: 20140113101807) do
     t.string   "sales_closing_potential"
     t.integer  "cabinet_type_id"
     t.integer  "countertop_design_id"
+    t.text     "cabinet_types_info"
+    t.text     "countertop_designs_info"
   end
 
   create_table "static_pages", force: true do |t|

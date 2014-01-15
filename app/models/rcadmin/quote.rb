@@ -17,7 +17,7 @@ class Rcadmin::Quote < ActiveRecord::Base
 
   def categories
     return Rcadmin::Category.none unless category?
-    Rcadmin::Category.where(id: category_ids)
+    @categories ||= Rcadmin::Category.where(id: category_ids)
   end
 
   def category_ids
@@ -25,19 +25,61 @@ class Rcadmin::Quote < ActiveRecord::Base
   end
 
 
-  def parse_cabinet_types_info
-    info = []
-    if cabinet_types_info.is_a? Hash
-      categories = Rcadmin::Category.where(id: cabinet_types_info.keys).to_a
-      cabinet_types_info.each_pair do |category_id, section_ids|
-        info << { product: categories.detect { |cat| cat.id == category_id.to_i }, sections: set_sections(section_ids) }
+
+  # Isolate dependencies this would change in future soon
+
+  def parse_countertop_designs_info
+    return @cinfo if @cinfo
+    @cinfo = []
+    if countertop_designs_info.is_a? Hash
+      categories = Rcadmin::Category.where(id: countertop_designs_info.keys).to_a
+      countertop_designs_info.each_pair do |category_id, countertop_design_hash|
+        @cinfo << { 
+          category: categories.detect { |cat| cat.id == category_id.to_i },
+          countertop_designs: extract_countertop_design_from(countertop_design_hash)
+        }
       end
+    end
+    @cinfo
+  end
+
+  def extract_countertop_design_from countertop_design_hash
+    countertop_designs = Rcadmin::CabinetType.where(id: countertop_design_hash.keys).to_a
+    info = []
+    countertop_design_hash.each_pair do |countertop_design_id, selection_id|
+      info << { 
+        countertop_design: countertop_designs.detect { |ct| ct.id == countertop_design_id.to_i }, 
+        selection: "Selection #{selection_id.first}" 
+      }
     end
     info
   end
 
-  def set_sections section_ids
-    section_ids.map { |sid| "Selection #{sid}" }
+  def parse_cabinet_types_info
+    return @info if @info
+    @info = []
+    if cabinet_types_info.is_a? Hash
+      categories = Rcadmin::Category.where(id: cabinet_types_info.keys).to_a
+      cabinet_types_info.each_pair do |category_id, cabinet_type_hash|
+        @info << { 
+          category: categories.detect { |cat| cat.id == category_id.to_i },
+          cabinet_types: extract_cabinets_from(cabinet_type_hash)
+        }
+      end
+    end
+    @info
+  end
+
+  def extract_cabinets_from cabinet_type_hash
+    cabinet_types = Rcadmin::CabinetType.where(id: cabinet_type_hash.keys).to_a
+    info = []
+    cabinet_type_hash.each_pair do |cabinet_type_id, selection_id|
+      info << { 
+        cabinet_type: cabinet_types.detect { |ct| ct.id == cabinet_type_id.to_i }, 
+        selection: "Selection #{selection_id.first}" 
+      }
+    end
+    info
   end
 
 end

@@ -26,7 +26,7 @@
                     <div class="form-group">
                       <label class="col-sm-3 control-label">Choose <%= countertop_design.name %></label>
                       <div class="col-sm-6">
-                        <%= select_tag("quote[countertop_designs_info][#{category.id}][]", options_from_collection_for_select(sections, :id, :name), :selected => @selected_category ,:class => 'form-control') %>
+                        <%= select_tag("quote[countertop_designs_info][#{category.id}][#{countertop_design.id}][]", options_from_collection_for_select(sections, :id, :name), :selected => @selected_category ,:class => 'form-control') %>
                       </div>
                     </div>
                   </div>

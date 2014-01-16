@@ -16,7 +16,6 @@ class Rcadmin::CustomersController < ApplicationController
   # GET /rcadmin/customers/new
   def new
     @rcadmin_customer = Rcadmin::Customer.new
-    render :text => @rcadmin_customer.inspect and return false
   end
 
   # GET /rcadmin/customers/1/edit

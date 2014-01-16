@@ -5,11 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
+* Styling and Tips
+  - DO NOT use tabs and USE 2 spaces to indent code(configure your text editor for 2 spaces)
+  - Be consistent with the syntax espeically with hashes and use latest syntax ( {key: value} ) instead of ( {:key => value} )
+  - when passing arguments or parameters use single space after comma like has_many :customers, dependent: :destroy
+  - Embrace latest rails features and techniques 
+  - Avoid using protected attributes
+  - DO NOT include gems for minor functionalities better code yourself
+  - DO NOT use gem therubyracer. instead install nodejs and if you can't install then
+    just use therubyracer for development and test environment cuz its not memory efficient
+  
+
 * Ruby version
 
 * System dependencies
 
 * Configuration
+  - Edit config/database.yml file and use postgresql in development 
 
 * Database creation
 

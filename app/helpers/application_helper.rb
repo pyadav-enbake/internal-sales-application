@@ -4,5 +4,12 @@ module ApplicationHelper
   end
   
 
+ def sections
+   [
+     {id: 1, name: 'Selection 1'}, {id: 2, name: 'Selection 2'},
+     {id: 3, name: 'Selection 3'}, {id: 4, name: 'Selection 4'}
+   ].map { |s| OpenStruct.new(s) }
+ end
+
 
 end

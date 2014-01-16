@@ -14,3 +14,15 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+
+# gemset and ruby version file ignore
+.ruby-*
+DS_Store
+
+# VIM tempfiles ignore
+*.swp
+*.swo
+
+# database file to be ignore
+config/database.yml

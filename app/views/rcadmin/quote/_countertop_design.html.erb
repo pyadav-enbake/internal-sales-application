@@ -1,49 +1,56 @@
-		<div class="container">
-		<%if flash[:error] %>
-		<div class="alert alert-dismissable alert-danger">
-			<%=flash[:error]%>
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		</div>
-		<%end%>
+<div class="container">
+  <% if flash[:error] %>
+    <div class="alert alert-dismissable alert-danger">
+      <%=flash[:error]%>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+  <% end %>
 
-		<%= form_for("",:url => {:action=>"save_countertop"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-orange">
-						<div class="panel-heading">
-							<h4>Select Countertop Design</h4>
-							<div class="options">
-							</div>
-						</div>
-						<input type="hidden" name="quote[id]" value="#{@quote.id}">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Choose Countertop Design</label>
-							                <div class="col-sm-6">
-												<%= select("quote","countertop_design_id", Rcadmin::CountertopDesign.all.collect {|c| [ c.name , c.id ] }, {:include_blank => "Select Countertop Design",:selected=>""},:class => 'form-control') %>
-							                </div>
-							            </div>
+  <%= form_for("",:url => {:action=>"save_countertop"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+    <input type="hidden" name="quote[id]" value="<%= @quote.id %>">
+    <% last_category_id = @categories.to_a.last.id %>
+    <% @categories.each do |category| %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-orange">
+            <div class="panel-heading">
+              <h4>Select <%= category.name %> Countertop Design</h4>
+              <div class="options">
+              </div>
+            </div>
 
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-6 col-sm-offset-3">
-				      			<div class="btn-toolbar">
-									<%= submit_tag "Next Step" ,:class=>"btn-primary btn"%>
-									<%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
-					      			
-				      			</div>
-				      		</div>
-				      	</div>
-				      </div>
-					</div>
-				</div>
-			</div>
-			<%end%>
-		</div>
+            <div class="panel-body">
+              <% @countertop_designs.each do |countertop_design| %>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Choose <%= countertop_design.name %></label>
+                      <div class="col-sm-6">
+                        <%= select_tag("quote[countertop_designs_info][#{category.id}][#{countertop_design.id}][]", options_from_collection_for_select(sections, :id, :name), :selected => @selected_category ,:class => 'form-control') %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
 
+            <% if last_category_id === category.id %>
+              <div class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <div class="btn-toolbar">
+                      <%= submit_tag "Next Step" ,:class=>"btn-primary btn"%>
+                      <%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

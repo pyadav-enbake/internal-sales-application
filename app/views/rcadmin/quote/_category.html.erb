@@ -1,61 +1,61 @@
-		<div class="container">
-		<%if flash[:error] %>
-		<div class="alert alert-dismissable alert-danger">
-			<%=flash[:error]%>
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		</div>
-		<%end%>
+<div class="container">
+  <%if flash[:error] %>
+    <div class="alert alert-dismissable alert-danger">
+      <%=flash[:error]%>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+  <%end%>
 
-		<%= form_for("",:url => {:action=>"save_category_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-orange">
-						<div class="panel-heading">
-							<h4>Select Category</h4>
-							<div class="options">
-							</div>
-						</div>
-						<input type="hidden" name="quote[id]" value="#{@quote.id}">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Choose Category For Quote</label>
-							                <div class="col-sm-6">
-												<%= select("quote","category", Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected=>@selected_category},:multiple => true,:class => 'form-control') %>
-							                </div>
-							            </div>
+  <%= form_for("",:url => {:action=>"save_category_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-orange">
+          <div class="panel-heading">
+            <h4>Select Category</h4>
+            <div class="options">
+            </div>
+          </div>
+          <input type="hidden" name="quote[id]" value="#{@quote.id}">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Choose Category For Quote</label>
+                  <div class="col-sm-6">
+                    <%= select("quote","category", Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected=>@selected_category},:multiple => true,:class => 'form-control') %>
+                  </div>
+                </div>
 
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-6 col-sm-offset-3">
-				      			<div class="btn-toolbar">
-									<%= submit_tag "Next Step" ,:class=>"btn-primary btn"%>
-									<%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
-					      			
-				      			</div>
-				      		</div>
-				      	</div>
-				      </div>
-					</div>
-				</div>
-			</div>
-			<%end%>
-		</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <div class="btn-toolbar">
+                  <%= submit_tag "Next Step" ,:class=>"btn-primary btn"%>
+                  <%#=link_to "Back",rcadmin_administrators_path,:class=>"btn-default btn"%>
 
-  <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"95%"}
-    }
-    for (var selector in config) {
-      $("#quote_category").chosen(config[selector]);
-    }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
 
-  </script>
+<script type="text/javascript">
+  var config = {
+    '.chosen-select'           : {},
+    '.chosen-select-deselect'  : {allow_single_deselect:true},
+    '.chosen-select-no-single' : {disable_search_threshold:10},
+    '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+    '.chosen-select-width'     : {width:"95%"}
+  }
+  for (var selector in config) {
+    $("#quote_category").chosen(config[selector]);
+  }
+
+</script>

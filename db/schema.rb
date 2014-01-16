@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
+    t.integer  "status",      limit: 1
   end
 
   create_table "contractors", force: true do |t|
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.integer  "zip"
     t.string   "email"
     t.string   "phone"
-    t.integer  "status"
+    t.integer  "status",        limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.string   "name"
     t.text     "description"
     t.integer  "display_order"
-    t.integer  "status"
+    t.integer  "status",        limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.text     "question"
     t.text     "answer"
     t.integer  "display_order"
-    t.integer  "status"
+    t.integer  "status",          limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.integer  "status"
+    t.integer  "status",           limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "measurement_type"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.integer  "product_id"
     t.integer  "quantity"
     t.float    "total_price"
-    t.integer  "status"
+    t.integer  "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -154,11 +154,13 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                  default: 1
+    t.integer  "status",                  limit: 1, default: 1
     t.date     "delivery_date"
     t.string   "sales_closing_potential"
     t.integer  "cabinet_type_id"
     t.integer  "countertop_design_id"
+    t.text     "cabinet_types_info"
+    t.text     "countertop_designs_info"
     t.integer  "contractor_id"
   end
 
@@ -172,7 +174,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status"
+    t.integer  "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

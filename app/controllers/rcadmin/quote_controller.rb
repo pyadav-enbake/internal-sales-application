@@ -159,7 +159,7 @@ class Rcadmin::QuoteController < ApplicationController
     else
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.countertop_design_id = params[:quote][:countertop_design_id]
-      @quote.countertop_designs_info = params[:quote][:countertop_designs_info].to_hash
+      @quote.countertop_designs_info = params[:quote][:countertop_designs_info].to_hash.to_s
       if @quote.save
         #redirect_to :action => 'show_product'
         redirect_to :action => 'show_product'

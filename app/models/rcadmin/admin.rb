@@ -15,5 +15,5 @@ class Rcadmin::Admin < ActiveRecord::Base
    attr_accessible :first_name,:last_name,:email,:username, :password, :password_confirmation, :remember_me,:terms_and_conditions,:role,:quote_category
   #validates :username, :presence => true
 	
-	has_many :customers,dependent: :destroy
+	has_many :contractors,dependent: :destroy
 end

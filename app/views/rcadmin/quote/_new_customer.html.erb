@@ -1,7 +1,6 @@
-		<div class="container">
-
-
+			<span ><%=link_to "Exist Customer","javascript:void(0)",:id=>"old_customer"%></span>
 			<%= form_for(@rcadmin_customer,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+			<%= hidden_field_tag 'act' ,"qcustomer"%>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-orange">
@@ -90,11 +89,11 @@
 				      		<div class="col-sm-6 col-sm-offset-3">
 				      			<div class="btn-toolbar">
 									<%if @rcadmin_customer.id.nil? %>
-										<%= f.submit "Add Customer" ,:class=>"btn-primary btn"%>
+										<%= f.submit "Next Step" ,:class=>"btn-primary btn"%>
 									<%else%>
 										<%= f.submit "Update Customer" ,:class=>"btn-primary btn"%>
 									<%end%>
-									<%=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
+									<%#=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
 				      			</div>
 				      		</div>
 				      	</div>
@@ -104,3 +103,10 @@
 			</div>
 		</div>
 		<%end%>
+<script>
+  $("#old_customer").on('click',function() {
+    $.get("/quote/old_customer",function(data,status){
+     $("#formchng").html(data);
+    });
+  }); 
+</script>

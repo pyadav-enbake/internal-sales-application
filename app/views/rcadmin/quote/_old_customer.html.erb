@@ -1,5 +1,3 @@
-<div class="container">
-<div id="formchng">
 <%= form_for(@quote,:url => {:action=>"save_customer_deatils"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
   <%= f.hidden_field :act ,:value=>"exist",:class=>"form-control",:id=>"act"%>
   <div class="row">
@@ -48,4 +46,10 @@
     </div>
   </div>
 <%end%>
-</div>
+<script>
+  $("#new_customer").on('click',function() {
+    $.get("/quote/new_customer",function(data,status){
+     $("#formchng").html(data);
+    });
+  });
+</script>

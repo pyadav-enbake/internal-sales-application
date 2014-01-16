@@ -1,18 +1,23 @@
 class Rcadmin::QuoteController < ApplicationController
+	protect_from_forgery except: :get_customer
+	before_action :check_auth,:authenticate
 	def index
+		@rcadmin_customer = Rcadmin::Customer.new
 		session[:quote_id] = nil
 		@quote = Rcadmin::Quote.new
 	end
 
 	def save_customer_deatils
-		@quote = Rcadmin::Quote.new( params[:rcadmin_quote])
-		if @quote.save
-				session[:quote_id] = @quote.id
-				redirect_to :action => 'show_category'
-		else
-			render :action=> 'index'
-		end
-		
+	# render :text => params.inspect and return false
+	  @rcadmin_customer = Rcadmin::Customer.new
+	  @quote = Rcadmin::Quote.new( params[:rcadmin_quote])
+	  
+	  if @quote.save
+			  session[:quote_id] = @quote.id
+			  redirect_to :action => 'show_category'
+	  else
+		  render :action=> 'index'
+	  end
 	end
 	
 	
@@ -156,7 +161,23 @@ class Rcadmin::QuoteController < ApplicationController
       end
     end  
   end
+  
+  def get_customer
+    contractor_id = params["contractor_id"]
+    @customer =  Rcadmin::Customer.by_contractor(contractor_id)
+    #render :text => @customer.inspect and return false
+    render :partial => "get_customer", :object => @customer
+  end
 
+  def get_new_customer
+    @rcadmin_customer = Rcadmin::Customer.new
+    render :partial => "new_customer", :object => @rcadmin_customer
+  end
+
+  def get_old_customer
+    @quote = Rcadmin::Quote.new
+    render :partial => "old_customer", :object =>  @quote
+  end
 
   
 end

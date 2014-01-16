@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label class="col-sm-3 control-label">Select Customer</label>
+  <div class="col-sm-6">
+    <%= select(:rcadmin_quote,:customer_id, @customer.collect {|c| [ c.fullname, c.id ] }, {:prompt => "Select Customer"},:class => 'form-control') %>
+  </div>
+</div>

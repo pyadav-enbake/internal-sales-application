@@ -1,5 +1,11 @@
 
 $(document).ready(function() {
+  $("#new_customer").on('click',function() {
+    $.get("/quote/new_customer",function(data,status){
+     $("#formchng").html(data);
+    });
+  });
+ 
 	$("#dimension_category_type").change(function() {
 	  $.ajax({
 		url: "/rcadmin/catdimen_name",
@@ -176,4 +182,15 @@ function check_product(){
 		$('#myModal').modal('show');
 		return true;
 	}
+}
+
+function get_customer(id){
+   $.ajax({
+    url: "/quote/get_customer",
+    type: "POST",
+    data: {"contractor_id" : id},
+    success: function(data) {
+      $("#part_cust").html(data);
+    }
+  });
 }

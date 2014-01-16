@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113101807) do
+ActiveRecord::Schema.define(version: 20140116092235) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 20140113101807) do
     t.integer  "status"
   end
 
+  create_table "contractors", force: true do |t|
+    t.integer  "admin_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "state"
+    t.string   "city"
+    t.string   "address"
+    t.string   "zip"
+    t.string   "phone"
+    t.integer  "status",     limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "countertop_designs", force: true do |t|
     t.string   "name"
     t.integer  "status",     limit: 1
@@ -59,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140113101807) do
   end
 
   create_table "customers", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "contractor_id"
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
@@ -144,6 +159,7 @@ ActiveRecord::Schema.define(version: 20140113101807) do
     t.string   "sales_closing_potential"
     t.integer  "cabinet_type_id"
     t.integer  "countertop_design_id"
+    t.integer  "contractor_id"
   end
 
   create_table "static_pages", force: true do |t|

@@ -1,9 +1,11 @@
 RomarCabinates::Application.routes.draw do
 
+
   namespace :rcadmin do
     resources :countertop_designs
     resources :cabinet_types
     resources :subcategories
+    resources :contractors
     resources :customers
     resources :email_templates
     resources :faqs
@@ -70,6 +72,9 @@ RomarCabinates::Application.routes.draw do
 	post '/rcadmin/quote/save_cabinet' => 'rcadmin/quote#save_cabinet'
 	get '/rcadmin/quote/countertop_design' => 'rcadmin/quote#show_countertop_design'
 	post '/rcadmin/quote/save_countertop' => 'rcadmin/quote#save_countertop'
+	post '/quote/get_customer' => 'rcadmin/quote#get_customer'
+	get '/quote/new_customer' => 'rcadmin/quote#get_new_customer'
+	get '/quote/old_customer' => 'rcadmin/quote#get_old_customer'
 
 
 #authenticated :admins do

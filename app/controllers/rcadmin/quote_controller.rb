@@ -137,6 +137,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.cabinet_type_id = params[:quote][:cabinet_type_id]
       @quote.cabinet_types_info = params[:quote][:cabinet_types_info].to_hash
+      render :text => @quote.inspect and return false
       if @quote.save
         #redirect_to :action => 'show_product'
         redirect_to :action => 'show_countertop_design'

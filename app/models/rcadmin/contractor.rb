@@ -1,5 +1,5 @@
 class Rcadmin::Contractor < ActiveRecord::Base
-	validates_presence_of :admin_id,:first_name,:last_name,:email
+	validates_presence_of :admin_id,:company_name,:email
 	validates :email, presence: true, :email => true
 	validates_uniqueness_of :email,:on => :create
 	validates_presence_of :state,:city,:address,:zip
@@ -7,7 +7,7 @@ class Rcadmin::Contractor < ActiveRecord::Base
 	validates_presence_of:phone,:status
 	validates :phone, :length => {:minimum => 6, :maximum => 25}, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }
 	
-	attr_accessible :admin_id,:first_name,:last_name,:email,:state,:city,:address,:zip,:phone,:status
+	attr_accessible :admin_id,:first_name,:last_name,:email,:state,:city,:address,:zip,:phone,:status,:company_name
 
 	belongs_to :admin
 	has_many :customers,dependent: :destroy

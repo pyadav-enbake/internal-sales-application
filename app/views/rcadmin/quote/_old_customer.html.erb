@@ -20,7 +20,7 @@
 	      <div class="form-group" id="exist_cont">
 		<label class="col-sm-3 control-label">Select Contractor</label>
 		<div class="col-sm-6">
-		  <%= select(:rcadmin_quote,:contractor_id, Rcadmin::Contractor.find_by_adminid("#{current_user.id}").collect {|c| [ c.fullname, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control',:onchange=>"console.log(this.value);get_customer(this.value)") %>
+		  <%= select(:rcadmin_quote,:contractor_id, Rcadmin::Contractor.find_by_adminid("#{current_user.id}").collect {|c| [ c.company_name, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control',:onchange=>"console.log(this.value);get_customer(this.value)") %>
 		</div>
 	      </div>
 	      <span id="part_cust"></span>

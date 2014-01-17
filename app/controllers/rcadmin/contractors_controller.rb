@@ -79,6 +79,6 @@ class Rcadmin::ContractorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rcadmin_contractor_params
-      params.require(:rcadmin_contractor).permit(:admin_id, :first_name, :last_name, :email, :state, :city, :address, :zip, :phone, :status)
+      params.require(:rcadmin_contractor).permit(:admin_id, :first_name, :last_name, :email, :state, :city, :address, :zip, :phone, :status,:company_name)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116092235) do
+ActiveRecord::Schema.define(version: 20140117133818) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",      limit: 1
+    t.integer  "status"
   end
 
   create_table "contractors", force: true do |t|
@@ -61,9 +61,10 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.string   "address"
     t.string   "zip"
     t.string   "phone"
-    t.integer  "status",     limit: 1
+    t.integer  "status",       limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "company_name"
   end
 
   create_table "countertop_designs", force: true do |t|
@@ -133,7 +134,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.integer  "status",           limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "measurement_type"
@@ -174,7 +175,7 @@ ActiveRecord::Schema.define(version: 20140116092235) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status",      limit: 1
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

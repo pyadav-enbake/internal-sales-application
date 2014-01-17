@@ -75,8 +75,8 @@ class Rcadmin::QuoteController < ApplicationController
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       #render :text => @quote.inspect and return false
-      WelcomeMailer.send_quote_mail(@quote.customer_id).deliver
-      WelcomeMailer.send_quote_mail_customer(@customer).deliver
+      WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
+      WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
     end
     render :text => 'ok'
     #redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
@@ -105,8 +105,8 @@ class Rcadmin::QuoteController < ApplicationController
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       #render :text => @quote.inspect and return false
-      WelcomeMailer.send_quote_mail(@quote.customer_id).deliver
-      WelcomeMailer.send_quote_mail_customer(@customer).deliver
+      WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
+      WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
 
 
     else

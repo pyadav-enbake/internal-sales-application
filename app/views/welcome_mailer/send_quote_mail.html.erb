@@ -1,6 +1,7 @@
 <%@customer = Rcadmin::Customer.find(@customer_id)%>
 <%#@sales_admin = Rcadmin::Admin.find(@customer.admin_id)%>
-<%@quote = Rcadmin::Quote.find_by_customer(@customer_id)%>
+<%#@quote = Rcadmin::Quote.find_by_customer(@customer_id)%>
+<%@quote = Rcadmin::Quote.where("id = ?", @quote_id)%>
 Dear Administrator,
 
 A customer has been request a quote.
@@ -41,9 +42,9 @@ Quote Details<br>
                     <tr>
                       <th>Product Name</th>
                       <th>Category Name</th>
-                      <th>Price per unit</th>
-                      <th>Enter Qty.</th>
-                      <th>Total Price</th>
+                      <!--th>Price per unit</th-->
+                      <th>Quantity</th>
+                      <!--th>Total Price</th-->
                     </tr>
                   </thead>
                   <tbody>
@@ -51,10 +52,10 @@ Quote Details<br>
                       <%@tot_amt += qtp.total_price%>
                       <tr>
                         <td><%=qtp.product.title%></td>
-                        <td><%=qtp.product.category.name%></td>
-                        <td>$<%=qtp.product.price%></td>
-                        <td><%=qtp.quantity%></td>
-                        <td>$<%=qtp.total_price%></td>
+                        <td style="text-align:center;"><%=qtp.product.category.name%></td>
+                        <!--td>$<%#=qtp.product.price%></td-->
+                        <td style="text-align:center;"><%=qtp.quantity%></td>
+                        <!--td>$<%#=qtp.total_price%></td-->
                       </tr>
                     <%end%>
                   </tbody>

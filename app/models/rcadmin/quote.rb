@@ -78,5 +78,23 @@ class Rcadmin::Quote < ActiveRecord::Base
     end
     info
   end
+  
+  def self.copy_quote(exist_quote,customer_id)
+    return @quote if @quote
+    
+    @quote = Rcadmin::Quote.new
+    
+    @quote.contractor_id = exist_quote.contractor_id
+    @quote.customer_id = customer_id
+    @quote.category = exist_quote.category
+    @quote.status = exist_quote.status
+    @quote.delivery_date = exist_quote.delivery_date
+    @quote.sales_closing_potential = exist_quote.contractor_id
+    @quote.cabinet_types_info = exist_quote.cabinet_types_info
+    @quote.countertop_designs_info = exist_quote.countertop_designs_info
+    
+    @quote
+    
+  end
 
 end

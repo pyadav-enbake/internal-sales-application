@@ -85,12 +85,8 @@ class Rcadmin::QuoteController < ApplicationController
   def resend_quote
     @qid = params["quote_id"]
     @existquote = Rcadmin::Quote.find(@qid)
-    @quote = Rcadmin::Quote.new
-    @quote.customer_id = params["customer_id"]
-    @quote.category = @existquote.category
-    @quote.status = @existquote.status
-    @quote.delivery_date = @existquote.delivery_date
-    @quote.sales_closing_potential = @existquote.sales_closing_potential
+    @quote = Rcadmin::Quote.copy_quote(@existquote,params["customer_id"])
+#    render :text => @quote.inspect and return false
     if @quote.save
       params[:quantity].each do |key,val|
         @quota_product = {}

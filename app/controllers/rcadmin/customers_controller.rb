@@ -15,6 +15,7 @@ class Rcadmin::CustomersController < ApplicationController
 
   # GET /rcadmin/customers/new
   def new
+     session['act'] = nil
     @rcadmin_customer = Rcadmin::Customer.new
   end
 
@@ -30,8 +31,8 @@ class Rcadmin::CustomersController < ApplicationController
 
     respond_to do |format|
       if @rcadmin_customer.save
-	if(params['act'] == "qcustomer" || session['act'] = "qcustomer")
-	session['act'] = "qcustomer"
+	if(params['act'] == "qcustomer" || session['act'] == "qcustomer")
+	  session['act'] = "qcustomer"
 	   @quote = Rcadmin::Quote.new
 	   #@quote.admin_id  = current_user.id
 	   @quote.contractor_id = @rcadmin_customer.contractor_id
@@ -40,7 +41,6 @@ class Rcadmin::CustomersController < ApplicationController
 	   session[:quote_id] = @quote.id
 	   format.html { redirect_to select_quote_category_path, notice: 'Customer was successfully created.' }
 	else
-	render :text =>'else'.inspect and return false
 	  flash[:notice] = 'Customer was successfully created.'
 	  format.html { redirect_to rcadmin_customers_url, notice: 'Customer was successfully created.' }
 	  format.json { render action: 'show', status: :created, location: @rcadmin_customer }

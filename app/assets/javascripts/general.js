@@ -63,7 +63,11 @@ $(document).ready(function() {
       $(this).val(tval);
       var id = $(this).attr('id');
       var oprice = $("#oprice"+id).val();
-      $("#chk"+id).prop('checked', true);;
+      if(tval == 0){
+	$("#chk"+id).prop('checked', false);
+      }else{
+	$("#chk"+id).prop('checked', true);
+      }
       var text = event.target.value;
       
       var modify_price = (oprice*text).toFixed(2);

@@ -5,6 +5,7 @@ class Rcadmin::CustomersController < ApplicationController
   # GET /rcadmin/customers
   # GET /rcadmin/customers.json
   def index
+    session['act'] = nil
     @rcadmin_customers = Rcadmin::Customer.all
   end
 
@@ -15,7 +16,7 @@ class Rcadmin::CustomersController < ApplicationController
 
   # GET /rcadmin/customers/new
   def new
-     session['act'] = nil
+     
     @rcadmin_customer = Rcadmin::Customer.new
   end
 
@@ -28,11 +29,12 @@ class Rcadmin::CustomersController < ApplicationController
   # POST /rcadmin/customers.json
   def create
     @rcadmin_customer = Rcadmin::Customer.new(rcadmin_customer_params)
-
+    if params['act'] == "qcustomer"
+      session['act'] = "qcustomer"
+    end
     respond_to do |format|
       if @rcadmin_customer.save
-	if(params['act'] == "qcustomer" || session['act'] == "qcustomer")
-	  session['act'] = "qcustomer"
+	if(session['act'] == "qcustomer")
 	   @quote = Rcadmin::Quote.new
 	   #@quote.admin_id  = current_user.id
 	   @quote.contractor_id = @rcadmin_customer.contractor_id

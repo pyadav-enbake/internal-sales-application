@@ -47,7 +47,15 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def show_product
+    if params[:qid]
+      @quote_id=params[:qid]
+      @customer_id = params[:cid]
+      session[:quote_id] = params[:qid]
+      @exist_quota_total_price = Rcadmin::QuoteProduct.sum(:total_price).to_f.round(2)
+      @exist_quota_product_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:product_id)
+    end
     @quote = Rcadmin::Quote.find(session[:quote_id] )
+    
     @categories =  @quote.categories.includes(:products, subcategories: :products)
     @products =  Rcadmin::Product.where(category_id: @quote.category_ids)
     @subcategories =  Rcadmin::Subcategory.where(category_id: @quote.category_ids)
@@ -74,20 +82,19 @@ class Rcadmin::QuoteController < ApplicationController
         end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
-      #render :text => @quote.inspect and return false
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
       WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
     end
     render :text => 'ok'
-    #redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
   end
 
   def resend_quote
     @qid = params["quote_id"]
     @existquote = Rcadmin::Quote.find(@qid)
     @quote = Rcadmin::Quote.copy_quote(@existquote,params["customer_id"])
-#    render :text => @quote.inspect and return false
+    
     if @quote.save
+    @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'] )
       params[:quantity].each do |key,val|
         @quota_product = {}
         @quota_product['quote_id'] = @quote.id
@@ -101,10 +108,9 @@ class Rcadmin::QuoteController < ApplicationController
           @rcadmin_quota_product.save  
         end
 
-
+      
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
-      #render :text => @quote.inspect and return false
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
       WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
 
@@ -113,7 +119,6 @@ class Rcadmin::QuoteController < ApplicationController
       render :text => 'Some thing went Wornge' and return false
     end
     redirect_to "/rcadmin/customers/#{@quote.customer_id}/edit"
-    #render :text => params.inspect and return false
 
   end
 
@@ -125,7 +130,6 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def save_cabinet
-    # params["quote"]["cabinet_type_id"].reject!{|a| a==""} 
     if params["quote"]["cabinet_types_info"].blank?
       flash[:error] = 'Please select one cabinet type'
       render :action => 'show_cabinet_selection'
@@ -135,7 +139,6 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.cabinet_types_info = params[:quote][:cabinet_types_info].to_hash.to_s
      
       if @quote.save
-        #redirect_to :action => 'show_product'
         redirect_to :action => 'show_countertop_design'
       end
     end  
@@ -148,7 +151,6 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def save_countertop
-    # params["quote"]["cabinet_type_id"].reject!{|a| a==""} 
     if params[:quote][:countertop_designs_info].blank? 
       flash[:error] = 'Please select one countertop design'
       render :action => 'show_countertop_design'
@@ -157,7 +159,6 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.countertop_design_id = params[:quote][:countertop_design_id]
       @quote.countertop_designs_info = params[:quote][:countertop_designs_info].to_hash.to_s
       if @quote.save
-        #redirect_to :action => 'show_product'
         redirect_to :action => 'show_product'
       end
     end  
@@ -166,7 +167,6 @@ class Rcadmin::QuoteController < ApplicationController
   def get_customer
     contractor_id = params["contractor_id"]
     @customer =  Rcadmin::Customer.by_contractor(contractor_id)
-    #render :text => @customer.inspect and return false
     render :partial => "get_customer", :object => @customer
   end
 

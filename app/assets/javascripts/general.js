@@ -109,6 +109,7 @@ $(document).ready(function() {
   $('#confirm_send_quote').click(function(){
     $("#err_msg").html('');
     var frm = $('#send_quote_frm');
+    //console.log(frm.attr('action'));return false;
     $("#myModalconfirmsend").modal('hide');
     $("#myModalsend").modal({ backdrop: 'static',keyboard: false});
     $.ajax({

@@ -87,5 +87,11 @@
         .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
         .tab-sec-last{bottom: 46px;position: absolute;width: 99.5%;}
         </style>
-
+<script>
+$(document).ready(function() {
+  $('#tabs input[type=checkbox]').prop('checked',false);
+  $('#tabs input[type=text]').attr('disabled',false);
+  $('.quantity1').val(0);
+});
+</script>
 

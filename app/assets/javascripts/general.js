@@ -58,8 +58,12 @@ $(document).ready(function() {
 	
 //Quote Calculation
   $(".quantity1").keyup(function(event){
+    //console.log(event.target.value);
+      var tval = (event.target.value) ? parseInt(event.target.value) : 0;
+      $(this).val(tval);
       var id = $(this).attr('id');
       var oprice = $("#oprice"+id).val();
+      $("#chk"+id).prop('checked', true);;
       var text = event.target.value;
       
       var modify_price = (oprice*text).toFixed(2);

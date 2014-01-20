@@ -6,7 +6,7 @@
 				<div style="clear:both;"></div>
 				<div style="color:black;">
 					<div id="accordion" class="accordion">
-					<%if @quote.size > 0%>
+					<%if !@quote.blank? || !@quote.nil?%>
 					
 						<% @quote.each_with_index do |qt,index|%>
 							<h3>Quote no - RC<%=qt.id%></h3>

@@ -56,6 +56,7 @@ class Rcadmin::CustomersController < ApplicationController
   # PATCH/PUT /rcadmin/customers/1
   # PATCH/PUT /rcadmin/customers/1.json
   def update
+  
     respond_to do |format|
       if @rcadmin_customer.update(rcadmin_customer_params)
       flash[:notice] = 'Customer was successfully updated.'

@@ -7,7 +7,7 @@ class CreateCustomers < ActiveRecord::Migration
       t.text :address
       t.string :city
       t.string :state
-      t.integer :zip
+      t.string :zip
       t.string :email
       t.string :phone
       t.integer :status,:limit => 1

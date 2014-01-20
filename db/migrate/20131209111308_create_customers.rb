@@ -9,7 +9,7 @@ class CreateCustomers < ActiveRecord::Migration
       t.string :state
       t.integer :zip
       t.string :email
-      t.integer :phone
+      t.string :phone
       t.integer :status,:limit => 1
 
       t.timestamps

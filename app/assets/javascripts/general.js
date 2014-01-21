@@ -169,10 +169,10 @@ $(document).ready(function() {
   
   $('.expand').click(function() {
       var inhtml = $('.expand').html();
-      if(inhtml == 'Exapnd All'){
-	$('.expand').html('Collaps All');
+      if(inhtml == 'Expand All'){
+	$('.expand').html('Collapse All');
       }else{
-	$('.expand').html('Exapnd All');
+	$('.expand').html('Exapand All');
       }
       $('#accordion .ui-widget-content').toggle('slow');
   });

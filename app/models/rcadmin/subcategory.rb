@@ -3,6 +3,6 @@ class Rcadmin::Subcategory < ActiveRecord::Base
 	attr_accessible :category_id,:name,:status
 	
 	belongs_to :category 
-	has_many :products,dependent: :destroy
+	#has_many :products,dependent: :destroy
 	
 end

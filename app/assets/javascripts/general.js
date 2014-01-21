@@ -165,7 +165,18 @@ $(document).ready(function() {
     }
 
   });
+//Expand and collaps  
   
+  $('.expand').click(function() {
+      var inhtml = $('.expand').html();
+      if(inhtml == 'Exapnd All'){
+	$('.expand').html('Collaps All');
+      }else{
+	$('.expand').html('Exapnd All');
+      }
+      $('#accordion .ui-widget-content').toggle('slow');
+  });
+
 
 });
 

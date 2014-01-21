@@ -18,7 +18,8 @@ class Rcadmin::Quote < ActiveRecord::Base
   end
 
   def category_ids
-    @category_ids ||= category.split(',')
+    return @category_ids if @category_ids
+    @category_ids ||= category.split(',') if !category.nil?
   end
 
 

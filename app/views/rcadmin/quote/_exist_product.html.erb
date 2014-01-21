@@ -39,9 +39,10 @@
                       <% else %>
 
                         <% @products.each_with_index do |product, index|%>
+			<%@exist_quota_category_ids = Rcadmin::QuoteProduct.where(product_id: product.id,quote_id: @quote_id,category_id: cat.id).pluck(:category_id)%>
 			  <input type="hidden" id="oprice<%= cat.id %><%= product.id %>" value="<%= product.price %>">
 			     <%if  @exist_quota_product_ids && @exist_quota_product_ids.include?(product.id) && @exist_quota_category_ids.include?(cat.id)%>
-			     <%@exist_quota_product = Rcadmin::QuoteProduct.where(product_id: product.id).first%>
+			     <%@exist_quota_product = Rcadmin::QuoteProduct.where(product_id: product.id,quote_id: @quote_id,category_id: cat.id).first%>
 				<tr>
 				  <td><input type="text" name="quantity[<%= cat.id %>][<%= product.id %>]" id="<%= cat.id %><%= product.id %>" style="width: 30px;" value="<%=@exist_quota_product.quantity%>" class="quantity1" onkeypress="return isNumber(event)"></td>
 				  <td><input type="checkbox" name="product[<%= cat.id %>][<%= product.id %>]" value="" class="chkpro" id="chk<%= cat.id %><%= product.id %>" checked="checked"></td>

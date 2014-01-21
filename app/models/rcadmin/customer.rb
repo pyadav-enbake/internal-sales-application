@@ -7,7 +7,7 @@ class Rcadmin::Customer < ActiveRecord::Base
 	validates_presence_of:phone,:status
 	validates :phone, :length => {:minimum => 6, :maximum => 25}, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }
 	
-	attr_accessible :contractor_id,:first_name,:last_name,:email,:state,:city,:address,:zip,:phone,:status
+	attr_accessible :contractor_id,:first_name,:last_name,:title,:email,:state,:city,:address,:zip,:phone,:status
 
 	belongs_to :contractor
 	has_many :quotes,dependent: :destroy

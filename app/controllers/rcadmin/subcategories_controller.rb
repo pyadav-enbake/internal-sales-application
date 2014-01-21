@@ -28,8 +28,8 @@ class Rcadmin::SubcategoriesController < ApplicationController
 
     respond_to do |format|
       if @rcadmin_subcategory.save
-        flash[:notice] = 'Subcategory was successfully created.' 
-        format.html { redirect_to rcadmin_subcategories_url, notice: 'Subcategory was successfully created.' }
+        flash[:notice] = 'Product Type was successfully created.' 
+        format.html { redirect_to rcadmin_subcategories_url, notice: 'Product Type was successfully created.' }
         format.json { render action: 'show', status: :created, location: @rcadmin_subcategory }
       else
         format.html { render action: 'new' }
@@ -43,8 +43,8 @@ class Rcadmin::SubcategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @rcadmin_subcategory.update(rcadmin_subcategory_params)
-        flash[:notice] = 'Subcategory was successfully updated.' 
-        format.html { redirect_to rcadmin_subcategories_url, notice: 'Subcategory was successfully updated.' }
+        flash[:notice] = 'Product Type was successfully updated.' 
+        format.html { redirect_to rcadmin_subcategories_url, notice: 'Product Type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,7 +58,7 @@ class Rcadmin::SubcategoriesController < ApplicationController
   def destroy
     @rcadmin_subcategory.destroy
     respond_to do |format|
-	  flash[:notice] = 'Subcategory was successfully deleted.' 
+	  flash[:notice] = 'Product Type was successfully deleted.' 
       format.html { redirect_to rcadmin_subcategories_url }
       format.json { head :no_content }
     end

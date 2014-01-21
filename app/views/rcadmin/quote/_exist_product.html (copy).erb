@@ -1,5 +1,7 @@
-  <%= form_tag("send_quote", method: "post", :id=>"send_quote_frm") do %>
-  <div id="subtabs" class="tabs-bottom">
+    <%= form_tag("resend_quote", method: "post", :id=>"send_quote_frm") do %>
+    <input type="hidden" name="quote_id" value="<%=@quote_id%>">
+    <input type="hidden" name="customer_id" value="<%=@customer_id%>">
+    <div id="subtabs" class="tabs-bottom">
     <div>
       <ul class="tabs">
         <% @categories.each_with_index do |cat, index|%>
@@ -7,17 +9,17 @@
         <% end %>
       </ul>
     </div>
-   <a href="#" class="expand">Exapand All</a><br>
+    <a href="#" class="expand">Expand All</a><br>
     <% if @categories.size > 0 %>
       <% @categories.each_with_index do |cat,index|%>
-        <div id="subtabs-<%=index%>" >
+        <div id="subtabs-<%=index%>">
           <div id="accordion" class="accordion">
-            <% @subcategories = Rcadmin::Subcategory.all %>
+            <% @subcategories = cat.subcategories %>
             <% if @subcategories.size > 0 %>
               <% @subcategories.each_with_index do |subcat, index|%>
                 <h3><%= subcat.name %></h3>
                 <div>
-                  <% @products = Rcadmin::Product.where(subcategory_id: subcat.id) %>
+                  <% @products = subcat.products %>
                   <table class="table">
                     <thead>
                       <tr>
@@ -37,16 +39,30 @@
                       <% else %>
 
                         <% @products.each_with_index do |product, index|%>
-			  <input type="hidden" id="oprice<%= cat.id %><%= product.id %>" value="<%= product.price %>">
+			  <input type="hidden" id="oprice<%= product.id %>" value="<%= product.price %>">
+			  <%if  @exist_quota_product_ids && @exist_quota_product_ids.include?(product.id)%>
+			    <%@exist_quota_product = Rcadmin::QuoteProduct.where(product_id: product.id).first%>
+			    <%#=@exist_quota_product.quantity%>
 			    <tr>
-			      <td><input type="text" name="quantity[<%= cat.id %>][<%= product.id %>]" id="<%= cat.id %><%= product.id %>" style="width: 30px;" value="" class="quantity1" onkeypress="return isNumber(event)"></td>
-			      <td><input type="checkbox" name="product[<%= cat.id %>][<%= product.id %>]" value="" class="chkpro" id="chk<%= cat.id %><%= product.id %>"></td>
+			      <td><input type="text" name="quantity[<%= product.id %>]" id="<%= product.id %>" style="width: 30px;" value="<%=@exist_quota_product.quantity%>" class="quantity1" onkeypress="return isNumber(event)" ></td>
+			      <td><input type="checkbox" name="product[<%= product.id %>]" value="" class="chkpro" id="chk<%= product.id %>" checked="checked"></td>
 			      <td><%= product.title %></td>
 			      <td id="price">$<%= product.price %></td>
 			      <td id="measure"><%= product.measurement_type %></td>
-			      <input type="hidden" name="tot_price[<%= cat.id %>][<%= product.id %>]" id="tprice<%= cat.id %><%= product.id %>" value="">
-			      <td >$ <span id="price<%= cat.id %><%= product.id %>">0.00</span><%#=product.price%></td>
+			      <input type="hidden" name="tot_price[<%= product.id %>]" id="tprice<%= product.id %>" value="">
+			      <td >$ <span id="price<%= product.id %>"><%=@exist_quota_product.total_price%></span><%#=product.price%></td>
 			    </tr>
+			  <%else%>
+			    <tr>
+			      <td><input type="text" name="quantity[<%= product.id %>]" id="<%= product.id %>" style="width: 30px;" value="0" class="quantity1" onkeypress="return isNumber(event)"></td>
+			      <td><input type="checkbox" name="product[<%= product.id %>]" value="" class="chkpro" id="chk<%= product.id %>"></td>
+			      <td><%= product.title %></td>
+			      <td id="price">$<%= product.price %></td>
+			      <td id="measure"><%= product.measurement_type %></td>
+			      <input type="hidden" name="tot_price[<%= product.id %>]" id="tprice<%= product.id %>" value="">
+			      <td >$ <span id="price<%= product.id %>">0.00</span><%#=product.price%></td>
+			    </tr>
+			  <%end%>
                         <% end %>
                       <% end %>
                     </tbody>
@@ -88,11 +104,5 @@
         .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }
         .tab-sec-last{bottom: 46px;position: absolute;width: 99.5%;}
         </style>
-<script>
-$(document).ready(function() {
-  $('#tabs input[type=checkbox]').prop('checked',false);
-  $('#tabs input[type=text]').attr('disabled',false);
- 
-});
-</script>
+
 

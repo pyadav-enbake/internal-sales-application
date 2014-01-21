@@ -33,12 +33,12 @@
 									<input type="hidden" name="quote_id"value="<%=qt.id%>">
 									<input type="hidden" name="customer_id"value="<%= @rcadmin_customer.id%>">
 									<input type="hidden" id="oprice<%=qtp.id%>" value="<%=qtp.product.price%>">
-									
+									<%@cat_detail =   Rcadmin::Category.find(qtp.category_id)%>
 									<%@tot_amt += qtp.total_price%>
 									<tr>
 										<td><%=qtp.product.title%></td>
 										<td><%=qtp.product.measurement_type%></td>
-										<td><%=qtp.product.category.name%></td>
+										<td><%=@cat_detail.name%></td>
 										<td>$<%=qtp.product.price%></td>
 										<td><input type="text" name="quantity[<%=qtp.product.id%>]" id="<%=qtp.id%>" style="width: 30px;"  class="quantity2" onkeypress="return isNumber(event)" value="<%=qtp.quantity%>" disabled="disabled"><%#=qtp.quantity%></td>
 										<!--td>$<%#=qtp.total_price%></td-->

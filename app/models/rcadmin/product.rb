@@ -1,8 +1,8 @@
 class Rcadmin::Product < ActiveRecord::Base
-	validates_presence_of :title,:price,:measurement_type,:status
-	attr_accessible :title,:measurement_type,:price,:description,:status
+	validates_presence_of :subcategory_id,:title,:price,:measurement_type,:status
+	attr_accessible :subcategory_id,:title,:measurement_type,:price,:description,:status
 	
-	#belongs_to :subcategory 
+	belongs_to :subcategory 
 	#belongs_to :category 
 	has_many :quote_product,dependent: :destroy
 	

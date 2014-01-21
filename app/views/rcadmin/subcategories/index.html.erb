@@ -1,10 +1,9 @@
         <div id="page-heading">
             <ol class="breadcrumb">
-				<li><%=link_to "Category",rcadmin_categories_path%></li>
-                <li><%=link_to "Sub Category",rcadmin_subcategories_path%></li>
+                <li><%=link_to "Product Type",rcadmin_subcategories_path%></li>
             </ol>
 
-            <h1>Sub Category</h1>
+            <h1>Product Type</h1>
         </div>
 		<%if flash[:notice] %>
 		<div class="alert alert-dismissable alert-success">
@@ -21,9 +20,9 @@
                     <div class="panel panel-sky">
                         <div class="panel-heading">
                         
-                            <h4>Sub Category</h4>
+                            <h4>Product Type</h4>
                             <div class="options"> 
-								<div class="pull-right"><%=link_to 'New Sub Category', new_rcadmin_subcategory_path,:class=>"btn btn-info btn-lg"%></div>
+								<div class="pull-right"><%=link_to 'New Product Type', new_rcadmin_subcategory_path,:class=>"btn btn-info btn-lg"%></div>
                                 <!--a href="javascript:;"><i class="fa fa-cog"></i></a>
                                 <a href="javascript:;"><i class="fa fa-wrench"></i></a>
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a-->
@@ -36,7 +35,7 @@
                                     <tr>
 										
 										<th>Name</th>
-										<th>Catgory</th>
+										<!--th>Catgory</th-->
 										<th>Satus</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
@@ -53,7 +52,7 @@
 										<%end%>
 											
 											<td><%=sc.name%></td>
-											<td><%=sc.category.name%></td>
+											<!--td><%#=sc.category.name%></td-->
 											<td><%if sc.status == 0%>Active<%else%>Inactive<%end%></td>
 											<td><%=sc.created_at.strftime(" %dth %b %Y at %I:%M%p") %></td>
 											<td><%=sc.updated_at.strftime(" %dth %b %Y at %I:%M%p") %></td>

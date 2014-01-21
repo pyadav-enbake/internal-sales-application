@@ -53,33 +53,40 @@ class Rcadmin::QuoteController < ApplicationController
       session[:quote_id] = params[:qid]
       @exist_quota_total_price = Rcadmin::QuoteProduct.sum(:total_price).to_f.round(2)
       @exist_quota_product_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:product_id)
+      @exist_quota_category_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:category_id)
     end
     @quote = Rcadmin::Quote.find(session[:quote_id] )
     
-    @categories =  @quote.categories.includes(:products, subcategories: :products)
-    @products =  Rcadmin::Product.where(category_id: @quote.category_ids)
+    @categories =  @quote.categories
+    @products =  Rcadmin::Product.all
     @subcategories =  Rcadmin::Subcategory.where(category_id: @quote.category_ids)
 
   end
 
   def send_quote
+ # render :text =>  params.inspect and return false
     if params[:product].size > 0
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.delivery_date = params["extra_info"]['delivery_date']
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
       @quote.status = 0
       @quote.save
-      params[:product].each do |key,val|
-        @quota_product = {}
-        @quota_product['quote_id'] = session[:quote_id]
-        @quota_product['product_id'] = key.to_i
-        @quota_product['quantity'] = params['quantity'][key]
-        @quota_product['total_price'] = params['tot_price'][key]
-        @quota_product['status'] = 0
-        if @quota_product['quantity'].to_i > 0
-          @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-          @rcadmin_quota_product.save if params['quantity'][key] 
-        end
+      params[:product].each do |k,v|
+	@catid=k 
+	v.each do |key,val|
+	  @quota_product = {}
+	  @quota_product['quote_id'] = session[:quote_id]
+	  @quota_product['product_id'] = key.to_i
+	  @quota_product['quantity'] = params['quantity'][k][key]
+	  @quota_product['total_price'] = params['tot_price'][k][key]
+	  @quota_product['status'] = 0
+	  @quota_product['category_id'] = @catid.to_i
+	 # render :text =>  @quota_product.inspect and return false
+	  if @quota_product['quantity'].to_i > 0
+	    @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+	    @rcadmin_quota_product.save if params['quantity'][k][key] 
+	  end
+	end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
@@ -89,26 +96,30 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def resend_quote
+  #render :text =>  params.inspect and return false
     @qid = params["quote_id"]
     @existquote = Rcadmin::Quote.find(@qid)
     @quote = Rcadmin::Quote.copy_quote(@existquote,params["customer_id"])
     
     if @quote.save
+  #  render :text =>  @quote.inspect and return false
     @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'] )
-      params[:quantity].each do |key,val|
-        @quota_product = {}
-        @quota_product['quote_id'] = @quote.id
-        @quota_product['product_id'] = key.to_i
-        @product_details =  Rcadmin::Product.find(@quota_product['product_id'])
-        @quota_product['quantity'] = val.to_i
-        @quota_product['total_price'] = @product_details.price * @quota_product['quantity']
-        @quota_product['status'] = 0
-        if @quota_product['quantity'].to_i > 0
-          @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-          @rcadmin_quota_product.save  
-        end
-
-      
+      params[:product].each do |k,v|
+	@catid=k 
+	v.each do |key,val|
+	  @quota_product = {}
+	  @quota_product['quote_id'] = @quote.id
+	  @quota_product['product_id'] = key.to_i
+	  @quota_product['quantity'] = params['quantity'][k][key]
+	  @quota_product['total_price'] = params['tot_price'][k][key]
+	  @quota_product['status'] = 0
+	  @quota_product['category_id'] = @catid.to_i
+	 # render :text =>  @quota_product.inspect and return false
+	  if @quota_product['quantity'].to_i > 0
+	    @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+	    @rcadmin_quota_product.save if params['quantity'][k][key] 
+	  end
+	end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver

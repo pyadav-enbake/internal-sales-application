@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20140121070746) do
   end
 
   create_table "products", force: true do |t|
+    t.integer  "subcategory_id"
     t.string   "title"
     t.text     "description"
     t.float    "price"
@@ -173,7 +174,7 @@ ActiveRecord::Schema.define(version: 20140121070746) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status"
+    t.integer  "status",      limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

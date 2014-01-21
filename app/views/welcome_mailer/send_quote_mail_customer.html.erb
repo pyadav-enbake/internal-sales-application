@@ -49,9 +49,10 @@ Dear <%=@customer.fullname%>,
 							  <tbody>
 								<% @qt_pro.each_with_index do |qtp,index|%>
 								<%@tot_amt += qtp.total_price%>
+								<%@cat_details =Rcadmin::Category.find(qtp.category_id) %>
 								<tr>
 									<td><%=qtp.product.title%></td>
-									<td style="text-align:center;"><%=qtp.product.category.name%></td>
+									<td style="text-align:center;"><%=@cat_details.name%></td>
 									<!--td>$<%#=qtp.product.price%></td-->
 									<td style="text-align:center;"><%=qtp.quantity%></td>
 									<!--td>$<%#=qtp.total_price%></td-->

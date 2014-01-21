@@ -58,12 +58,13 @@ $(document).ready(function() {
 	
 //Quote Calculation
   $(".quantity1").keyup(function(event){
-    //console.log(event.target.value);
-      var tval = (event.target.value) ? parseInt(event.target.value) : 0;
+    console.log(event.target.value);
+      var tval = (event.target.value) ? parseInt(event.target.value) : '';
       $(this).val(tval);
       var id = $(this).attr('id');
       var oprice = $("#oprice"+id).val();
-      if(tval == 0){
+      console.log(tval +'sssss'+id);
+      if(tval == ''){
 	$("#chk"+id).prop('checked', false);
       }else{
 	$("#chk"+id).prop('checked', true);

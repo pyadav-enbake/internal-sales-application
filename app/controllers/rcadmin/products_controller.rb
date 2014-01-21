@@ -74,6 +74,6 @@ class Rcadmin::ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rcadmin_product_params
-      params.require(:rcadmin_product).permit(:title,:description,:price,:measurement_type,:status)
+      params.require(:rcadmin_product).permit(:title,:description,:price,:measurement_type,:status,:subcategory_id)
     end
 end

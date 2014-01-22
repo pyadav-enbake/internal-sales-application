@@ -97,5 +97,24 @@ class Rcadmin::Quote < ActiveRecord::Base
     @quote
     
   end
+  
+  def self.extra_quote(quote_id)
+    
+    @salesadmin_category = Rcadmin::Category.where(quote_id: quote_id)
+    return @salesadmin_category
+  end
+
+  def self.extra_quote_ids(quote_id)
+    
+    @salesadmin_category_ids = Rcadmin::Category.where(quote_id: quote_id).pluck(:id)
+    return @salesadmin_category_ids
+  end
+
+
+  def self.merger_quote_name(quote_id)
+    @all_category_name = Rcadmin::Category.where(quote_id: quote_id,quote_id: 0).pluck(:name)
+    
+    return @all_category_name
+  end
 
 end

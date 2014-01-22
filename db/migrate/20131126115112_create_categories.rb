@@ -5,6 +5,7 @@ class CreateCategories < ActiveRecord::Migration
       t.text :description
       t.timestamps
       t.integer :status ,:limit => 1
+      t.integer :quote_id,:default => 0
     end
   end
 end

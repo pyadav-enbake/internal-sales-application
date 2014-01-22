@@ -1,0 +1,6 @@
+  <%@extr = Rcadmin::Quote.extra_quote_ids(@qid)%>
+  <%@all_quote_category  = Rcadmin::Quote.extra_quote(@qid)%>
+  <label class="col-sm-3 control-label ">Your Additional Category </label>
+  <div class="col-sm-6" >
+    <%= collection_check_boxes("quote","category", @all_quote_category,:id,:name, :checked => @extr ) %>
+  </div>

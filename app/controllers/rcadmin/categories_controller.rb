@@ -5,7 +5,7 @@ class Rcadmin::CategoriesController < ApplicationController
   # GET /rcadmin/categories
   # GET /rcadmin/categories.json
   def index
-    @rcadmin_categories = Rcadmin::Category.all
+    @rcadmin_categories = Rcadmin::Category.all.default
   end
 
   # GET /rcadmin/categories/1

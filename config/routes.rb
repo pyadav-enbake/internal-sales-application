@@ -75,6 +75,7 @@ RomarCabinates::Application.routes.draw do
 	post '/quote/get_customer' => 'rcadmin/quote#get_customer'
 	get '/quote/new_customer' => 'rcadmin/quote#get_new_customer'
 	get '/quote/old_customer' => 'rcadmin/quote#get_old_customer'
+	post '/rcadmin/quote/add_new_room' => 'rcadmin/quote#add_new_room'
 
 
 #authenticated :admins do

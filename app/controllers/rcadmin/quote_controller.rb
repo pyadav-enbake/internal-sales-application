@@ -31,6 +31,7 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def save_category_deatils
+    #render :text => params.inspect and return false
     params["quote"]["category"].reject!{|a| a==""} 
     if params[:quote][:category].nil? or params["quote"]["category"].blank?
       flash[:error] = 'Please select any category'
@@ -56,10 +57,11 @@ class Rcadmin::QuoteController < ApplicationController
      
     end
     @quote = Rcadmin::Quote.find(session[:quote_id] )
+    #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
     
     @categories =  @quote.categories
     @products =  Rcadmin::Product.all
-    @subcategories =  Rcadmin::Subcategory.where(category_id: @quote.category_ids)
+    @subcategories =  Rcadmin::Subcategory.all
 
   end
 
@@ -96,30 +98,28 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def resend_quote
-  #render :text =>  params.inspect and return false
     @qid = params["quote_id"]
     @existquote = Rcadmin::Quote.find(@qid)
     @quote = Rcadmin::Quote.copy_quote(@existquote,params["customer_id"])
     
     if @quote.save
-  #  render :text =>  @quote.inspect and return false
-    @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'] )
+      @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'] )
       params[:product].each do |k,v|
-	@catid=k 
-	v.each do |key,val|
-	  @quota_product = {}
-	  @quota_product['quote_id'] = @quote.id
-	  @quota_product['product_id'] = key.to_i
-	  @quota_product['quantity'] = params['quantity'][k][key]
-	  @quota_product['total_price'] = params['tot_price'][k][key]
-	  @quota_product['status'] = 0
-	  @quota_product['category_id'] = @catid.to_i
-	 # render :text =>  @quota_product.inspect and return false
-	  if @quota_product['quantity'].to_i > 0
-	    @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-	    @rcadmin_quota_product.save if params['quantity'][k][key] 
-	  end
-	end
+      	@catid=k 
+      	v.each do |key,val|
+      	  @quota_product = {}
+      	  @quota_product['quote_id'] = @quote.id
+      	  @quota_product['product_id'] = key.to_i
+      	  @quota_product['quantity'] = params['quantity'][k][key]
+      	  @quota_product['total_price'] = params['tot_price'][k][key]
+      	  @quota_product['status'] = 0
+      	  @quota_product['category_id'] = @catid.to_i
+      	 # render :text =>  @quota_product.inspect and return false
+      	  if @quota_product['quantity'].to_i > 0
+      	    @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+      	    @rcadmin_quota_product.save if params['quantity'][k][key] 
+      	  end
+      	end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
@@ -189,6 +189,24 @@ class Rcadmin::QuoteController < ApplicationController
   def get_old_customer
     @quote = Rcadmin::Quote.new
     render :partial => "old_customer", :object =>  @quote
+  end
+  
+  def add_new_room
+   # render :text => params[:rcadmin_category].inspect and return false
+    @qid = session[:quote_id]
+    @rcadmin_extra_category = Rcadmin::Category.new(params[:rcadmin_category])
+    @rcadmin_extra_category.status = 0
+   # render :text => @rcadmin_extra_category.inspect and return false
+    @exist_cat_name = Rcadmin::Quote.merger_quote_name(@qid)
+    if @exist_cat_name.include?(params[:rcadmin_category][:name])
+      render :text => 'Room Name Already exist',:status => 404
+    end
+    if @rcadmin_extra_category.save
+       render :partial => "all_category_with_extra", :object => @qid
+    else
+      return @rcadmin_customer.errors.full_messages[0]
+    end
+    
   end
 
 

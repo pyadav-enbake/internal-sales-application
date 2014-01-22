@@ -166,7 +166,8 @@ $(document).ready(function() {
 
   });
 //Expand and collaps  
-  $(".accordion" ).accordion({ collapsible: true });
+ 
+  $(".accordion" ).accordion({ collapsible: true ,heightStyle: "content"});
  
   $('.expand').click(function() {
       var inhtml = $('.expand').html();
@@ -184,6 +185,38 @@ $(document).ready(function() {
       //$('#accordion .ui-widget-content').toggle('slow');
   });
 
+
+//Add Room
+
+ $('#add_new_room_modal').click(function(){
+    $("#err_msg_room").html('');
+    $("#myModaladdroom").modal('show');
+  });
+
+$('#add_room').click(function(){
+   $("#err_msg_room").html('');
+   if($("#room_name").val() == ""){
+      $("#err_msg_room").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Please put room name</p></div>');
+      return false;
+   }
+   var frm  = $("#new_rcadmin_category");
+   $.ajax({
+      type: frm.attr('method'),
+      url: frm.attr('action'),
+      data: frm.serialize(),
+      success: function (data) {
+        $("#all_cat" ).css( "class",'' );
+        $("#all_cat" ).addClass( "form-group" );
+        $("#all_cat").html(data);
+        $("#myModaladdroom").modal('hide');
+      },
+      error: function (xhr, ajaxOptions, thrownError,status) {
+       $("#err_msg_room").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Category name already exist</p></div>');
+        return false;
+      }
+    });   
+
+});
 
 });
 

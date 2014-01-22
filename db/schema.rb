@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121070746) do
+ActiveRecord::Schema.define(version: 20140122061021) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -97,6 +97,13 @@ ActiveRecord::Schema.define(version: 20140121070746) do
     t.datetime "updated_at"
   end
 
+  create_table "extra_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "quote_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "faq_categories", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -142,6 +149,7 @@ ActiveRecord::Schema.define(version: 20140121070746) do
   create_table "quote_products", force: true do |t|
     t.integer  "quote_id"
     t.integer  "product_id"
+    t.integer  "category_id",           null: false
     t.integer  "quantity"
     t.float    "total_price"
     t.integer  "status",      limit: 1

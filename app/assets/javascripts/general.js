@@ -172,10 +172,13 @@ $(document).ready(function() {
       var inhtml = $('.expand').html();
       if(inhtml == 'Expand All'){
 	$('.expand').html('Collapse All');
+	$('#accordion .ui-widget-content').fadeIn(1000);
       }else{
-	$('.expand').html('Exapand All');
+	$('.expand').html('Expand All');
+	$('#accordion .ui-widget-content').fadeOut(1000);
+	
       }
-      $('#accordion .ui-widget-content').toggle('slow');
+      //$('#accordion .ui-widget-content').toggle('slow');
   });
 
 

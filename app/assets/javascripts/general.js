@@ -45,9 +45,8 @@ $(document).ready(function() {
 
 
 
-  $( "#accordion" ).accordion();
-  $( ".accordion" ).accordion();
-
+ // $( "#accordion" ).accordion();
+  //$( ".accordion" ).accordion({ collapsible: true });
   $( "#subtabs" ).tabs();
 
 //fAQ
@@ -167,17 +166,21 @@ $(document).ready(function() {
 
   });
 //Expand and collaps  
-  
+  $(".accordion" ).accordion({ collapsible: true });
+ 
   $('.expand').click(function() {
       var inhtml = $('.expand').html();
       if(inhtml == 'Expand All'){
 	$('.expand').html('Collapse All');
 	$('#accordion .ui-widget-content').fadeIn(1000);
       }else{
+	
 	$('.expand').html('Expand All');
 	$('#accordion .ui-widget-content').fadeOut(1000);
+	$(".accordion" ).accordion( "option", "active",-90);
 	
       }
+     
       //$('#accordion .ui-widget-content').toggle('slow');
   });
 

@@ -52,7 +52,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote_id=params[:qid]
       @customer_id = params[:cid]
       session[:quote_id] = params[:qid]
-      @exist_quota_total_price = Rcadmin::QuoteProduct.sum(:total_price).to_f.round(2)
+      @exist_quota_total_price = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).sum(:total_price).to_f.round(2)
       @exist_quota_product_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:product_id)
      
     end

@@ -168,7 +168,7 @@ $(document).ready(function() {
   });
 //Expand and collaps  
  
-  $(".accordion" ).accordion({ collapsible: true ,heightStyle: "content"});
+  $(".accordion" ).accordion({ collapsible: true ,heightStyle: "fill"});
  
   $('.expand').click(function() {
       var inhtml = $('.expand').html();

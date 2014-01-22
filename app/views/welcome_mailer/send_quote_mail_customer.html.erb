@@ -72,4 +72,33 @@ Dear <%=@customer.fullname%>,
 			</div>
 		</div>
 	</div>
-</div>
+</div><br>
+<%@opt_qt_pro_cids =  Rcadmin::QuoteProduct.where(quote_id: @quote_id,header_option: 'Yes').uniq.pluck(:category_id)%>
+<%if !@opt_qt_pro_cids.blank? || !@opt_qt_pro_cids.nil?%>
+<%@tot_hamt = 0.0%>
+	<h2>Option<h2> 
+	======================<br>
+	<% @opt_qt_pro_cids.each_with_index do |oqt,index|%>
+		<%@cat_details =Rcadmin::Category.find(oqt) %>
+		<h3><b><%=@cat_details.name%><b></h3><br><br>
+		<%@qp_details = Rcadmin::QuoteProduct.where(quote_id: @quote_id,category_id: @cat_details.id,header_option: 'Yes')%>
+		<table>
+			<thead>
+				<th>Product Name</th>
+				<th>Price per unit</th>
+			</thead>
+			<tbody>
+				<% @qp_details.each_with_index do |oqt,index|%>
+					<%@product_details =Rcadmin::Product.find(oqt.product_id) %>
+					<%@tot_hamt += @product_details.price%>
+					<tr>
+						<td><%=@product_details.title%></td>
+						<td><%=@product_details.price%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	<%end%>
+	<hr>
+	<div>Total Price = $<%=@tot_hamt.round(2)%></div>
+<%end%>

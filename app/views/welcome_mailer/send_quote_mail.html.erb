@@ -43,9 +43,9 @@ Quote Details<br>
                     <tr>
                       <th>Product Name</th>
                       <th>Category Name</th>
-                      <!--th>Price per unit</th-->
+                      <th>Price per unit</th>
                       <th>Quantity</th>
-                      <!--th>Total Price</th-->
+                      <th>Total Price</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -55,9 +55,9 @@ Quote Details<br>
                       <tr>
                         <td><%=qtp.product.title%></td>
                         <td style="text-align:center;"><%=@cat_details.name%></td>
-                        <!--td>$<%#=qtp.product.price%></td-->
+                        <td>$<%=qtp.product.price%></td>
                         <td style="text-align:center;"><%=qtp.quantity%></td>
-                        <!--td>$<%#=qtp.total_price%></td-->
+                        <td>$<%=qtp.total_price%></td>
                       </tr>
                     <%end%>
                   </tbody>

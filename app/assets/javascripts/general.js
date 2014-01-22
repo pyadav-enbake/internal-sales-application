@@ -90,10 +90,11 @@ $(document).ready(function() {
   function total_item_price_count(){
     var total_price = 0.00;
     $("#tabs input:checkbox:checked").each(function() {
-	    var id = $(this).attr('id').replace('chk','');
-	    var price = $('#price'+id).text();
-	    total_price += Number(price);
-	    
+      if($(this).attr('class') == 'chkpro') {
+        var id = $(this).attr('id').replace('chk','');
+        var price = $('#price'+id).text();
+        total_price += Number(price);
+      }
     });
     total_price = total_price.toFixed(2);
     return total_price

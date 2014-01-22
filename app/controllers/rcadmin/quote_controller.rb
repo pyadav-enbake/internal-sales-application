@@ -66,7 +66,7 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def send_quote
- # render :text =>  params.inspect and return false
+  #render :text =>  params.inspect and return false
     if params[:product].size > 0
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.delivery_date = params["extra_info"]['delivery_date']
@@ -74,21 +74,24 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.status = 0
       @quote.save
       params[:product].each do |k,v|
-	@catid=k 
-	v.each do |key,val|
-	  @quota_product = {}
-	  @quota_product['quote_id'] = session[:quote_id]
-	  @quota_product['product_id'] = key.to_i
-	  @quota_product['quantity'] = params['quantity'][k][key]
-	  @quota_product['total_price'] = params['tot_price'][k][key]
-	  @quota_product['status'] = 0
-	  @quota_product['category_id'] = @catid.to_i
-	 # render :text =>  @quota_product.inspect and return false
-	  if @quota_product['quantity'].to_i > 0
-	    @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-	    @rcadmin_quota_product.save if params['quantity'][k][key] 
-	  end
-	end
+        @catid=k 
+        v.each do |key,val|
+          @quota_product = {}
+          @quota_product['quote_id'] = session[:quote_id]
+          @quota_product['product_id'] = key.to_i
+          @quota_product['quantity'] = params['quantity'][k][key]
+          @quota_product['total_price'] = params['tot_price'][k][key]
+          @quota_product['status'] = 0
+          @quota_product['category_id'] = @catid.to_i
+          
+          @quota_product['header_option'] = params['header_option'][k][key] if params['header_option'][k]
+          @quota_product['header_option'] = 'No' if @quota_product['header_option'] == nil
+          #render :text =>  @quota_product.inspect and return false
+          if @quota_product['quantity'].to_i > 0
+            @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+            @rcadmin_quota_product.save if params['quantity'][k][key] 
+          end
+        end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
       WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver

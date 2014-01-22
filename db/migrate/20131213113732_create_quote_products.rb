@@ -7,6 +7,7 @@ class CreateQuoteProducts < ActiveRecord::Migration
       t.integer :quantity
       t.float   :total_price, :precision => 10, :scale => 2
       t.integer :status,:limit =>1
+      t.string :header_option,:default =>'No'
 
       t.timestamps
     end

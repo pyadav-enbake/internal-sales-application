@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140122061021) do
   create_table "categories", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.integer  "quote_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
@@ -149,10 +150,11 @@ ActiveRecord::Schema.define(version: 20140122061021) do
   create_table "quote_products", force: true do |t|
     t.integer  "quote_id"
     t.integer  "product_id"
-    t.integer  "category_id",           null: false
+    t.integer  "category_id"
     t.integer  "quantity"
     t.float    "total_price"
-    t.integer  "status",      limit: 1
+    t.integer  "status",        limit: 1
+    t.string   "header_option",           default: "No"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

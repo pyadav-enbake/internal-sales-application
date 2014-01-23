@@ -43,8 +43,7 @@
 		  <%end%>
 		  <td><%=c.company_name%> </td>
 		  <td><%=c.first_name%> </td>
-		  <td><%=c.first_name%> </td>
-		  <td><%=c.last_name%></td>
+		  <td><%=c.last_name%> </td>
 		  <td><%=c.email%></td>
 		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).count%></td>
 		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).order(:created_at).last.created_at.strftime('%b %d, %Y at %H:%M')%></td>

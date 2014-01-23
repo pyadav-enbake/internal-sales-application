@@ -9,10 +9,9 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def save_customer_deatils
-   render :text => params.inspect and return false
-    @rcadmin_customer = Rcadmin::Customer.new
+
     @quote = Rcadmin::Quote.new( params[:rcadmin_quote])
-    
+    @quote.customer_id = params[:rcadmin_quote][:customer_id]
     if @quote.save
 		    session[:quote_id] = @quote.id
 		    redirect_to :action => 'show_category'

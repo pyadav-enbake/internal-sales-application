@@ -13698,4 +13698,5 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   float: left ;
   margin: 0 1% 0 0 ;
   width: 300px !important;
+  line-height: 25px !important;
 }

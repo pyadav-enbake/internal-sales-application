@@ -48,11 +48,17 @@
 								</tbody>
 								</table>
 								<a href="/rcadmin/quote/product?cid=<%=@rcadmin_customer.id%>&qid=<%=qt.id%>" class="btn-primary btn">Edit</a>
-								<!--input type="button" name="edit" value="Edit" class="btn-primary btn edit_quote" -->
-							<%end%>
-							<hr>
-								<div class="pull-right">Total Price = $<span id="tot_qut_resend_frm_<%=qt.id%>"><%=@tot_amt.round(2)%></span></div>
-								
+								<hr>
+								<div class="pull-right">Total Price = $<span id="tot_qut_resend_frm_<%=qt.id%>"><%=@tot_amt.round(2)%></span></div><br>
+								<%if qt.notes%>
+									<div>
+										<h3><b>Special Instructions/Notes</b></h3>
+										<hr>
+										<div class="pull-left"><%=qt.notes%></div>
+									</div>
+								<%end%>									
+									<!--input type="button" name="edit" value="Edit" class="btn-primary btn edit_quote" -->
+								<%end%>
 							</div>
 						<%end%>
 					<%else%>

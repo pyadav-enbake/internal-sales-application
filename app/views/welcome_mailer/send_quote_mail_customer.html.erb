@@ -102,3 +102,9 @@ Dear <%=@customer.fullname%>,
 	<hr>
 	<div>Total Price = $<%=@tot_hamt.round(2)%></div>
 <%end%>
+<%@quote = Rcadmin::Quote.where("id = ?", @quote_id).first%>
+<%if !@quote.notes.blank? %>
+<br><h2>Special Instructions/Notes</h2> 
+	======================<br>
+	<div><%=@quote.notes%></div>
+<%end%>

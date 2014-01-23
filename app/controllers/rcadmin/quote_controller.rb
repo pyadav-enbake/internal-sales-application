@@ -71,6 +71,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.delivery_date = params["extra_info"]['delivery_date']
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
+      @quote.notes = params["extra_info"]['notes']
       @quote.status = 0
       @quote.save
       params[:product].each do |k,v|
@@ -106,7 +107,7 @@ class Rcadmin::QuoteController < ApplicationController
     @quote = Rcadmin::Quote.copy_quote(@existquote,params["customer_id"])
     
     if @quote.save
-      @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'] )
+      @quote.update_attributes(:delivery_date => params["extra_info"]['delivery_date'],:sales_closing_potential =>  params["extra_info"]['sales_closing_potential'],:notes => params["extra_info"]['notes'] )
       params[:product].each do |k,v|
       	@catid=k 
       	v.each do |key,val|

@@ -50,7 +50,7 @@
 								<a href="/rcadmin/quote/product?cid=<%=@rcadmin_customer.id%>&qid=<%=qt.id%>" class="btn-primary btn">Edit</a>
 								<%end%>
 								<hr>
-								<div class="pull-right">Total Price = $<span id="tot_qut_resend_frm_<%=qt.id%>"><%=@tot_amt.round(2)%></span></div>
+								<div class="pull-right">Total Price = $<span id="tot_qut_resend_frm_<%=qt.id%>"><%=@tot_amt.round(2)%></span></div><br>
 								<%if qt.notes%>
 									<h4><b>Special Instructions/Notes</b></h4>
 									<hr>

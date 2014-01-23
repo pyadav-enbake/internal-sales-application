@@ -24,12 +24,12 @@
 	  <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 	    <thead>
 	      <tr>
-		<th>Name</th>
-		<th>Email</th>
-		<th>State</th>
-		<th>City</th>
-		<th>Status</th>
-		<th>Action</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Quotes</th>
+			<th>Most recent</th>
+			<th>Action</th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -40,11 +40,11 @@
 		  <%else%>
 		    <tr class="odd gradeX">
 		  <%end%>
-		  <td><%=c.first_name%> <%=c.last_name%></td>
+		  <td><%=c.first_name%> </td>
+		  <td><%=c.last_name%></td>
 		  <td><%=c.email%></td>
-		  <td><%=c.state%></td>
-		  <td><%=c.city%></td>
-		  <td><%if c.status == 0%>Active<%else%>Inactive<%end%></td>
+		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).count%></td>
+		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).order(:created_at).last.created_at.strftime('%b %d, %Y at %H:%M')%></td>
 		  <td><%= link_to 'Edit', edit_rcadmin_contractor_path(c),:class=>"btn btn-info" %> <%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
 		  </tr>
 		<%end%>

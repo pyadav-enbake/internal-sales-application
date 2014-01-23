@@ -1,3 +1,8 @@
+    <%= form_tag("", method: "post", :id=>"search",:html=>{:class=>"form-horizontal"}) do %>
+      <div class="search_pro"><%=text_field_tag :search, :sender, :value => '',:placeholder => "Enter Title to Search",:class=>"form-control search_pro_in"%>
+      <%=button_tag "Search",:class=>"btn-primary btn"%></div>
+    <%end%>
+
     <%= form_tag("resend_quote", method: "post", :id=>"send_quote_frm") do %>
     <input type="hidden" name="quote_id" value="<%=@quote_id%>">
     <input type="hidden" name="customer_id" value="<%=@customer_id%>">
@@ -19,7 +24,12 @@
               <% @subcategories.each_with_index do |subcat, index|%>
                 <h3><%= subcat.name %></h3>
                 <div>
-                  <% @products = Rcadmin::Product.where(subcategory_id: subcat.id) %>
+                  <%if @search_term == ""%>
+                    <% @products = Rcadmin::Product.where(subcategory_id: subcat.id) %>
+                  <%else%>
+
+                    <% @products = Rcadmin::Product.where("subcategory_id = ? and title like ?", subcat.id,"%31%" ) %>
+                  <%end%>
                   <table class="table">
                     <thead>
                       <tr>

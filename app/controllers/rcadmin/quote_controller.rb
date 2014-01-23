@@ -58,7 +58,7 @@ class Rcadmin::QuoteController < ApplicationController
     end
     @quote = Rcadmin::Quote.find(session[:quote_id] )
     #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
-    
+    @search_term = (params[:search] != "") ? params[:search] : ''
     @categories =  @quote.categories
     @products =  Rcadmin::Product.all
     @subcategories =  Rcadmin::Subcategory.all

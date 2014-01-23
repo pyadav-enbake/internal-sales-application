@@ -13690,3 +13690,12 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 }
 .chkpro{display: none}
 .expand{float: right;color:#0000FF !important;text-decoration:underline;}
+.search_pro{
+  margin: 0 0% 1% 0 ;
+  
+}
+.search_pro_in{    
+  float: left ;
+  margin: 0 1% 0 0 ;
+  width: 300px !important;
+}

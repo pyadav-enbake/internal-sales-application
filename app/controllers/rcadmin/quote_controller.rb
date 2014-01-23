@@ -9,7 +9,7 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def save_customer_deatils
-  # render :text => params.inspect and return false
+   render :text => params.inspect and return false
     @rcadmin_customer = Rcadmin::Customer.new
     @quote = Rcadmin::Quote.new( params[:rcadmin_quote])
     

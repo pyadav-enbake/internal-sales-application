@@ -84,8 +84,11 @@ class Rcadmin::QuoteController < ApplicationController
           @quota_product['status'] = 0
           @quota_product['category_id'] = @catid.to_i
           
-          @quota_product['header_option'] = params['header_option'][k][key] if params['header_option'][k]
-          @quota_product['header_option'] = 'No' if @quota_product['header_option'] == nil
+            if @quota_product['header_option'] == nil
+                @quota_product['header_option'] = 'No' 
+            else
+                @quota_product['header_option'] = params['header_option'][k][key] if params['header_option'][k]
+            end
           #render :text =>  @quota_product.inspect and return false
           if @quota_product['quantity'].to_i > 0
             @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 

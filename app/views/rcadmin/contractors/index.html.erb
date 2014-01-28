@@ -45,8 +45,13 @@
 		  <td><%=c.first_name%> </td>
 		  <td><%=c.last_name%> </td>
 		  <td><%=c.email%></td>
+          <% if Rcadmin::Quote.where(Contractor_id: c.id).blank? %>
+		  <td>0</td>
+		  <td>nil</td>
+          <% else %>
 		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).count%></td>
 		  <td><%=Rcadmin::Quote.where(contractor_id: c.id).order(:created_at).last.created_at.strftime('%b %d, %Y at %H:%M')%></td>
+      <%end%>
 		  <td><%= link_to 'Edit', edit_rcadmin_contractor_path(c),:class=>"btn btn-info" %> <%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"%></td>
 		  </tr>
 		<%end%>

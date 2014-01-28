@@ -45,7 +45,7 @@
 		  <td><%=c.first_name%> </td>
 		  <td><%=c.last_name%> </td>
 		  <td><%=c.email%></td>
-          <% if Rcadmin::Quote.where(Contractor_id: c.id).blank? %>
+          <% if Rcadmin::Quote.where(contractor_id: c.id).blank? %>
 		  <td>0</td>
 		  <td>nil</td>
           <% else %>

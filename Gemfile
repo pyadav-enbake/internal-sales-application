@@ -12,6 +12,11 @@ gem 'devise', git: 'git://github.com/plataformatec/devise.git'
 # Use mysql as the database for Active Record
 # gem 'mysql2'
 
+group :development do
+    gem 'pry'
+    gem 'quiet_assets'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

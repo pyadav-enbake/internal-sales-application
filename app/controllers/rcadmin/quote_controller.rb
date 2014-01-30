@@ -218,7 +218,7 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def display_quotes
-    @rcadmin_quotes = Rcadmin::Quote.all
+    @rcadmin_quotes = Rcadmin::Quote.where(:contractor_id => params[:id])
   end
 
   def edit
@@ -228,6 +228,11 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def update
+  end
+
+  def show
+    puts"---------------#{params[:id]}-----------------"
+    @rcadmin_quotes = Rcadmin::Quote.find(params[:id])
   end
 
 

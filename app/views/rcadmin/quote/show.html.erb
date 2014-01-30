@@ -1,0 +1,60 @@
+<div id="page-heading">
+  <ol class="breadcrumb">
+  </ol>
+
+  <h1>Quote</h1>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quote ID:</strong>
+  <%= @rcadmin_quotes.id %>
+</p>
+
+<p>
+  <strong>Contractor Name:</strong>
+  <%= @rcadmin_quotes.contractor.fullname %>
+</p>
+
+<p>
+  <strong>Customer ID</strong>
+  <%= @rcadmin_quotes.customer_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @rcadmin_quotes.category %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @rcadmin_quotes.status %>
+</p>
+
+<p>
+  <strong>Delivary Date:</strong>
+  <%= @rcadmin_quotes.delivery_date %>
+</p>
+
+<p>
+  <strong>Sales Closing Potential:</strong>
+  <%= @rcadmin_quotes.sales_closing_potential %>
+</p>
+
+<p>
+  <strong>Cabinet Types Info:</strong>
+  <%= @rcadmin_quotes.cabinet_types_info %>
+</p>
+
+<p>
+  <strong>Countertop Designs Info:</strong>
+  <%= @rcadmin_quotes.countertop_designs_info %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @rcadmin_quotes.notes %>
+</p>
+
+<%= link_to 'Back', rcadmin_display_quotes_path	%>

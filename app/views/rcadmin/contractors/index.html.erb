@@ -41,7 +41,7 @@
 		  <%else%>
 		    <tr class="odd gradeX">
 		  <%end%>
-		  <td><%=c.company_name%> </td>
+		  <td><%=link_to c.id , {:controller => 'rcadmin/quote', :action => 'display_quotes', :id => c.id } %> </td>
 		  <td><%=c.first_name%> </td>
 		  <td><%=c.last_name%> </td>
 		  <td><%=c.email%></td>

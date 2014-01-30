@@ -1,6 +1,6 @@
 class Rcadmin::Quote < ActiveRecord::Base
   validates_presence_of :contractor_id,:customer_id
-  attr_accessible :contractor_id,:customr_id,:category,:status,:delivery_date,:sales_closing_potential, :cabinet_types_info, :countertop_designs_info,:notes
+  attr_accessible :contractor_id,:customer_id,:category,:status,:delivery_date,:sales_closing_potential, :cabinet_types_info, :countertop_designs_info,:notes
   
   belongs_to :contractor
   has_many :quote_product,dependent: :destroy

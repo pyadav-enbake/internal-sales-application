@@ -57,7 +57,7 @@ RomarCabinates::Application.routes.draw do
 	get "/admins/sign_out" => 'rcadmin/public#destroy'
 	devise_for :admins, :class_name => "Rcadmin::Admin"
 	get 'admins/dashboard' => 'rcadmin/dashboard#index',:as=> 'dashboard_url'
-	get 'rcadmin/administrators/destroy/:id' => 'rcadmin/administrators#destroy'
+	delete 'rcadmin/administrators/destroy/:id' => 'rcadmin/administrators#destroy'
 	get '/rcadmin/catdimen_name' => 'rcadmin/public#category_dimension_name'
 	get '/rcadmin/dc_name' => 'rcadmin/public#dc_name'
 	get '/rcadmin/subcat' => 'rcadmin/public#subcat'
@@ -77,7 +77,7 @@ RomarCabinates::Application.routes.draw do
 	get '/quote/new_customer' => 'rcadmin/quote#get_new_customer'
 	get '/quote/old_customer' => 'rcadmin/quote#get_old_customer'
 	post '/rcadmin/quote/add_new_room' => 'rcadmin/quote#add_new_room'
-
+  get '/rcadmin/display_quotes' => 'rcadmin/quote#display_quotes'
 
 #authenticated :admins do
 # devise_scope :admins do

@@ -217,5 +217,19 @@ class Rcadmin::QuoteController < ApplicationController
     
   end
 
+  def display_quotes
+    @rcadmin_quotes = Rcadmin::Quote.all
+  end
+
+  def edit
+  end
+
+  def destroy
+  end
+
+  def update
+  end
+
+
 
 end

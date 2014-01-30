@@ -231,7 +231,6 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def show
-    puts"---------------#{params[:id]}-----------------"
     @rcadmin_quotes = Rcadmin::Quote.find(params[:id])
   end
 

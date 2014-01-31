@@ -7,7 +7,6 @@ class Rcadmin::Quote < ActiveRecord::Base
   belongs_to :cabinet_type
   belongs_to :countertop_design
   
-  
   scope :find_by_customer, ->(customer_id) { where(:customer_id=>customer_id) }
 
 
@@ -20,6 +19,12 @@ class Rcadmin::Quote < ActiveRecord::Base
   def category_ids
     return @category_ids if @category_ids
     @category_ids ||= category.split(',') if !category.nil?
+  end
+
+  def remove_category category_id = nil
+    index = category_ids.index(category_id)
+    category_ids.delete_at(index) 
+    update_attribute(:category, category_ids.join(","))
   end
 
 

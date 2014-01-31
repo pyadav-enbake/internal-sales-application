@@ -1,7 +1,9 @@
 RomarCabinates::Application.routes.draw do
 
 
+
   namespace :rcadmin do
+    put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
     resources :countertop_designs
     resources :cabinet_types
     resources :subcategories

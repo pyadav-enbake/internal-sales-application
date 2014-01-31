@@ -26,3 +26,5 @@ DS_Store
 
 # database file to be ignore
 config/database.yml
+
+.DS_Store

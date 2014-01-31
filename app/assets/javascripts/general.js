@@ -104,13 +104,21 @@ $(document).ready(function() {
 //send_quote
   $('#send_quote').click(function(){
     if ($("#extra_info_delivery_date").val() == ""){
-	    $("#err_msg").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Please select Delivery Date</p></div>');
-	    return false;
+      $("#err_msg").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Please select Delivery Date</p></div>');
+      return false;
     }else{
-	  $("#myModal").modal('hide');
-	  $("#myModalconfirmsend").modal({ backdrop: 'static',keyboard: false});
+      $("#myModal").modal('hide');
+      var frm = $('#send_quote_frm');
+      $.ajax({
+        type: frm.attr('method'),
+        url: frm.attr('action'),
+        data: frm.serialize()
+      }).success(function(data) {
+        $('.quote-preview').html(data);
+      });
+      $("#myModalconfirmsend").modal({ backdrop: 'static',keyboard: false});
     }
-	   
+
   });
 
 //Confirm and send Quote 	
@@ -118,18 +126,11 @@ $(document).ready(function() {
   $('#confirm_send_quote').click(function(){
     $("#err_msg").html('');
     var frm = $('#send_quote_frm');
-    //console.log(frm.attr('action'));return false;
-    $("#myModalconfirmsend").modal('hide');
-    $("#myModalsend").modal({ backdrop: 'static',keyboard: false});
-    $.ajax({
-      type: frm.attr('method'),
-      url: frm.attr('action'),
-      data: frm.serialize(),
-      success: function (data) {
-	      $("#myModalsend").modal('hide');
-	      $('#myModal2').modal({ backdrop: 'static',keyboard: false});
-      }
-    });    
+    $("#myModalconfirmsend").modal('hide')
+    $.post('send_quote').success(function() {
+      $("#myModalsend").modal('hide');
+      $('#myModal2').modal({ backdrop: 'static',keyboard: false});
+    });
   });
 
 //resend_quote

@@ -1,7 +1,7 @@
-<%@customer = Rcadmin::Customer.find(@customer_id)%>
+<% @customer = Rcadmin::Customer.find(@customer_id)%>
 <%#@sales_admin = Rcadmin::Admin.find(@customer.admin_id)%>
 <%#@quote = Rcadmin::Quote.find_by_customer(@customer_id)%>
-<%@quote = Rcadmin::Quote.where("id = ?", @quote_id)%>
+<% @quote = Rcadmin::Quote.where("id = ?", @quote_id)%>
 Dear Administrator,
 
 A customer has been request a quote.

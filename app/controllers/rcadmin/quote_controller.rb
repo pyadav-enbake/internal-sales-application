@@ -71,10 +71,11 @@ class Rcadmin::QuoteController < ApplicationController
 
   end
 
-  def send_quote
-  #render :text =>  params.inspect and return false
+  def preview
+    #render :text =>  params.inspect and return false
     if params[:product].size > 0
       @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @quote.quote_product.destroy_all
       @quote.delivery_date = params["extra_info"]['delivery_date']
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
       @quote.notes = params["extra_info"]['notes']
@@ -90,12 +91,12 @@ class Rcadmin::QuoteController < ApplicationController
           @quota_product['total_price'] = params['tot_price'][k][key]
           @quota_product['status'] = 0
           @quota_product['category_id'] = @catid.to_i
-          
-            if @quota_product['header_option'] == nil
-                @quota_product['header_option'] = 'No' 
-            else
-                @quota_product['header_option'] = params['header_option'][k][key] if params['header_option'][k]
-            end
+
+          if @quota_product['header_option'] == nil
+            @quota_product['header_option'] = 'No' 
+          else
+            @quota_product['header_option'] = params['header_option'][k][key] if params['header_option'][k]
+          end
           #render :text =>  @quota_product.inspect and return false
           if @quota_product['quantity'].to_i > 0
             @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
@@ -104,10 +105,17 @@ class Rcadmin::QuoteController < ApplicationController
         end
       end
       @customer = Rcadmin::Customer.find(@quote.customer_id)
-      WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
-      WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
     end
-    render :text => 'ok'
+    @quote_id = @quote.id
+    render template: 'welcome_mailer/send_quote_mail_customer', layout: false
+  end
+
+  def send_quote
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+    @customer = @quote.customer
+    WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
+    WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
+    render text: 'ok'
   end
 
   def resend_quote

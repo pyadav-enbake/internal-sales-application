@@ -69,6 +69,7 @@ RomarCabinates::Application.routes.draw do
   post '/rcadmin/quote/product' => 'rcadmin/quote#show_product'
 	post '/save_customer_deatils' => 'rcadmin/quote#save_customer_deatils'
 	post 'save_category_deatils' => 'rcadmin/quote#save_category_deatils'
+	post '/rcadmin/quote/preview' => 'rcadmin/quote#preview'
 	post '/rcadmin/quote/send_quote' => 'rcadmin/quote#send_quote'
 	post '/rcadmin/quote/resend_quote' => 'rcadmin/quote#resend_quote'
 	get '/rcadmin/quote/cabinet_selection' => 'rcadmin/quote#show_cabinet_selection'

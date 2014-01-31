@@ -111,6 +111,12 @@
             $('#tabs input[type=checkbox]').prop('checked',false);
             $('#tabs input[type=text]').attr('disabled',false);
 
+            $.ajaxSetup({
+              beforeSend: function(jqXHR) {
+                jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+              }
+            });
+
 
             $(document).on('click', '.someclass', function(evt) {
               evt.preventDefault();

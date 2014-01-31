@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require ckeditor-jquery
 // = require jquery-1.10.2.min.js
 // = require jqueryui-1.10.3.min.js
-//= require jquery_ujs
 // = require bootstrap.min.js
 // = require bootstrap-collapse.js
 // = require enquire.js

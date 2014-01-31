@@ -78,6 +78,7 @@ RomarCabinates::Application.routes.draw do
 	get '/quote/old_customer' => 'rcadmin/quote#get_old_customer'
 	post '/rcadmin/quote/add_new_room' => 'rcadmin/quote#add_new_room'
   get '/rcadmin/display_quotes' => 'rcadmin/quote#display_quotes'
+  get '/rcadmin/display_quotes/:search' => 'rcadmin/quote#display_quotes'
   get '/rcadmin/show' => 'rcadmin/quote#show'
 #authenticated :admins do
 # devise_scope :admins do

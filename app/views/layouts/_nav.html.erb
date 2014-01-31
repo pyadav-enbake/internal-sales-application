@@ -4,10 +4,9 @@
         <% if controller_name == "quote"%>
 		<li id="search">
 			<a href="javascript:;"><i class="fa fa-search opacity-control"></i></a>
-			 <form>
-				<input type="text" class="search-query" placeholder="Search...">
-				<button type="submit"><i class="fa fa-search"></i></button>
-			</form>
+            <%= form_tag :rcadmin_display_quotes, :method => 'GET', :id => 'searchForm' do |f|  %>
+                <%= text_field_tag :search, nil,:id => 's', :value => "Enter Category...", :onFocus =>"this.value=''", :class => 'search-query' %>
+            <% end %>
 		</li>
         <%end%>
 		<li class="divider"></li>

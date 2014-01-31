@@ -1,6 +1,7 @@
 <nav id="page-leftbar" role="navigation">
 		<!-- BEGIN SIDEBAR MENU -->
 	<ul class="acc-menu" id="sidebar">
+        <% if controller_name == "quote"%>
 		<li id="search">
 			<a href="javascript:;"><i class="fa fa-search opacity-control"></i></a>
 			 <form>
@@ -8,6 +9,7 @@
 				<button type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</li>
+        <%end%>
 		<li class="divider"></li>
 		<li><a href="/rcadmin/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
 		<%if current_user.role == 'admin'%>

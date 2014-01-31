@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140123092112) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
 
   create_table "cabinet_types", force: true do |t|
     t.string   "name"
-    t.integer  "status",     limit: 1
+    t.integer  "status",     limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,10 +49,9 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   create_table "categories", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "quote_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
+    t.integer  "status",      limit: 2
   end
 
   create_table "contractors", force: true do |t|
@@ -62,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.string   "address"
     t.string   "zip"
     t.string   "phone"
-    t.integer  "status",       limit: 1
+    t.integer  "status",       limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "company_name"
@@ -70,22 +72,22 @@ ActiveRecord::Schema.define(version: 20140123092112) do
 
   create_table "countertop_designs", force: true do |t|
     t.string   "name"
-    t.integer  "status",     limit: 1
+    t.integer  "status",     limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "customers", force: true do |t|
-    t.integer  "contractor_id"
+    t.integer  "admin_id"
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
     t.string   "city"
     t.string   "state"
-    t.string   "zip"
+    t.integer  "zip"
     t.string   "email"
     t.string   "phone"
-    t.integer  "status",        limit: 1
+    t.integer  "status",     limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
@@ -98,18 +100,11 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.datetime "updated_at"
   end
 
-  create_table "extra_categories", force: true do |t|
-    t.string   "name"
-    t.integer  "quote_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "faq_categories", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "display_order"
-    t.integer  "status",        limit: 1
+    t.integer  "status",        limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -119,7 +114,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.text     "question"
     t.text     "answer"
     t.integer  "display_order"
-    t.integer  "status",          limit: 1
+    t.integer  "status",          limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -137,24 +132,24 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   end
 
   create_table "products", force: true do |t|
+    t.integer  "category_id"
     t.integer  "subcategory_id"
+    t.integer  "dimension_id"
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.string   "measurement_type"
-    t.integer  "status",           limit: 1
+    t.integer  "status",           limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "measurement_type"
   end
 
   create_table "quote_products", force: true do |t|
     t.integer  "quote_id"
     t.integer  "product_id"
-    t.integer  "category_id"
     t.integer  "quantity"
     t.float    "total_price"
-    t.integer  "status",        limit: 1
-    t.string   "header_option",           default: "No"
+    t.integer  "status",      limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -164,7 +159,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                  limit: 1, default: 1
+    t.integer  "status",                  limit: 2, default: 1
     t.date     "delivery_date"
     t.string   "sales_closing_potential"
     t.integer  "cabinet_type_id"
@@ -172,7 +167,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.text     "cabinet_types_info"
     t.text     "countertop_designs_info"
     t.integer  "contractor_id"
-    t.text     "note"
+    t.text     "notes"
   end
 
   create_table "static_pages", force: true do |t|
@@ -185,7 +180,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status",      limit: 1
+    t.integer  "status",      limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

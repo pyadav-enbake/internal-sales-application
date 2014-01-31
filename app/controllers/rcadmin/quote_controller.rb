@@ -8,6 +8,13 @@ class Rcadmin::QuoteController < ApplicationController
 	  @quote = Rcadmin::Quote.new
   end
 
+
+  def remove_category
+    @quote = Rcadmin::Quote.find params[:id] 
+    @quote.remove_category params[:category_id]
+    render  json: {success: true, count: @quote.category_ids.length}
+  end
+
   def save_customer_deatils
 
     @quote = Rcadmin::Quote.new( params[:rcadmin_quote])

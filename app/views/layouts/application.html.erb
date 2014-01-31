@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RomarCabinates</title>
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-	<%= render partial: "layouts/header" %>
-	 <div id="page-container">
-		 <%= render partial: "layouts/nav" %>
-		 <%= render partial: "layouts/right_bar" %>
-		<div id="page-content">
-			<div id='wrap'>
-				<%= yield %>
-			</div>
-		</div>
-	 </div>
-	<%= render partial: "layouts/footer" %>
-</body>
+  <head>
+    <title>RomarCabinates</title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <%= render partial: "layouts/header" %>
+    <div id="page-container">
+      <%= render partial: "layouts/nav" %>
+      <%= render partial: "layouts/right_bar" %>
+      <div id="page-content">
+        <div id='wrap'>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= render partial: "layouts/footer" %>
+  </body>
 </html>

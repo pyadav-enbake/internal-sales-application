@@ -40,6 +40,7 @@
               <th>Category</th>
               <th>Delivery Date</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -56,6 +57,7 @@
                     <td><%=c.category%></td>
                     <td><%=c.delivery_date%></td>
                     <td><%if c.status == 0%>Active<%else%>Inactive<%end%></td>
+                    <td></td>
                     </tr>
                 <%end%>
             <%end%>

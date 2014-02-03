@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   layout :get_layout 
 
   def get_layout
-      if controller_name == 'devise'
+      if devise_controller?
           'devise'
       elsif controller_name == 'quote' && action_name == 'quote_preview'
           'mail_preview'

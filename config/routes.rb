@@ -56,6 +56,7 @@ RomarCabinates::Application.routes.draw do
 
 	end
 
+	 post "/rcadmin/quote/quote_preview" => 'rcadmin/quote#quote_preview'
 	get "/admins/sign_out" => 'rcadmin/public#destroy'
 	devise_for :admins, :class_name => "Rcadmin::Admin"
 	get 'admins/dashboard' => 'rcadmin/dashboard#index',:as=> 'dashboard_url'

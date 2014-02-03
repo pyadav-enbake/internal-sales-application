@@ -58,7 +58,7 @@
       </div>
       <div class="modal-body">
         <a href="/rcadmin/createquote"><strong>Create Quote</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/rcadmin/customers/<%=@quote.customer_id%>/edit"><strong>Review all past quotes</strong> </a>
+        <a href="/rcadmin/display_quotes?id=<%=@quote.contractor_id%>"><strong>Review all past quotes</strong> </a>
       </div>
       <div style="clear:both"></div>
       <!--div class="modal-footer">
@@ -88,6 +88,28 @@
       <div class="modal-body">
         <div class="quote-preview"></div>
         <button type="button" class="btn btn-default" data-dismiss="modal">Edit Quote</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" id="preview_quote">preview mail</button>
+        <button type="button" class="btn btn-primary" id="confirm_send_quote">Confirm & Send</button>
+      </div>
+      <div style="clear:both"></div>
+      <!--div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
+      </div-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="preview_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
+        <h4 class="modal-title">Confirm your Quote</h4>
+      </div>
+      <div class="modal-body">
+        <div class="quote-preview"></div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Edit Quote</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" id="preview_quote">preview mail</button>
         <button type="button" class="btn btn-primary" id="confirm_send_quote">Confirm & Send</button>
       </div>
       <div style="clear:both"></div>

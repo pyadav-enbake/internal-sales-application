@@ -1,4 +1,6 @@
 class Rcadmin::Contractor < ActiveRecord::Base
+    has_many :categories, :through => :contractor_categories
+    has_many :contractor_categories
 	validates_presence_of :admin_id,:company_name,:email
 	validates :email, presence: true, :email => true
 	validates_uniqueness_of :email,:on => :create

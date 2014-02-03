@@ -108,14 +108,6 @@ $(document).ready(function() {
       return false;
     }else{
       $("#myModal").modal('hide');
-      var frm = $('#send_quote_frm');
-      $.ajax({
-        type: frm.attr('method'),
-        url: frm.attr('action'),
-        data: frm.serialize()
-      }).success(function(data) {
-        $('.quote-preview').html(data);
-      });
       $("#myModalconfirmsend").modal({ backdrop: 'static',keyboard: false});
     }
 
@@ -140,12 +132,20 @@ $(document).ready(function() {
     });
   });
 
+  $('button[data-dismiss=modal]').click(function(evt) {
+    evt.preventDefault();
+    $('.quote-preview').html('');
+  });
+
   $('#preview_quote').click(function(){
     $("#err_msg").html('');
-    var preview_frm = $('#send_quote_frm');
-      preview_frm.attr('target','_blank');
-      preview_frm.attr('action','quote_preview').submit();
-      preview_frm.attr('action','send_quote');
+    var previewForm = $('#send_quote_frm');
+    $.post('quote_preview', previewForm.serialize()).success(function(data) {
+      $('.quote-preview').html(data);
+    });
+    // preview_frm.attr('target','_blank');
+    // preview_frm.attr('action','quote_preview').submit();
+    previewForm.attr('action','send_quote');
     //console.log(frm.attr('action'));return false;
   });
 

@@ -18,4 +18,5 @@
  *= require form-toggle/toggles
  *= require font-awesome
  *= require autocomplete/chosen
+ *= require rails.developer
  */

@@ -91,6 +91,7 @@ class Rcadmin::QuoteController < ApplicationController
     #render :text =>  params.inspect and return false
     if params[:product].size > 0
       @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @quote.quote_product.destroy_all
       @quote.delivery_date = params["extra_info"]['delivery_date']
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
       @quote.notes = params["extra_info"]['notes']
@@ -271,6 +272,7 @@ class Rcadmin::QuoteController < ApplicationController
       #render :text =>  params.inspect and return false
       if params[:product].size > 0
           @quote = Rcadmin::Quote.find(session[:quote_id] )
+          @quote.quote_product.destroy_all
           @quote.delivery_date = params["extra_info"]['delivery_date']
           @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
           @quote.notes = params["extra_info"]['notes']

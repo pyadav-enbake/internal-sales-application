@@ -242,12 +242,16 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def display_quotes
-      if params[:search].blank?
-          @rcadmin_quotes = Rcadmin::Quote.where(:contractor_id => params[:id])
-      else
-          #@rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}% or email like '%#{params[:search]}%'").map{|c|c.quotes}
-          @rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}%' or email like '%#{params[:search]}%'").map{|c|c.quotes}.flatten
-      end
+    if params[:customer_id]
+      @customer = Rcadmin::Customer.where(id: params[:customer_id]).first
+      @rcadmin_quotes = @customer.quotes
+
+    elsif params[:search].blank?
+      @rcadmin_quotes = Rcadmin::Quote.where(:contractor_id => params[:id])
+    else
+      #@rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}% or email like '%#{params[:search]}%'").map{|c|c.quotes}
+      @rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}%' or email like '%#{params[:search]}%'").map{|c|c.quotes}.flatten
+    end
   end
 
   def edit

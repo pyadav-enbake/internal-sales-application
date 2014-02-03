@@ -1,6 +1,6 @@
 <%@customer = Rcadmin::Customer.find(@customer.id)%>
 <%#@sales_admin = Rcadmin::Admin.find(@customer.admin_id)%>
-<%@quote = Rcadmin::Quote.where("id = ?", @quote_id)%>
+<%@quote = Rcadmin::Quote.where("id = ?", session[:quote_id]) %>
 Dear <%=@customer.fullname%>,
 
 	You have been been request a quote.
@@ -30,7 +30,7 @@ Dear <%=@customer.fullname%>,
 				<div style="clear:both;"></div>
 				<div style="color:black;">
 					<!--div id="accordion" class="accordion"-->
-					<%if @quote.size > 0%>
+					<% unless @quote.blank? %>
 					<%@tot_amt = 0.0%>
 						<% @quote.each_with_index do |qt,index|%>
 							<h3>Quote no - RC<%=qt.id%></h3>
@@ -102,7 +102,7 @@ Dear <%=@customer.fullname%>,
 	<hr>
 	<div>Total Price = $<%=@tot_hamt.round(2)%></div>
 <%end%>
-<%@quote = Rcadmin::Quote.where("id = ?", @quote_id).first%>
+<%@quote = Rcadmin::Quote.where("id = ?", session[:quote_id]).first %>
 <%if !@quote.notes.blank? %>
 <br><h2>Special Instructions/Notes</h2> 
 	======================<br>

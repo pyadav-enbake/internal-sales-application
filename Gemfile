@@ -5,7 +5,7 @@ ruby "2.1.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 # gem 'mysql2'
-gem 'turbo-sprockets-rails3'
+# gem 'turbo-sprockets-rails3'
 # Use Devise for user authentication
 #gem 'devise', :git => 'git://github.com/plataformatec/devise.git', :ref => '49aebde'
 gem 'devise', git: 'git://github.com/plataformatec/devise.git'

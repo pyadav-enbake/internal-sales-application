@@ -120,6 +120,10 @@
 
             $(document).on('click', '.someclass', function(evt) {
               evt.preventDefault();
+              var isRejected = !confirm('Are you sure you want to delete this room from your quote?');
+              if(isRejected) {
+                return false;
+              }
               var data = $(this).data();
               var url = data.url;
               $.ajax(url, { dataType: 'json', type: 'PUT'}).success(function(data) {

@@ -48,8 +48,8 @@ class Rcadmin::QuoteController < ApplicationController
               params[:quote][:category] = Rcadmin::Category.all.map{|category|category.id}.to_s.gsub("[","""]").gsub("]","")
               @quote.category = params[:quote][:category]
               if @quote.save
-                  #redirect_to :action => 'show_product'
-                  redirect_to :action => 'show_cabinet_selection'
+                  redirect_to :action => 'show_product'
+                  #redirect_to :action => 'show_cabinet_selection'
               end
           end
       else
@@ -62,8 +62,8 @@ class Rcadmin::QuoteController < ApplicationController
               params[:quote][:category] = params[:quote][:category].join(',')
               @quote.category = params[:quote][:category]
               if @quote.save
-                  #redirect_to :action => 'show_product'
-                  redirect_to :action => 'show_cabinet_selection'
+                  redirect_to :action => 'show_product'
+                  # redirect_to :action => 'show_cabinet_selection'
               end
           end
       end

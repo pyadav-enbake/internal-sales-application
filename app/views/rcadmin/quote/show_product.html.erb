@@ -2,8 +2,6 @@
   <ul class="tabs">
     <li class=""><a href="#tabs-1">Create Customer</a></li>
     <li ><a  href="#tabs-2">Select Category</a></li>
-    <li><a href="#tabs-3">Cabinet Selection</a></li>
-    <li><a href="#tabs-4">Countertop Design</a></li>
     <li><a href="#tabs-5">Product List</a></li>
   </ul>
   <div id="tabs-1">
@@ -32,7 +30,7 @@ $(document).ready(function() {
 //$('#tabs input[type=checkbox]').prop('checked',false);
 //$('#tabs input[type=text]').attr('disabled',false);
 //$('.quantity1').val(0);
-$( "#tabs" ).tabs({ active: 4 });
+$( "#tabs" ).tabs({ active: 2 });
 	$('.ui-tabs-anchor').click(function(){
 		var tabname = $(this).html();
 		if(tabname == 'Select Category'){

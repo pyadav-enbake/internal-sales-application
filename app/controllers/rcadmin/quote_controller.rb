@@ -14,6 +14,14 @@ class Rcadmin::QuoteController < ApplicationController
     @quote = Rcadmin::Quote.find params[:id] 
   end
 
+  def grid
+    @quote = Rcadmin::Quote.find params[:id] 
+    @contractor = @quote.contractor || Rcadmin::Contractor.new
+    @customer = @quote.customer || Rcadmin::Customer.new
+    @categories = @quote.categories
+    render template: "rcadmin/quote/templates/grid#{params[:template_id]||1}", layout: false
+  end
+
   def remove_category
     @quote = Rcadmin::Quote.find params[:id] 
     @quote.remove_category params[:category_id]

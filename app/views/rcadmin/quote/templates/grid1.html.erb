@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Cab Draw</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= stylesheet_link_tag :grid %>
+
+  </head>
+
+  <body class="bl">
+    <div class="container">
+      <header>
+        <a href="#" class="logo-bl"><img src="<%= image_path("img/logo-black.png") %>"></a>
+        <span>23949 S. Northern Illinois Drive &#9679; Channahon, IL 60410</span>
+        <span class="pull-right">815-467-990 &#9679; Fax 815-467-9985</span>
+      </header>
+      <section id="contant">
+        <h4>SERVICE WORK ORDER</h4>
+        <div class="text">
+          <div class="sm-p"><p><span>Original Order#</span> 123-456-789</p></div>
+          <div class="sm-p pull-right"><p><span>Date</span><%= Date.today.strftime("%d.%m.%Y") %></p></div>
+          <p><span>Contactor</span><%= @contractor.fullname %></p>
+          <p><span>Name</span><%= @customer.fullname %></p>
+          <p><span>Address</span><%= @customer.full_address %></p>
+          <p><span>Phone#</span> <%= @customer.phone %></p>
+          <p><span>Schedule Date & Time</span><%= @quote.delivery_date.strftime("%d.%m.%Y") %></p>
+          <p></p>
+          <p><span>Work To Be Performed</span><%= @quote.notes %></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+        </div>
+        <h4 class="italic">THE WORK AS DESCRIBED ABOVE HAS BEEN SATISFACTORILY COMPLETED</h4>
+        <div class="text">
+          <div class="sm-p titled"><p><span>AUTHORIZED SIGNATURE (CUSTOMER)</span>TYURIN</p></div>
+          <div class="sm-p pull-right"><p><span>Date Completed</span>12.02.2014</p></div>  
+          <div class="sm-p titled clear"><p><span>SERVICE REPRESENTATIVE</span>Clients</p></div>                  
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

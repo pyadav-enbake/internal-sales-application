@@ -58,7 +58,7 @@
                     <td><%=c.delivery_date%></td>
                     <td><%if c.status == 0%>Active<%else%>Inactive<%end%></td>
                     <td>
-                      <a href="<%= rcadmin_display_quotes_path(id: c.id) %>" class="btn btn-primary">Docs</a>
+                      <a href="<%= docs_rcadmin_quote_path(c) %>" class="btn btn-primary">Docs</a>
                       <a href="<%= rcadmin_show_path(id: c.id) %>" class="btn btn-primary">Quotes</a>
                     </td>
                     </tr>

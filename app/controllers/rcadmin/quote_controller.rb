@@ -9,6 +9,11 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
+
+  def docs
+    @quote = Rcadmin::Quote.find params[:id] 
+  end
+
   def remove_category
     @quote = Rcadmin::Quote.find params[:id] 
     @quote.remove_category params[:category_id]

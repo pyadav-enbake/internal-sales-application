@@ -13,6 +13,9 @@ RomarCabinates::Application.routes.draw do
     resources :faqs
     resources :faq_categories
     resources :static_pages
+    resources :quotes, controller: :quote, only: :none do
+      get :docs, on: :member
+    end
   end
 
 

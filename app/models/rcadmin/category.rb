@@ -6,6 +6,10 @@ class Rcadmin::Category < ActiveRecord::Base
 
     scope :default, -> {  where(:quote_id => 0)  }
 
+    def to_s
+      "#{name}"
+    end
+
     #has_many :subcategories, dependent: :destroy
     #has_many :products, dependent: :destroy
 end

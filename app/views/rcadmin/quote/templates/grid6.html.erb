@@ -53,7 +53,7 @@
 
       <ul class="foot">
         <li style="width: 31%;">
-          <h5><span>1</span></h5>
+          <h5><span>1</span><%= @categories.try(:[], 0) %> </h5>
           <div class="row">
             <p style="width: 31%;"><span>WOOD</span> </p>
             <p style="width: 30%;"><span>DR. HD</span> </p>
@@ -80,7 +80,7 @@
           </div>
         </li>
         <li style="width: 31%;">
-          <h5><span>2</span></h5>
+          <h5><span>2</span><%= @categories.try(:[], 1) %></h5>
           <div class="row">
             <p style="width: 31%;"><span>WOOD</span> </p>
             <p style="width: 30%;"><span>DR. HD</span> </p>
@@ -107,7 +107,7 @@
           </div>
         </li>
         <li style="width: 30%;">
-          <h5><span>3</span></h5>
+          <h5><span>3</span><%= @categories.try(:[], 2) %></h5>
           <div class="row">
             <p style="width: 31%;"><span>WOOD</span> </p>
             <p style="width: 30%;"><span>DR. HD</span> </p>

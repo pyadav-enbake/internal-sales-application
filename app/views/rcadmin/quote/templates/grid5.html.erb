@@ -20,79 +20,79 @@
       <ul class="head">
         <li style="width: 30%;">
           <div class="logo"><img src="<%= image_path("img/logo.png") %>"></div>
-          <p class="f-right">JOB # ____________________</p>
+          <p class="f-right" style="width: 45%;"><span>JOB #</span>123456</p>
           <div class="row">
-            <p>CUSTOMER  _________________</p>
-            <p>JOB NAME  _________________</p>
+            <p style="width: 51%;"><span>CUSTOMER</span><%= @customer.fullname %> </p>
+            <p style="width: 45%;"><span>JOB NAME </span></p>
           </div>
           <div class="row">
-            <p>JOB ADDRESS  ___________________________________________</p>
+            <p style="width: 96%;"><span>JOB ADDRESS</span><%= @customer.full_address %></p>
           </div>
           <div class="row">
-            <p>DATE  __ / __ / __</p>
-            <p>DEL. DATE  __ / __ / __</p>
-            <p>PHONE  _____________</p>
+            <p style="width: 25%;" ><span>Date: </span><%= @quote.created_at.strftime("%d.%m.%Y") %></p>
+            <p style="width: 30%;"><span>Del Date: </span><%= @quote.delivery_date.strftime("%d.%m.%Y") %></p>
+            <p style="width: 38%;"><span>PHONE </span><%= @customer.phone %></p>
           </div>
         </li>
         <li class="v-t">C A B I N E T</li>
         <li style="width: 27%;">
           <div class="row">
-            <p>WOOD  _________</p>
-            <p>DR. HD  ________</p>
-            <p>INTERIOR  _________</p>
-          </div>
-          <div class="row">
-            <p>UP. DE  ________</p>
-            <p>DWR. HD  _______</p>
-            <p>DWR BOX  _________</p>
-          </div>
-          <div class="row">
-            <p>BS. DR  ________</p>
-            <p>HNGE  _________</p>
-            <p>DWR SLIDE  ________</p>
-          </div>
-          <div class="row">
-            <p>DR. LIP  ________</p>
-            <p>T. RAIL  ________</p>
-            <p>CONSTR.  _________</p>
-          </div>
-          <div class="row">
-            <p>DRW.  ___________</p>
-            <p>FINISH  ___________________________</p>
-          </div>
-        </li>
-        <li class="v-t">C O U N T E R</li>
-        <li style="width: 18%;">
-          <div class="row">
-            <p>BRAND  ______</p>
-            <p>LAMINATED  </p><span class="four"></span>
-          </div>
-          <div class="row">
-            <p>COLOR  ______</p>
-            <p>SOLID SURFACE  </p><span class="four"></span>
-          </div>
-          <div class="row">
-            <p>PATTERN #  ______</p>
-            <p>OTHER  _________</p>
-          </div>
-          <div class="row">
-            <p>EDGE TYPE _______________________</p>
-          </div>
-          <div class="row">
-            <p>SINK  _____________________________</p>
-          </div>
-        </li>
-        <li style="width: 13.969%;">
-          <header>
-            Page___ of ___
-          </header>
-          <p class="final">SOECIAL NOTE:</p>
-        </li>
-      </ul>
-      <h1>EXPRESS / SERVICE</h1>
-      <span>DO NOT PUT WOOD AND LAMINATE WORK ORDERS ON SAME SHEET</span>
-    </div>
+            <div class="row">
+              <p style="width: 31%;"><span>WOOD</span> </p>
+              <p style="width: 30%;"><span>DR. HD</span> </p>
+              <p style="width: 31%;"><span>INTERIOR</span> </p>
+            </div>
+            <div class="row">
+              <p style="width: 31%;"><span>UP. DE</span> </p>
+              <p style="width: 30%;"><span>DWR. HD</span> </p>
+              <p style="width: 31%;"><span>DWR BOX</span> </p>
+            </div>
+            <div class="row">
+              <p style="width: 31%;"><span>BS. DR</span> </p>
+              <p style="width: 30%;"><span>HNGE</span> </p>
+              <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+            </div>
+            <div class="row">
+              <p style="width: 31%;"><span>DR. LIP</span> </p>
+              <p style="width: 30%;"><span>T. RAIL</span> </p>
+              <p style="width: 31%;"><span>CONSTR.</span></p>
+            </div>
+            <div class="row">
+              <p style="width: 33%;"><span>DRW.</span></p>
+              <p style="width: 63%;"><span>FINISH</span> </p>
+            </div>
+          </li>
+          <li class="v-t">C O U N T E R</li>
+          <li style="width: 18%;">
+            <div class="row">
+              <p style="width: 33%;"><span>BRAND</span> </p>
+              <p style="width: 45%;"><span>LAMINATED</span>  </p><span class="four"></span>
+            </div>
+            <div class="row">
+              <p style="width: 30%;"><span>COLOR</span>  </p>
+              <p style="width: 49%;"><span>SOLID SURFACE </span> </p><span class="four"></span>
+            </div>
+            <div class="row">
+              <p style="width: 50%;"><span>PATTERN #</span></p>
+              <p style="width: 44%;"><span>OTHER</span> </p>
+            </div>
+            <div class="row">
+              <p style="width: 98%;"><span>EDGE TYPE</span></p>
+            </div>
+            <div class="row">
+              <p style="width: 98%;"><span>SINK</span> </p>
+            </div>
+          </li>
+          <li style="width: 13.969%;">
+            <header>
+              Pag 1 of 1
+            </header>
+            <p class="final">SOECIAL NOTE: <%= @quote.notes %></p>
+          </li>
+        </ul>
+        <h1>EXPRESS / SERVICE</h1>
+        <span>DO NOT PUT WOOD AND LAMINATE WORK ORDERS ON SAME SHEET</span>
+      </div>
 
-  </body>
-</html>
-
+    </body>
+  </html>

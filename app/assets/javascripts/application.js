@@ -75,3 +75,14 @@ function formSubmit(id)
 {
 document.getElementById(id).submit();
 }
+
+$(function() {
+
+  $('#check_all').change(function(evt) {
+    if( $(this).is(":checked") )
+      $('.quote-categories').prop('checked', true);
+    else
+      $('.quote-categories').prop('checked', false);
+  });
+
+});

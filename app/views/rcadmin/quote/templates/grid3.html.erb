@@ -7,7 +7,9 @@
     <title>Cab Draw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag :grid %>
+    <link href="<%= stylesheet_path('css/reset') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/style') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/responsive') %>" rel="stylesheet" type="text/css" />
 
   </head>
 
@@ -24,18 +26,18 @@
           requested, sign where indicated and return to our office.  Thank you.           
         </span>
         <div class="text">
-          <div class="sm-p" style="width:99%;"><p><span>NAME:</span>Tyurin Alexandr Victororvich</p></div>
-          <div class="sm-p" style="width:64%;"><p><span>CARDHOLDER NAME:</span>Tyurin Alex</p></div>
-          <div class="sm-p" style="width:35%;"><p><span>CARD ZIPCODE:</span>1324-5678-9101-1234</p></div>
-          <div class="sm-p" style="width:99%;"><p><span>ACCOUNT NUMBER:</span>654321</p></div>
-          <div class="sm-p" style="width:40%;"><p><span>EXPIRATION DATE:</span>12.02.2014</p></div>
-          <div class="sm-p" style="width:59%;"><p><span>STREET ADDRESS:</span>Ukraine, Zaporizhzhya</p></div>
-          <div class="sm-p" style="width:35%;"><p><span>CARD TYPE: VISA:</span>Maestro</p></div>
-          <div class="sm-p" style="width:21%;"><p><span>MC:</span>456789</p></div>
-          <div class="sm-p" style="width:21%;"><p><span>DISCOVER:</span>789456</p></div>
-          <div class="sm-p" style="width:21%;"><p><span>AMEX:</span>16589</p></div>
-          <div class="sm-p" style="width:69%;"><p><span>AUTHORIZED SIGNATURE:</span>TYURIN</p></div>
-          <div class="sm-p" style="width:30%;"><p><span>DATE:</span>12.02.2014</p></div>
+          <div class="sm-p" style="width:99%;"><p><span>NAME:</span><%= @customer.fullname %></p></div>
+          <div class="sm-p" style="width:64%;"><p><span>CARDHOLDER NAME:</span></p></div>
+          <div class="sm-p" style="width:35%;"><p><span>CARD ZIPCODE:</span></p></div>
+          <div class="sm-p" style="width:99%;"><p><span>ACCOUNT NUMBER:</span></p></div>
+          <div class="sm-p" style="width:40%;"><p><span>EXPIRATION DATE:</span></p></div>
+          <div class="sm-p" style="width:59%;"><p><span>STREET ADDRESS:</span><%= @customer.full_address %></p></div>
+          <div class="sm-p" style="width:35%;"><p><span>CARD TYPE: VISA:</span></p></div>
+          <div class="sm-p" style="width:21%;"><p><span>MC:</span></p></div>
+          <div class="sm-p" style="width:21%;"><p><span>DISCOVER:</span></p></div>
+          <div class="sm-p" style="width:21%;"><p><span>AMEX:</span></p></div>
+          <div class="sm-p" style="width:69%;"><p><span>AUTHORIZED SIGNATURE:</span></p></div>
+          <div class="sm-p" style="width:30%;"><p><span>DATE:</span><%= Date.today.strftime("%d.%m.%Y") %></p></div>
         </div>
       </section>
     </div>

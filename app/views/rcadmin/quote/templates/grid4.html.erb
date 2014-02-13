@@ -7,7 +7,9 @@
     <title>Cab Draw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag :grid %>
+    <link href="<%= stylesheet_path('css/reset') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/style') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/responsive') %>" rel="stylesheet" type="text/css" />
 
   </head>
 
@@ -20,14 +22,14 @@
       </header>
       <section id="contant">
         <h4>Agreement to Purchase</h4>
-        <div class="sm-p n-b" style="width:33%;"><p><span>SUBMITTED TO:</span>Alexandr</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>PHONE:</span>+3 8 063 96 15 660</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>DATE:</span>11.02.2014</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>ADDRESS:</span>Ukraine, Zaporizhzhya</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>JOB NAME:</span>Discover</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>PROPOSAL:</span>Be better</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>CITY, STATE, ZIP CODE:</span>ZP,UA,70030</p></div>
-        <div class="sm-p n-b" style="width:33%;"><p><span>JOB LOCATION</span>UA, Zaporizhzhya</p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>SUBMITTED TO:</span><%= @contractor.fullname %></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>PHONE:</span><%= @customer.phone %></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>DATE:</span><%= Date.today.strftime("%d.%m.%Y") %></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>ADDRESS:</span><%= @customer.address %></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>JOB NAME:</span></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>PROPOSAL:</span></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>CITY, STATE, ZIP CODE:</span><%= "#{@customer.city}, #{@customer.state}, #{@customer.zip}" %></p></div>
+        <div class="sm-p n-b" style="width:33%;"><p><span>JOB LOCATION</span><%= @customer.full_address %></p></div>
 
         <div class="text">
           <b>Agreement to purchase per attached proposal</b>

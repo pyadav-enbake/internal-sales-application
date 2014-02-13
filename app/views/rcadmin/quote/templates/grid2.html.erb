@@ -7,7 +7,9 @@
     <title>Cab Draw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag :grid %>
+    <link href="<%= stylesheet_path('css/reset') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/style') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('css/responsive') %>" rel="stylesheet" type="text/css" />
 
   </head>
 
@@ -15,129 +17,129 @@
     <div class="container br">
       <header>
         <a href="#" class="logo-color"><img src="<%= image_path("img/logo-color.png") %>"></a>
-        <div class="pull-right header-text"><p><span>CAD PERSON</span>Alexandr Tyurin</p></div>
+        <div class="pull-right header-text"><p><span>CAD PERSON</span></p></div>
       </header>
       <section id="contant">
         <h4>Turn in Check List</h4>
         <div class="checkbox">
-          <div class="sm-p"><p><span>CONTRACTOR:</span> Alex</p></div>
-          <div class="sm-p pull-right"><p><span>DATE:</span>12.02.2014</p></div>
-          <div class="sm-p"><p><span>CUSTOMER:</span> Alexandr</p></div>
-          <div class="sm-p pull-right"><p><span>SALESPERSON:</span> Alexandr</p></div>
+          <div class="sm-p"><p><span>CONTRACTOR:</span> <%= @contractor.fullname %></p></div>
+          <div class="sm-p pull-right"><p><span>DATE:</span><%= Date.today.strftime("%d.%m.%Y") %></p></div>
+          <div class="sm-p"><p><span>CUSTOMER:</span> <%= @customer.fullname %></p></div>
+          <div class="sm-p pull-right"><p><span>SALESPERSON:</span> </p></div>
           <span class="sm">Sales Chk/ CAD </span>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Turn in checklist completed</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Job jacket complete</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Title information (name, address, phone number, etc…) on all drawings</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>All room selection blocks completed (must include hardware). </span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Late ordered hardware must be added by a change order </span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Appliance specifications (give extra copy to CAD room with Job name & number) </span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Trim list “sticker” filled out completely (specify wood, finish, and quantity)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>All price pages filled out completely (name, address, phone, builder)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Can the cabinet be delivered…will it go in the room, will it stand up…specify loose toekick</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Special order forms included</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Custom Quotes included </span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Delivery date requested on all drawings</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Ceiling/Soffit height on top view/plan view drawings</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Stain match reference numbers</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Rail sizes listed wherever molding is used (Draw cross view)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Valance details (rise, crown reveal)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Cabinet sink centers, heights, depths, and rail sizes (note special depth drawers)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>On wall and tall cabinetry specify top and roof type (finished tops/flush finished tops etc…)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Separate shop drawings for complex cabinets (no flutes or moldings just rail sizes)     </span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Wood top should be drawn with sizes, edge detail included on the same page</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Open shelf area on cabinets should have I.D. measurements noted</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>Drawing for appliance panels with Make and Model number and sizes (include specs)</span>
           </div>
           <div class="row">
             <input type="checkbox">
-            <input type="text" value="OK">
+            <input type="text" value="">
             <span>All Corbels, onlay’s, special materials should be specified on drawings for pricing and ordering</span>
           </div>
           <div class="row">

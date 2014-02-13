@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123092112) do
+ActiveRecord::Schema.define(version: 20140213082421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",      limit: 2
+    t.integer  "quote_id",              default: 0
   end
 
   create_table "contractors", force: true do |t|
@@ -78,16 +79,16 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   end
 
   create_table "customers", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "contractor_id"
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip"
+    t.string   "zip"
     t.string   "email"
     t.string   "phone"
-    t.integer  "status",     limit: 2
+    t.integer  "status",        limit: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
@@ -132,24 +133,24 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   end
 
   create_table "products", force: true do |t|
-    t.integer  "category_id"
     t.integer  "subcategory_id"
-    t.integer  "dimension_id"
     t.string   "title"
     t.text     "description"
     t.float    "price"
-    t.integer  "status",           limit: 2
+    t.string   "measurement_type"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "measurement_type"
   end
 
   create_table "quote_products", force: true do |t|
     t.integer  "quote_id"
     t.integer  "product_id"
+    t.integer  "category_id"
     t.integer  "quantity"
     t.float    "total_price"
-    t.integer  "status",      limit: 2
+    t.integer  "status",        limit: 2
+    t.string   "header_option",           default: "No"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -170,6 +171,11 @@ ActiveRecord::Schema.define(version: 20140123092112) do
     t.text     "notes"
   end
 
+  create_table "states", force: true do |t|
+    t.string "name"
+    t.string "abbr"
+  end
+
   create_table "static_pages", force: true do |t|
     t.string   "name"
     t.text     "content"
@@ -180,7 +186,7 @@ ActiveRecord::Schema.define(version: 20140123092112) do
   create_table "subcategories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "status",      limit: 2
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

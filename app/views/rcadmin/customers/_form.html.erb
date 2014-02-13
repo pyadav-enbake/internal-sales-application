@@ -1,110 +1,110 @@
-		<div class="container">
-			<%= form_for(@rcadmin_customer,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-orange">
-						<div class="panel-heading">
-							<h4><%if @rcadmin_customer.id.nil? %>Add<%else%>Edit<%end%> Customer</h4>
-							<div class="options">
-						
-							</div>
-						</div><br>
-						<%if @rcadmin_customer.errors.any? %>
-						<div class="alert alert-dismissable alert-danger">
-								<%=@rcadmin_customer.errors.full_messages[0] %>.
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							</div>
+<div class="container">
+  <%= form_for(@rcadmin_customer,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-orange">
+          <div class="panel-heading">
+            <h4><%if @rcadmin_customer.id.nil? %>Add<%else%>Edit<%end%> Customer</h4>
+            <div class="options">
 
-						<%end%>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Contractor Company Name</label>
-							                <div class="col-sm-6">
-									  <%= select("rcadmin_customer","contractor_id", Rcadmin::Contractor.find_by_adminid("#{@current_user.id}").collect {|c| [ c.company_name, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control') %>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">First Name</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :first_name ,:class=>"form-control",:placeholder=>"First Name"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Last Name</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :last_name ,:class=>"form-control",:placeholder=>"Last Name"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Title</label>
-							                <div class="col-sm-6">
-									  <%= f.text_field :title ,:class=>"form-control",:placeholder=>"Title"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Email</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :email ,:class=>"form-control",:placeholder=>"Email"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">State</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :state ,:class=>"form-control",:placeholder=>"State"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">City</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :city ,:class=>"form-control",:placeholder=>"city"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Address</label>
-							                <div class="col-sm-6">
-												<%= f.text_area :address ,:class=>"form-control",:placeholder=>"Address"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Zipcode</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :zip ,:class=>"form-control",:placeholder=>"Zipcode"%>
-							                </div>
-							            </div>
-							            <%= f.hidden_field :admin_id ,:value=>"#{@current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Phone</label>
-							                <div class="col-sm-6">
-												<%= f.text_field :phone ,:class=>"form-control",:placeholder=>"Phone Number"%>
-							                </div>
-							            </div>
-							            <div class="form-group">
-							                <label class="col-sm-3 control-label">Status</label>
-							                <div class="col-sm-6">
-												<%= select(:rcadmin_customer, :status, [['Active', 0], ['Inactive', 1]], {}, {:class => 'form-control'}) %>
-							                </div>
-							            </div>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-6 col-sm-offset-3">
-				      			<div class="btn-toolbar">
-									<%if @rcadmin_customer.id.nil? %>
-										<%= f.submit "Add Customer" ,:class=>"btn-primary btn"%>
-									<%else%>
-										<%= f.submit "Update Customer" ,:class=>"btn-primary btn"%>
-									<%end%>
-									<%=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
-				      			</div>
-				      		</div>
-				      	</div>
-				      </div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<%end%>
+            </div>
+          </div><br>
+          <%if @rcadmin_customer.errors.any? %>
+            <div class="alert alert-dismissable alert-danger">
+              <%=@rcadmin_customer.errors.full_messages[0] %>.
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            </div>
+
+          <%end%>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Contractor Company Name</label>
+                  <div class="col-sm-6">
+                    <%= select("rcadmin_customer","contractor_id", Rcadmin::Contractor.find_by_adminid("#{@current_user.id}").collect {|c| [ c.company_name, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control') %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :first_name ,:class=>"form-control",:placeholder=>"First Name"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :last_name ,:class=>"form-control",:placeholder=>"Last Name"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Title</label>
+                  <div class="col-sm-6">
+                     <%= f.select :title, ['Mr.', 'Mrs.', 'Miss'], {}, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :email ,:class=>"form-control",:placeholder=>"Email"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">State</label>
+                  <div class="col-sm-6">
+                    <%= f.select :state, State.pluck(:name), {}, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">City</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :city ,:class=>"form-control",:placeholder=>"city"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Address</label>
+                  <div class="col-sm-6">
+                    <%= f.text_area :address ,:class=>"form-control",:placeholder=>"Address"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Zipcode</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :zip ,:class=>"form-control",:placeholder=>"Zipcode"%>
+                  </div>
+                </div>
+                <%= f.hidden_field :admin_id ,:value=>"#{@current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Phone</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :phone ,:class=>"form-control",:placeholder=>"Phone Number"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Status</label>
+                  <div class="col-sm-6">
+                    <%= select(:rcadmin_customer, :status, [['Active', 0], ['Inactive', 1]], {}, {:class => 'form-control'}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <div class="btn-toolbar">
+                  <%if @rcadmin_customer.id.nil? %>
+                    <%= f.submit "Add Customer" ,:class=>"btn-primary btn"%>
+                  <%else%>
+                    <%= f.submit "Update Customer" ,:class=>"btn-primary btn"%>
+                  <%end%>
+                  <%=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>

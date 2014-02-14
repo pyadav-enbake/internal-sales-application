@@ -22,11 +22,25 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label ">Choose Category For Quote</label>
                   <div class="col-sm-6" >
-                    <%= collection_check_boxes("quote","category", Rcadmin::Category.all,:id,:name, {}, {class: "quote-categories"}) %>
+                    <%#= collection_check_boxes("quote","category", Rcadmin::Category.all,:id,:name, {}, {class: "quote-categories"}) %>
+                   <table> 
+                    <% Rcadmin::Category.all.each do |category| %>
+                      <tr>
+                        <td>
+                          <%= check_box_tag "quote[category][]", category.id, false, :id => "quote_category_#{category.id}", :class => "quote-categories" %>
+                        </td>
+                        <td>
+                          <label for="quote_category_<%= category.id %>" class="quote-categories select_quote_label">
+                            <%= category.name %>
+                          </label>
+                        </td>
+                      </tr>
+                    <% end %>
+                   </table>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label ">Select all</label>
+                  <label class="col-sm-3 control-label select_all_categories">Select all</label>
                   <div class="col-sm-6" >
                     <%= check_box_tag :check_all %>
                   </div>

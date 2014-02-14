@@ -169,8 +169,6 @@ class Rcadmin::QuoteController < ApplicationController
           @customer = Rcadmin::Customer.find(@quote.customer_id)
           WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
           WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
-
-
       else
           render :text => 'Some thing went Wornge' and return false
       end

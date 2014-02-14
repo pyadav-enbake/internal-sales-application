@@ -3,6 +3,7 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
 
   belongs_to :quote
   belongs_to :product
+  belongs_to :category
 
   scope :find_by_quote, ->(quote_id) { where(:quote_id=>quote_id) }
 end

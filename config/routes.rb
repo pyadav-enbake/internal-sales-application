@@ -1,7 +1,6 @@
 RomarCabinates::Application.routes.draw do
 
 
-
   namespace :rcadmin do
     put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
     resources :countertop_designs
@@ -17,6 +16,7 @@ RomarCabinates::Application.routes.draw do
       get :docs, on: :member
       get 'docs/:template_id', action: 'grid', on: :member, as: :print_templates
     end
+    get 'quotations', to: 'quote#quotations', as: :quotations
   end
 
 

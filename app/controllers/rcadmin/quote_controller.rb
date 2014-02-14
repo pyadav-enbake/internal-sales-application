@@ -9,6 +9,9 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
+  def quotations
+    @rcadmin_quotes = current_user.quotes.includes(:contractor)
+  end
 
   def docs
     @quote = Rcadmin::Quote.find params[:id] 

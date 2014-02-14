@@ -13700,3 +13700,9 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   width: 300px !important;
   line-height: 25px !important;
 }
+
+.select_all_categories { 
+  padding-top: 0px !important;
+ }
+
+.select_quote_label { margin-left: 5px; margin-top: 7px; }

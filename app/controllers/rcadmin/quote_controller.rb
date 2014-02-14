@@ -47,7 +47,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @selected_category = @quote.category.split(',') if !@quote.category.nil?
     else
-      @selected_category = []
+      redirect_to create_quote_path
     end
 
   end

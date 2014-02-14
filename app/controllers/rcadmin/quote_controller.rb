@@ -25,6 +25,10 @@ class Rcadmin::QuoteController < ApplicationController
     render template: "rcadmin/quote/templates/grid#{params[:template_id]||1}", layout: false
   end
 
+  def quotations
+    @rcadmin_quotes = current_user.quotations
+  end
+
   def remove_category
     @quote = Rcadmin::Quote.find params[:id] 
     @quote.remove_category params[:category_id]

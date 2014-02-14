@@ -13,10 +13,10 @@ class Rcadmin::Contractor < ActiveRecord::Base
 
   belongs_to :admin
   has_many :customers,dependent: :destroy
-  has_many :quotes,dependent: :destroy
+  has_many :quotes, dependent: :destroy
   scope :default, -> {  where(:status => 0)  }
   #composed_of :name, :mapping => %w(first_name last_name)
-  scope :find_by_adminid, ->(admin_id) { where(admin_id: admin_id) }
+  scope :find_by_adminid, ->(admin_id) { where("admin_id = ? OR admin_id = 0", admin_id).order(:id) }
   def fullname
     "#{first_name} #{last_name}"
   end

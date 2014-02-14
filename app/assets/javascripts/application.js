@@ -23,6 +23,7 @@
 // = require plugins/codeprettifier/prettify.js
 // = require plugins/easypiechart/jquery.easypiechart.min.js
 // = require plugins/sparklines/jquery.sparklines.min.js
+// = require plugins/jquery-editable/jquery.editable
 // = require plugins/form-toggle/toggle.min.js
 // = require plugins/form-inputmask/jquery.inputmask.bundle
 // = require plugins/datatables/jquery.dataTables.min.js

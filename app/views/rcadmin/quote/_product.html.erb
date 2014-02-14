@@ -120,6 +120,7 @@
 
             $(document).on('click', '.someclass', function(evt) {
               evt.preventDefault();
+              var $self = $(this);
               var isRejected = !confirm('Are you sure you want to delete this room from your quote?');
               if(isRejected) {
                 return false;
@@ -130,7 +131,7 @@
                 if(data.count === 0)
                   window.location.href = '/rcadmin/quote/category';
                 else 
-                  window.location.reload();
+                  removeTab($self);
               });
             });
 
@@ -139,6 +140,13 @@
             }, function() {
               $(this).find('span').removeClass('someclass');
             });
+
+            function removeTab($tab) {
+              var tabId = $tab.siblings('a').attr('href');
+              $(tabId).remove();
+              $tab.parents('li').remove();
+              $('.delete-tab a').first().click();
+            }
 
           });
         </script>

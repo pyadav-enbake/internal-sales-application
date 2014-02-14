@@ -1,11 +1,13 @@
 jQuery ->
 
+  categoryId = null
   if $('.editable').length
     $('.editable').editable
       event: 'click'
       callback: (data) ->
 
         id = data.$el.data('id')
+
 
         content = parseInt(data.content)
         if isNaN(content)
@@ -19,8 +21,9 @@ jQuery ->
           unless isNaN(value)
             sum += value
           
+      
 
-        $('.total.' + data.$el.data('id')).text(sum)
+        console.log($('.total[data-id=' +  id + ']').text(sum))
 
 
 
@@ -29,7 +32,19 @@ jQuery ->
     $('.live-data').modal('hide')
     $('.total[data-product-id]').each ->
       value = parseInt($(this).text())
-      id = ".quantity1." + $(this).data('productId')
+      id = ".quantity1.#{$(this).data('id')}"
       unless isNaN(value)
         $(id).val(value)
       $(id).trigger('keyup')
+
+  $('[data-target="#live-data"]').on 'click', ->
+    categoryId = $(this).data('id')
+
+    $('.total').each ->
+      productId = $(this).data('productId')
+      $(this).data('id', "#{categoryId}#{productId}")
+
+    $('td.editable').each ->
+      productId = $(this).data('productId')
+      $(this).data('id', "#{categoryId}#{productId}")
+

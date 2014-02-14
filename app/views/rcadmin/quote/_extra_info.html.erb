@@ -23,13 +23,13 @@
             <% 1.upto(15).each do |n| %>
               <tr class="odd gradeX">
                 <% base_products.each do |product| %>
-                  <td class="editable" data-id="<%= "#{product.subcategory_id}#{product.id}" %>"></td>
+                  <td class="editable" data-id="<%= "#{product.subcategory_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
                 <% end %>
               </tr>
             <% end %>
             <tr class="even">
               <% base_products.each do |product| %>
-                <td class="total <%= "#{product.subcategory_id}#{product.id}" %>" data-product-id="<%= "#{product.subcategory_id}#{product.id}" %>"></td>
+                <td class="total" data-id="<%= "#{product.subcategory_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
               <% end %>
             </tr>
           </tbody>

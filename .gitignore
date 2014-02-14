@@ -18,6 +18,7 @@
 
 # gemset and ruby version file ignore
 .ruby-*
+.rvmrc
 DS_Store
 
 # VIM tempfiles ignore

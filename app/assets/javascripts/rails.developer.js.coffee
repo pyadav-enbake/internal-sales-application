@@ -1,24 +1,26 @@
 jQuery ->
-  $('.editable').editable
-    event: 'click'
-    callback: (data) ->
 
-      id = data.$el.data('id')
+  if $('.editable').length
+    $('.editable').editable
+      event: 'click'
+      callback: (data) ->
 
-      content = parseInt(data.content)
-      if isNaN(content)
-        data.$el.text(0)
-      else
-        data.$el.text(content)
+        id = data.$el.data('id')
 
-      sum = 0
-      $('.editable[data-id=' + id + ']').each ->
-        value = parseInt($(this).text())
-        unless isNaN(value)
-          sum += value
-        
+        content = parseInt(data.content)
+        if isNaN(content)
+          data.$el.text(0)
+        else
+          data.$el.text(content)
 
-      $('.total.' + data.$el.data('id')).text(sum)
+        sum = 0
+        $('.editable[data-id=' + id + ']').each ->
+          value = parseInt($(this).text())
+          unless isNaN(value)
+            sum += value
+          
+
+        $('.total.' + data.$el.data('id')).text(sum)
 
 
 

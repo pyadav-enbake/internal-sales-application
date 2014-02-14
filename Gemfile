@@ -44,6 +44,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'roo', '~> 1.13.0'
 
 # web application
 gem 'unicorn'

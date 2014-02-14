@@ -120,6 +120,12 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
+    ruby-ole (1.2.11.7)
+    rubyzip (1.1.0)
     sanitize (2.0.6)
       nokogiri (>= 1.4.4)
     sass (3.2.12)
@@ -131,6 +137,8 @@ GEM
       json (>= 1.1.3)
       rdoc (~> 3.10)
     slop (3.4.7)
+    spreadsheet (0.9.7)
+      ruby-ole (>= 1.0)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -181,6 +189,7 @@ DEPENDENCIES
   quiet_assets
   rails (~> 4.0.0)
   rails_12factor
+  roo (~> 1.13.0)
   sanitize
   sass-rails (~> 4.0.0)
   sdoc

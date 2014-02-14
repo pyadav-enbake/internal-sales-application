@@ -99,6 +99,7 @@ $(document).ready(function() {
     total_price = total_price.toFixed(2);
     return total_price
   }
+  window.total_price_calculator = total_item_price_count;
   $( "#extra_info_delivery_date" ).datepicker({dateFormat: 'yy-mm-dd',minDate: 0});
 
 //send_quote

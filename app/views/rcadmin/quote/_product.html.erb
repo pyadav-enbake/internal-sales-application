@@ -146,6 +146,7 @@
               $(tabId).remove();
               $tab.parents('li').remove();
               $('.delete-tab a').first().click();
+              $("#total_price").text(total_price_calculator());
             }
 
           });

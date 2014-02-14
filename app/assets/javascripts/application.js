@@ -24,6 +24,7 @@
 // = require plugins/easypiechart/jquery.easypiechart.min.js
 // = require plugins/sparklines/jquery.sparklines.min.js
 // = require plugins/form-toggle/toggle.min.js
+// = require plugins/form-inputmask/jquery.inputmask.bundle
 // = require plugins/datatables/jquery.dataTables.min.js
 // = require plugins/datatables/dataTables.bootstrap.js
 // = require demo/demo-datatables.js
@@ -84,5 +85,7 @@ $(function() {
     else
       $('.quote-categories').prop('checked', false);
   });
+
+  $('.mask').inputmask();
 
 });

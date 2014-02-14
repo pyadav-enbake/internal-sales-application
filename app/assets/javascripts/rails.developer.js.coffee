@@ -6,7 +6,7 @@ jQuery ->
       event: 'click'
       callback: (data) ->
 
-        id = data.$el.data('id')
+        id = data.$el.attr('klass')
 
 
         content = parseInt(data.content)
@@ -16,14 +16,14 @@ jQuery ->
           data.$el.text(content)
 
         sum = 0
-        $('.editable[data-id=' + id + ']').each ->
+        $('.editable[klass=' + id + ']').each ->
           value = parseInt($(this).text())
           unless isNaN(value)
             sum += value
           
       
 
-        console.log($('.total[data-id=' +  id + ']').text(sum))
+        console.log($('.total[klass=' +  id + ']').text(sum))
 
 
 
@@ -32,7 +32,7 @@ jQuery ->
     $('.live-data').modal('hide')
     $('.total[data-product-id]').each ->
       value = parseInt($(this).text())
-      id = ".quantity1.#{$(this).data('id')}"
+      id = ".quantity1.#{$(this).attr('klass')}"
       unless isNaN(value)
         $(id).val(value)
       $(id).trigger('keyup')
@@ -40,11 +40,14 @@ jQuery ->
   $('[data-target="#live-data"]').on 'click', ->
     categoryId = $(this).data('id')
 
-    $('.total').each ->
+    $('td.total').each ->
       productId = $(this).data('productId')
-      $(this).data('id', "#{categoryId}#{productId}")
+      $(this).attr('id', "#{categoryId}#{productId}")
+      $(this).removeAttr('klass')
+      $(this).attr('klass', "#{categoryId}#{productId}")
 
     $('td.editable').each ->
       productId = $(this).data('productId')
+      $(this).removeAttr('klass')
       $(this).data('id', "#{categoryId}#{productId}")
-
+      $(this).attr('klass', "#{categoryId}#{productId}")

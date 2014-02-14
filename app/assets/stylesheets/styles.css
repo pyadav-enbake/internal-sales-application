@@ -17,6 +17,13 @@ section,
 summary {
   display: block;
 }
+
+
+.no-search-filter #example_filter {
+  display: none;
+}
+
+
 audio,
 canvas,
 video {

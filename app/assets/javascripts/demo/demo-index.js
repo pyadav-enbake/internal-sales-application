@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
 
     ds.push({
     data:d1,
-    label: "Budget",
+    label: "Estimated",
     bars: {
         show: true,
         barWidth: 0.2,

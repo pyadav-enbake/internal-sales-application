@@ -34,6 +34,7 @@
 // = require plugins/form-daterangepicker/moment.min.js
 // = require plugins/pulsate/jQuery.pulsate.min.js
 // = require placeholdr.js
+// = require rails.developer
 // = require applicationn.js
 // = require demo/demo.js
 // = require general.js

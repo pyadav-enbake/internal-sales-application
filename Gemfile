@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby "2.1.0"
 
+gem "spring", group: :development
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.0'
 # gem 'mysql2'
@@ -45,6 +47,7 @@ group :doc do
 end
 
 gem 'roo', '~> 1.13.0'
+gem "mail_view", "~> 1.0.3", group: :development
 
 # web application
 gem 'unicorn'

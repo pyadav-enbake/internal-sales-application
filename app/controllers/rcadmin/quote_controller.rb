@@ -279,10 +279,14 @@ class Rcadmin::QuoteController < ApplicationController
 
   def show
       @rcadmin_quotes = Rcadmin::Quote.find(params[:id])
-      cabinet_types = @rcadmin_quotes.cabinet_types_info.gsub("=>", ":")
-      @json_cabinet_types = JSON.parse(cabinet_types)
-      countertop = @rcadmin_quotes.countertop_designs_info.gsub("=>", ":")
-      @json_countertop = JSON.parse(countertop)
+      unless  @rcadmin_quotes.cabinet_types_info.nil?
+        cabinet_types = @rcadmin_quotes.cabinet_types_info.gsub("=>", ":")
+      end
+      @json_cabinet_types = JSON.parse(cabinet_types || '{}')
+      unless  @rcadmin_quotes.countertop_designs_info.nil?
+        countertop = @rcadmin_quotes.countertop_designs_info.gsub("=>", ":")
+      end
+      @json_countertop = JSON.parse(countertop || '{}')
 
   end
 

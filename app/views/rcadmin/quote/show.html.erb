@@ -45,7 +45,8 @@
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Status:</label>
-              <%= @rcadmin_quotes.status %>
+              <%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, @rcadmin_quotes.status) %>
+              <%=  %>
             </div>
 
             <div class="form-group">

@@ -10,7 +10,7 @@ class Rcadmin::QuoteController < ApplicationController
 
 
   def quotations
-    @rcadmin_quotes = current_user.quotes.includes(:contractor)
+    @rcadmin_quotes = current_user.quotes.includes(:contractor).order("created_at DESC")
   end
 
   def docs

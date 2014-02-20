@@ -12,6 +12,10 @@ class Rcadmin::Quote < ActiveRecord::Base
   scope :current_month_quotes, -> { where("created_at >= ? AND created_at <= ?", Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
   scope :current_year_quotes, -> { where("created_at >= ? AND created_at <= ?", Time.zone.now.beginning_of_year, Time.zone.now.end_of_year) }
 
+
+  STATUSES = ['Draft', 'Sent to Client', 'Negotiations', 'In Contract', 'Turned In']
+  RATING = ['Very Poor', 'Poor', 'Fair', '50-50', 'Strong', 'Very Strong']
+
   def categories
     return Rcadmin::Category.none unless category?
     @categories ||= Rcadmin::Category.where(id: category_ids)

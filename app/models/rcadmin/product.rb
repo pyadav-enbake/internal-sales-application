@@ -9,11 +9,13 @@ class Rcadmin::Product < ActiveRecord::Base
   #scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 
   def self.base_products
-    base_subcategory = Rcadmin::Subcategory.find_by(name: "Base");
-    if base_subcategory
-      where(subcategory_id: base_subcategory.id)
-    else
-      none
+    @base_subcategory ||= begin 
+      base_subcategory = Rcadmin::Subcategory.find_by(name: "Base")
+      if base_subcategory
+        where(subcategory_id: base_subcategory.id)
+      else
+        none
+      end
     end
   end
 end

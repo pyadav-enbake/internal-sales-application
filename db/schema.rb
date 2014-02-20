@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213082421) do
+ActiveRecord::Schema.define(version: 20140220133848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20140213082421) do
     t.text     "description"
     t.float    "price"
     t.string   "measurement_type"
-    t.integer  "status",           limit: 2
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20140213082421) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                  limit: 2, default: 1
+    t.integer  "status",                  limit: 2, default: 0
     t.date     "delivery_date"
     t.string   "sales_closing_potential"
     t.integer  "cabinet_type_id"
@@ -184,8 +184,9 @@ ActiveRecord::Schema.define(version: 20140213082421) do
   end
 
   create_table "subcategories", force: true do |t|
+    t.integer  "category_id"
     t.string   "name"
-    t.integer  "status",     limit: 2
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

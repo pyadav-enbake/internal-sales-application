@@ -136,9 +136,7 @@ class Rcadmin::QuoteController < ApplicationController
           end
         end
       end
-      @customer = Rcadmin::Customer.find(@quote.customer_id)
-      WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
-      WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
+      WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
     end
     render :text => 'ok'
   end
@@ -169,9 +167,7 @@ class Rcadmin::QuoteController < ApplicationController
                   end
               end
           end
-          @customer = Rcadmin::Customer.find(@quote.customer_id)
-          WelcomeMailer.send_quote_mail(@quote.customer_id,@quote.id).deliver
-          WelcomeMailer.send_quote_mail_customer(@customer,@quote.id).deliver
+          WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
       else
           render :text => 'Some thing went Wornge' and return false
       end
@@ -327,7 +323,7 @@ class Rcadmin::QuoteController < ApplicationController
           @customer = Rcadmin::Customer.find(@quote.customer_id)
       end
       respond_to do |format|
-          format.html
+          format.html { render template: 'welcome_mailer/send_quote_mail_customer' }
       end
   end
 end

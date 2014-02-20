@@ -1,77 +1,667 @@
-<% @customer = Rcadmin::Customer.find(@customer_id)%>
-<%#@sales_admin = Rcadmin::Admin.find(@customer.admin_id)%>
-<%#@quote = Rcadmin::Quote.find_by_customer(@customer_id)%>
-<% @quote = Rcadmin::Quote.where("id = ?", @quote_id)%>
-Dear Administrator,
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- NAME: 1 COLUMN -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>*|MC:SUBJECT|*</title>
+        
+        <!--[if gte mso 6]>
+        <style>
+            table.mcnFollowContent {width:100% !important;}
+            table.mcnShareContent {width:100% !important;}
+        </style>
+        <![endif]-->
+    <style type="text/css">
+                body,#bodyTable,#bodyCell{
+                        height:100% !important;
+                        margin:0;
+                        padding:0;
+                        width:100% !important;
+                }
+                table{
+                        border-collapse:collapse;
+                }
+                img,a img{
+                        border:0;
+                        outline:none;
+                        text-decoration:none;
+                }
+                h1,h2,h3,h4,h5,h6{
+                        margin:0;
+                        padding:0;
+                }
+                p{
+                        margin:1em 0;
+                        padding:0;
+                }
+                a{
+                        word-wrap:break-word;
+                }
+                .ReadMsgBody{
+                        width:100%;
+                }
+                .ExternalClass{
+                        width:100%;
+                }
+                .ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{
+                        line-height:100%;
+                }
+                table,td{
+                        mso-table-lspace:0pt;
+                        mso-table-rspace:0pt;
+                }
+                #outlook a{
+                        padding:0;
+                }
+                img{
+                        -ms-interpolation-mode:bicubic;
+                }
+                body,table,td,p,a,li,blockquote{
+                        -ms-text-size-adjust:100%;
+                        -webkit-text-size-adjust:100%;
+                }
+                #bodyCell{
+                        padding:20px;
+                }
+                .mcnImage{
+                        vertical-align:bottom;
+                }
+                .mcnTextContent img{
+                        height:auto !important;
+                }
+                body,#bodyTable{
+                        background-color:#F2F2F2;
+                }
+                #bodyCell{
+                        border-top:0;
+                }
+                #templateContainer{
+                        border:0;
+                }
+                h1{
+                        color:#606060 !important;
+                        display:block;
+                        font-family:Helvetica;
+                        font-size:40px;
+                        font-style:normal;
+                        font-weight:bold;
+                        line-height:125%;
+                        letter-spacing:-1px;
+                        margin:0;
+                        text-align:left;
+                }
+                h2{
+                        color:#404040 !important;
+                        display:block;
+                        font-family:Helvetica;
+                        font-size:26px;
+                        font-style:normal;
+                        font-weight:bold;
+                        line-height:125%;
+                        letter-spacing:-.75px;
+                        margin:0;
+                        text-align:left;
+                }
+                h3{
+                        color:#606060 !important;
+                        display:block;
+                        font-family:Helvetica;
+                        font-size:18px;
+                        font-style:normal;
+                        font-weight:bold;
+                        line-height:125%;
+                        letter-spacing:-.5px;
+                        margin:0;
+                        text-align:left;
+                }
+                h4{
+                        color:#808080 !important;
+                        display:block;
+                        font-family:Helvetica;
+                        font-size:16px;
+                        font-style:normal;
+                        font-weight:bold;
+                        line-height:125%;
+                        letter-spacing:normal;
+                        margin:0;
+                        text-align:left;
+                }
+                #templatePreheader{
+                        background-color:#FFFFFF;
+                        border-top:0;
+                        border-bottom:0;
+                }
+                .preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
+                        color:#606060;
+                        font-family:Helvetica;
+                        font-size:11px;
+                        line-height:125%;
+                        text-align:left;
+                }
+                .preheaderContainer .mcnTextContent a{
+                        color:#606060;
+                        font-weight:normal;
+                        text-decoration:underline;
+                }
+                #templateHeader{
+                        background-color:#FFFFFF;
+                        border-top:0;
+                        border-bottom:0;
+                }
+                .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+                        color:#606060;
+                        font-family:Helvetica;
+                        font-size:15px;
+                        line-height:150%;
+                        text-align:left;
+                }
+                .headerContainer .mcnTextContent a{
+                        color:#6DC6DD;
+                        font-weight:normal;
+                        text-decoration:underline;
+                }
+                #templateBody{
+                        background-color:#FFFFFF;
+                        border-top:0;
+                        border-bottom:0;
+                }
+                .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+                        color:#606060;
+                        font-family:Helvetica;
+                        font-size:15px;
+                        line-height:150%;
+                        text-align:left;
+                }
+                .bodyContainer .mcnTextContent a{
+                        color:#6DC6DD;
+                        font-weight:normal;
+                        text-decoration:underline;
+                }
+                #templateFooter{
+                        background-color:#FFFFFF;
+                        border-top:0;
+                        border-bottom:0;
+                }
+                .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+                        color:#606060;
+                        font-family:Helvetica;
+                        font-size:11px;
+                        line-height:125%;
+                        text-align:left;
+                }
+                .footerContainer .mcnTextContent a{
+                        color:#606060;
+                        font-weight:normal;
+                        text-decoration:underline;
+                }
+        @media only screen and (max-width: 480px){
+                body,table,td,p,a,li,blockquote{
+                        -webkit-text-size-adjust:none !important;
+                }
 
-A customer has been request a quote.
+}       @media only screen and (max-width: 480px){
+                body{
+                        width:100% !important;
+                        min-width:100% !important;
+                }
 
-Below are the customer Details<br><br>
+}       @media only screen and (max-width: 480px){
+                td[id=bodyCell]{
+                        padding:10px !important;
+                }
 
-Customer Deatils<br>
-====================<br>
-Customer Name - <%=@customer.first_name%>  <%=@customer.last_name%><br>
-Customer Email - <%=@customer.email%><br>
-Customer Address - <%=@customer.address%> <br>
-Customer city - <%=@customer.city%><br>
-Customer State - <%=@customer.state%> <br>
-Customer Zipcode - <%=@customer.zip%> <br>
-Customer Phone - <%=@customer.phone%> <br><br>
+}       @media only screen and (max-width: 480px){
+                table[class=mcnTextContentContainer]{
+                        width:100% !important;
+                }
 
+}       @media only screen and (max-width: 480px){
+                table[class=mcnBoxedTextContentContainer]{
+                        width:100% !important;
+                }
 
+}       @media only screen and (max-width: 480px){
+                table[class=mcpreview-image-uploader]{
+                        width:100% !important;
+                        display:none !important;
+                }
 
-Quote Details<br>
-======================<br>
+}       @media only screen and (max-width: 480px){
+                img[class=mcnImage]{
+                        width:100% !important;
+                }
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-orange">
-      <div class="panel-heading">
-        <!--h4>All Quote</h4-->
-        <div style="clear:both;"></div>
-        <div style="color:black;">
-          <!--div id="accordion" class="accordion"-->
-          <%if @quote.size > 0%>
-            <%@tot_amt = 0.0%>
-            <% @quote.each_with_index do |qt,index|%>
-              <h3>Quote no - RC<%=qt.id%></h3>
-              <%@qt_pro =  Rcadmin::QuoteProduct.find_by_quote(qt.id)%>
-	     
-              <div>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Product Name</th>
-                      <th>Category Name</th>
-                      <th>Price per unit</th>
-                      <th>Quantity</th>
-                      <th>Total Price</th>
+}       @media only screen and (max-width: 480px){
+                table[class=mcnImageGroupContentContainer]{
+                        width:100% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageGroupContent]{
+                        padding:9px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageGroupBlockInner]{
+                        padding-bottom:0 !important;
+                        padding-top:0 !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                tbody[class=mcnImageGroupBlockOuter]{
+                        padding-bottom:9px !important;
+                        padding-top:9px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[class=mcnCaptionTopContent],table[class=mcnCaptionBottomContent]{
+                        width:100% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[class=mcnCaptionLeftTextContentContainer],table[class=mcnCaptionRightTextContentContainer],table[class=mcnCaptionLeftImageContentContainer],table[class=mcnCaptionRightImageContentContainer],table[class=mcnImageCardLeftTextContentContainer],table[class=mcnImageCardRightTextContentContainer]{
+                        width:100% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]{
+                        padding-right:18px !important;
+                        padding-left:18px !important;
+                        padding-bottom:0 !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardBottomImageContent]{
+                        padding-bottom:9px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardTopImageContent]{
+                        padding-top:18px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]{
+                        padding-right:18px !important;
+                        padding-left:18px !important;
+                        padding-bottom:0 !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardBottomImageContent]{
+                        padding-bottom:9px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnImageCardTopImageContent]{
+                        padding-top:18px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[class=mcnCaptionLeftContentOuter] td[class=mcnTextContent],table[class=mcnCaptionRightContentOuter] td[class=mcnTextContent]{
+                        padding-top:9px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnCaptionBlockInner] table[class=mcnCaptionTopContent]:last-child td[class=mcnTextContent]{
+                        padding-top:18px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnBoxedTextContentColumn]{
+                        padding-left:18px !important;
+                        padding-right:18px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=mcnTextContent]{
+                        padding-right:18px !important;
+                        padding-left:18px !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[id=templateContainer],table[id=templatePreheader],table[id=templateHeader],table[id=templateBody],table[id=templateFooter]{
+                        max-width:600px !important;
+                        width:100% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                h1{
+                        font-size:24px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                h2{
+                        font-size:20px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                h3{
+                        font-size:18px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                h4{
+                        font-size:16px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[class=mcnBoxedTextContentContainer] td[class=mcnTextContent],td[class=mcnBoxedTextContentContainer] td[class=mcnTextContent] p{
+                        font-size:18px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                table[id=templatePreheader]{
+                        display:block !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=preheaderContainer] td[class=mcnTextContent],td[class=preheaderContainer] td[class=mcnTextContent] p{
+                        font-size:14px !important;
+                        line-height:115% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=headerContainer] td[class=mcnTextContent],td[class=headerContainer] td[class=mcnTextContent] p{
+                        font-size:18px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=bodyContainer] td[class=mcnTextContent],td[class=bodyContainer] td[class=mcnTextContent] p{
+                        font-size:18px !important;
+                        line-height:125% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=footerContainer] td[class=mcnTextContent],td[class=footerContainer] td[class=mcnTextContent] p{
+                        font-size:14px !important;
+                        line-height:115% !important;
+                }
+
+}       @media only screen and (max-width: 480px){
+                td[class=footerContainer] a[class=utilityLink]{
+                        display:block !important;
+                }
+
+}</style></head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F2F2F2;height: 100% !important;width: 100% !important;">
+        <center>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #F2F2F2;height: 100% !important;width: 100% !important;">
+                <tr>
+                    <td align="center" valign="top" id="bodyCell" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 20px;border-top: 0;height: 100% !important;width: 100% !important;">
+                        <!-- BEGIN TEMPLATE // -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border: 0;">
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN PREHEADER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templatePreheader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                                        <tr>
+                                                <td valign="top" class="preheaderContainer" style="padding-top: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                
+                                    
+                                        <img align="left" alt="" src="https://gallery.mailchimp.com/98dd909447830b429328bfa28/images/logo_black.png" width="564" style="max-width: 1304px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
+                                    
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="366" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
+                        
+                            23949 S. Northern Illinois Drive ● Channahon, IL 60410
+                        </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <% @qt_pro.each_with_index do |qtp,index|%>
-                      <%@tot_amt += qtp.total_price%>
-		      <%@cat_details =Rcadmin::Category.find(qtp.category_id) %>
-                      <tr>
-                        <td><%=qtp.product.title%></td>
-                        <td style="text-align:center;"><%=@cat_details.name%></td>
-                        <td>$<%=qtp.product.price%></td>
-                        <td style="text-align:center;"><%=qtp.quantity%></td>
-                        <td>$<%=qtp.total_price%></td>
-                      </tr>
-                    <%end%>
-                  </tbody>
-                </table>
-                <hr>
-                <div class="pull-right">Total Price = $<%=@tot_amt.round(2)%></div>
-              </div>
-            <%end%>
-          <%else%>
-            <h4>No Quota Available</h4>
-          <%end%>
-          <!--/div-->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                </tbody></table>
+                
+                <table align="right" border="0" cellpadding="0" cellspacing="0" width="197" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
+                        
+                            815-467-990 ● Fax 815-467-9985
+                        </td>
+                    </tr>
+                </tbody></table>
+                
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END PREHEADER -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN HEADER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateHeader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                                      <tr>
+                                        <td valign="top" class="headerContainer" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #020202;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>QUOTE EMAIL</strong></span></div>
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <!-- First Part -->
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                                                                             
+                                                          <table style="margin-bottom: 25px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                            <thead>
+                                                              <tr>
+                                                                <td style="text-align: center;padding: 5px;border: 2px solid #000000;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Category Name</strong></td>
+                                                                <td style="text-align: center;border: 2px solid #000000;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Total Price</strong></td>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody style="width: 100%;">
+                                                          <% @categories = @quote.categories.to_a %>
+                                                          <% categories_sum = @quote.quote_product.group(:category_id).sum(:total_price) %>
+                                                          <% categories_sum.each do |category_id, total| %>
+                                                            <% category = @categories.detect { |category| category.id === category_id } %>
+
+                                                              <tr>
+                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= category.name %></td>
+                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$ <%= total %></td>
+                                                              </tr>
+                                                            <% end %>
+                                                            </tbody>
+                                                          </table>
+
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                        </table></td>
+                                      </tr>
+                                    </table>
+                                    <!-- // END HEADER -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN BODY // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                                      <tr>
+                                        <td valign="top" class="bodyContainer" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #020202;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>OPTION</strong></span></div>
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+                                                              <% @quote.quote_product.includes(:category).group_by { |qp| qp.category_id}.each do |category_id, quote_products| %>
+
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <span style="color: #000000;font-family: arial;font-size: 15px;line-height: 15px;"><%= quote_products[0].category %></span>
+                                                          <hr style="margin-bottom:0;">
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <table style="margin-bottom: 25px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                            <thead>
+                                                              <tr>
+                                                                <td style="border: 1px solid #000000;width: 50px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>check</strong></td>
+                                                                <td style="border: 1px solid #000000;width: 250px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Item</strong></td>
+                                                                <td style="border: 1px solid #000000;width: 250px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Price</strong></td>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                              <%= total = 0 %>
+                                                              <% quote_products.each do |quote_product| %>
+                                                                <!-- PRODUCTS -->
+                                                                <tr>
+                                                                  <td style="border: 1px solid #000000;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><input type="checkbox"></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.title %></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$<%= quote_product.total_price %></td>
+                                                                  <% total += quote_product.total_price %>
+                                                                </tr>
+                                                              <% end %>
+
+                                                              <tr>
+                                                                <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">&nbsp;</td>
+                                                                <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">&nbsp;</td>
+                                                                <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Total Price:$ <%= total %></td>
+                                                              </tr>
+                                                            </tbody>
+                                                          </table>
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                <% end %>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table></td>
+                                      </tr>
+                                    </table>
+                                    <!-- // END BODY -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN FOOTER // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateFooter" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                                        <tr>
+                                            <td valign="top" class="footerContainer" style="padding-bottom: 9px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"></td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END FOOTER -->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </table>
+        </center>
+                <center>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                
+                <style type="text/css">
+                    @media only screen and (max-width: 480px){
+                        table[id="canspamBar"] td{font-size:14px !important;}
+                        table[id="canspamBar"] td a{display:block !important; margin-top:10px !important;}
+                    }
+                </style>
+            </center></body>
+</html>
+
+
+
+

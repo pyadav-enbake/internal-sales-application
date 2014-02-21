@@ -1,3 +1,4 @@
+=begin
 class MailPreviewer < MailView
 
   def send_quote_mail
@@ -6,3 +7,4 @@ class MailPreviewer < MailView
     WelcomeMailer.send_quote_mail_customer(@quote.id)
   end
 end
+=end

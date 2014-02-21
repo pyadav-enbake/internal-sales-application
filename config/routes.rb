@@ -1,10 +1,6 @@
 RomarCabinates::Application.routes.draw do
 
 
-  if Rails.env.development?
-    mount MailPreviewer => 'mail_previewer'
-  end
-
   namespace :rcadmin do
     put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
     resources :countertop_designs

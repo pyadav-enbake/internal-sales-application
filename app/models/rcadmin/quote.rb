@@ -14,7 +14,7 @@ class Rcadmin::Quote < ActiveRecord::Base
 
 
   STATUSES = ['Draft', 'Sent to Client', 'Negotiations', 'In Contract', 'Turned In']
-  RATING = ['Very Poor', 'Poor', 'Fair', '50-50', 'Strong', 'Very Strong']
+  RATING = ['Very Poor', 'Poor', 'Fair', '50/50', 'Strong', 'Very Strong']
 
   def categories
     return Rcadmin::Category.none unless category?

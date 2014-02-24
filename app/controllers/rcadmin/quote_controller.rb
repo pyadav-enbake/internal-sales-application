@@ -137,6 +137,7 @@ class Rcadmin::QuoteController < ApplicationController
         end
       end
       WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
+      @quote.sent_to_client!
     end
     render :text => 'ok'
   end

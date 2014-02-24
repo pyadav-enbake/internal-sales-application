@@ -16,6 +16,13 @@ class Rcadmin::Quote < ActiveRecord::Base
   STATUSES = ['Draft', 'Sent to Client', 'Negotiations', 'In Contract', 'Turned In']
   RATING = ['Very Poor', 'Poor', 'Fair', '50/50', 'Strong', 'Very Strong']
 
+  STATUSES.each_with_index do |status, index|
+    method_name = status.gsub(" ", "_").underscore
+    define_method "#{method_name}!" do
+      update_attribute(:status, index)
+    end
+  end
+
   def categories
     return Rcadmin::Category.none unless category?
     @categories ||= Rcadmin::Category.where(id: category_ids)

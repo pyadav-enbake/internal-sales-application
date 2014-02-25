@@ -456,6 +456,7 @@
                                 </td>
                             </tr>
                             <tr>
+                              <% grand_total = 0; %>
                                 <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                     <!-- BEGIN HEADER // -->
                                     <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateHeader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
@@ -500,7 +501,7 @@
                                                             </thead>
                                                             <tbody style="width: 100%;">
                                                           <% @categories = @quote.categories.to_a %>
-                                                          <% categories_sum = @quote.quote_product.group(:category_id).sum(:total_price) %>
+                                                          <% categories_sum = @quote.quote_product.where(header_option: 'No').group(:category_id).sum(:total_price) %>
                                                           <% categories_sum.each do |category_id, total| %>
                                                             <% category = @categories.detect { |category| category.id === category_id } %>
 
@@ -508,6 +509,7 @@
                                                                 <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= category.name %></td>
                                                                 <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$ <%= total %></td>
                                                               </tr>
+                                                              <% grand_total += total %>
                                                             <% end %>
                                                             </tbody>
                                                           </table>
@@ -551,7 +553,7 @@
                                               </tr>
                                             </tbody>
                                             </table>
-                                                              <% @quote.quote_product.includes(:category).group_by { |qp| qp.category_id}.each do |category_id, quote_products| %>
+                                                              <% @quote.quote_product.where(header_option: 'Yes').includes(:category).group_by { |qp| qp.category_id}.each do |category_id, quote_products| %>
 
                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                             <tbody class="mcnTextBlockOuter">
@@ -604,6 +606,7 @@
                                                                   <% total += quote_product.total_price %>
                                                                 </tr>
                                                               <% end %>
+                                                              <% grand_total += total %>
 
                                                               <tr>
                                                                 <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">&nbsp;</td>
@@ -627,6 +630,7 @@
                                     </table>
                                     <!-- // END BODY -->
                                 </td>
+                                Total: <%= grand_total %>
                             </tr>
                             <tr>
                                 <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">

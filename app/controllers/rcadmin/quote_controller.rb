@@ -17,6 +17,14 @@ class Rcadmin::QuoteController < ApplicationController
     @quote = Rcadmin::Quote.find params[:id] 
   end
 
+  def cover_sheet
+    @quote = Rcadmin::Quote.find params[:id] 
+    @categories = @quote.categories
+    @without_options = @quote.quote_product.group(:category_id).sum(:total_price)
+    @products_with_option = @quote.quote_product.with_option.includes(:category).group_by(&:category_id)
+    @products_without_option = @quote.quote_product.without_option.includes(:category).group_by(&:category_id)
+  end
+
   def grid
     @quote = Rcadmin::Quote.find params[:id] 
     @contractor = @quote.contractor || Rcadmin::Contractor.new
@@ -124,10 +132,11 @@ class Rcadmin::QuoteController < ApplicationController
           @quota_product['status'] = 0
           @quota_product['category_id'] = @catid.to_i
 
-          if @quota_product['header_option'] == blank?
-            @quota_product['header_option'] = 'No' 
+          header_options = params[:header_option]
+          if header_options && header_options[k].present? && header_options[k][key].present?
+            @quota_product['header_option'] = 'Yes' 
           else
-            @quota_product['header_option'] = "Yes"
+            @quota_product['header_option'] = "No"
           end
           #render :text =>  @quota_product.inspect and return false
           if @quota_product['quantity'].to_i > 0
@@ -308,10 +317,11 @@ class Rcadmin::QuoteController < ApplicationController
                   @quota_product['status'] = 0
                   @quota_product['category_id'] = @catid.to_i
 
-                  if @quota_product['header_option'] == blank?
-                      @quota_product['header_option'] = 'No' 
+                  header_options = params[:header_option]
+                  if header_options && header_options[k].present? && header_options[k][key].present?
+                      @quota_product['header_option'] = 'Yes' 
                   else
-                      @quota_product['header_option'] = "Yes"
+                      @quota_product['header_option'] = "No"
                   end
                   #render :text =>  @quota_product.inspect and return false
                   if @quota_product['quantity'].to_i > 0

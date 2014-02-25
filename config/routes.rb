@@ -13,8 +13,11 @@ RomarCabinates::Application.routes.draw do
     resources :faq_categories
     resources :static_pages
     resources :quotes, controller: :quote, only: :index do
-      get :docs, on: :member
-      get 'docs/:template_id', action: 'grid', on: :member, as: :print_templates
+      member do
+        get :docs
+        get 'docs/:template_id', action: 'grid', as: :print_templates
+        get 'cover-sheet', action: :cover_sheet, as: :cover_sheet
+      end
     end
     get 'quotations', to: 'quote#quotations', as: :quotations
   end

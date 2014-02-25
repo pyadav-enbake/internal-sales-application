@@ -1,0 +1,115 @@
+<div id="page-heading">
+  <ol class="breadcrumb">
+    <li><%=link_to "Quotes",rcadmin_display_quotes_path%></li>
+  </ol>
+
+  <h1>Quote</h1>
+</div>
+<%if flash[:notice] %>
+<div class="alert alert-dismissable alert-success">
+  <strong>Well done!</strong> <%=flash[:notice]%>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+<%end%>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <div class="panel panel-sky">
+        <div class="panel-heading">
+
+          <h4>Cover Sheet</h4>
+        </div>
+
+        <div class="panel-body collapse in">
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+
+            <% @without_options.each_pair do |category_id, total_price| %>
+              <% category = @categories.detect { |category| category.id === category_id } %>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><%= category.name %></label>
+                $ <%= total_price %>
+              </div>
+
+            <% end %>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b>Total Price:</b></label>
+              $ <%= @without_options.values.sum %>
+            </div>
+
+
+
+
+          </table>  
+
+            <div class="form-group">
+              <h4><label class="col-sm-3 control-label"></label></h4>
+            </div>
+
+            <div>
+            <% @products_without_option.each_pair do |category_id, quote_products| %>
+              <% category = @categories.detect { |category| category.id === category_id } %>
+            <br/>
+            <h4><%= quote_products[0].category %></h4>
+            <table id="example" class="table table-striped table-bordered datatables dataTable">
+
+              <% total = 0 %>
+              <% quote_products.each do |quote_product| %>
+                <tr>
+                  <td>
+                    <%= quote_product.product.title %>
+                  </td>
+                  <td>
+                    $ <%= quote_product.total_price %>
+                    <% total += quote_product.total_price %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td><b>Total</b></td>
+                <td>$ <%= total %></td>
+            </table>
+
+          <% end %>
+        </div>
+<br/>
+            <div class="form-group">
+              <h2><label class="col-sm-12 control-label text-center">OPTION</label></h2>
+            </div>
+          <div>
+            <% @products_with_option.each_pair do |category_id, quote_products| %>
+              <% category = @categories.detect { |category| category.id === category_id } %>
+            <br/>
+            <h4><%= quote_products[0].category %></h4>
+            <table id="example" class="table table-striped table-bordered datatables dataTable">
+
+              <% total = 0 %>
+              <% quote_products.each do |quote_product| %>
+                <tr>
+                  <td>
+                    <%= quote_product.product.title %>
+                  </td>
+                  <td>
+                    $ <%= quote_product.total_price %>
+                    <% total += quote_product.total_price %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td><b>Total</b></td>
+                <td>$ <%= total %></td>
+            </table>
+
+          <% end %>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+

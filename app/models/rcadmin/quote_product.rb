@@ -6,4 +6,7 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
   belongs_to :category
 
   scope :find_by_quote, ->(quote_id) { where(:quote_id=>quote_id) }
+
+  scope :with_option, -> { where(header_option: 'Yes') }
+  scope :without_option, -> { where(header_option: 'No') }
 end

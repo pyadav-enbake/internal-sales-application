@@ -28,7 +28,7 @@
         <% cat = quote_category.category %>
         <div id="subtabs-<%=index%>" >
         <a href="#" data-id="<%= cat.id %>"  data-toggle="modal" data-target="#live-data">Base Calculator</a>
-        <input type="text" name="quote[quote_categories_attributes][<%= index %>][markup]" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99'" class="markup-factor mask" data-category-id="<%= cat.id %>" />
+        <input type="text" name="quote[quote_categories_attributes][<%= index %>][markup]" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99.9'" class="markup-factor mask" data-category-id="<%= cat.id %>" />
         <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
           <div id="accordion" class="accordion">
             <% @subcategories = Rcadmin::Subcategory.all %>

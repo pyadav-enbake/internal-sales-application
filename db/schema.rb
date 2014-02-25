@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225105833) do
+ActiveRecord::Schema.define(version: 20140225205956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20140225105833) do
   create_table "quote_categories", force: true do |t|
     t.integer  "quote_id"
     t.integer  "category_id"
-    t.integer  "markup",      default: 0
+    t.decimal  "markup",      precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

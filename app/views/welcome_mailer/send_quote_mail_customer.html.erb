@@ -500,14 +500,15 @@
                                                               </tr>
                                                             </thead>
                                                             <tbody style="width: 100%;">
-                                                          <% @categories = @quote.categories.to_a %>
+                                                          <% quote_categories = @quote.quote_categories.includes(:category) %>
                                                           <% categories_sum = @quote.quote_product.where(header_option: 'No').group(:category_id).sum(:total_price) %>
                                                           <% categories_sum.each do |category_id, total| %>
-                                                            <% category = @categories.detect { |category| category.id === category_id } %>
+                                                            <% quote_category = quote_categories.detect { |category| category.category_id === category_id } %>
+                                                            <% category = quote_category.category %>
 
                                                               <tr>
                                                                 <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= category.name %></td>
-                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$ <%= total %></td>
+                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$ <%= total = with_markup(total, quote_category.markup).round(2) %></td>
                                                               </tr>
                                                               <% grand_total += total %>
                                                             <% end %>

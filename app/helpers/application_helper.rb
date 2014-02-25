@@ -4,6 +4,11 @@ module ApplicationHelper
   end
   
 
+ def with_markup total, markup
+   markup_amount = total / 100 * markup
+   total + markup_amount
+ end
+
  def sections
    [
      {id: 1, name: 'Selection 1'}, {id: 2, name: 'Selection 2'},

@@ -24,10 +24,12 @@
     </div>
     <a href="javascript:void(0)" class="expand">Expand All</a><br>
     <% if @categories.size > 0 %>
-      <% @categories.each_with_index do |cat,index|%>
+      <% @quote.quote_categories.includes(:category).each_with_index do |quote_category, index|%>
+        <% cat = quote_category.category %>
         <div id="subtabs-<%=index%>" >
         <a href="#" data-id="<%= cat.id %>"  data-toggle="modal" data-target="#live-data">Base Calculator</a>
-        <input type="text" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99%'" class="markup-factor mask" data-category-id="<%= cat.id %>" />
+        <input type="text" name="quote[quote_categories_attributes][<%= index %>][markup]" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99'" class="markup-factor mask" data-category-id="<%= cat.id %>" />
+        <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
           <div id="accordion" class="accordion">
             <% @subcategories = Rcadmin::Subcategory.all %>
             <% if @subcategories.size > 0 %>

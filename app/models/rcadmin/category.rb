@@ -1,6 +1,10 @@
 class Rcadmin::Category < ActiveRecord::Base
     has_one :contractor, :through => :contractor_categories
     has_many :contractor_categories
+
+    has_many :quote_categories
+    has_many :quotes, through: :quote_categories
+
     validates_presence_of :name
     attr_accessible :name,:description,:status,:quote_id
 

@@ -1,12 +1,16 @@
 class Rcadmin::Quote < ActiveRecord::Base
   validates_presence_of :contractor_id,:customer_id
-  attr_accessible :contractor_id,:customer_id,:category,:status,:delivery_date,:sales_closing_potential, :cabinet_types_info, :countertop_designs_info,:notes
+  attr_accessible :contractor_id,:customer_id,:category,:status,:delivery_date,:sales_closing_potential, :cabinet_types_info, :countertop_designs_info,:notes, :quote_categories_attributes
   
   belongs_to :contractor
   belongs_to :customer
   has_many :quote_product,dependent: :destroy
   belongs_to :cabinet_type
   belongs_to :countertop_design
+
+  has_many :quote_categories
+  has_many :categories, through: :quote_categories
+  accepts_nested_attributes_for :quote_categories
   
   scope :find_by_customer, ->(customer_id) { where(:customer_id=>customer_id) }
   scope :current_month_quotes, -> { where("created_at >= ? AND created_at <= ?", Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
@@ -21,16 +25,6 @@ class Rcadmin::Quote < ActiveRecord::Base
     define_method "#{method_name}!" do
       update_attribute(:status, index)
     end
-  end
-
-  def categories
-    return Rcadmin::Category.none unless category?
-    @categories ||= Rcadmin::Category.where(id: category_ids)
-  end
-
-  def category_ids
-    return @category_ids if @category_ids
-    @category_ids ||= category.split(',') if !category.nil?
   end
 
   def remove_category category_id = nil

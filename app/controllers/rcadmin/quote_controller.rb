@@ -70,7 +70,7 @@ class Rcadmin::QuoteController < ApplicationController
           else
               @quote = Rcadmin::Quote.find(session[:quote_id] )
               params[:quote][:category] = Rcadmin::Category.all.map{|category|category.id}.to_s.gsub("[","""]").gsub("]","")
-              @quote.category = params[:quote][:category]
+              @quote.category_ids = params[:quote][:category]
               if @quote.save
                   redirect_to :action => 'show_product'
                   #redirect_to :action => 'show_cabinet_selection'
@@ -83,8 +83,7 @@ class Rcadmin::QuoteController < ApplicationController
               render :action => 'show_category'
           else
               @quote = Rcadmin::Quote.find(session[:quote_id] )
-              params[:quote][:category] = params[:quote][:category].join(',')
-              @quote.category = params[:quote][:category]
+              @quote.category_ids = params[:quote][:category]
               if @quote.save
                   redirect_to :action => 'show_product'
                   # redirect_to :action => 'show_cabinet_selection'
@@ -120,7 +119,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
       @quote.notes = params["extra_info"]['notes']
       @quote.status = 0
-      @quote.save
+      @quote.update_attributes(params[:quote])
       params[:product].each do |k,v|
         @catid=k 
         v.each do |key,val|
@@ -272,6 +271,8 @@ class Rcadmin::QuoteController < ApplicationController
       #@rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}% or email like '%#{params[:search]}%'").map{|c|c.quotes}
       @rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}%' or email like '%#{params[:search]}%'").map{|c|c.quotes}.flatten
     end
+
+    @rcadmin_quotes = @rcadmin_quotes.order("created_at DESC")
   end
 
   def edit
@@ -305,7 +306,7 @@ class Rcadmin::QuoteController < ApplicationController
           @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
           @quote.notes = params["extra_info"]['notes']
           @quote.status = 0
-          @quote.save
+          @quote.update_attributes(params[:quote])
           params[:product].each do |k,v|
               @catid=k 
               v.each do |key,val|

@@ -1,6 +1,7 @@
 class WelcomeMailer < ActionMailer::Base
 
   default from: 'rubyonrails4@gmail.com'
+  add_template_helper(ApplicationHelper)
 
   def testmail()
     mail :to => 'akankshita009@gmail.com', :from => "email@domain.com", :subject => "Subject line"

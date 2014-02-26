@@ -7,6 +7,7 @@ class Rcadmin::QuoteController < ApplicationController
     @rcadmin_customer = Rcadmin::Customer.new
     session[:quote_id] = nil
     @quote = Rcadmin::Quote.new
+    @categories = current_admin.categories
   end
 
 
@@ -54,6 +55,7 @@ class Rcadmin::QuoteController < ApplicationController
   def show_category
     if session[:quote_id] != nil
       @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @categories = current_admin.categories
       @selected_category = @quote.category.split(',') if !@quote.category.nil?
     else
       redirect_to create_quote_path
@@ -244,20 +246,22 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def add_new_room
-      # render :text => params[:rcadmin_category].inspect and return false
-      @qid = session[:quote_id]
-      @rcadmin_extra_category = Rcadmin::Category.new(params[:rcadmin_category])
-      @rcadmin_extra_category.status = 0
-      # render :text => @rcadmin_extra_category.inspect and return false
-      @exist_cat_name = Rcadmin::Quote.merger_quote_name(@qid)
-      if @exist_cat_name.include?(params[:rcadmin_category][:name])
-          render :text => 'Room Name Already exist',:status => 404
-      end
-      if @rcadmin_extra_category.save
-          render :partial => "all_category_with_extra", :object => @qid
-      else
-          return @rcadmin_customer.errors.full_messages[0]
-      end
+    # render :text => params[:rcadmin_category].inspect and return false
+    @qid = session[:quote_id]
+    @rcadmin_extra_category = current_admin.categories.build params[:rcadmin_category]
+    @rcadmin_extra_category.status = 0
+    # render :text => @rcadmin_extra_category.inspect and return false
+    @exist_cat_name = Rcadmin::Quote.merger_quote_name(@qid)
+    if @exist_cat_name.include?(params[:rcadmin_category][:name])
+      render :text => 'Room Name Already exist',:status => 404
+      return
+    end
+    if @rcadmin_extra_category.save
+      render :partial => "all_category_with_extra", :object => @qid
+      return 
+    else
+      return @rcadmin_extra_category.errors.full_messages[0]
+    end
 
   end
 

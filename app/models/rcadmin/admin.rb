@@ -17,5 +17,6 @@ class Rcadmin::Admin < ActiveRecord::Base
 
   has_many :contractors, dependent: :destroy
   has_many :quotes, through: :contractors
+  has_many :categories, dependent: :destroy
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225205956) do
+ActiveRecord::Schema.define(version: 20140226114614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,10 @@ ActiveRecord::Schema.define(version: 20140225205956) do
     t.datetime "updated_at"
     t.integer  "status",      limit: 2
     t.integer  "quote_id",              default: 0
+    t.integer  "admin_id"
   end
+
+  add_index "categories", ["admin_id"], name: "index_categories_on_admin_id", using: :btree
 
   create_table "contractors", force: true do |t|
     t.integer  "admin_id"

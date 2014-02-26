@@ -19,7 +19,7 @@
             </tr>
           </thead>
           <tbody>
-            <% categories = Rcadmin::Category.all %>
+            <% categories = current_admin.categories %>
             <% 1.upto(15).each do |n| %>
               <tr class="odd gradeX">
                 <% base_products.each do |product| %>

@@ -30,7 +30,7 @@
 							            <!--div class="form-group">
 							                <label class="col-sm-3 control-label">Category</label>
 							                <div class="col-sm-6">
-												<%#= select(:rcadmin_subcategory,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
+												<%#= select(:rcadmin_subcategory,:category_id, current_admin.categories.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
 							                </div>
 							            </div-->
 							            <div class="form-group">

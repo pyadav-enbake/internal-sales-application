@@ -5,7 +5,7 @@ class Rcadmin::CategoriesController < ApplicationController
   # GET /rcadmin/categories
   # GET /rcadmin/categories.json
   def index
-    @rcadmin_categories = Rcadmin::Category.all.default
+    @rcadmin_categories = current_admin.categories.default
   end
 
   # GET /rcadmin/categories/1
@@ -15,7 +15,7 @@ class Rcadmin::CategoriesController < ApplicationController
 
   # GET /rcadmin/categories/new
   def new
-    @rcadmin_category = Rcadmin::Category.new
+    @rcadmin_category = current_admin.categories.build
   end
 
   # GET /rcadmin/categories/1/edit
@@ -26,7 +26,7 @@ class Rcadmin::CategoriesController < ApplicationController
   # POST /rcadmin/categories.json
   def create
   #render :text => rcadmin_category_params.inspect and return false
-    @rcadmin_category = Rcadmin::Category.new(rcadmin_category_params)
+    @rcadmin_category = current_admin.categories.build rcadmin_category_params
 
     respond_to do |format|
       if @rcadmin_category.save
@@ -69,11 +69,11 @@ class Rcadmin::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rcadmin_category
-      @rcadmin_category = Rcadmin::Category.find(params[:id])
+      @rcadmin_category = current_admin.categories.find  params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rcadmin_category_params
-      params.require(:rcadmin_category).permit(:name,:description,:status)
+      params.require(:rcadmin_category).permit(:name, :description, :status)
     end
 end

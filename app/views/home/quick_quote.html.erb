@@ -9,9 +9,9 @@
 		</div>	
 		<div class="controls">
 			<%if @category_id%>
-				<%= select(:rcadmin_product,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected => @category_id},:class => 'form-control') %>
+				<%= select(:rcadmin_product,:category_id, current_admin.categories.collect {|c| [ c.name , c.id ] }, {:selected => @category_id},:class => 'form-control') %>
 			<%else%>
-				<%= select(:rcadmin_product,:category_id, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
+				<%= select(:rcadmin_product,:category_id, current_admin.categories.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Category"},:class => 'form-control') %>
 			<%end%>
 		</div>
 		<div class="controls">

@@ -6,6 +6,7 @@ class Rcadmin::Category < ActiveRecord::Base
     has_many :quotes, through: :quote_categories
 
     validates_presence_of :name
+    validates_uniqueness_of :name, scope: [:name, :admin_id]
     attr_accessible :name,:description,:status,:quote_id
 
     scope :default, -> {  where(:quote_id => 0)  }

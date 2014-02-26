@@ -22,9 +22,9 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label ">Choose Category For Quote</label>
                   <div class="col-sm-6" >
-                    <%#= collection_check_boxes("quote","category", Rcadmin::Category.all,:id,:name, {}, {class: "quote-categories"}) %>
+                    <%#= collection_check_boxes("quote","category", current_admin.categories, :id, :name, {}, {class: "quote-categories"}) %>
                    <table> 
-                    <% Rcadmin::Category.all.each do |category| %>
+                    <% @categories.each do |category| %>
                       <tr>
                         <td>
                           <%= check_box_tag "quote[category][]", category.id, false, :id => "quote_category_#{category.id}", :class => "quote-categories" %>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                   <span class="btn-warning btn pull-left" id="add_new_room_modal">Add Category/Room</span>
                   <div class="col-sm-6">
-                    <%#= collection_check_boxes("quote","category", Rcadmin::Category.all,:id,:name, :class => 'form-control') %>
+                    <%#= collection_check_boxes("quote","category", current_admin.categories, :id,:name, :class => 'form-control') %>
                   </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
 
 
 <div class="modal fade" id="myModaladdroom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= form_for(Rcadmin::Category.new,:url => {:action=>"add_new_room"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+  <%= form_for(current_admin.categories.build, :url => {:action=>"add_new_room"},:html=>{:class=>"form-horizontal row-border"})  do |f| %>
   <%= f.hidden_field :quote_id ,:value=>"#{@quote.id}",:class=>"form-control",:placeholder=>"Room/Categoty Name"%>
     <div class="modal-dialog">
       <div class="modal-content">

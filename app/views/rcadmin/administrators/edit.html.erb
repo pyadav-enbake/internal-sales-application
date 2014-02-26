@@ -94,7 +94,7 @@
 							            <!--div class="form-group">
 							                <label class="col-sm-3 control-label">Choose Category For Quote</label>
 							                <div class="col-sm-6">
-												<%#= select(:rcadmin_admin,:quote_category, Rcadmin::Category.all.collect {|c| [ c.name , c.id ] }, {:selected=>@administrator.quote_category.split(',')},:multiple => true,:class => 'form-control') %>
+												<%#= select(:rcadmin_admin,:quote_category, current_admin.categories.collect {|c| [ c.name , c.id ] }, {:selected=>@administrator.quote_category.split(',')},:multiple => true,:class => 'form-control') %>
 							                </div>
 							            </div-->
 

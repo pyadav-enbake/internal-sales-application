@@ -20,9 +20,8 @@ class Rcadmin::QuoteController < ApplicationController
   def cover_sheet
     @quote = Rcadmin::Quote.find params[:id] 
     @categories = @quote.categories
-    @without_options = @quote.quote_product.group(:category_id).sum(:total_price)
-    @products_with_option = @quote.quote_product.with_option.includes(:category).group_by(&:category_id)
-    @products_without_option = @quote.quote_product.without_option.includes(:category).group_by(&:category_id)
+    @customer = @quote.customer
+    @quote_products_sum = @quote.quote_product.group(:category_id).sum(:total_price)
   end
 
   def grid

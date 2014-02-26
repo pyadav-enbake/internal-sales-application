@@ -17,6 +17,7 @@ class Rcadmin::Customer < ActiveRecord::Base
   def fullname
     "#{first_name} #{last_name}"
   end
+  alias :to_s :fullname
 
   def full_address
     "#{address}, #{city} #{state} #{zip}"

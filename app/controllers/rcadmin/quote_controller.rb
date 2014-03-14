@@ -134,12 +134,13 @@ class Rcadmin::QuoteController < ApplicationController
           @quota_product['status'] = 0
           @quota_product['category_id'] = @catid.to_i
 
-          header_options = params[:header_option]
+          header_options, hidden = params[:header_option], params[:hidden]
           if header_options && header_options[k].present? && header_options[k][key].present?
             @quota_product['header_option'] = 'Yes' 
           else
             @quota_product['header_option'] = "No"
           end
+          @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
           #render :text =>  @quota_product.inspect and return false
           if @quota_product['quantity'].to_i > 0
             @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
@@ -323,12 +324,13 @@ class Rcadmin::QuoteController < ApplicationController
                   @quota_product['status'] = 0
                   @quota_product['category_id'] = @catid.to_i
 
-                  header_options = params[:header_option]
+                  header_options, hidden = params[:header_option], params[:hidden]
                   if header_options && header_options[k].present? && header_options[k][key].present?
                       @quota_product['header_option'] = 'Yes' 
                   else
                       @quota_product['header_option'] = "No"
                   end
+                  @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
                   #render :text =>  @quota_product.inspect and return false
                   if @quota_product['quantity'].to_i > 0
                       @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 

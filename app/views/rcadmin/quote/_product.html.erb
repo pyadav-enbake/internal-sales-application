@@ -47,6 +47,7 @@
                         <th>Measure Type</th>
                         <th>Total Price</th>
                         <th>Option</th>
+                        <th>Hide</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -67,6 +68,7 @@
                             <input type="hidden" name="tot_price[<%= cat.id %>][<%= product.id %>]" id="tprice<%= cat.id %><%= product.id %>" value="">
                             <td >$ <span id="price<%= cat.id %><%= product.id %>">0.00</span><%#=product.price%></td>
                             <td><input type="checkbox" name="header_option[<%= cat.id %>][<%= product.id %>]" value="Yes" ></td>
+                            <td><input type="checkbox" name="hidden[<%= cat.id %>][<%= product.id %>]"></td>
                           </tr>
                         <% end %>
                       <% end %>

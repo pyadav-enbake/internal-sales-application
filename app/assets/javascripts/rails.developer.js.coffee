@@ -1,5 +1,18 @@
 jQuery ->
 
+
+  $('#page-content').on 'click', '.option-product', (evt) ->
+    hideProduct = $(this).closest('.quote-product').find('.hide-product')
+    if hideProduct.length and hideProduct.is(":checked")
+      evt.preventDefault()
+      alert("You can not hide options")
+
+  $('#page-content').on 'click', '.hide-product', (evt) ->
+    optionProduct = $(this).closest('.quote-product').find('.option-product')
+    if optionProduct.length and optionProduct.is(":checked")
+      evt.preventDefault()
+      alert("You can not hide options")
+
   categoryId = null
   if $('.editable').length
     $('.editable').editable

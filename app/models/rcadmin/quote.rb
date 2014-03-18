@@ -4,7 +4,7 @@ class Rcadmin::Quote < ActiveRecord::Base
   
   belongs_to :contractor
   belongs_to :customer
-  has_many :quote_product,dependent: :destroy
+  has_many :quote_product, dependent: :destroy
   belongs_to :cabinet_type
   belongs_to :countertop_design
 
@@ -33,6 +33,21 @@ class Rcadmin::Quote < ActiveRecord::Base
     update_attribute(:category, category_ids.join(","))
   end
 
+  def categories_with_products(option = 'Yes')
+    products_having_option = self.quote_product.has_option(option).
+      joins(:category).includes(:category).references(:categories).
+      order("LOWER(categories.name)").group_by do |quote_product|
+        quote_product.category
+      end
+  end
+
+  def categories_with_option_products
+    categories_with_products('Yes')
+  end
+
+  def categories_without_option_products
+    categories_with_products('No')
+  end
 
 
   # Isolate dependencies this would change in future soon

@@ -456,82 +456,9 @@
                                 </td>
                             </tr>
                             <tr>
-                              <% grand_total = 0; %>
-                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                    <!-- BEGIN HEADER // -->
-                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateHeader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
-                                      <tr>
-                                        <td valign="top" class="headerContainer" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                            <tbody class="mcnTextBlockOuter">
-                                              <tr>
-                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-
-                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                                    <tbody><tr>
-
-                                                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #020202;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
-
-                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>QUOTE EMAIL</strong></span></div>
-
-                                                        </td>
-                                                      </tr>
-                                                  </tbody></table>
-
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                            </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                            <tbody class="mcnTextBlockOuter">
-                                              <tr>
-                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-
-                                                  <!-- First Part -->
-                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                                    <tbody><tr>
-
-                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
-
-                                                                                                             
-                                                          <table style="margin-bottom: 25px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                                            <thead>
-                                                              <tr>
-                                                                <td style="text-align: center;padding: 5px;border: 2px solid #000000;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Category Name</strong></td>
-                                                                <td style="text-align: center;border: 2px solid #000000;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Total Price</strong></td>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody style="width: 100%;">
-                                                          <% quote_categories = @quote.quote_categories.includes(:category).order("LOWER(categories.name) ASC") %>
-                                                          <% categories_sum = @quote.quote_product.where(header_option: 'No').group(:category_id).sum(:total_price) %>
-                                                          <% categories_sum.each do |category_id, total| %>
-                                                            <% quote_category = quote_categories.detect { |category| category.category_id === category_id } %>
-                                                            <% category = quote_category.category %>
-
-                                                              <tr>
-                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= category.name %></td>
-                                                                <td style="width: 275px;border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$ <%= total = with_markup(total, quote_category.markup).round(2) %></td>
-                                                              </tr>
-                                                              <% grand_total += total %>
-                                                            <% end %>
-                                                            </tbody>
-                                                          </table>
-
-
-                                                        </td>
-                                                      </tr>
-                                                  </tbody></table>
-
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                        </table></td>
-                                      </tr>
-                                    </table>
-                                    <!-- // END HEADER -->
-                                </td>
-                            </tr>
-                            <tr>
                                 <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                     <!-- BEGIN BODY // -->
+                                    <% grand_total = 0 %>
                                     <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
                                       <tr>
                                         <td valign="top" class="bodyContainer" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
@@ -544,7 +471,7 @@
 
                                                         <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #020202;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
 
-                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>OPTION</strong></span></div>
+                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>ROOMS</strong></span></div>
 
                                                         </td>
                                                       </tr>
@@ -554,10 +481,7 @@
                                               </tr>
                                             </tbody>
                                             </table>
-                                                              <% grouped_quote_products = @quote.quote_product.where(header_option: 'Yes').includes(:category).group_by(&:category_id) %>
-                                                              <% quote_categories.each do |quote_category| %>
-                                                                <% quote_products = grouped_quote_products[quote_category.category_id] %>
-                                                                <% next if quote_products.nil? %>
+                                                              <% @quote.categories_without_option_products.each do |category, quote_products| %>
 
                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                             <tbody class="mcnTextBlockOuter">
@@ -569,7 +493,7 @@
 
                                                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
 
-                                                          <span style="color: #000000;font-family: arial;font-size: 15px;line-height: 15px;"><%= quote_category.category %></span>
+                                                          <span style="color: #000000;font-family: arial;font-size: 24px;line-height: 15px;"><%= category %></span>
                                                           <hr style="margin-bottom:0;">
                                                         </td>
                                                       </tr>
@@ -636,7 +560,112 @@
                                     </table>
                                     <!-- // END BODY -->
                                 </td>
-                                Total: <%= grand_total %>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <!-- BEGIN BODY // -->
+                                    <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                                      <tr>
+                                        <td valign="top" class="bodyContainer" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #020202;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <div style="text-align: center;"><span style="font-size:24px"><strong>OPTION</strong></span></div>
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+                                                              <% @quote.categories_with_option_products.each do |category, quote_products| %>
+
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <span style="color: #000000;font-family: arial;font-size: 24px;line-height: 15px;"><%= category %></span>
+                                                          <hr style="margin-bottom:0;">
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                            <tbody class="mcnTextBlockOuter">
+                                              <tr>
+                                                <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                    <tbody><tr>
+
+                                                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
+
+                                                          <table style="margin-bottom: 25px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                                            <thead>
+                                                              <tr>
+                                                                <td style="border: 1px solid #000000;width: 50px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>check</strong></td>
+                                                                <td style="border: 1px solid #000000;width: 250px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Item</strong></td>
+                                                                <td style="border: 1px solid #000000;width: 250px;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><strong>Price</strong></td>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                              <% with_hidden_total = total = 0 %>
+                                                              <% quote_products.each do |quote_product| %>
+                                                                <% with_hidden_total += quote_product.total_price %>
+                                                                <% next if quote_product.hidden? %>
+                                                                <!-- PRODUCTS -->
+                                                                <tr>
+                                                                  <td style="border: 1px solid #000000;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><input type="checkbox"></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.title %></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$<%= quote_product.total_price %></td>
+                                                                  <% total += quote_product.total_price %>
+                                                                </tr>
+                                                              <% end %>
+                                                              <% grand_total += with_hidden_total %>
+
+                                                              <tr>
+                                                                <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">&nbsp;</td>
+                                                                <td style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">&nbsp;</td>
+                                                                <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Total Price:$ <%= total.round(2) %></td>
+                                                              </tr>
+                                                            </tbody>
+                                                          </table>
+
+                                                        </td>
+                                                      </tr>
+                                                  </tbody></table>
+
+                                                <% end %>
+
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table></td>
+                                      </tr>
+                                    </table>
+                                    <!-- // END BODY -->
+                                </td>
+                                Total: <%= grand_total.round(2) %>
                             </tr>
                             <tr>
                                 <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">

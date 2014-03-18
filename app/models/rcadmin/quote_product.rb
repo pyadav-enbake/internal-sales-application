@@ -8,6 +8,13 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
 
   scope :find_by_quote, ->(quote_id) { where(:quote_id=>quote_id) }
 
-  scope :with_option, -> { where(header_option: 'Yes') }
-  scope :without_option, -> { where(header_option: 'No') }
+  scope :has_option, ->(value) { where(header_option: value) }
+
+
+
+
+
+
+
+
 end

@@ -200,6 +200,7 @@ DEPENDENCIES
   sdoc
   spring
   therubyracer
+  thread_safe
   turbolinks
   uglifier (>= 1.3.0)
   unicorn

@@ -1,5 +1,34 @@
 jQuery ->
 
+  quoteMiscs = ->
+    fieldName = $('.misc-field-name').val()
+    if fieldName.length
+      console.log(fieldName)
+      dbName = fieldName.replace(/[^a-zA-Z0-9\-_]+/g, '-').replace(/(^-|-$)/g, '').replace(/-/g, '_').toLowerCase()
+      $div = $('<div />', {class: 'row'})
+      $label = $('<label />', {for: fieldName, text: fieldName, class: 'col-sm-3 control-label'})
+      $input = $('<input />', {type: 'text', value: '', name: 'misc[' + dbName+ ']', class: 'form-control'})
+      $inputWrapper = $('<div />', {class: 'col-sm-6'})
+      $inputWrapper.append($input)
+      $div.append($label)
+      $div.append($inputWrapper)
+
+      $('.misc-fields').append($div)
+      $('.misc-fields').append('<br />')
+      $('.misc-field-name').val('')
+      $('.misc-field-name').focus()
+
+
+  $('.create-field').on 'click', (evt) ->
+    evt.preventDefault()
+    quoteMiscs()
+
+  $('.misc-field-name').on 'keypress', (evt) ->
+    if evt.which == 13
+      evt.preventDefault()
+      quoteMiscs()
+
+
 
   $('#page-content').on 'click', '.option-product', (evt) ->
     hideProduct = $(this).closest('.quote-product').find('.hide-product')

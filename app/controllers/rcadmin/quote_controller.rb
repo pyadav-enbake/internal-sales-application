@@ -122,6 +122,7 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
       @quote.notes = params["extra_info"]['notes']
       @quote.status = 0
+      @quote.miscs = params[:misc]
       @quote.update_attributes(params[:quote])
       params[:product].each do |k,v|
         @catid=k 
@@ -312,6 +313,7 @@ class Rcadmin::QuoteController < ApplicationController
           @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
           @quote.notes = params["extra_info"]['notes']
           @quote.status = 0
+          @quote.miscs = params[:misc]
           @quote.update_attributes(params[:quote])
           params[:product].each do |k,v|
               @catid=k 

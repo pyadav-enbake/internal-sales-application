@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313143103) do
+ActiveRecord::Schema.define(version: 20140319103317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -184,6 +185,7 @@ ActiveRecord::Schema.define(version: 20140313143103) do
     t.text     "countertop_designs_info"
     t.integer  "contractor_id"
     t.text     "notes"
+    t.hstore   "miscs"
   end
 
   create_table "states", force: true do |t|

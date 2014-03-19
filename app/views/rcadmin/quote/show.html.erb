@@ -66,6 +66,16 @@
               <%= @rcadmin_quotes.notes %>
             </div>
           </table>  
+          
+          <h3>Miscs</h3>
+
+          <% @rcadmin_quotes.miscs? && @rcadmin_quotes.miscs.each_pair do |field_name, value| %>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= field_name.to_s.humanize %></label>
+              <%= value %>
+            </div>
+          <% end %>
+
 
             <div class="form-group">
               <h4><label class="col-sm-3 control-label">Cabinet Types Info:</label></h4>

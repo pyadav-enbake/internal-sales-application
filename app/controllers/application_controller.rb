@@ -72,12 +72,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_user
-      # render :text =>params[:controller] and return false
-      if admin_signed_in?
-          @current_user = Rcadmin::Admin.find(session[:admin_id])
-      end
-  end
+  alias :current_user :current_admin
+
 
 
 end

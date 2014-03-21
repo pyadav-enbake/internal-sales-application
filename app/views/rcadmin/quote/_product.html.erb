@@ -14,6 +14,7 @@
   <div id="subtabs" class="tabs-bottom">
     <div>
       <ul class="tabs">
+        <% @subcategories = Rcadmin::Subcategory.includes(:products).to_a %>
         <% @categories.each_with_index do |cat, index|%>
           <li class="delete-tab">
             <a href="#subtabs-<%= index %>"><%= cat.name %></a>
@@ -23,7 +24,7 @@
       </ul>
     </div>
     <a href="javascript:void(0)" class="expand">Expand All</a><br>
-    <% if @categories.size > 0 %>
+    <% if @categories.length > 0 %>
       <% @quote.quote_categories.includes(:category).each_with_index do |quote_category, index|%>
         <% cat = quote_category.category %>
         <div id="subtabs-<%=index%>" >
@@ -31,12 +32,30 @@
         <input type="text" name="quote[quote_categories_attributes][<%= index %>][markup]" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99.9'" class="markup-factor mask" data-category-id="<%= cat.id %>" />
         <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
           <div id="accordion" class="accordion">
-            <% @subcategories = Rcadmin::Subcategory.all %>
+            <h3>MISCS</h3>
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Enter Qty.</th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Price per unit</th>
+                    <th>Measure Type</th>
+                    <th>Total Price</th>
+                    <th>Option</th>
+                    <th>Hide</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
             <% if @subcategories.size > 0 %>
               <% @subcategories.each_with_index do |subcat, index|%>
                 <h3><%= subcat.name %></h3>
                 <div>
-                  <% @products = Rcadmin::Product.where(subcategory_id: subcat.id) %>
+                  <% @products = subcat.products %>
                   <table class="table">
                     <thead>
                       <tr>

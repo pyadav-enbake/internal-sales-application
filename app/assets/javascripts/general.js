@@ -138,6 +138,13 @@ $(document).ready(function() {
     $('.quote-preview').html('');
   });
 
+
+  $('#save-draft').click(function() {
+    var previewForm = $('#send_quote_frm');
+    previewForm.attr('action', 'quote_preview?draft=true')
+    previewForm.submit();
+  });
+
   $('#preview_quote').click(function(){
     $("#err_msg").html('');
     var previewForm = $('#send_quote_frm');

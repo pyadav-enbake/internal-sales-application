@@ -10,6 +10,14 @@
 	  <div class="options">
 	  </div>
 	</div><br>
+
+        <% if notice %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= notice %>
+          </div>
+        <% end %>
+
 	<%if @quote.errors.any? %>
 	  <div class="alert alert-dismissable alert-danger">
 	    <%=@quote.errors.full_messages[0] %>.

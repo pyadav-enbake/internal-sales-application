@@ -305,46 +305,48 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def quote_preview
-      #render :text =>  params.inspect and return false
-      if params[:product].size > 0
-          @quote = Rcadmin::Quote.find(session[:quote_id] )
-          @quote.quote_product.destroy_all
-          @quote.delivery_date = params["extra_info"]['delivery_date']
-          @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
-          @quote.notes = params["extra_info"]['notes']
-          @quote.status = 0
-          @quote.miscs = params[:misc]
-          @quote.update_attributes(params[:quote])
-          params[:product].each do |k,v|
-              @catid=k 
-              v.each do |key,val|
-                  @quota_product = {}
-                  @quota_product['quote_id'] = session[:quote_id]
-                  @quota_product['product_id'] = key.to_i
-                  @quota_product['quantity'] = params['quantity'][k][key]
-                  @quota_product['total_price'] = params['tot_price'][k][key]
-                  @quota_product['status'] = 0
-                  @quota_product['category_id'] = @catid.to_i
+    if params[:product].size > 0
+      @quote = Rcadmin::Quote.find(session[:quote_id] )
+      @quote.quote_product.destroy_all
+      @quote.delivery_date = params["extra_info"]['delivery_date']
+      @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
+      @quote.notes = params["extra_info"]['notes']
+      @quote.status = 0
+      @quote.miscs = params[:misc]
+      @quote.update_attributes(params[:quote])
+      params[:product].each do |k,v|
+        @catid=k 
+        v.each do |key,val|
+          @quota_product = {}
+          @quota_product['quote_id'] = session[:quote_id]
+          @quota_product['product_id'] = key.to_i
+          @quota_product['quantity'] = params['quantity'][k][key]
+          @quota_product['total_price'] = params['tot_price'][k][key]
+          @quota_product['status'] = 0
+          @quota_product['category_id'] = @catid.to_i
 
-                  header_options, hidden = params[:header_option], params[:hidden]
-                  if header_options && header_options[k].present? && header_options[k][key].present?
-                      @quota_product['header_option'] = 'Yes' 
-                  else
-                      @quota_product['header_option'] = "No"
-                  end
-                  @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
-                  #render :text =>  @quota_product.inspect and return false
-                  if @quota_product['quantity'].to_i > 0
-                      @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-                      @rcadmin_quota_product.save if params['quantity'][k][key] 
-                  end
-              end
+          header_options, hidden = params[:header_option], params[:hidden]
+          if header_options && header_options[k].present? && header_options[k][key].present?
+            @quota_product['header_option'] = 'Yes' 
+          else
+            @quota_product['header_option'] = "No"
           end
+          @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
+          #render :text =>  @quota_product.inspect and return false
+          if @quota_product['quantity'].to_i > 0
+            @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
+            @rcadmin_quota_product.save if params['quantity'][k][key] 
+          end
+        end
+      end
 
-          @customer = Rcadmin::Customer.find(@quote.customer_id)
-      end
-      respond_to do |format|
-          format.html { render template: 'welcome_mailer/send_quote_mail_customer' }
-      end
+      @customer = Rcadmin::Customer.find(@quote.customer_id)
+    end
+
+    if params.has_key?(:draft)
+      redirect_to create_quote_path, notice: 'Your Quote has been saved as a draft.'
+    else
+      render template: 'welcome_mailer/send_quote_mail_customer'
+    end
   end
 end

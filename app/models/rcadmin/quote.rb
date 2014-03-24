@@ -31,9 +31,8 @@ class Rcadmin::Quote < ActiveRecord::Base
   end
 
   def remove_category category_id = nil
-    index = category_ids.index(category_id)
-    category_ids.delete_at(index) 
-    update_attribute(:category, category_ids.join(","))
+    quote_category = self.quote_categories.where(category_id: category_id).first
+    quote_category and quote_category.destroy
   end
 
   def categories_with_products(option = 'Yes')

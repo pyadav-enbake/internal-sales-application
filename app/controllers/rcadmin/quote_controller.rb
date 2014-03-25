@@ -96,62 +96,28 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def show_product
-      if params[:qid]
-          @quote_id=params[:qid]
-          @customer_id = params[:cid]
-          session[:quote_id] = params[:qid]
-          @exist_quota_total_price = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).sum(:total_price).to_f.round(2)
-          @exist_quota_product_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:product_id)
-
-      end
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
-      #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
-      @search_term = (params[:search] != "") ? params[:search] : ''
-      @categories =  @quote.categories
-      @products =  Rcadmin::Product.all
-      @subcategories =  Rcadmin::Subcategory.all
-
+    if params[:qid]
+      @quote_id=params[:qid]
+      @customer_id = params[:cid]
+      session[:quote_id] = params[:qid]
+      @exist_quota_total_price = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).sum(:total_price).to_f.round(2)
+      @exist_quota_product_ids = Rcadmin::QuoteProduct.where(quote_id: params[:qid]).pluck(:product_id)
+    end
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+    #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
+    @search_term = (params[:search] != "") ? params[:search] : ''
+    @categories =  @quote.categories # Rooms 
+    @subcategories = Rcadmin::Subcategory.includes(:products) #.limit(5) # Categories
   end
 
   def send_quote
-    #render :text =>  params.inspect and return false
-    if params[:product].size > 0
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
-      @quote.quote_product.destroy_all
-      @quote.delivery_date = params["extra_info"]['delivery_date']
-      @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
-      @quote.notes = params["extra_info"]['notes']
-      @quote.status = 0
-      @quote.miscs = params[:misc]
-      @quote.update_attributes(params[:quote])
-      params[:product].each do |k,v|
-        @catid=k 
-        v.each do |key,val|
-          @quota_product = {}
-          @quota_product['quote_id'] = session[:quote_id]
-          @quota_product['product_id'] = key.to_i
-          @quota_product['quantity'] = params['quantity'][k][key]
-          @quota_product['total_price'] = params['tot_price'][k][key]
-          @quota_product['status'] = 0
-          @quota_product['category_id'] = @catid.to_i
-
-          header_options, hidden = params[:header_option], params[:hidden]
-          if header_options && header_options[k].present? && header_options[k][key].present?
-            @quota_product['header_option'] = 'Yes' 
-          else
-            @quota_product['header_option'] = "No"
-          end
-          @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
-          #render :text =>  @quota_product.inspect and return false
-          if @quota_product['quantity'].to_i > 0
-            @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-            @rcadmin_quota_product.save if params['quantity'][k][key] 
-          end
-        end
-      end
-      WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
-      @quote.sent_to_client!
-    end
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+    @quote.quote_product.destroy_all
+    @quote.status = 0
+    @quote.update_attributes(params[:quote])
+    @customer = Rcadmin::Customer.find(@quote.customer_id)
+    WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
+    @quote.sent_to_client!
     render :text => 'ok'
   end
 
@@ -305,43 +271,11 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def quote_preview
-    if params[:product].size > 0
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.quote_product.destroy_all
-      @quote.delivery_date = params["extra_info"]['delivery_date']
-      @quote.sales_closing_potential = params["extra_info"]['sales_closing_potential']
-      @quote.notes = params["extra_info"]['notes']
       @quote.status = 0
-      @quote.miscs = params[:misc]
       @quote.update_attributes(params[:quote])
-      params[:product].each do |k,v|
-        @catid=k 
-        v.each do |key,val|
-          @quota_product = {}
-          @quota_product['quote_id'] = session[:quote_id]
-          @quota_product['product_id'] = key.to_i
-          @quota_product['quantity'] = params['quantity'][k][key]
-          @quota_product['total_price'] = params['tot_price'][k][key]
-          @quota_product['status'] = 0
-          @quota_product['category_id'] = @catid.to_i
-
-          header_options, hidden = params[:header_option], params[:hidden]
-          if header_options && header_options[k].present? && header_options[k][key].present?
-            @quota_product['header_option'] = 'Yes' 
-          else
-            @quota_product['header_option'] = "No"
-          end
-          @quota_product[:hidden] = hidden && hidden[k].present? && hidden[k][key].present?
-          #render :text =>  @quota_product.inspect and return false
-          if @quota_product['quantity'].to_i > 0
-            @rcadmin_quota_product = Rcadmin::QuoteProduct.new(@quota_product) 
-            @rcadmin_quota_product.save if params['quantity'][k][key] 
-          end
-        end
-      end
-
       @customer = Rcadmin::Customer.find(@quote.customer_id)
-    end
 
     if params.has_key?(:draft)
       redirect_to create_quote_path, notice: 'Your Quote has been saved as a draft.'

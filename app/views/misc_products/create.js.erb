@@ -1,0 +1,11 @@
+<% if @misc_product.errors.any? %>
+  $('.misc-errors').html('<%= j render(partial: 'errors', locals: {object: @misc_product}) %>');
+<% elsif @misc_product.persisted? %>
+  <% @quote.categories.each do |category| %>
+    var classSelector = '.misc-products-<%= category.id %>';
+    var html = '<%= j render(partial: 'rcadmin/quote/misc_product', locals: {product: @misc_product, cat: category, misc: Time.now.to_i}) %>';
+    $(classSelector).append(html);
+  <% end %>
+  $('#new-misc-product-modal').modal('hide');
+  $('.new-misc-product').get(0).reset();
+<% end %>

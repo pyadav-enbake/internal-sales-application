@@ -55,56 +55,56 @@ $(document).ready(function() {
     $('#div'+$(this).attr('target')).show();
   });
 
-//Quote Calculation
-  $(".quantity1").keyup(function(event){
-    console.log(event.target.value);
-      var tval = (event.target.value) ? parseInt(event.target.value) : '';
-      $(this).val(tval);
+
+  (function() {
+
+    // Handles all calculation logic in view and for form
+
+    var products = {}; 
+
+    $('#subtabs').on('keyup', '.quantity', function(evt) {
+      var quantity = parseInt($(this).val(), 10);
       var id = $(this).attr('id');
-      var oprice = $("#oprice"+id).val();
-      console.log(tval +'sssss'+id);
-      if(tval == ''){
-	$("#chk"+id).prop('checked', false);
-      }else{
-	$("#chk"+id).prop('checked', true);
-      }
-      var text = event.target.value;
+      var $parent = $(this).closest('tr');
 
-      var modify_price = (oprice*text).toFixed(2);
-      $('#price'+id).text(modify_price);
-      $('#tprice'+id).val(modify_price);
-      var total_item_price = total_item_price_count();
-      $("#total_price").text(total_item_price);
-  });
-  $(".chkpro").click(function(event){
-      var id = $(this).attr('id').replace('chk','');
-      if($("#chk"+id).is(':checked')){
-	      var total_item_price = total_item_price_count();
-	      $("#total_price").text(total_item_price);
-      }else{
-	      var total_item_price = total_item_price_count();
-	      $("#total_price").text(total_item_price);
-      }
-  })
+      if(isNaN(quantity)) {
 
-  function total_item_price_count(){
-    var total_price = 0.00;
-    $("#tabs input:checkbox:checked").each(function() {
-      if($(this).attr('class') == 'chkpro') {
-        var id = $(this).attr('id').replace('chk','');
-        var price = $('#price'+id).text();
-        total_price += Number(price);
+        delete products[id];
+        $parent.find('.total-price-text').text('0.00');
+        $parent.find('.total-price-field').val('0.00');
+      } else {
+
+        var price = Number($parent.find('.price').text());
+        products[id] = price * quantity;
+
+        var totalProductPrice = products[id].toFixed(2);
+        $parent.find('.total-price-text').text(totalProductPrice);
+        $parent.find('.total-price-field').val(totalProductPrice);
       }
+      var totalPrice = productsSum().toFixed(2)
+      $('#total_price').text(totalPrice);
     });
-    total_price = total_price.toFixed(2);
-    return total_price
-  }
-  window.total_price_calculator = total_item_price_count;
-  $( "#extra_info_delivery_date" ).datepicker({dateFormat: 'yy-mm-dd',minDate: 0});
+
+
+    // Using colsure to bring in products object (which is productId with total cose)
+    productsSum = function() {
+      var sum = 0.0;
+      for(var key in products) {
+        sum += products[key];
+      }
+      return sum;
+    };
+
+    window.total_price_calculator = productsSum;
+
+  })();
+  
+
+  $( "#quote_delivery_date" ).datepicker({dateFormat: 'yy-mm-dd',minDate: 0});
 
 //send_quote
   $('#send_quote').click(function(){
-    if ($("#extra_info_delivery_date").val() == ""){
+    if ($("#quote_delivery_date").val() == ""){
       $("#err_msg").html('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">x</button><p>Please select Delivery Date</p></div>');
       return false;
     }else{

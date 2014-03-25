@@ -1,5 +1,30 @@
 jQuery ->
 
+
+  $('.show-misc-modal').on 'click', (evt) ->
+    evt.preventDefault()
+    evt.stopPropagation()
+    $('#new-misc-product-modal').modal('show')
+
+
+  do ->
+    $form = $('form.new-misc-product')
+
+    $form.on 'submit', (evt) ->
+      evt.preventDefault()
+      evt.stopPropagation()
+      createMiscProduct()
+
+    $form.find('button[type=submit]').on 'click', (evt) ->
+      evt.preventDefault()
+      evt.stopPropagation()
+      createMiscProduct()
+
+    createMiscProduct = ->
+      data = $form.serializeArray()
+      url = $form.attr('action')
+      $.post(url, data, null, 'script')
+
   quoteMiscs = ->
     fieldName = $('.misc-field-name').val()
     if fieldName.length
@@ -7,7 +32,7 @@ jQuery ->
       dbName = fieldName.replace(/[^a-zA-Z0-9\-_]+/g, '-').replace(/(^-|-$)/g, '').replace(/-/g, '_').toLowerCase()
       $div = $('<div />', {class: 'row'})
       $label = $('<label />', {for: fieldName, text: fieldName, class: 'col-sm-3 control-label'})
-      $input = $('<input />', {type: 'text', value: '', name: 'misc[' + dbName+ ']', class: 'form-control'})
+      $input = $('<input />', {type: 'text', value: '', name: 'quote[miscs][' + dbName+ ']', class: 'form-control'})
       $inputWrapper = $('<div />', {class: 'col-sm-6'})
       $inputWrapper.append($input)
       $div.append($label)
@@ -31,13 +56,13 @@ jQuery ->
 
 
   $('#page-content').on 'click', '.option-product', (evt) ->
-    hideProduct = $(this).closest('.quote-product').find('.hide-product')
+    hideProduct = $(this).closest('tr').find('.hide-product')
     if hideProduct.length and hideProduct.is(":checked")
       evt.preventDefault()
       alert("You can not hide options")
 
   $('#page-content').on 'click', '.hide-product', (evt) ->
-    optionProduct = $(this).closest('.quote-product').find('.option-product')
+    optionProduct = $(this).closest('tr').find('.option-product')
     if optionProduct.length and optionProduct.is(":checked")
       evt.preventDefault()
       alert("You can not hide options")

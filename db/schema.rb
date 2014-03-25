@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321164800) do
+ActiveRecord::Schema.define(version: 20140325070547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,19 @@ ActiveRecord::Schema.define(version: 20140321164800) do
     t.string   "role"
   end
 
+  create_table "misc_products", force: true do |t|
+    t.integer  "quote_id"
+    t.string   "title"
+    t.text     "description"
+    t.float    "price"
+    t.string   "measurement_type"
+    t.string   "customer_wording"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "misc_products", ["quote_id"], name: "index_misc_products_on_quote_id", using: :btree
+
   create_table "products", force: true do |t|
     t.integer  "subcategory_id"
     t.string   "title"
@@ -170,7 +183,11 @@ ActiveRecord::Schema.define(version: 20140321164800) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",                  default: false
+    t.string   "product_type",            default: "Rcadmin::Product"
   end
+
+  add_index "quote_products", ["product_id"], name: "index_quote_products_on_product_id", using: :btree
+  add_index "quote_products", ["product_type"], name: "index_quote_products_on_product_type", using: :btree
 
   create_table "quotes", force: true do |t|
     t.integer  "customer_id"

@@ -1,6 +1,11 @@
 RomarCabinates::Application.routes.draw do
 
 
+  resources :quotes, controller: :quote, only: :none do
+    resources :misc_products, only: [:create, :update, :destroy]
+  end
+
+
   namespace :rcadmin do
     put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
     resources :countertop_designs

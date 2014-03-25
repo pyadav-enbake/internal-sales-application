@@ -56,14 +56,14 @@
         <div class="row">
           <label class="col-sm-3 control-label">Sales Closing Potential</label>
           <div class="col-sm-6">
-            <%= select(:extra_info, :sales_closing_potential, Rcadmin::Quote::RATING.my_hash.invert, {selected: 3}, {:class => 'form-control'}) %>
+            <%= select(:quote, :sales_closing_potential, Rcadmin::Quote::RATING.my_hash.invert, {selected: 3}, {:class => 'form-control'}) %>
           </div>
         </div>
 
         <div class="row">
           <label class="col-sm-3 control-label">Expected Target Delivery Date</label>
           <div class="col-sm-6">
-            <%= text_field_tag "extra_info[delivery_date]", "" ,:class=>"form-control",:placeholder=>"Select Date"%>
+            <%= text_field_tag "quote[delivery_date]", "" ,:class=>"form-control",:placeholder=>"Select Date"%>
           </div>
         </div>
 
@@ -72,7 +72,7 @@
           <label class="col-sm-3 control-label">Notes</label>
 
           <div class="col-sm-6">
-            <%= text_area_tag "extra_info[notes]", "" ,:class=>"form-control",:placeholder=>"Your notes"%>
+            <%= text_area_tag "quote[notes]", "" ,:class=>"form-control",:placeholder=>"Your notes"%>
           </div>
         </div>
 
@@ -154,7 +154,7 @@
 
 <div class="modal fade" id="myModalconfirmsend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" style="width: 620px;">
+    <div class="modal-content" style="width: 700px;">
       <div class="modal-header">
         <!--button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button-->
         <h4 class="modal-title">Confirm your Quote</h4>

@@ -2,12 +2,21 @@ class Rcadmin::Quote < ActiveRecord::Base
   validates_presence_of :contractor_id,:customer_id
   attr_accessible :contractor_id, :customer_id, :category, :status,
     :delivery_date,:sales_closing_potential, :cabinet_types_info, 
-    :countertop_designs_info,:notes, :quote_categories_attributes, :miscs
+    :countertop_designs_info,:notes, :quote_categories_attributes, :miscs,
+    :quote_products_attributes
   
+
+  has_many :misc_products, dependent: :destroy
+  has_many :quote_misc_products, dependent: :destroy, through: :misc_products, source: :quote_products
+
   belongs_to :contractor
   belongs_to :customer
   has_many :quote_product, dependent: :destroy # TODO: remove this after replacing all occurences 
   has_many :quote_products, dependent: :destroy 
+  accepts_nested_attributes_for :quote_products, reject_if: proc { |attrs| attrs['quantity'].blank? }
+
+
+
   belongs_to :cabinet_type
   belongs_to :countertop_design
 

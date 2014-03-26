@@ -25,7 +25,7 @@ module QuoteCalculator
   end
 
   def factor
-    1.2
+    miscs && miscs['factor'].to_f.round(2) || 0.0
   end
 
   def factor_value
@@ -61,7 +61,7 @@ module QuoteCalculator
   end
 
   def extra_misc
-    miscs && miscs.except("corian", "labor").values.map(&:to_f).sum || 0.0
+    miscs && miscs.except("corian", "labor", "factor").values.map(&:to_f).sum || 0.0
   end
 
 

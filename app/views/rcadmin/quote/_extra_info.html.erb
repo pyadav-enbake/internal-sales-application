@@ -48,7 +48,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Aditional Information</h4>
+        <h2 class="modal-title">Cover Sheet</h2>
       </div>
       <div class="modal-body">
         <div id="err_msg"></div>
@@ -81,15 +81,22 @@
                 </tr>
                 <tr>
                   <td>Factor(<span class="quote-factor"><%= @quote.factor %></span>)</td>
-                  <td class="factor-total"></td>
+                  <td ><input type=text" value="1.0" name="quote[miscs][factor]" class="factor-total form-control" /></td>
                 </tr>
                 <tr>
                   <td>Corian</td>
-                  <td><input type="text" class="corian-total" value="1.0" name="quote[miscs][corian]"/></td>
+                  <td><input type="text" class="corian-total form-control" value="1.0" name="quote[miscs][corian]"/></td>
                 </tr>
-                <tr>
+                <tr class="misc-td">
                   <td>MISC</td>
                   <td class="misc-total"></td>
+                </tr>
+                <tr>
+                  <td>Misc Item</td>
+                  <td>
+                    <input type="text" value="" placeholder="Enter field name" class="misc-field-name form-control" />
+                    <a href="#" class="create-field">Create</a>
+                  </td>
                 </tr>
                 <tr>
                   <td>Pre Tax</td>
@@ -105,7 +112,7 @@
                 </tr>
                 <tr>
                   <td>Labor</td>
-                  <td><input type="text" class="labor-total" name="quote[miscs][labor]"/></td>
+                  <td><input type="text" class="labor-total form-control" name="quote[miscs][labor]"/></td>
                 </tr>
                 <tr>
                   <td>Delivery</td>
@@ -120,6 +127,8 @@
             
           </div>
         </div>
+
+        <h2> Additional Information </h2>
 
         <div class="row">
           <label class="col-sm-3 control-label">Sales Closing Potential</label>
@@ -144,22 +153,6 @@
           </div>
         </div>
 
-        <br />
-
-        <div class="misc-fields">
-        </div>
-
-        <div class="row">
-          <div class="col-sm-3">
-            <label for="field control-label">Field Name</label>
-          </div>
-          <div class="col-sm-6">
-            <input type="text" value="" placeholder="Enter field name" class="misc-field-name form-control" />
-          </div>
-          <div class="col-sm-3">
-            <a href="#" class="create-field">Create</a>
-          </div>
-        </div>
 
       </div>
 

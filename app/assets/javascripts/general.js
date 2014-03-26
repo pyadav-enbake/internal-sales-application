@@ -122,7 +122,7 @@ $(document).ready(function() {
       };
 
       this.factor = function() {
-        return ( Number( $('.quote-factor').text() ) || 1.2 );
+        return ( Number( $('.factor-total').val() ) || 1.0 );
       };
 
       this.factorValue = function() {
@@ -154,7 +154,7 @@ $(document).ready(function() {
       };
 
       this.corian = function() {
-        return ( parseFloat( $('.corian-total').val() ) * 1.0 );
+        return ( parseFloat( $('.corian-total').val() ) * 1.0 ) || 1.0;
       };
 
       this.grandTotal = function() {
@@ -186,11 +186,12 @@ $(document).ready(function() {
 
 
     var quote = new QuoteCalculator();
-    $('.corian-total, .labor-total').keyup(function(evt) {
+    var inputSelector = '.corian-total, .labor-total, .factor-total';
+    $(inputSelector).keyup(function(evt) {
       $(this).trigger('change');
     });
 
-    $('.corian-total, .labor-total').change(function(evt) {
+    $(inputSelector).change(function(evt) {
       quote.updateDOM();
     });
 

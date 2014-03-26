@@ -38,13 +38,15 @@ jQuery ->
     if fieldName.length
       console.log(fieldName)
       dbName = fieldName.replace(/[^a-zA-Z0-9\-_]+/g, '-').replace(/(^-|-$)/g, '').replace(/-/g, '_').toLowerCase()
-      $div = $('<div />', {class: 'row'})
-      $label = $('<label />', {for: fieldName, text: fieldName, class: 'col-sm-3 control-label'})
+      $div = $('<tr />')
+      $label = $('<td />', {text: fieldName})
+
+      $td = $('<td />')
       $input = $('<input />', {type: 'text', value: '', name: 'quote[miscs][' + dbName+ ']', class: 'form-control'})
-      $inputWrapper = $('<div />', {class: 'col-sm-6'})
-      $inputWrapper.append($input)
+      $td.append($input)
+
       $div.append($label)
-      $div.append($inputWrapper)
+      $div.append($td)
 
       $input.on 'keyup', (evt) ->
         miscsInputs[$(this).attr('name')] = Number($(this).val())
@@ -52,8 +54,7 @@ jQuery ->
         new QuoteCalculator().updateDOM()
 
 
-      $('.misc-fields').append($div)
-      $('.misc-fields').append('<br />')
+      $('.misc-td').after($div)
       $('.misc-field-name').val('')
       $('.misc-field-name').focus()
 

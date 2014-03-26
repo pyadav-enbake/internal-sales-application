@@ -5,7 +5,7 @@ module QuoteCalculator
   end
 
   def cabinet_total
-    @cabinet_total ||= self.quote_products.sum(:total_price)
+    @cabinet_total ||= self.quote_products.sum(:total_price).to_f.round(2)
   end
 
   def laminate_top_total
@@ -13,7 +13,7 @@ module QuoteCalculator
   end
 
   def product_total
-    @product_total ||= ( cabinet_total + laminate_top_total )
+    @product_total ||= ( cabinet_total + laminate_top_total ).to_f.round(2)
   end
 
   def percentage
@@ -21,7 +21,7 @@ module QuoteCalculator
   end
 
   def percentage_value
-    @percentage_value ||= ( product_total / 100 * percentage )
+    @percentage_value ||= ( product_total / 100 * percentage ).to_f.round(2)
   end
 
   def factor
@@ -29,11 +29,11 @@ module QuoteCalculator
   end
 
   def factor_value
-    @factor_value ||= ( percentage_value * factor ) - ( tax + delivery )
+    @factor_value ||= ( ( percentage_value * factor ) - ( tax + delivery ) ).to_f.round(2)
   end
 
   def pre_tax
-    @pre_tax ||= ( percentage_value + factor + corian )
+    @pre_tax ||= ( percentage_value + factor + corian + extra_misc ).to_f.round(2)
   end
 
   def tax_percentage
@@ -41,24 +41,29 @@ module QuoteCalculator
   end
 
   def tax_value
-    @tax_value ||= ( pre_tax / 100 * tax_percentage )
+    @tax_value ||= ( pre_tax / 100 * tax_percentage ).to_f.round(2)
   end
 
   def sub_total
-    @sub_total ||= ( pre_tax + tax_value )
-  end
-
-  def labor
-    @labor ||= ( miscs && miscs['labor'].to_f || 0.0 )
+    @sub_total ||= ( pre_tax + tax_value ).to_f.round(2)
   end
 
   def delivery
-    @deliver ||= ( sub_total / 5000  + 1 ) * 75
+    @deliver ||= ( ( sub_total / 5000  + 1 ) * 75 ).to_f.round(2)
   end
 
   def corian
-    @corian ||= miscs && miscs['corian'].to_f || 0.0
+    miscs && miscs['corian'].to_f.round(2) || 0.0
   end
+
+  def labor
+    miscs && miscs['labor'].to_f.round(2) || 0.0
+  end
+
+  def extra_misc
+    miscs && miscs.except("corian", "labor").values.map(&:to_f).sum || 0.0
+  end
+
 
   def grand_total
     sub_total + delivery

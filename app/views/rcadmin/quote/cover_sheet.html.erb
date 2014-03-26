@@ -83,79 +83,79 @@
           <tr>
             <td>&nbsp;</td>
             <td>CABINET</td>
-            <td>$ <%= @quote_products_sum.values.sum %></td>
+            <td>$ <%= @quote.cabinet_total %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>LAMINATE TOPS</td>
-            <td>$ <%= 00 %></td>
+            <td>$ <%= @quote.laminate_top_total %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>CORIAN</td>
-            <td>$ <%= 00 %></td>
+            <td>$ <%= @quote.corian %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>PRODUCTION TOTAL</td>
-            <td>$ <%= @quote_products_sum.values.sum %></td>
+            <td>$ <%= @quote.product_total %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
-            <td>KEY59%</td>
-            <td>$ <%= key59 = @quote_products_sum.values.sum / 100 * 50 %></td>
+            <td>KEY<%= @quote.percentage %>%</td>
+            <td>$ <%= @quote.percentage_value %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>FACTOR</td>
-            <td>$ (<%= factor = ( 100 / 1.2 ).round(2) %>)</td>
+            <td>$ <%= @quote.factor %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>PRE TAX</td>
-            <td>$ <%= pre_tax = (key59 - factor).round(2) %></td>
+            <td>$ <%= @quote.pre_tax %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>TAX 8.0%</td>
-            <td>$ <%=  tax = (pre_tax / 100 * 8.0).round(2) %></td>
+            <td>$ <%= @quote.tax_value %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>SUB TOTAL</td>
-            <td>$ <%=  total = (pre_tax + tax).round(2) %></td>
+            <td>$ <%= @quote.sub_total %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>DELIVERY</td>
-            <td>$ 150</td>
+            <td>$ <%= @quote.delivery %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>Labor</td>
+            <td><%= @quote.labor %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>Mics</td>
+            <td><%= @quote.extra_misc %></td>
           </tr>
 
           <tr>
             <td>&nbsp;</td>
             <td>TOTAL</td>
-            <td>$ <%=  total %></td>
+            <td>$ <%=  @quote.grand_total %></td>
           </tr>
         </table>
 

@@ -118,60 +118,60 @@ $(document).ready(function() {
       };
 
       this.percentageValue = function() {
-        return ( this.productTotal() / 100 * this.percentage() ).toFixed(2);
+        return ( this.productTotal() / 100 * this.percentage() );
       };
 
       this.factor = function() {
-        return Number( $('.quote-factor').text() ) || 1.2;
+        return ( Number( $('.quote-factor').text() ) || 1.2 );
       };
 
       this.factorValue = function() {
-        return ( ( this.percentageValue() * this.factor() ) - ( this.taxValue() + this.delivery() ) ).toFixed(2)
+        return ( ( this.percentageValue() * this.factor() ) - ( this.taxValue() + this.delivery() ) )
       };
 
       this.preTax = function() {
-        return ( this.percentageValue() * this.factor() * this.corian() + this.miscs() )
+        return ( this.percentageValue() + this.factor() + this.corian() + this.miscs() );
       };
 
       this.taxPercentage = function() {
-        return ( Number( $('.quote-tax-percentage').text() ) * 1.0 ) || 1.0;
+        return ( ( parseFloat( $('.quote-tax-percentage').text() ) * 1.0 ) || 1);
       };
 
       this.taxValue = function() {
-        return this.preTax() / 100 * this.taxPercentage();
+        return ( this.preTax() / 100 * this.taxPercentage() );
       };
 
       this.subTotal = function() {
-        return this.preTax() + this.taxValue();
+        return ( this.preTax() + this.taxValue() );
       };
 
       this.labor = function() {
-        return ( Number( $('.labor-total').val() ) * 1.0) || 0.0;
+        return ( ( parseFloat( $('.labor-total').val() ) * 1.0) || 0.0 );
       };
 
       this.delivery = function() {
-        return ( this.subTotal() / 5000.0 + 1 ) * 75;
+        return ( ( this.subTotal() / 5000.0 + 1 ) * 75 );
       };
 
       this.corian = function() {
-        return ( Number( $('.corian-total').val() ) * 1.0 );
+        return ( parseFloat( $('.corian-total').val() ) * 1.0 );
       };
 
       this.grandTotal = function() {
-        return this.subTotal() + this.delivery() + this.labor();
+        return ( this.subTotal() + this.delivery() + this.labor() );
       };
 
       this.miscs = function() {
-        return ( Number( $('.misc-total').text() ) * 1.0) || 0.0;
+        return ( ( parseFloat( $('.misc-total').text() ) * 1.0) || 0.0);
       };
 
       this.updateDOM = function() {
         $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
-        $('.laminate-top-total').text( this.laminateTopTotal() );
+        $('.laminate-top-total').text( this.laminateTopTotal().toFixed(2) );
         $('.product-total').text( this.productTotal().toFixed(2) );
-        $('.percentage-total').text( this.percentageValue() );
-        $('.factor-total').text( this.factorValue() );
-        $('.cabinet-total').text( this.cabinetTotal() );
+        $('.percentage-total').text( this.percentageValue().toFixed(2) );
+        $('.factor-total').text( this.factorValue().toFixed(2) );
+        $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
         // $('.corian-total').val( this.corian() );
         $('.pre-tax-total').text( this.preTax().toFixed(2) );
         $('.tax-total').text( this.taxValue().toFixed(2) );

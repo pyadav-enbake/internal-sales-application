@@ -54,6 +54,74 @@
         <div id="err_msg"></div>
 
         <div class="row">
+          <div class="col-sm-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cabinet</td>
+                  <td class="cabinet-total"></td>
+                </tr>
+                <tr>
+                  <td>Laminate tops</td>
+                  <td class="laminate-tops-total"></td>
+                </tr>
+                <tr>
+                  <td>Product total</td>
+                  <td class="product-total"></td>
+                </tr>
+                <tr>
+                  <td><span class="quote-percentage"><%= @quote.percentage %></span>%</td>
+                  <td class="percentage-total"></td>
+                </tr>
+                <tr>
+                  <td>Factor(<span class="quote-factor"><%= @quote.factor %></span>)</td>
+                  <td class="factor-total"></td>
+                </tr>
+                <tr>
+                  <td>Corian</td>
+                  <td><input type="text" class="corian-total" value="1.0" name="quote[miscs][corian]"/></td>
+                </tr>
+                <tr>
+                  <td>MISC</td>
+                  <td class="misc-total"></td>
+                </tr>
+                <tr>
+                  <td>Pre Tax</td>
+                  <td class="pre-tax-total"></td>
+                </tr>
+                <tr>
+                  <td>Tax <span class="quote-tax-percentage"><%= @quote.tax_percentage %></span>%</td>
+                  <td class="tax-total"></td>
+                </tr>
+                <tr>
+                  <td>Subtotal</td>
+                  <td class="subtotal-total"></td>
+                </tr>
+                <tr>
+                  <td>Labor</td>
+                  <td><input type="text" class="labor-total" name="quote[miscs][labor]"/></td>
+                </tr>
+                <tr>
+                  <td>Delivery</td>
+                  <td class="delivery-total"></td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td class="grand-total"></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+
+        <div class="row">
           <label class="col-sm-3 control-label">Sales Closing Potential</label>
           <div class="col-sm-6">
             <%= select(:quote, :sales_closing_potential, Rcadmin::Quote::RATING.my_hash.invert, {selected: 3}, {:class => 'form-control'}) %>

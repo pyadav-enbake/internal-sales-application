@@ -96,6 +96,103 @@ $(document).ready(function() {
     };
 
     window.total_price_calculator = productsSum;
+    window.QuoteCalculator = QuoteCalculator;
+
+
+    function QuoteCalculator() {
+
+      this.cabinetTotal = function() {
+        return productsSum();
+      };
+
+      this.laminateTopTotal = function() {
+        return 0.0;
+      };
+
+      this.productTotal = function() {
+        return this.cabinetTotal() + this.laminateTopTotal();
+      };
+
+      this.percentage = function() {
+        return Number($('.quote-percentage').text()) || 59;
+      };
+
+      this.percentageValue = function() {
+        return ( this.productTotal() / 100 * this.percentage() ).toFixed(2);
+      };
+
+      this.factor = function() {
+        return Number( $('.quote-factor').text() ) || 1.2;
+      };
+
+      this.factorValue = function() {
+        return ( ( this.percentageValue() * this.factor() ) - ( this.taxValue() + this.delivery() ) ).toFixed(2)
+      };
+
+      this.preTax = function() {
+        return ( this.percentageValue() * this.factor() * this.corian() + this.miscs() )
+      };
+
+      this.taxPercentage = function() {
+        return ( Number( $('.quote-tax-percentage').text() ) * 1.0 ) || 1.0;
+      };
+
+      this.taxValue = function() {
+        return this.preTax() / 100 * this.taxPercentage();
+      };
+
+      this.subTotal = function() {
+        return this.preTax() + this.taxValue();
+      };
+
+      this.labor = function() {
+        return ( Number( $('.labor-total').val() ) * 1.0) || 0.0;
+      };
+
+      this.delivery = function() {
+        return ( this.subTotal() / 5000.0 + 1 ) * 75;
+      };
+
+      this.corian = function() {
+        return ( Number( $('.corian-total').val() ) * 1.0 );
+      };
+
+      this.grandTotal = function() {
+        return this.subTotal() + this.delivery() + this.labor();
+      };
+
+      this.miscs = function() {
+        return ( Number( $('.misc-total').text() ) * 1.0) || 0.0;
+      };
+
+      this.updateDOM = function() {
+        $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
+        $('.laminate-top-total').text( this.laminateTopTotal() );
+        $('.product-total').text( this.productTotal().toFixed(2) );
+        $('.percentage-total').text( this.percentageValue() );
+        $('.factor-total').text( this.factorValue() );
+        $('.cabinet-total').text( this.cabinetTotal() );
+        // $('.corian-total').val( this.corian() );
+        $('.pre-tax-total').text( this.preTax().toFixed(2) );
+        $('.tax-total').text( this.taxValue().toFixed(2) );
+        $('.subtotal-total').text( this.subTotal().toFixed(2) );
+        // $('.labor-total').val( this.labor() );
+        $('.delivery-total').text( this.delivery().toFixed(2) );
+        $('.grand-total').text( this.grandTotal().toFixed(2) );
+      };
+
+    } // class QuoteCalulator ends
+
+
+
+    var quote = new QuoteCalculator();
+    $('.corian-total, .labor-total').keyup(function(evt) {
+      $(this).trigger('change');
+    });
+
+    $('.corian-total, .labor-total').change(function(evt) {
+      quote.updateDOM();
+    });
 
   })();
   
@@ -259,6 +356,9 @@ function total_resend_item_price_count(formid){
 
 function check_product(){
     var totp = $("#total_price").text();
+
+    var quote = new QuoteCalculator();
+    quote.updateDOM();
     if(parseInt(totp) == 0){
         //$("#myModal1").modal({ backdrop: 'static',keyboard: false});
         $('#myModal1').modal('show');

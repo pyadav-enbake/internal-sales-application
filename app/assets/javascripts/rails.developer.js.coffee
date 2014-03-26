@@ -8,6 +8,7 @@ jQuery ->
 
 
   do ->
+
     $form = $('form.new-misc-product')
 
     $form.on 'submit', (evt) ->
@@ -25,6 +26,13 @@ jQuery ->
       url = $form.attr('action')
       $.post(url, data, null, 'script')
 
+  miscsInputs = {}
+  miscsSum = ->
+    sum = 0
+    for name, value of miscsInputs
+      sum += value
+    sum
+
   quoteMiscs = ->
     fieldName = $('.misc-field-name').val()
     if fieldName.length
@@ -37,6 +45,12 @@ jQuery ->
       $inputWrapper.append($input)
       $div.append($label)
       $div.append($inputWrapper)
+
+      $input.on 'keyup', (evt) ->
+        miscsInputs[$(this).attr('name')] = Number($(this).val())
+        $('.misc-total').text(miscsSum())
+        new QuoteCalculator().updateDOM()
+
 
       $('.misc-fields').append($div)
       $('.misc-fields').append('<br />')

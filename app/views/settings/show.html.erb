@@ -1,0 +1,51 @@
+<div id="page-heading">
+  <ol class="breadcrumb">
+    <li><%=link_to "General Setting","#"%></li>
+    <li><%=link_to "Coversheet", settings_path %></li>
+  </ol>
+
+  <h1>Settings</h1>
+</div>
+<% if alert %>
+  <div class="alert alert-dismissable alert-danger">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+<% end %>
+<%if flash[:notice] %>
+  <div class="alert alert-dismissable alert-success">
+    <strong>Well done!</strong> <%=flash[:notice]%>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+                <%end%>
+                <div class="container">
+
+                  <div class="row">
+
+                    <div class="col-md-12">
+
+                      <div class="panel panel-sky">
+                        <div class="panel-heading">
+
+                          <h4>Settings</h4>
+                          
+                        </div>
+
+                        <div class="panel-body collapse in">
+
+                          <%= form_tag settings_path, method: :put, html: { class: 'form' } do %>
+                            <div class="form-group">
+                              <label for="coversheet_percentage">Coversheet Percentage</label>
+                              <%= text_field_tag :coversheet_percentage, AdminSetting[:coversheet_percentage], class: 'form-control '%>
+                            </div>
+                            <div class="form-group">
+                              <%= submit_tag "Update Settings", class: 'btn btn-primary' %>
+                            </div>
+
+                          <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div> <!-- container -->

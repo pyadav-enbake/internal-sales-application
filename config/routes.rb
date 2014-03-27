@@ -6,6 +6,12 @@ RomarCabinates::Application.routes.draw do
   end
 
 
+  scope :admin do
+    resource :settings
+  end
+  
+
+
   namespace :rcadmin do
     put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
     resources :countertop_designs

@@ -9,4 +9,9 @@ class MiscProduct < ActiveRecord::Base
   validates :price, numericality: true, allow_blank: true
 
   attr_protected :id
+
+  def customer_wording
+    wording = read_attribute(:customer_wording)
+    wording.presence || title
+  end
 end

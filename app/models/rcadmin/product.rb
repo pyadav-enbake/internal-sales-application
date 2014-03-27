@@ -10,6 +10,12 @@ class Rcadmin::Product < ActiveRecord::Base
 
   #scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 
+
+  def customer_wording
+    wording = read_attribute(:customer_wording)
+    wording.presence || title
+  end
+
   def self.base_products
     @base_subcategory ||= begin 
       base_subcategory = Rcadmin::Subcategory.find_by(name: "Base")

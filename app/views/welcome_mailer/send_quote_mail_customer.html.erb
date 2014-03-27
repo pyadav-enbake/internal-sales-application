@@ -529,7 +529,7 @@
                                                                 <% next if quote_product.hidden? %>
                                                                 <!-- PRODUCTS -->
                                                                 <tr>
-                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.title %></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.customer_wording %></td>
                                                                   <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$<%= quote_product.total_price %></td>
                                                                   <% total += quote_product.total_price %>
                                                                 </tr>
@@ -631,7 +631,7 @@
                                                                 <% next if quote_product.hidden? %>
                                                                 <!-- PRODUCTS -->
                                                                 <tr>
-                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.title %></td>
+                                                                  <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><%= quote_product.product.customer_wording %></td>
                                                                   <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">$<%= quote_product.total_price %></td>
                                                                   <% total += quote_product.total_price %>
                                                                 </tr>

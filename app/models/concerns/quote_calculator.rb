@@ -17,7 +17,7 @@ module QuoteCalculator
   end
 
   def percentage
-    59 # TODO use db for 59 so super admin can control
+    ::AdminSetting[:coversheet_percentage] 
   end
 
   def percentage_value

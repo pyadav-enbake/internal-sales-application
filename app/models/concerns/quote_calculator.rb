@@ -17,39 +17,49 @@ module QuoteCalculator
   end
 
   def percentage
-    ::AdminSetting[:coversheet_percentage] 
+    ::AdminSetting[:coversheet_percentage]
   end
 
   def percentage_value
-    @percentage_value ||= ( product_total / 100 * percentage ).to_f.round(2)
+    percentage / 100.0
   end
 
   def factor
     miscs && miscs['factor'].to_f.round(2) || 0.0
   end
 
+  def grand_total
+    @grand_total ||= (product_total * percentage_value * factor + extra_misc + corian + labor).round
+  end
+
+  def sub_total
+    @sub_total ||= ( grand_total - delivery ).to_f.round(2)
+  end
+
+  def pre_tax
+    @pre_tax ||= ( sub_total / (1 +  tax_percentage) ).to_f.round(2)
+  end
+
+  def percentage_value
+    @percentage_value ||= ( product_total * percentage_value ).to_f.round(2)
+  end
+
+  def delivery
+    @deliver ||= ( ( grand_total / 5000  + 1 ) * 75 ).to_f.round(2)
+  end
+
+
   def factor_value
     @factor_value ||= ( ( percentage_value * factor ) - ( tax + delivery ) ).to_f.round(2)
   end
 
-  def pre_tax
-    @pre_tax ||= ( percentage_value + factor + corian + extra_misc ).to_f.round(2)
-  end
 
   def tax_percentage
     8.0
   end
 
   def tax_value
-    @tax_value ||= ( pre_tax / 100 * tax_percentage ).to_f.round(2)
-  end
-
-  def sub_total
-    @sub_total ||= ( pre_tax + tax_value ).to_f.round(2)
-  end
-
-  def delivery
-    @deliver ||= ( ( sub_total / 5000  + 1 ) * 75 ).to_f.round(2)
+    @tax_value ||= ( pre_tax * tax_percentage / 100.0).to_f.round(2)
   end
 
   def corian
@@ -62,11 +72,6 @@ module QuoteCalculator
 
   def extra_misc
     miscs && miscs.except("corian", "labor", "factor").values.map(&:to_f).sum || 0.0
-  end
-
-
-  def grand_total
-    sub_total + delivery
   end
 
   module ClassMethods

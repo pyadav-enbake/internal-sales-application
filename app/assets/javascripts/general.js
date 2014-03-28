@@ -122,7 +122,7 @@ $(document).ready(function() {
       };
 
       this.factor = function() {
-        return ( Number( $('.factor-total').val() ) || 1.0 );
+        return ( Number( $('.factor-total').val() ) || 0.0 );
       };
 
       this.factorValue = function() {
@@ -134,7 +134,7 @@ $(document).ready(function() {
       };
 
       this.taxPercentage = function() {
-        return ( ( parseFloat( $('.quote-tax-percentage').text() ) * 1.0 ) || 1);
+        return ( ( parseFloat( $('.quote-tax-percentage').text() ) * 1.0 ) || 0.0);
       };
 
       this.taxValue = function() {
@@ -146,7 +146,7 @@ $(document).ready(function() {
       };
 
       this.labor = function() {
-        return ( ( parseFloat( $('.labor-total').val() ) * 1.0) || 0.0 );
+        return ( ( parseFloat( $('.labor-total').val() ) ) || 0.0 );
       };
 
       this.delivery = function() {
@@ -154,7 +154,7 @@ $(document).ready(function() {
       };
 
       this.corian = function() {
-        return ( parseFloat( $('.corian-total').val() ) * 1.0 ) || 1.0;
+        return ( parseFloat( $('.corian-total').val() ) * 1.0 ) || 0.0;
       };
 
       this.grandTotal = function() {

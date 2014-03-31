@@ -10,6 +10,8 @@ class MiscProduct < ActiveRecord::Base
 
   attr_protected :id
 
+  def type; end
+
   def customer_wording
     wording = read_attribute(:customer_wording)
     wording.presence || title

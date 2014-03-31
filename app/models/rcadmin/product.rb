@@ -1,7 +1,7 @@
 class Rcadmin::Product < ActiveRecord::Base
   validates_presence_of :subcategory_id,:title,:price,:measurement_type,:status
   attr_accessible :subcategory_id, :title, :measurement_type, :price,
-    :description, :status, :customer_wording
+    :description, :status, :customer_wording, :type
 
   belongs_to :subcategory 
   #belongs_to :category 
@@ -10,6 +10,18 @@ class Rcadmin::Product < ActiveRecord::Base
 
   #scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 
+
+  # TYPES
+  self.inheritance_column = nil
+  ['percentage', 'wood'].each do |type|
+    # defining scopes
+    scope type, -> { where(type: type) } 
+
+    # defining suffix
+    define_method "#{type}?" do
+      self.type == type
+    end
+  end
 
   def customer_wording
     wording = read_attribute(:customer_wording)

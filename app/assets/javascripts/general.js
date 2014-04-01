@@ -75,9 +75,18 @@ $(document).ready(function() {
       } else {
 
         var price = Number($parent.find('.price').text());
-        products[id] = price * quantity;
+        var isPercentage = $(this).hasClass('percentage');
+        if(isPercentage) {
+          price = woodProductsTotal();
+          quantity = productPercentage($(this).data('measurement'));
+        }
+        products[id] = {
+          totalPrice: price * quantity,
+          isWood: $(this).hasClass('wood'),
+          percentage: (isPercentage ?  quantity : 0)
+        };
 
-        var totalProductPrice = products[id].toFixed(2);
+        var totalProductPrice = products[id].totalPrice.toFixed(2);
         $parent.find('.total-price-text').text(totalProductPrice);
         $parent.find('.total-price-field').val(totalProductPrice);
       }
@@ -86,11 +95,36 @@ $(document).ready(function() {
     });
 
 
-    // Using colsure to bring in products object (which is productId with total cose)
-    productsSum = function() {
+    var productPercentage = function(percentageString) {
+      var percentage = percentageString.replace(/^%/, '')
+      return parseInt(percentage) / 100
+    };
+
+    var woodProductsTotal = function() {
       var sum = 0.0;
       for(var key in products) {
-        sum += products[key];
+        if(products[key].isWood) {
+          sum += products[key].totalPrice
+        }
+      }
+      return sum;
+    };
+
+
+    // Using colsure to bring in products object (which is productId with total cose)
+    var productsSum = function() {
+      var sum = 0.0;
+      for(var key in products) {
+
+        if(products[key].percentage) {
+          products[key].totalPrice = woodProductsTotal() * products[key].percentage;
+          var $elem = $('.percentage#' + key);
+          var $parent = $elem.closest('tr');
+          var totalProductPrice = products[key].totalPrice.toFixed(2);
+          $parent.find('.total-price-text').text(totalProductPrice);
+          $parent.find('.total-price-field').val(totalProductPrice);
+        }
+        sum += products[key].totalPrice;
       }
       return sum;
     };

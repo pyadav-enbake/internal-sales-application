@@ -3,7 +3,7 @@
   <input type="hidden" name="<%= quote_product_attr.call(:category_id) %>" value="<%= cat.id %>" />
   <input type="hidden" name="<%= quote_product_attr.call(:product_type) %>" value="<%= product.class.name %>" />
   <input type="hidden" name="<%= quote_product_attr.call(:product_id) %>" value="<%= product.id %>" />
-  <td><input type="text" name="<%= quote_product_attr.call(:quantity) %>" id="<%= "#{cat.id}#{product.id}" %>" style="width: 30px;" value="" class="quantity" onkeypress="return isNumber(event)"></td>
+  <td><input type="text" name="<%= quote_product_attr.call(:quantity) %>" id="<%= "#{cat.id}#{product.id}" %>" style="width: 30px;" value="" class="quantity <%= product.type %>" data-measurement="<%= product.measurement_type %>"onkeypress="return isNumber(event)"></td>
   <td></td>
   <td><%= product.title %></td>
   <td id="price">$<span class="price"><%= product.price %></span></td>

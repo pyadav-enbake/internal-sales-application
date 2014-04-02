@@ -12,15 +12,17 @@ class Rcadmin::Product < ActiveRecord::Base
 
 
   # TYPES
-  self.inheritance_column = nil
-  ['percentage', 'wood'].each do |type|
-    # defining scopes
-    scope type, -> { where(type: type) } 
+  TYPES = ['wood-percentage', 'maple-percentage', 'wood', 'maple']
+  def types=(types)
+    self.types_masking = (types & TYPES).map { |type| 2**TYPES.index(type) }.sum
+  end
 
-    # defining suffix
-    define_method "#{type}?" do
-      self.type == type
-    end
+  def types
+    TYPES.reject { |type| ((types_masking || 0) & 2**TYPES.index(type)).zero? }
+  end
+
+  def type
+    types.join(" ")
   end
 
   def customer_wording

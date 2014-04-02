@@ -24,12 +24,23 @@ task import_categories: :environment do
           price: row[price].to_s.try(:strip).sub(/^\$/, ''),
           customer_wording: row[customer_wording].to_s.try(:strip),
           wood: row[wood].to_s.strip.present?,
+          maple: row[maple].to_s.strip.present?,
           status: 0
         }
 
 
-        product_type = value[:measurement_type].match(/\d{2}%/) ?  'percentage' : ( value[:wood] == true ? 'wood' : '')
-        p value
+        types = []
+        types << 'wood' if value[:wood]
+        types << 'maple' if value[:maple]
+
+        if value[:measurement_type].match(/\d{2}%/)
+          if value[:title].match(/maple/i)
+            types << 'maple-percentage'
+          else
+            types << 'wood-percentage'
+          end
+        end
+
         category_name = value[:category]
         next if category_name.blank? or value[:title].blank? or value[:measurement_type].blank?
 
@@ -43,7 +54,8 @@ task import_categories: :environment do
           product = category.products.where(
             value.slice(:title, :measurement_type, :price, :description, :customer_wording, :status)
           ).first_or_create!
-          product.update(type: product_type)
+          product.types = types
+          product.save!
           
           puts product.customer_wording
         end

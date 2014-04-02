@@ -75,15 +75,20 @@ $(document).ready(function() {
       } else {
 
         var price = Number($parent.find('.price').text());
-        var isPercentage = $(this).hasClass('percentage');
-        if(isPercentage) {
+        var isWoodPercentage  = $(this).hasClass('wood-percentage');
+        var isMaplePercentage = $(this).hasClass('maple-percentage');
+        if(isWoodPercentage) {
           price = woodProductsTotal();
+          quantity = productPercentage($(this).data('measurement'));
+        } else if (isMaplePercentage) {
+          price = mapleProductsTotal();
           quantity = productPercentage($(this).data('measurement'));
         }
         products[id] = {
           totalPrice: price * quantity,
           isWood: $(this).hasClass('wood'),
-          percentage: (isPercentage ?  quantity : 0)
+          isMaple: $(this).hasClass('maple'),
+          percentage: ( ( isWoodPercentage || isMaplePercentage ) ?  quantity : 0 )
         };
 
         var totalProductPrice = products[id].totalPrice.toFixed(2);
@@ -110,6 +115,15 @@ $(document).ready(function() {
       return sum;
     };
 
+    mapleProductsTotal = function() {
+      var sum = 0.0;
+      for(var key in products) {
+        if(products[key].isMaple) {
+          sum += products[key].totalPrice;
+        }
+      }
+    };
+
 
     // Using colsure to bring in products object (which is productId with total cose)
     var productsSum = function() {
@@ -118,7 +132,7 @@ $(document).ready(function() {
 
         if(products[key].percentage) {
           products[key].totalPrice = woodProductsTotal() * products[key].percentage;
-          var $elem = $('.percentage#' + key);
+          var $elem = $('.maple-percentage#' + key + ' , .wood-percentage#' + key);
           var $parent = $elem.closest('tr');
           var totalProductPrice = products[key].totalPrice.toFixed(2);
           $parent.find('.total-price-text').text(totalProductPrice);

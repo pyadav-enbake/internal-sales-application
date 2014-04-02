@@ -16,20 +16,20 @@ module QuoteCalculator
     @product_total ||= ( cabinet_total + laminate_top_total ).to_f.round(2)
   end
 
+  def grand_total
+    @grand_total ||= (product_total * percentage_value * factor + extra_misc + corian + labor).round
+  end
+
   def percentage
     ::AdminSetting[:coversheet_percentage]
   end
 
   def percentage_value
-    percentage / 100.0
+    @percentage_value ||=  ( percentage / 100.0 ).round(2)
   end
 
   def factor
-    miscs && miscs['factor'].to_f.round(2) || 0.0
-  end
-
-  def grand_total
-    @grand_total ||= (product_total * percentage_value * factor + extra_misc + corian + labor).round
+    miscs && miscs['factor'].to_f.round(2) || 1.0
   end
 
   def sub_total
@@ -37,11 +37,7 @@ module QuoteCalculator
   end
 
   def pre_tax
-    @pre_tax ||= ( sub_total / (1 +  tax_percentage) ).to_f.round(2)
-  end
-
-  def percentage_value
-    @percentage_value ||= ( product_total * percentage_value ).to_f.round(2)
+    @pre_tax ||= ( sub_total / (1 +  tax_percentage / 100.0) ).to_f.round(2)
   end
 
   def delivery
@@ -50,7 +46,7 @@ module QuoteCalculator
 
 
   def factor_value
-    @factor_value ||= ( ( percentage_value * factor ) - ( tax + delivery ) ).to_f.round(2)
+    @factor_value ||= ( pre_tax - percentage_value )
   end
 
 

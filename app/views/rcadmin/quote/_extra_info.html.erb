@@ -81,7 +81,10 @@
                 </tr>
                 <tr>
                   <td>Factor(<span class="quote-factor"><%= @quote.factor %></span>)</td>
-                  <td ><input type=text" value="1.0" name="quote[miscs][factor]" class="factor-total form-control" /></td>
+                  <td >
+                    <input type=text" value="<%= @quote.factor || 1.0 %>" name="quote[miscs][factor]" class="factor-total form-control" />
+                  <span class="factor-calculated-value"><%= @quote.factor_value %></span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Corian</td>

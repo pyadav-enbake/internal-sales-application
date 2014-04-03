@@ -221,6 +221,7 @@ $(document).ready(function() {
         $('.product-total').text( this.productTotal().toFixed(2) );
         $('.percentage-total').text( this.percentageValue().toFixed(2) );
         $('.factor-total').text( this.factorValue().toFixed(2) );
+        $('.factor-calculated-value').text( this.factorValue().toFixed(2) );
         $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
         // $('.corian-total').val( this.corian() );
         $('.pre-tax-total').text( this.preTax().toFixed(2) );

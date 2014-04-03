@@ -17,7 +17,7 @@ module QuoteCalculator
   end
 
   def grand_total
-    @grand_total ||= (product_total * percentage_value * factor + extra_misc + corian + labor).round
+    @grand_total ||= (product_total * (percentage/100.0) * factor + extra_misc + corian + labor).round
   end
 
   def percentage
@@ -25,11 +25,11 @@ module QuoteCalculator
   end
 
   def percentage_value
-    @percentage_value ||=  ( percentage / 100.0 ).round(2)
+    @percentage_value ||=  ( percentage / 100.0 * product_total ).round(2)
   end
 
   def factor
-    miscs && miscs['factor'].to_f.round(2) || 1.0
+    miscs && miscs['factor'].to_f.round(4) || 1.0
   end
 
   def sub_total

@@ -11,6 +11,7 @@
           <div class="form-group misc-errors"></div>
           <%= f.hidden_field :quote_id, value: @quote.id %>
           <% f.hidden_field :status, value: 0 %>
+          <%= f.hidden_field :measurement_type, value: 'EA ', class: 'form-control', placeholder: 'Enter measurement type' %>
           <div class="form-group">
             <label for="title">Title</label>
             <%= f.text_field :title, class: 'form-control', placeholder: 'Enter title' %>
@@ -26,10 +27,6 @@
             <%= f.text_field :price, class: 'form-control', placeholder: 'Enter price' %>
           </div>
 
-          <div class="form-group">
-            <label for="measurement_type">Measurement Type</label>
-            <%= f.text_field :measurement_type, class: 'form-control', placeholder: 'Enter measurement type' %>
-          </div>
 
           <div class="form-group">
             <label for="customer_wording">Customer Wording</label>

@@ -51,7 +51,7 @@ task import_categories: :environment do
           category = Rcadmin::Subcategory.where("LOWER(name) = ?", category_name.downcase).
             first_or_create!(name: category_name, status: 0)
 
-          product = category.products.where(
+          product = category.cabinet_products.where(
             value.slice(:title, :measurement_type, :price, :description, :customer_wording, :status)
           ).first_or_create!
           product.types = types

@@ -10,6 +10,7 @@ class Rcadmin::Product < ActiveRecord::Base
 
   #scope :find_by_category, ->(category_id) { where(:category_id=>category_id) }
 
+  self.inheritance_column = 'kind'
 
   # TYPES
   TYPES = ['wood-percentage', 'maple-percentage', 'wood', 'maple']

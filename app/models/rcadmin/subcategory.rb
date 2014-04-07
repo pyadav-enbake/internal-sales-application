@@ -4,6 +4,8 @@ class Rcadmin::Subcategory < ActiveRecord::Base
   attr_accessible :name,:status
 
   #belongs_to :category 
-  has_many :products,dependent: :destroy
+  has_many :products, dependent: :destroy
+  has_many :cabinet_products, dependent: :destroy
+  has_many :laminate_products, dependent: :destroy
 	
 end

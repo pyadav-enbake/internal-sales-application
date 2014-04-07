@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402112850) do
+ActiveRecord::Schema.define(version: 20140407145915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20140402112850) do
     t.integer  "quote_id"
     t.integer  "product_id"
     t.integer  "category_id"
-    t.integer  "quantity"
+    t.float    "quantity",                default: 0.0
     t.float    "total_price"
     t.integer  "status",        limit: 2
     t.string   "header_option",           default: "No"

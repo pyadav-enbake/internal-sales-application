@@ -63,7 +63,7 @@ $(document).ready(function() {
     var products = {}; 
 
     $('#subtabs').on('keyup', '.quantity', function(evt) {
-      var quantity = parseInt($(this).val(), 10);
+      var quantity = Number($(this).val());
       var id = $(this).attr('id');
       var $parent = $(this).closest('tr');
 

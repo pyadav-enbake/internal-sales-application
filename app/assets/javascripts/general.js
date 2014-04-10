@@ -62,7 +62,8 @@ $(document).ready(function() {
 
     var products = {}; 
 
-    $('#subtabs').on('keyup', '.quantity', function(evt) {
+    $('#cabinet, #laminate').on('keyup', '.quantity', function(evt) {
+
       var quantity = Number($(this).val());
       var id = $(this).attr('id');
       var $parent = $(this).closest('tr');
@@ -77,25 +78,42 @@ $(document).ready(function() {
         var price = Number($parent.find('.price').text());
         var isWoodPercentage  = $(this).hasClass('wood-percentage');
         var isMaplePercentage = $(this).hasClass('maple-percentage');
+        var isCabinet = $(this).hasClass('cabinet');
+
+        var delegatedTarget = $(evt.delegateTarget).attr('id');
+
         if(isWoodPercentage) {
-          price = woodProductsTotal();
-          quantity = productPercentage($(this).data('measurement'));
-        } else if (isMaplePercentage) {
-          price = mapleProductsTotal();
+          price = woodProductsTotal()[delegatedTarget];
           quantity = productPercentage($(this).data('measurement'));
         }
+
+        if (isMaplePercentage) {
+          price = mapleProductsTotal()[delegatedTarget];
+          console.log( price );
+          quantity = productPercentage($(this).data('measurement'));
+        }
+
+        console.log(price, quantity);
         products[id] = {
           totalPrice: price * quantity,
           isWood: $(this).hasClass('wood'),
           isMaple: $(this).hasClass('maple'),
+          isCabinet: isCabinet,
           percentage: ( ( isWoodPercentage || isMaplePercentage ) ?  quantity : 0 )
         };
+
+        console.log( woodProductsTotal() );
+        console.log( products );
 
         var totalProductPrice = products[id].totalPrice.toFixed(2);
         $parent.find('.total-price-text').text(totalProductPrice);
         $parent.find('.total-price-field').val(totalProductPrice);
+
       }
-      var totalPrice = productsSum().toFixed(2)
+      var total = countProductTotal();
+      $('#cabinet-total').text(total.cabinet);
+      $('#laminate-total').text(total.laminate);
+      var totalPrice = (total.cabinet + total.laminate).toFixed(2)
       $('#total_price').text(totalPrice);
     });
 
@@ -106,22 +124,60 @@ $(document).ready(function() {
     };
 
     var woodProductsTotal = function() {
-      var sum = 0.0;
+      var sum = {cabinet: 0.0, laminate: 0.0};
       for(var key in products) {
-        if(products[key].isWood) {
-          sum += products[key].totalPrice
+        var product = products[key];
+        if( product.isCabinet && product.isWood ) {
+            sum.cabinet += product.totalPrice
+        } else if( product.isWood ) {
+          sum.laminate += product.totalPrice
         }
       }
       return sum;
     };
 
+
     mapleProductsTotal = function() {
-      var sum = 0.0;
+      var sum = {cabinet: 0.0, laminate: 0.0};
       for(var key in products) {
-        if(products[key].isMaple) {
-          sum += products[key].totalPrice;
+        var product = products[key];
+        if( product.isCabinet && product.isMaple ) {
+          sum.cabinet += product.totalPrice;
+        } else if( product.isMaple ) {
+          sum.laminate += product.totalPrice;
         }
       }
+      return sum;
+    };
+
+
+    var updatePercentageProducts = function(type, products, key) {
+      if(products[key].isWood) {
+        products[key].totalPrice = woodProductsTotal()[type] * products[key].percentage;
+      }
+      if(products[key].isMaple) {
+        products[key].totalPrice = mapleProductsTotal()[type] * products[key].percentage;
+      }
+      var $elem = $('#'+type).find('.maple-percentage#' + key + ' , .wood-percentage#' + key);
+      var $parent = $elem.closest('tr');
+      var totalProductPrice = products[key].totalPrice.toFixed(2);
+      $parent.find('.total-price-text').text(totalProductPrice);
+      $parent.find('.total-price-field').val(totalProductPrice);
+
+    };
+
+    countProductTotal = function() {
+      var sum = {cabinet: 0.0, laminate: 0.0};
+      for(var key in products) {
+        if(products[key].isCabinet) {
+          // updatePercentageProducts('cabinet', products, key);
+          sum.cabinet += products[key].totalPrice;
+        } else {
+          // updatePercentageProducts('laminate', products, key);
+          sum.laminate += products[key].totalPrice;
+        }
+      }
+      return sum;
     };
 
 
@@ -150,11 +206,11 @@ $(document).ready(function() {
     function QuoteCalculator() {
 
       this.cabinetTotal = function() {
-        return productsSum();
+        return countProductTotal().cabinet;
       };
 
       this.laminateTopTotal = function() {
-        return 0.0;
+        return countProductTotal().laminate;
       };
 
       this.productTotal = function() {
@@ -217,7 +273,7 @@ $(document).ready(function() {
 
       this.updateDOM = function() {
         $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
-        $('.laminate-top-total').text( this.laminateTopTotal().toFixed(2) );
+        $('.laminate-tops-total').text( this.laminateTopTotal().toFixed(2) );
         $('.product-total').text( this.productTotal().toFixed(2) );
         $('.percentage-total').text( this.percentageValue().toFixed(2) );
         $('.factor-total').text( this.factorValue().toFixed(2) );

@@ -107,7 +107,6 @@ class Rcadmin::QuoteController < ApplicationController
     #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
     @search_term = (params[:search] != "") ? params[:search] : ''
     @categories =  @quote.categories # Rooms 
-    @subcategories = Rcadmin::Subcategory.includes(:products) #.limit(5) # Categories
   end
 
   def send_quote

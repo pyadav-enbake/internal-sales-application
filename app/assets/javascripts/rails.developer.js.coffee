@@ -4,6 +4,7 @@ jQuery ->
   $('.show-misc-modal').on 'click', (evt) ->
     evt.preventDefault()
     evt.stopPropagation()
+    $('#misc_product_product_type').val($(this).data('productType'))
     $('#new-misc-product-modal').modal('show')
 
 

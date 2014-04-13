@@ -10,6 +10,15 @@ class MiscProduct < ActiveRecord::Base
 
   attr_protected :id
 
+  attr_accessor :product_type
+
+  self.inheritance_column = 'kind'
+
+  before_save :set_kind
+  def set_kind
+    self.kind = ( self.product_type == 'cabinet' ? "MiscCabinetProduct"  : 'MiscLaminateProduct' )
+  end
+
   def type; end
 
   def customer_wording

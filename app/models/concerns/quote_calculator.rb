@@ -5,11 +5,17 @@ module QuoteCalculator
   end
 
   def cabinet_total
-    @cabinet_total ||= self.quote_products.cabinets.sum(:total_price).to_f.round(2)
+    @cabinet_total ||= (
+      self.quote_products.cabinets.sum(:total_price).to_f +
+      self.quote_products.misc_cabinets.sum(:total_price).to_f
+    ).round(2)
   end
 
   def laminate_top_total
-    @laminate_top_total ||= self.quote_products.laminates.sum(:total_price).to_f.round(2)
+    @laminate_top_total ||= (
+      self.quote_products.laminates.sum(:total_price).to_f + 
+      self.quote_products.misc_laminates.sum(:total_price).to_f
+    )
   end
 
   def product_total

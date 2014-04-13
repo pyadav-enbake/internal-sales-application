@@ -47,7 +47,7 @@ $(document).ready(function() {
 
  // $( "#accordion" ).accordion();
   //$( ".accordion" ).accordion({ collapsible: true });
-  $( "#subtabs" ).tabs();
+  $( ".subtabs" ).tabs();
 
 //fAQ
   $('.showSingle').click(function(){
@@ -93,7 +93,6 @@ $(document).ready(function() {
           quantity = productPercentage($(this).data('measurement'));
         }
 
-        console.log(price, quantity);
         products[id] = {
           totalPrice: price * quantity,
           isWood: $(this).hasClass('wood'),
@@ -101,9 +100,6 @@ $(document).ready(function() {
           isCabinet: isCabinet,
           percentage: ( ( isWoodPercentage || isMaplePercentage ) ?  quantity : 0 )
         };
-
-        console.log( woodProductsTotal() );
-        console.log( products );
 
         var totalProductPrice = products[id].totalPrice.toFixed(2);
         $parent.find('.total-price-text').text(totalProductPrice);

@@ -27,18 +27,8 @@
 
       <div class="tab-pane <%= 'active' if index.zero? %>" id="<%= product_type %>">
 
-        <div id="subtabs" class="tabs-bottom">
+        <div class="subtabs" class="tabs-bottom">
 
-          <div>
-            <ul class="tabs">
-              <% @categories.each_with_index do |room, index|%>
-                <li class="delete-tab">
-                  <a href="#subtabs-<%= "#{product_type}-#{index}" %>"><%= room.name %></a>
-                  <%= content_tag :span, "", data: { url: rcadmin_remove_quote_category_path(@quote, room) } %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
 
           <% @quote.quote_categories.includes(:category).each_with_index do |quote_category, index| %>
             <% room = quote_category.category %>
@@ -49,7 +39,7 @@
               <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
 
               <div id="accordion" class="accordion">
-                <h3>MISCS <a href="#" class="show-misc-modal">Add Misc Product </a></h3>
+                <h3>MISCS <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a></h3>
                 <div>
                   <table class="table">
                     <thead>
@@ -64,14 +54,14 @@
                         <th>Hide</th>
                       </tr>
                     </thead>
-                    <tbody class="misc-products-<%= room.id %>">
+                    <tbody class="misc-products-<%= "#{product_type}-#{room.id}" %>">
                       <%= render partial: 'rcadmin/quote/misc_product',
-                        collection: @quote.misc_products, as: :product, locals: {cat: room, product_type: product_type} %>
+                        collection: @quote.send("misc_#{product_association}".to_sym), as: :product, locals: {cat: room, product_type: product_type} %>
                     </tbody>
                   </table>
                 </div>
 
-                <% Rcadmin::Subcategory.joins(product_association).order(:id).uniq(:id).each_with_index do |subcat, index|%>
+                <% Rcadmin::Subcategory.joins(product_association).includes(product_association).order(:id).uniq(:id).each_with_index do |subcat, index|%>
                   <h3><%= subcat.name %></h3>
                   <div>
                     <% @products = subcat.send(product_association) %>
@@ -101,6 +91,17 @@
             </div>
           <% end %>
 
+          <div>
+            <ul class="tabs">
+              <% @categories.each_with_index do |room, index|%>
+                <li class="delete-tab">
+                  <a href="#subtabs-<%= "#{product_type}-#{index}" %>"><%= room.name %></a>
+                  <%= content_tag :span, "", data: { url: rcadmin_remove_quote_category_path(@quote, room) } %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
         </div>
         <p class="text-center">
           <%= "#{product_type}".titlecase.pluralize %> Total: $<span id="<%= product_type %>-total">0.00</span>
@@ -129,7 +130,7 @@
 </script>
 <style>
   /* force a height so the tabs don't jump as content height changes */
-#subtabs .tabs-spacer { float: left; height: 200px; }
+.subtabs .tabs-spacer { float: left; height: 200px; }
 .tabs-bottom .ui-tabs-nav { clear: left; padding: 0 .2em .2em .2em; }
 .tabs-bottom .ui-tabs-nav li { top: auto; bottom: 0; margin: 0 .2em 1px 0; border-bottom: auto; border-top: 0; }
 .tabs-bottom .ui-tabs-nav li.ui-tabs-active { margin-top: -1px; padding-top: 1px; }

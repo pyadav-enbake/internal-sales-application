@@ -1,9 +1,10 @@
 <% if @misc_product.errors.any? %>
   $('.misc-errors').html('<%= j render(partial: 'errors', locals: {object: @misc_product}) %>');
 <% elsif @misc_product.persisted? %>
+  <% product_type = params[:misc_product][:product_type] %>
   <% @quote.categories.each do |category| %>
-    var classSelector = '.misc-products-<%= category.id %>';
-    var html = '<%= j render(partial: 'rcadmin/quote/misc_product', locals: {product: @misc_product, cat: category, misc: Time.now.to_i}) %>';
+    var classSelector = '.misc-products-<%= "#{product_type}-#{category.id}" %>';
+    var html = '<%= j render(partial: 'rcadmin/quote/misc_product', locals: {product: @misc_product, cat: category, misc: Time.now.to_i, product_type: product_type}) %>';
     $(classSelector).append(html);
   <% end %>
   $('#new-misc-product-modal').modal('hide');

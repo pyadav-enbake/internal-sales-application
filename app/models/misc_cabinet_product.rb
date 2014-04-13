@@ -1,0 +1,2 @@
+class MiscCabinetProduct < MiscProduct
+end

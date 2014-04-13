@@ -8,20 +8,26 @@ class Rcadmin::Quote < ActiveRecord::Base
   
 
   has_many :misc_products, dependent: :destroy
+  has_many :misc_cabinet_products, dependent: :destroy
+  has_many :misc_laminate_products, dependent: :destroy
   has_many :quote_misc_products, dependent: :destroy, through: :misc_products, source: :quote_products
 
   belongs_to :contractor
   belongs_to :customer
   has_many :quote_product, dependent: :destroy # TODO: remove this after replacing all occurences 
-  has_many :quote_products, dependent: :destroy do
-    def cabinets
-      where(product_type: 'CabinetProduct')
-    end
 
-    def laminates
-      where(product_type: 'LaminateProduct')
+  has_many :quote_products, dependent: :destroy do
+    %w(cabinet laminate misc_cabinet misc_laminate).each do |product_type|
+      klass_name = "#{product_type}_product".classify
+      method_name = product_type.pluralize
+
+      define_method method_name do
+        where(product_type: klass_name)
+      end
+
     end
   end
+
   accepts_nested_attributes_for :quote_products, reject_if: proc { |attrs| attrs['quantity'].blank? }
 
 

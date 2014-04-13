@@ -1,0 +1,2 @@
+class MiscLaminateProduct < MiscProduct
+end

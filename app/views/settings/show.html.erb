@@ -36,7 +36,7 @@
                           <%= form_tag settings_path, method: :put, html: { class: 'form' } do %>
                             <div class="form-group">
                               <label for="coversheet_percentage">Coversheet Percentage</label>
-                              <%= text_field_tag :coversheet_percentage, AdminSetting[:coversheet_percentage], class: 'form-control '%>
+                              <%= text_field_tag :coversheet_percentage, @setting.value, class: 'form-control '%>
                             </div>
                             <div class="form-group">
                               <%= submit_tag "Update Settings", class: 'btn btn-primary' %>

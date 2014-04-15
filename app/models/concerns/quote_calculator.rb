@@ -27,7 +27,7 @@ module QuoteCalculator
   end
 
   def percentage
-    ::AdminSetting[:coversheet_percentage]
+    @percentage ||= AdminSetting.find_by(name: 'coversheet_percentage').value.to_f
   end
 
   def percentage_value

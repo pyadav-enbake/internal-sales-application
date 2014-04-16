@@ -5,7 +5,7 @@
   <input type="hidden" name="<%= quote_product_attr.call(:product_id) %>" value="<%= product.id %>" />
   <td><input type="text" name="<%= quote_product_attr.call(:quantity) %>" id="<%= "#{cat.id}#{product.id}" %>" style="width: 30px;" value="" class="quantity <%= "#{product.type} #{product_type}" %>" data-measurement="<%= product.measurement_type %>"onkeypress="return isNumber(event)"></td>
   <td></td>
-  <td><%= product.title %></td>
+  <td class="title"><%= product.title %></td>
   <td id="price">$<span class="price"><%= product.price %></span></td>
   <td id="measure"><%= product.measurement_type %></td>
   <input type="hidden" name="<%= quote_product_attr.call(:total_price) %>" class="total-price-field" value="">

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require ckeditor-jquery
 // = require jquery-1.10.2.min.js
+// = require underscore
 // = require jqueryui-1.10.3.min.js
 // = require bootstrap.min.js
 // = require bootstrap-collapse.js

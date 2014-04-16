@@ -1,6 +1,35 @@
 jQuery ->
 
 
+  $(document).on('click', '.search-products-btn', (evt) ->
+    evt.preventDefault()
+    searchText = $('.search-products-text').val().trim()
+    regex = new RegExp(searchText, 'i')
+    matches = new Object()
+
+    # Clear old search changes and unexpand accordions
+    $('#accordion .ui-widget-content').hide()
+    $(".accordion" ).accordion( "option", "active",-90)
+    $('.ui-accordion-content .table tr').removeAttr('style')
+    
+    # Search each title for search term and highligh it
+    $('.ui-accordion-content .table .title').each (index) ->
+      title = $(this).text().trim()
+      console.log title
+      if regex.test title
+        id = $(this).closest('.ui-accordion-content').attr('id')
+        matches[id] = "##{id}"
+        $(this).parent().css({'background-color': 'yellow'})
+
+
+
+    selector = _.values(matches).join(", ")
+    $(selector).show()
+
+  )
+
+
+
   $('.show-misc-modal').on 'click', (evt) ->
     evt.preventDefault()
     evt.stopPropagation()

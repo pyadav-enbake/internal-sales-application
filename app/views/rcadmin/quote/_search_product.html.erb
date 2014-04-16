@@ -1,4 +1,6 @@
-    <%= form_tag("", method: "post", :id=>"search",:html=>{:class=>"form-horizontal"}) do %>
-      <div class="search_pro"><%=text_field_tag :search, :sender, :value => '',:placeholder => "Enter Title to Search",:class=>"form-control search_pro_in"%>
-      <%=button_tag "Search",:class=>"btn-primary btn"%></div>
-    <%end%>
+<%= form_tag("", method: "post", :id=>"search",:html=>{:class=>"form-horizontal"}) do %>
+  <div class="search_pro">
+    <%= text_field_tag :search, :sender, :value => '' , :placeholder => "Enter Title to Search", :class=>"form-control search_pro_in search-products-text" %>
+    <%= button_tag "Search", :class => "btn-primary btn search-products-btn" %>
+  </div>
+<% end %>

@@ -41,6 +41,13 @@ jQuery ->
         evt.preventDefault()
         if current > 0
           $(window).scrollTop $(selectorArray[--current]).offset().top - 80
+
+      $('.search-cancel').click (evt) ->
+        evt.preventDefault()
+        $(".search-controls").hide()
+        $('.search-products-text').val("")
+        $('#accordion .ui-widget-content').hide()
+        $(window).scrollTop $('.search-products-text').offset().top - 100
         
 
     selector = selectorArray.join(", ")

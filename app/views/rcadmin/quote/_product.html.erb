@@ -8,7 +8,20 @@
     top: -20%;
     display: block;
   }
+
+  span.search-controls {
+    position: fixed;
+    top: 0;
+    left: 45%;
+    z-index: 100000;
+    display: none;
+  }
 </style>
+
+<span class="search-controls">
+  <button class="btn search-prev">Prev</button>
+  <button class="btn search-next">Next</button>
+</span>
 
 <%= render 'search_product' %>
 

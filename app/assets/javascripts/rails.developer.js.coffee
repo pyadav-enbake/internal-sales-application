@@ -9,13 +9,11 @@ jQuery ->
 
     # Clear old search changes and unexpand accordions
     $('#accordion .ui-widget-content').hide()
-    $(".accordion" ).accordion( "option", "active",-90)
     $('.ui-accordion-content .table tr').removeAttr('style')
     
     # Search each title for search term and highligh it
     $('.ui-accordion-content .table .title').each (index) ->
       title = $(this).text().trim()
-      console.log title
       if regex.test title
         id = $(this).closest('.ui-accordion-content').attr('id')
         matches[id] = "##{id}"
@@ -23,8 +21,31 @@ jQuery ->
 
 
 
-    selector = _.values(matches).join(", ")
+
+    selectorArray = _.values(matches)
+
+    navigation = ->
+
+      $(".search-controls").show()
+
+      if selectorArray.length
+        $(window).scrollTop $(selectorArray[0]).offset().top - 80
+
+      current = 0
+      $('.search-next').click (evt) ->
+        evt.preventDefault()
+        if current < ( selectorArray.length - 1 )
+          $(window).scrollTop $(selectorArray[++current]).offset().top - 80
+
+      $('.search-prev').click (evt) ->
+        evt.preventDefault()
+        if current > 0
+          $(window).scrollTop $(selectorArray[--current]).offset().top - 80
+        
+
+    selector = selectorArray.join(", ")
     $(selector).show()
+    navigation()
 
   )
 

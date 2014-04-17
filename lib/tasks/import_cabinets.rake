@@ -34,7 +34,7 @@ task import_cabinets: :environment do
         types << 'maple' if value[:maple]
 
         if value[:measurement_type].match(/\d{2}%/)
-          if value[:title].match(/maple/i)
+          if value[:title].match(/(MAPLE INTERIORS|ALL PLYWOOD CONSTRUCTION)/i)
             types << 'maple-percentage'
           else
             types << 'wood-percentage'

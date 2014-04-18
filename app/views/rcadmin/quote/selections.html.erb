@@ -1,0 +1,90 @@
+<style>
+  .form-control {
+    width: 50%;
+    float: right;
+  }
+</style>
+<div id="page-heading">
+  <ol class="breadcrumb">
+    <li><%=link_to "Quote",rcadmin_display_quotes_path%></li>
+  </ol>
+
+  <h1>Quotes</h1>
+</div>
+<%if flash[:notice] %>
+    <div class="alert alert-dismissable alert-success">
+      <strong>Well done!</strong> <%=flash[:notice]%>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+<%end%>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <%= form_for @quote do |f| %>
+
+        <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+
+        <% @categories.each do |category| %>
+          <div class="panel panel-sky">
+            <div class="panel-heading">
+              <%= category.name %>
+            </div>
+
+            <div class="panel-body collapse in">
+
+
+              <table class="table">
+                <thead>
+                </thead>
+
+                <tbody>
+                  <% if have_product_type_selection = @quote.product_type_selections.empty? %>
+
+                    <% @cabinet_types.each do |cabinet_type| %>
+                      <% field = lambda { |attr| "quote[product_type_selections_attributes][#{category.id}#{cabinet_type.id}][#{attr}]" } %>
+                      <tr>
+                        <%= hidden_field_tag field.call(:product_type_id), cabinet_type.id %>
+                        <%= hidden_field_tag field.call(:category_id), category.id %>
+                        <td><%= cabinet_type.name %></td>
+                        <td><%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name) %></td>
+                      </tr>
+                    <% end %>
+
+                  <% else %>
+
+                    <% @quote.product_type_selections.order(:id).each do |pts| %>
+                      <% field = lambda { |attr| "quote[product_type_selections_attributes][#{category.id}#{pts.id}][#{attr}]" } %>
+                      <% cabinet_type = pts.product_type %>
+                      <tr>
+                        <%= hidden_field_tag field.call(:id), pts.id %>
+                        <%= hidden_field_tag field.call(:product_type_id), pts.product_type_id %>
+                        <%= hidden_field_tag field.call(:category_id), pts.category_id %>
+                        <td><%= cabinet_type.name %></td>
+                        <td>
+                          <%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name, pts.selection_type_id), class: 'selection-select' %>
+                          <% if pts.name.present?  %>
+                            <%= text_field_tag field.call(:name), pts.name, class: 'form-control other-field-name' %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+
+                  <% end %>
+                </tbody>
+              </table>
+
+
+
+            </div>
+          </div>
+        <% end %>
+        <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+      <% end %>
+    </div>
+  </div>
+
+</div> <!-- container -->

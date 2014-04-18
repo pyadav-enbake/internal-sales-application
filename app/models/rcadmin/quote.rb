@@ -4,7 +4,7 @@ class Rcadmin::Quote < ActiveRecord::Base
   attr_accessible :contractor_id, :customer_id, :category, :status,
     :delivery_date,:sales_closing_potential, :cabinet_types_info, 
     :countertop_designs_info,:notes, :quote_categories_attributes, :miscs,
-    :quote_products_attributes
+    :quote_products_attributes, :product_type_selections_attributes
   
 
   has_many :misc_products, dependent: :destroy
@@ -30,6 +30,11 @@ class Rcadmin::Quote < ActiveRecord::Base
 
   accepts_nested_attributes_for :quote_products, reject_if: proc { |attrs| attrs['quantity'].blank? }
 
+
+  has_many :product_type_selections, dependent: :destroy
+  has_many :product_types, through: :product_type_selections
+  has_many :selection_types, through: :product_type_selections
+  accepts_nested_attributes_for :product_type_selections
 
 
   belongs_to :cabinet_type

@@ -1,6 +1,16 @@
 jQuery ->
 
 
+  $('.selection-select').on 'change', (evt) ->
+    selectionValue = $(this).find('option:selected').text()
+
+    if selectionValue == 'Other'
+      fieldName = $(this).attr('name')
+      fieldName = fieldName.replace('selection_type_id', 'name')
+      $inputField = $('<input />', {name: fieldName, class: 'other-field-name form-control'})
+      unless $(this).siblings('.other-field-name').length
+        $(this).after($inputField)
+
   $(document).on('click', '.search-products-btn', (evt) ->
     evt.preventDefault()
     searchText = $('.search-products-text').val().trim()

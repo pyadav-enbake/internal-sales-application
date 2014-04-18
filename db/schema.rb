@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415104813) do
+ActiveRecord::Schema.define(version: 20140418124845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,30 @@ ActiveRecord::Schema.define(version: 20140415104813) do
 
   add_index "misc_products", ["quote_id"], name: "index_misc_products_on_quote_id", using: :btree
 
+  create_table "product_type_selections", force: true do |t|
+    t.integer  "product_type_id"
+    t.integer  "selection_type_id"
+    t.integer  "quote_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name",              default: ""
+  end
+
+  add_index "product_type_selections", ["category_id"], name: "index_product_type_selections_on_category_id", using: :btree
+  add_index "product_type_selections", ["product_type_id"], name: "index_product_type_selections_on_product_type_id", using: :btree
+  add_index "product_type_selections", ["quote_id"], name: "index_product_type_selections_on_quote_id", using: :btree
+  add_index "product_type_selections", ["selection_type_id"], name: "index_product_type_selections_on_selection_type_id", using: :btree
+
+  create_table "product_types", force: true do |t|
+    t.string   "name",       default: ""
+    t.string   "type",       default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "product_types", ["type"], name: "index_product_types_on_type", using: :btree
+
   create_table "products", force: true do |t|
     t.integer  "subcategory_id"
     t.string   "title"
@@ -215,6 +239,16 @@ ActiveRecord::Schema.define(version: 20140415104813) do
     t.text     "notes"
     t.hstore   "miscs"
   end
+
+  create_table "selection_types", force: true do |t|
+    t.string   "name"
+    t.integer  "selectable_id"
+    t.string   "selectable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "selection_types", ["selectable_id", "selectable_type"], name: "index_selection_types_on_selectable_id_and_selectable_type", using: :btree
 
   create_table "states", force: true do |t|
     t.string "name"

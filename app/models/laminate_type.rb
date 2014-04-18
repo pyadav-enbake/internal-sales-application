@@ -1,0 +1,2 @@
+class LaminateType < ProductType
+end

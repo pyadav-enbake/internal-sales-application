@@ -155,6 +155,13 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
+  def  selections
+    @quote = Rcadmin::Quote.find(params[:id])
+    @categories = @quote.categories
+    @cabinet_types = ::CabinetType.includes(:selections).order(:id)
+  end
+
+
   def show_cabinet_selection
       @quote = Rcadmin::Quote.find(session[:quote_id] )
       @categories = @quote.categories
@@ -254,6 +261,9 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def update
+    @quote = Rcadmin::Quote.find params[:id]
+    @quote.update(params[:quote])
+    redirect_to :back || selections_rcadmin_quote_path(id: @quote.id)
   end
 
   def show

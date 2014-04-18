@@ -1,6 +1,5 @@
 jQuery ->
 
-
   $('.selection-select').on 'change', (evt) ->
     selectionValue = $(this).find('option:selected').text()
 

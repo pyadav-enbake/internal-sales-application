@@ -155,8 +155,8 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
-  def  selections
-    @quote = Rcadmin::Quote.find(params[:id])
+  def selections
+    @quote = Rcadmin::Quote.includes(product_type_selections: [:product_type, :selection_type]).where(id: params[:id]).first
     @categories = @quote.categories
     @cabinet_types = ::CabinetType.includes(:selections).order(:id)
   end

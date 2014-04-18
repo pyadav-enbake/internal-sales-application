@@ -1,7 +1,7 @@
 <style>
   .form-control {
     width: 50%;
-    float: right;
+    float: left;
   }
 </style>
 <div id="page-heading">
@@ -42,7 +42,7 @@
                 </thead>
 
                 <tbody>
-                  <% if have_product_type_selection = @quote.product_type_selections.empty? %>
+                  <% if have_product_type_selection = @quote.product_type_selections.length.zero? %>
 
                     <% @cabinet_types.each do |cabinet_type| %>
                       <% field = lambda { |attr| "quote[product_type_selections_attributes][#{category.id}#{cabinet_type.id}][#{attr}]" } %>
@@ -50,7 +50,7 @@
                         <%= hidden_field_tag field.call(:product_type_id), cabinet_type.id %>
                         <%= hidden_field_tag field.call(:category_id), category.id %>
                         <td><%= cabinet_type.name %></td>
-                        <td><%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name) %></td>
+                        <td><%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name), class: 'selection-select form-control' %></td>
                       </tr>
                     <% end %>
 
@@ -65,7 +65,7 @@
                         <%= hidden_field_tag field.call(:category_id), pts.category_id %>
                         <td><%= cabinet_type.name %></td>
                         <td>
-                          <%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name, pts.selection_type_id), class: 'selection-select' %>
+                          <%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name, pts.selection_type_id), class: 'selection-select form-control' %>
                           <% if pts.name.present?  %>
                             <%= text_field_tag field.call(:name), pts.name, class: 'form-control other-field-name' %>
                           <% end %>

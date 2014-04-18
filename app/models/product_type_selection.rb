@@ -5,4 +5,9 @@ class ProductTypeSelection < ActiveRecord::Base
   belongs_to :category, class_name: 'Rcadmin::Category'
 
   attr_protected :id
+
+  after_update :unset_name
+  def unset_name
+    self.update_column(:name, "") if self.selection_type.name != 'Other'
+  end
 end

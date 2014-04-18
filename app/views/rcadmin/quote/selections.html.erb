@@ -56,7 +56,7 @@
 
                   <% else %>
 
-                    <% @quote.product_type_selections.order(:id).each do |pts| %>
+                    <% @quote.product_type_selections.order(:id).select {|pts| pts.category_id == category.id }.each do |pts| %>
                       <% field = lambda { |attr| "quote[product_type_selections_attributes][#{category.id}#{pts.id}][#{attr}]" } %>
                       <% cabinet_type = pts.product_type %>
                       <tr>

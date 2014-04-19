@@ -23,7 +23,7 @@ RomarCabinates::Application.routes.draw do
     resources :faqs
     resources :faq_categories
     resources :static_pages
-    resources :quotes, controller: :quote, only: [:index, :show, :update] do
+    resources :quotes, controller: :quote, only: [:index, :show, :update, :edit] do
       member do
         get :docs
         get 'docs/:template_id', action: 'grid', as: :print_templates

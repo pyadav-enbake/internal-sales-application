@@ -255,6 +255,9 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def edit
+    @quote = Rcadmin::Quote.find params[:id]
+    session[:quote_id] = @quote.id
+    redirect_to select_quote_product_path
   end
 
   def destroy

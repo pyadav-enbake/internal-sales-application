@@ -164,6 +164,10 @@
       }
     });
 
+    $('[data-is-edit=true]').find('.quantity').trigger('keyup').end().
+      find('.option-product[data-checked=true]').trigger('click').end().
+      find('.hide-product[data-checked=true]').trigger('click');
+
 
     $(document).on('click', '.someclass', function(evt) {
       evt.preventDefault();

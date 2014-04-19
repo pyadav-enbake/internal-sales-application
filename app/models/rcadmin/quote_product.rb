@@ -13,9 +13,8 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
 
 
 
-
-
-
-
+  def has_option?
+    self.header_option == 'Yes'
+  end
 
 end

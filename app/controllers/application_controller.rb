@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   helper_method :current_user
  # before_filter :authenticate
+
+ before_filter do
+   @current_user = current_user
+ end
   
   layout :get_layout 
 

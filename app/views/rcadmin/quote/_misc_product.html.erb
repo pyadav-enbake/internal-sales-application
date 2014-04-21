@@ -1,4 +1,4 @@
-<% quote_product = @quote.quote_products.detect { |qp| qp.product_id == product.id } %>
+<% quote_product = @quote.quote_products.detect { |qp| qp.product_id == product.id && qp.category_id == cat.id } %>
 <tr data-is-edit="<%= !!quote_product %>">
   <% quote_product_attr = lambda { |attr| "quote[quote_products_attributes[#{cat.id}#{product.id}#{product.object_id}][#{attr}]" } %>
 
@@ -8,7 +8,7 @@
   <input type="hidden" name="<%= quote_product_attr.call(:product_id) %>" value="<%= product.id %>" />
   <td>
     <input type="text" name="<%= quote_product_attr.call(:quantity) %>" 
-    id="<%= "#{cat.id}#{product.id}" %>" style="width: 30px;" value="<%= quote_product.try(:quantity) %>" 
+    id="<%= "#{cat.id}#{product.id}" %>" style="width: 60px;" value="<%= quote_product.try(:quantity) %>" 
     class="quantity <%= "#{product.type} #{product_type}" %>" 
     data-measurement="<%= product.measurement_type %>" onkeypress="return isNumber(event)"></td>
   <td></td>

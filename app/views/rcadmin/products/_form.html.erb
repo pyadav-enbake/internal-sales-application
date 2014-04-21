@@ -1,26 +1,67 @@
 <div class="container">
 
-  <%= form_tag import_cabinet_products_path, class: 'form-inline', multipart: true do %>
-    <div class="form-group">
-      <%= file_field_tag :product_file %>
-    </div>
-    <div class="form-group">
-      <label for="cabinet">Cabinet</label>
-      <%= radio_button_tag :product_type, 'cabinet', true %>
-      <label for="laminate">laminate</label>
-      <%= radio_button_tag :product_type, 'laminate' %>
-    </div>
-    <div class="form-group">
-      <%= button_tag :upload, class: 'btn btn-primary' %>
+  <%= form_tag import_cabinet_products_path, class: 'form-horizontal row-border', multipart: true do %>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="panel panel-orange">
+          <div class="panel-heading">
+            <h4>Bulk Upload</h4>
+          </div>
+          <br />
+
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                
+                <div class="form-group">
+                  <label for="product-file" class="col-md-3 control-label">Select File</label>
+                  <div class="col-md-6" style="padding-top: 8px">
+                    <%= file_field_tag :product_file %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-3 control-label" for="product-type">Product Type</label>
+                  <div class="col-md-6" style="padding-top: 8px">
+                    <label for="cabinet">Cabinet</label>
+                    <%= radio_button_tag :product_type, 'cabinet', true %> &nbsp;&nbsp;
+                    <label for="laminate">Laminate</label>
+                    <%= radio_button_tag :product_type, 'laminate' %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-3">&nbsp;</label>
+                  <div class="col-md-6" style="padding-top: 8px">
+                    <%= button_tag :upload, class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   <% end %>
+
+
+
 
   <%= form_for(@rcadmin_product,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-orange">
           <div class="panel-heading">
-            <h4><%if @rcadmin_product.id.nil? %>Add<%else%>Edit<%end%> Product</h4>
+            <h4>
+              <% if @rcadmin_product.persisted? %>
+                Edit
+              <% else %>
+                Create Single
+              <% end %>
+              Product
+            </h4>
             <div class="options">
 
             </div>

@@ -5,7 +5,21 @@ class Rcadmin::ProductsController < ApplicationController
   # GET /rcadmin/products
   # GET /rcadmin/products.json
   def index
-    @rcadmin_products = Rcadmin::Product.all
+    @rcadmin_products = CabinetProduct.all
+  end
+
+
+  def import
+    if product_file = params[:product_file]
+      product_type = params[:product_type].inquiry
+      if product_type.cabinet?
+        task = CabinetTask.new(product_file.path)
+      elsif product_type.laminate?
+        task = LaminateTask.new(product_file.path)
+      end
+      task.import if task.valid?
+    end
+    redirect_to :back
   end
 
   # GET /rcadmin/products/1
@@ -15,7 +29,7 @@ class Rcadmin::ProductsController < ApplicationController
 
   # GET /rcadmin/products/new
   def new
-    @rcadmin_product = Rcadmin::Product.new
+    @rcadmin_product = CabinetProduct.new
   end
 
   # GET /rcadmin/products/1/edit
@@ -26,7 +40,7 @@ class Rcadmin::ProductsController < ApplicationController
   # POST /rcadmin/products
   # POST /rcadmin/products.json
   def create
-    @rcadmin_product = Rcadmin::Product.new(rcadmin_product_params)
+    @rcadmin_product = CabinetProduct.new(rcadmin_product_params)
 	
     respond_to do |format|
       if @rcadmin_product.save
@@ -69,7 +83,7 @@ class Rcadmin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rcadmin_product
-      @rcadmin_product = Rcadmin::Product.find(params[:id])
+      @rcadmin_product = CabinetProduct.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

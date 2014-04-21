@@ -9,6 +9,13 @@ RomarCabinates::Application.routes.draw do
   scope :admin do
     resource :settings
   end
+
+
+  scope :rcadmin do
+    resources :cabinet_products, controller: 'rcadmin/products' do
+      post :import, on: :collection
+    end
+  end
   
 
 

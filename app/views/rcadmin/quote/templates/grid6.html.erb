@@ -16,6 +16,16 @@
 
   <body>
 
+    <% if  params[:category_ids].blank? || params[:category_ids].empty? %>
+      <%= form_tag "", class: 'form-horizontal', method: :get do %>
+        <% @quote.categories.each do |category| %>
+          <%= check_box_tag "category_ids[]", category.id, (params[:category_ids].present? && params[:category_ids].include?(category.id.to_s) ) %>
+          <label for="<%= category.name %>"><%= category.name %></label>
+        <% end %>
+        <%= submit_tag :Update %>
+      <% end %>
+    <% end %>
+
     <div class="table green">
       <ul class="head">
         <li style="width: 42%;">
@@ -30,7 +40,7 @@
           </div>
           <div class="row">
             <p style="width: 100px;" ><span>Date: </span><%= Date.today.strftime("%d.%m.%Y") %></p>
-            <p style="width: 100px;"><span>Del Date: </span><%= @quote.delivery_date.strftime("%d.%m.%Y") %></p>
+            <p style="width: 100px;"><span>Del Date: </span><%= @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
             <p style="width: 215px;"><span>Ship With: </span></p>
           </div>
         </li>
@@ -51,23 +61,27 @@
 
       <div class="contant"></div>
 
+      <% @categories = @categories.select { |category| params[:category_ids].present? && params[:category_ids].include?(category.id.to_s) } %>
+
+      <% category_ids = @categories.map(&:id) %>
+
       <ul class="foot">
         <li style="width: 31%;">
           <h5><span>1</span><%= @categories.try(:[], 0) %> </h5>
           <div class="row">
-            <p style="width: 31%;"><span>WOOD</span> </p>
+            <p style="width: 31%;"><span>WOOD</span> <%= @quote.selection_value_for category_ids[0], 'Wood Species' %></p>
             <p style="width: 30%;"><span>DR. HD</span> </p>
-            <p style="width: 31%;"><span>INTERIOR</span> </p>
+            <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for category_ids[0], 'Interior' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>UP. DE</span> </p>
             <p style="width: 30%;"><span>DWR. HD</span> </p>
-            <p style="width: 31%;"><span>DWR BOX</span> </p>
+            <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for category_ids[0], 'Dwr Box' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>BS. DR</span> </p>
-            <p style="width: 30%;"><span>HNGE</span> </p>
-            <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+            <p style="width: 30%;"><span>HNGE</span> <%= @quote.selection_value_for category_ids[0], 'hinge' %></p>
+            <p style="width: 31%;"><span>DWR SLIDE</span> <%= @quote.selection_value_for category_ids[0], 'Dwr Slide' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>DR. LIP</span> </p>
@@ -82,19 +96,19 @@
         <li style="width: 31%;">
           <h5><span>2</span><%= @categories.try(:[], 1) %></h5>
           <div class="row">
-            <p style="width: 31%;"><span>WOOD</span> </p>
+            <p style="width: 31%;"><span>WOOD</span> <%= @quote.selection_value_for category_ids[1], 'Wood Species' %></p>
             <p style="width: 30%;"><span>DR. HD</span> </p>
-            <p style="width: 31%;"><span>INTERIOR</span> </p>
+            <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for category_ids[1], 'Interior' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>UP. DE</span> </p>
             <p style="width: 30%;"><span>DWR. HD</span> </p>
-            <p style="width: 31%;"><span>DWR BOX</span> </p>
+            <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for category_ids[1], 'Dwr Box' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>BS. DR</span> </p>
-            <p style="width: 30%;"><span>HNGE</span> </p>
-            <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+            <p style="width: 30%;"><span>HNGE</span> <%= @quote.selection_value_for category_ids[1], 'hinge' %></p>
+            <p style="width: 31%;"><span>DWR SLIDE</span> <%= @quote.selection_value_for category_ids[1], 'Dwr Slide' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>DR. LIP</span> </p>
@@ -109,19 +123,19 @@
         <li style="width: 30%;">
           <h5><span>3</span><%= @categories.try(:[], 2) %></h5>
           <div class="row">
-            <p style="width: 31%;"><span>WOOD</span> </p>
+            <p style="width: 31%;"><span>WOOD</span> <%= @quote.selection_value_for category_ids[2], 'Wood Species' %></p>
             <p style="width: 30%;"><span>DR. HD</span> </p>
-            <p style="width: 31%;"><span>INTERIOR</span> </p>
+            <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for category_ids[2], 'Interior' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>UP. DE</span> </p>
             <p style="width: 30%;"><span>DWR. HD</span> </p>
-            <p style="width: 31%;"><span>DWR BOX</span> </p>
+            <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for category_ids[2], 'Dwr Box' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>BS. DR</span> </p>
-            <p style="width: 30%;"><span>HNGE</span> </p>
-            <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+            <p style="width: 30%;"><span>HNGE</span> <%= @quote.selection_value_for category_ids[2], 'hinge' %></p>
+            <p style="width: 31%;"><span>DWR SLIDE</span> <%= @quote.selection_value_for category_ids[2], 'Dwr Slide' %></p>
           </div>
           <div class="row">
             <p style="width: 31%;"><span>DR. LIP</span> </p>

@@ -16,6 +16,13 @@
 
   <body>
 
+    <% if params[:category_id].blank? %>
+      <%= form_tag "", class: 'horizontal-form', method: :get do %>
+        <%= select_tag :category_id, options_from_collection_for_select(@quote.categories, :id, :name) %>
+        <%= submit_tag :update %>
+      <% end %>
+    <% end %>
+
     <div class="table">
       <ul class="head">
         <li style="width: 30%;">
@@ -30,7 +37,7 @@
           </div>
           <div class="row">
             <p style="width: 25%;" ><span>Date: </span><%= @quote.created_at.strftime("%d.%m.%Y") %></p>
-            <p style="width: 30%;"><span>Del Date: </span><%= @quote.delivery_date.strftime("%d.%m.%Y") %></p>
+            <p style="width: 30%;"><span>Del Date: </span><%= @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
             <p style="width: 38%;"><span>PHONE </span><%= @customer.phone %></p>
           </div>
         </li>
@@ -38,19 +45,19 @@
         <li style="width: 27%;">
           <div class="row">
             <div class="row">
-              <p style="width: 31%;"><span>WOOD</span> </p>
+              <p style="width: 31%;"><span>WOOD</span> <%= @quote.selection_value_for params[:category_id], 'Wood Species' %></p>
               <p style="width: 30%;"><span>DR. HD</span> </p>
-              <p style="width: 31%;"><span>INTERIOR</span> </p>
+              <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for params[:category_id], 'interior' %></p>
             </div>
             <div class="row">
               <p style="width: 31%;"><span>UP. DE</span> </p>
               <p style="width: 30%;"><span>DWR. HD</span> </p>
-              <p style="width: 31%;"><span>DWR BOX</span> </p>
+              <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for params[:category_id], 'Dwr Box' %></p>
             </div>
             <div class="row">
               <p style="width: 31%;"><span>BS. DR</span> </p>
-              <p style="width: 30%;"><span>HNGE</span> </p>
-              <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+              <p style="width: 30%;"><span>HNGE</span> <%= @quote.selection_value_for params[:category_id], 'hinge' %></p>
+              <p style="width: 31%;"><span>DWR SLIDE</span> <%= @quote.selection_value_for params[:category_id], 'Dwr Slide' %></p>
             </div>
             <div class="row">
               <p style="width: 31%;"><span>DR. LIP</span> </p>

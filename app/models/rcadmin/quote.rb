@@ -59,6 +59,15 @@ class Rcadmin::Quote < ActiveRecord::Base
     end
   end
 
+
+  def selection_value_for category_id, type
+    product_selector = self.product_type_selections.joins(:product_type).
+      where(category_id: category_id).where("LOWER(product_types.name) = ?", type.downcase).first
+    return if product_selector.nil?
+    product_selector.name.presence || product_selector.selection_type.name
+  end
+
+
   def remove_category category_id = nil
     quote_category = self.quote_categories.where(category_id: category_id).first
     quote_category and quote_category.destroy

@@ -394,7 +394,13 @@ $(document).ready(function() {
   });
   //Expand and collaps
 
-  $(".accordion" ).accordion({ collapsible: true ,heightStyle: "fill"});
+  $(".accordion" ).accordion({
+    collapsible: true,
+    heightStyle: "fill",
+    create: function(evt, ui) {
+      $('.overlay-active').removeClass('overlay-active');
+    }
+  })
 
   $('.expand').click(function() {
       var inhtml = $('.expand').html();

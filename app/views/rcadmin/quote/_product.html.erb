@@ -16,7 +16,22 @@
     z-index: 100000;
     display: none;
   }
+
+  .overlay-active {
+    background: #000000 url("<%= image_path("sending.gif") %>") no-repeat center center;
+    display: block !important;
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+  }
+
 </style>
+
+<div class="overlay-active"></div>
 
 <span class="search-controls">
   <button class="btn search-prev">Prev</button>

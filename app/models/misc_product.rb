@@ -8,6 +8,11 @@ class MiscProduct < ActiveRecord::Base
 
   validates :price, numericality: true, allow_blank: true
 
+  before_validation :set_description
+  def set_description
+    self.description = title
+  end
+
   attr_protected :id
 
   attr_accessor :product_type

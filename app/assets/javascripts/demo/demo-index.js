@@ -219,60 +219,6 @@ jQuery(document).ready(function() {
         [7, 166 + randValue()]
     ];
 
-    var plot_statistics = $.plot($("#site-statistics"), [{
-        data: viewcount,
-        label: "View Count"
-    }, {
-        data: uniqueviews,
-        label: "Unique Views"
-    }, {
-        data: usercount,
-        label: "User Count"
-    }], {
-        series: {
-            lines: {
-                show: true,
-                lineWidth: 1.5,
-                fill: 0.05
-            },
-            points: {
-                show: true
-            },
-            shadowSize: 0
-        },
-        grid: {
-            labelMargin: 10,
-            hoverable: true,
-            clickable: true,
-            borderWidth: 0
-        },
-        colors: ["#60cde8", "#71a5e7", "#aa73c2"],
-        xaxis: {
-            tickColor: "transparent",
-            ticks: [[1, "S"], [2, "M"], [3, "T"], [4, "W"], [5, "T"], [6, "F"], [7, "S"]],
-            tickDecimals: 0,
-            autoscaleMargin: 0,
-            font: {
-                color: '#8c8c8c',
-                size: 12
-            }
-        },
-        yaxis: {
-            ticks: 4,
-            tickDecimals: 0,
-            tickColor: "#e3e4e6",
-            font: {
-                color: '#8c8c8c',
-                size: 12
-            },
-            tickFormatter: function (val, axis) {
-                if (val>999) {return (val/1000) + "K";} else {return val;}
-            }
-        },
-        legend : {
-            labelBoxBorderColor: 'transparent'
-        }
-    });
 
     var d1 = [
         [1, 29 + randValue()],
@@ -446,52 +392,6 @@ jQuery(document).ready(function() {
 
     //
 
-    var plot = $.plot(container, series, {
-        series: {
-            lines: {
-                show: true,
-                lineWidth: 1.5,
-                fill: 0.15
-            },
-            shadowSize: 0
-        },
-        grid: {
-            
-            labelMargin: 10,
-            tickColor: "#e6e7e8",
-            borderWidth: 0
-        },
-        colors: ["#f1c40f"],
-        xaxis: {
-            tickFormatter: function() {
-                return "";
-            },
-            tickColor: "transparent"
-        },
-        yaxis: {
-            ticks: 2,
-            min: 0,
-            max: 100,
-            tickFormatter: function (val, axis) {
-                return val + "%";
-            },
-            font: {
-                color: '#8c8c8c',
-                size: 12
-            }
-        },
-        legend: {
-            show: true
-        }
-    });
-
-    // Update the random dataset at 25FPS for a smoothly-animating chart
-
-    setInterval(function updateRandom() {
-        series[0].data = getRandomData();
-        plot.setData(series);
-        plot.draw();
-    }, 40);
 
 
 });

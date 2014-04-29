@@ -52,11 +52,18 @@ class Rcadmin::Quote < ActiveRecord::Base
   STATUSES = ['Draft', 'Sent to Client', 'Negotiations', 'In Contract', 'Turned In']
   RATING = ['Very Poor', 'Poor', 'Fair', '50/50', 'Strong', 'Very Strong']
 
+
+  def status
+    STATUSES[read_attribute(:status)]
+  end
+
   STATUSES.each_with_index do |status, index|
     method_name = status.gsub(" ", "_").underscore
     define_method "#{method_name}!" do
       update_attribute(:status, index)
     end
+
+    scope method_name, lambda { where(status: index) }
   end
 
 

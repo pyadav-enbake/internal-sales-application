@@ -1,295 +1,281 @@
-          <%= javascript_include_tag "plugins/charts-flot/jquery.flot.min.js" %>
-          <%= javascript_include_tag "plugins/charts-flot/jquery.flot.resize.min.js" %>
-          <%= javascript_include_tag "plugins/charts-flot/jquery.flot.orderBars.min.js" %>
-           <%= javascript_include_tag "demo/demo-index" %>
-	<div id="page-heading">
-		<ol class="breadcrumb">
-			<li class='active'><a href="index.htm">Dashboard</a></li>
-		</ol>
+<%= javascript_include_tag "plugins/charts-flot/jquery.flot.min.js" %>
+<%= javascript_include_tag "plugins/charts-flot/jquery.flot.resize.min.js" %>
+<%= javascript_include_tag "plugins/charts-flot/jquery.flot.orderBars.min.js" %>
+<%= javascript_include_tag "demo/demo-index" %>
+<div id="page-heading">
+  <ol class="breadcrumb">
+    <li class='active'><a href="index.htm">Dashboard</a></li>
+  </ol>
 
-		<h1>Dashboard</h1>
-		<!--div class="options">
-			<div class="btn-toolbar">
-				<button class="btn btn-default" id="daterangepicker2">
-					<i class="fa fa-calendar-o"></i> 
-					<span class="hidden-xs hidden-sm">October 14, 2013 - November 13, 2013</span> <b class="caret"></b>
-				</button>
-				<div class="btn-group hidden-xs">
-					<a href='#' class="btn btn-default dropdown-toggle" data-toggle='dropdown'><i class="fa fa-cloud-download"></i><span class="hidden-xs hidden-sm hidden-md"> Export as</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Text File (*.txt)</a></li>
-						<li><a href="#">Excel File (*.xlsx)</a></li>
-						<li><a href="#">PDF File (*.pdf)</a></li>
-					</ul>
-				</div>
-				<a href="#" class="btn btn-default hidden-xs"><i class="fa fa-cog"></i></a>
-			</div>
-		</div-->
-	</div>
-		<%if flash[:notice] %>
-		<div class="alert alert-dismissable alert-success">
-			<strong>Well done!</strong> <%=flash[:notice]%>
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		</div>
-		<%end%>
+  <h1>Dashboard</h1>
+  <!--div class="options">
+  <div class="btn-toolbar">
+    <button class="btn btn-default" id="daterangepicker2">
+      <i class="fa fa-calendar-o"></i> 
+      <span class="hidden-xs hidden-sm">October 14, 2013 - November 13, 2013</span> <b class="caret"></b>
+    </button>
+    <div class="btn-group hidden-xs">
+      <a href='#' class="btn btn-default dropdown-toggle" data-toggle='dropdown'><i class="fa fa-cloud-download"></i><span class="hidden-xs hidden-sm hidden-md"> Export as</span> <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Text File (*.txt)</a></li>
+        <li><a href="#">Excel File (*.xlsx)</a></li>
+        <li><a href="#">PDF File (*.pdf)</a></li>
+      </ul>
+    </div>
+    <a href="#" class="btn btn-default hidden-xs"><i class="fa fa-cog"></i></a>
+  </div>
+  </div-->
+</div>
+<%if flash[:notice] %>
+  <div class="alert alert-dismissable alert-success">
+    <strong>Well done!</strong> <%=flash[:notice]%>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+                <%end%>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-3 col-xs-12 col-sm-6">
-						<a class="info-tiles tiles-toyo" href="<%= rcadmin_customers_path %>">
-							<div class="tiles-heading">Quotes for Month</div>
-							<div class="tiles-body-alt">
-								<!--i class="fa fa-bar-chart-o"></i-->
-								<div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_month_quotes.size %></div>
-								<small>in <%= Time.zone.now.strftime("%B") %></small>
-							</div>
-							<div class="tiles-footer">more info</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-xs-12 col-sm-6">
-						<a class="info-tiles tiles-success" href="<%= rcadmin_customers_path %>">
-							<div class="tiles-heading">Quotes YTD</div>
-							<div class="tiles-body-alt">
-								<!--i class="fa fa-money"></i-->
-								<div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_year_quotes.size %><span class="text-smallcaps"></span></div>
-								<small>in <%= Time.zone.now.strftime("%Y") %></small>
-							</div>
-							<div class="tiles-footer">more info</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-xs-12 col-sm-6">
-						<a class="info-tiles tiles-orange" href="#">
-							<div class="tiles-heading">Total Closing Percentage</div>
-							<div class="tiles-body-alt">
-								<i class="fa fa-group"></i>
-								<div class="text-center">109</div>
-								<small>new users registered</small>
-							</div>
-							<div class="tiles-footer">manage members</div>
-						</a>
-					</div>
-					<div class="col-md-3 col-xs-12 col-sm-6">
-						<a class="info-tiles tiles-alizarin" href="#">
-							<div class="tiles-heading">Closed Deals</div>
-							<div class="tiles-body-alt">
-								<i class="fa fa-shopping-cart"></i>
-								<div class="text-center">57</div>
-								<small>&nbsp;</small>
-							</div>
-							<div class="tiles-footer">&nbsp;</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                          <a class="info-tiles tiles-toyo" href="<%= rcadmin_customers_path %>">
+                            <div class="tiles-heading">Quotes for Month</div>
+                            <div class="tiles-body-alt">
+                              <!--i class="fa fa-bar-chart-o"></i-->
+                              <div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_month_quotes.size %></div>
+                              <small>in <%= Time.zone.now.strftime("%B") %></small>
+                            </div>
+                            <div class="tiles-footer">more info</div>
+                          </a>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                          <a class="info-tiles tiles-success" href="<%= rcadmin_customers_path %>">
+                            <div class="tiles-heading">Quotes YTD</div>
+                            <div class="tiles-body-alt">
+                              <!--i class="fa fa-money"></i-->
+                              <div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_year_quotes.size %><span class="text-smallcaps"></span></div>
+                              <small>in <%= Time.zone.now.strftime("%Y") %></small>
+                            </div>
+                            <div class="tiles-footer">more info</div>
+                          </a>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                          <a class="info-tiles tiles-orange" href="#">
+                            <div class="tiles-heading">Pending Jobs</div>
+                            <div class="tiles-body-alt">
+                              <i class="fa "></i>
+                              <div class="text-center"><%= current_user.quotes_negotiations_count %></div>
+                              <small>&nbsp;</small>
+                            </div>
+                            <div class="tiles-footer">&nbsp;</div>
+                          </a>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                          <a class="info-tiles tiles-alizarin" href="#">
+                            <div class="tiles-heading">Jobs Turned In</div>
+                            <div class="tiles-body-alt">
+                              <div class="text-center"><%= current_user.quotes_turned_in_count %></div>
+                              <small>&nbsp;</small>
+                            </div>
+                            <div class="tiles-footer">&nbsp;</div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
 
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-info">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12 clearfix">
-								<h4 class="pull-left" style="margin: 0 0 20px;">Sales Total By Month <small></small></h4>
-								<div class="btn-group pull-right">
-									<a href="javascript:;" class="btn btn-default btn-sm active">this week</a>
-									<a href="javascript:;" class="btn btn-default btn-sm ">previous week</a>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div id="site-statistics" style="height:250px;"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="panel panel-grape">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12 clearfix">
-								<h4 class="pull-left" style="margin: 0 0 20px;">Closing Sales <small>(by quarter)</small></h4>
-								<div class="btn-group pull-right">
-									<a href="javascript:;" class="btn btn-default btn-sm active">2012</a>
-									<a href="javascript:;" class="btn btn-default btn-sm ">2011</a>
-									<a href="javascript:;" class="btn btn-default btn-sm ">2010</a>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div id="budget-variance" style="height:250px;"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
-<!--		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-primary">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12 clearfix">
-								<h4 class="pull-left" style="margin:0 0 10px">Site Reports <small>(overview)</small></h4>
-								<div class="pull-right">
-									<a href="javascript:;" class="btn btn-default-alt btn-sm">Refresh</a>
-									<a href="javascript:;" class="btn btn-default-alt btn-sm"><i class="fa fa-wrench"></i></a>
-									<a href="javascript:;" class="btn btn-default-alt btn-sm"><i class="fa fa-cog"></i></a>
-								</div>
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexvisits" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">7,451</h3>
-								<p style="text-align: center; margin: 0;">Visits</p>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexpageviews" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">35,711</h3>
-								<p style="text-align: center; margin: 0;">Page Views</p>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexpagesvisit" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">6.92</h3>
-								<p style="text-align: center; margin: 0;">Pages / Visit</p>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexavgvisit" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">00:04:17</h3>
-								<p style="text-align: center; margin: 0;">Average Visit Time</p>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexnewvisits" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">71.27%</h3>
-								<p style="text-align: center; margin: 0;">New Visits</p>
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2">
-								<div id="indexbouncerate" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
-								<h3 style="text-align: center; margin: 0; color: #808080;">31.08%</h3>
-								<p style="text-align: center; margin: 0;">Bounce Rate</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->
+                  <div class="row">
 
-<!--		<div class="row">
-			<div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
-				<a class="info-tiles tiles-alizarin" href="#">
-					<div class="tiles-heading">
-						<div class="pull-left">Comments</div>
-						<div class="pull-right">+15.6%</div>
-					</div>
-					<div class="tiles-body">
-						<div class="pull-left"><i class="fa fa-comments-o"></i></div>
-						<div class="pull-right"><div id="indexinfocomments" style="margin-top: 10px; margin-bottom: -10px;"></div></div>
-					</div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
-				<a class="info-tiles tiles-orange" href="#">
-					<div class="tiles-heading">
-						<div class="pull-left">Likes</div>
-						<div class="pull-right">-5.5%</div>
-					</div>
-					<div class="tiles-body">
-						<div class="pull-left"><i class="fa fa-thumbs-o-up"></i></div>
-						<div class="pull-right"><div id="indexinfolikes" style="margin-top: 10px; margin-bottom: -10px;"></div></div>
-					</div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
-				<a class="info-tiles tiles-success" href="#">
-					<div class="tiles-heading">
-						<div class="pull-left">Bugs Fixed</div>
-						<div class="pull-right">+14.9%</div>
-					</div>
-					<div class="tiles-body">
-						<div class="pull-left"><i class="fa fa-check"></i></div>
-						<div class="pull-right">37</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
-				<a class="info-tiles tiles-toyo" href="#">
-					<div class="tiles-heading">
-						<div class="pull-left">Downloads</div>
-						<div class="pull-right">-9.8%</div>
-					</div>
-					<div class="tiles-body">
-						<div class="pull-left"><i class="fa fa-download"></i></div>
-						<div class="pull-right">3.67<span class="text-smallcaps">k</span></div>
-					</div>
-				</a>
-			</div>
+                    <div class="col-md-6">
+                      <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                          <h4>Most Recent Quotes</h4>
+                          <div class="options">
+                          </div>
+                        </div>
+                        <div class="panel-body">
+                          <div class="table-responsive">
+                            <table style="margin-bottom: 0px;" class="table">
+                              <thead>
+                                <tr>
+                                  <th>Contractor</th>
+                                  <th>Customer</th>
+                                  <th>Date</th>
+                                  <th>Amount</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody class="selects">
+                                <% @recent_quotes.each do |quote| %>
+                                <tr>
+                                  <td><%= quote.contractor %></td>
+                                  <td><%= quote.customer %></td>
+                                  <td><%= quote.created_at.strftime("%d-%m-%Y") %></td>
+                                  <td>$ <%= quote.grand_total %></td>
+                                  <td><%= quote.status %></td>
+                                </tr>
+                              <% end %>
+                              </tbody>
+                              <tfoot>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-			
-		</div>-->
-
-		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-orange">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12 clearfix">
-								<h4 class="pull-left" style="margin:0 0 10px">Quote Category Breakdown <small></small></h4>
-								<div class="btn-group pull-right">
-									<a href="javascript:;" id="updatePieCharts" class="btn btn-default-alt btn-sm">Refresh</a>
-								</div>
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-4" style="padding-top:10px;padding-bottom:10px;">
-								<div class="easypiechart" id="returningvisits" data-percent="65">
-									<span class="percent"></span>
-								</div>
-								<label for="newvisits">Commercial</label>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-4" style="padding-top:10px;padding-bottom:10px;">
-								<span class="easypiechart" id="newvisitor" data-percent="81">
-									<span class="percent"></span>
-								</span>
-								<label for="bouncerate">Remodel</label>
-								<hr class="hidden-md hidden-lg">
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-4" style="padding-top:10px;padding-bottom:10px;">
-								<span class="easypiechart" id="clickrate" data-percent="42">
-									<span class="percent"></span>
-								</span>
-								<label for="clickrate">Residential</label>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-                        <div class="col-md-6">
-                          <div class="panel panel-orange">
-                            <div class="panel-body">
-                              <div class="row">
-                                <div class="col-md-12 clearfix">
-                                  <h4 class="pull-left" style="margin: 0 0 20px;">Featured Links</h4>
-                                  <div class="btn-group pull-right">
-                                  </div>
-                                </div>
-                                <div class="col-md-12">
-                                  <ul>
-                                    <li><a target="_blank" href="http://www.hardwareresources.com/">Hardware Resources</a></li>
-                                    <li><a target="_blank" href="https://www.rev-a-shelf.com/">Rev-a-shelf</a></li>
-                                    <li><a target="_blank" href="http://www.houzz.com/photos/kitchen">Houzz Kitchen</a></li>
-                                  </ul>
-                                </div>
+                    <div class="col-md-6">
+                      <div class="panel panel-grape">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-12 clearfix">
+                              <h4 class="pull-left" style="margin: 0 0 20px;">Closing Sales <small>(by quarter)</small></h4>
+                              <div class="btn-group pull-right">
+                                <a href="javascript:;" class="btn btn-default btn-sm active">2012</a>
+                                <a href="javascript:;" class="btn btn-default btn-sm ">2011</a>
+                                <a href="javascript:;" class="btn btn-default btn-sm ">2010</a>
                               </div>
                             </div>
+                            <div class="col-md-12">
+                              <div id="budget-variance" style="height:250px;"></div>
+                            </div>
                           </div>
-                      </div>		</div>
-		
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--		<div class="row">
+                    <div class="col-md-12">
+                      <div class="panel panel-primary">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-12 clearfix">
+                              <h4 class="pull-left" style="margin:0 0 10px">Site Reports <small>(overview)</small></h4>
+                              <div class="pull-right">
+                                <a href="javascript:;" class="btn btn-default-alt btn-sm">Refresh</a>
+                                <a href="javascript:;" class="btn btn-default-alt btn-sm"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="btn btn-default-alt btn-sm"><i class="fa fa-cog"></i></a>
+                              </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexvisits" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">7,451</h3>
+                              <p style="text-align: center; margin: 0;">Visits</p>
+                              <hr class="hidden-md hidden-lg">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexpageviews" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">35,711</h3>
+                              <p style="text-align: center; margin: 0;">Page Views</p>
+                              <hr class="hidden-md hidden-lg">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexpagesvisit" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">6.92</h3>
+                              <p style="text-align: center; margin: 0;">Pages / Visit</p>
+                              <hr class="hidden-md hidden-lg">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexavgvisit" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">00:04:17</h3>
+                              <p style="text-align: center; margin: 0;">Average Visit Time</p>
+                              <hr class="hidden-md hidden-lg">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexnewvisits" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">71.27%</h3>
+                              <p style="text-align: center; margin: 0;">New Visits</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                              <div id="indexbouncerate" style="width: 90px; margin: 0 auto; padding: 10px 0 6px;"><canvas width="90" height="45" style="display: inline-block; width: 90px; height: 45px; vertical-align: top;"></canvas></div>
+                              <h3 style="text-align: center; margin: 0; color: #808080;">31.08%</h3>
+                              <p style="text-align: center; margin: 0;">Bounce Rate</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>-->
+
+                  <!--		<div class="row">
+                    <div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
+                      <a class="info-tiles tiles-alizarin" href="#">
+                        <div class="tiles-heading">
+                          <div class="pull-left">Comments</div>
+                          <div class="pull-right">+15.6%</div>
+                        </div>
+                        <div class="tiles-body">
+                          <div class="pull-left"><i class="fa fa-comments-o"></i></div>
+                          <div class="pull-right"><div id="indexinfocomments" style="margin-top: 10px; margin-bottom: -10px;"></div></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
+                      <a class="info-tiles tiles-orange" href="#">
+                        <div class="tiles-heading">
+                          <div class="pull-left">Likes</div>
+                          <div class="pull-right">-5.5%</div>
+                        </div>
+                        <div class="tiles-body">
+                          <div class="pull-left"><i class="fa fa-thumbs-o-up"></i></div>
+                          <div class="pull-right"><div id="indexinfolikes" style="margin-top: 10px; margin-bottom: -10px;"></div></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
+                      <a class="info-tiles tiles-success" href="#">
+                        <div class="tiles-heading">
+                          <div class="pull-left">Bugs Fixed</div>
+                          <div class="pull-right">+14.9%</div>
+                        </div>
+                        <div class="tiles-body">
+                          <div class="pull-left"><i class="fa fa-check"></i></div>
+                          <div class="pull-right">37</div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3 col-sm-6 col-lg-3">
+                      <a class="info-tiles tiles-toyo" href="#">
+                        <div class="tiles-heading">
+                          <div class="pull-left">Downloads</div>
+                          <div class="pull-right">-9.8%</div>
+                        </div>
+                        <div class="tiles-body">
+                          <div class="pull-left"><i class="fa fa-download"></i></div>
+                          <div class="pull-right">3.67<span class="text-smallcaps">k</span></div>
+                        </div>
+                      </a>
+                    </div>
+
+
+                  </div>-->
+
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-6">
+                      <div class="panel panel-orange">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-12 clearfix">
+                              <h4 class="pull-left" style="margin: 0 0 20px;">Featured Links</h4>
+                              <div class="btn-group pull-right">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <ul>
+                                <li><a target="_blank" href="http://www.hardwareresources.com/">Hardware Resources</a></li>
+                                <li><a target="_blank" href="https://www.rev-a-shelf.com/">Rev-a-shelf</a></li>
+                                <li><a target="_blank" href="http://www.houzz.com/photos/kitchen">Houzz Kitchen</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>		</div>
+
 
 
 

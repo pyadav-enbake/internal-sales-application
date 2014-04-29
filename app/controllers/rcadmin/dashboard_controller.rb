@@ -1,6 +1,6 @@
 class Rcadmin::DashboardController < ApplicationController
-  before_filter :check_auth,:authenticate
+  before_filter :check_auth, :authenticate
   def index
-	#render :text => session['warden.user.admin.key'].inspect and return false;
+    @recent_quotes = current_user.quotes.includes([:contractor, :customer]).last(5)
   end
 end

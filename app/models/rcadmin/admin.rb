@@ -19,4 +19,12 @@ class Rcadmin::Admin < ActiveRecord::Base
   has_many :quotes, through: :contractors
   has_many :categories, dependent: :destroy
 
+
+  %w(turned_in negotiations).each do |status|
+    method_name = "quotes_#{status}_count"
+    define_method method_name do
+      quotes.send(status.to_sym).count
+    end
+  end
+
 end

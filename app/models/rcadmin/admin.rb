@@ -27,4 +27,28 @@ class Rcadmin::Admin < ActiveRecord::Base
     end
   end
 
+
+  def quarter_range now = Time.now
+    now = now.beginning_of_year
+    ranges = [0, 3, 6, 9].map do |quarter|
+      (now + quarter.month).all_quarter
+    end
+  end
+
+  def unclosed_data
+    quotes = []
+    quarter_range.each_with_index do |quarter_range, index|
+      quotes << [index + 1, self.quotes.unclosed.where(created_at: quarter_range).size]
+    end
+    quotes
+  end
+
+  def turned_in_data
+    quotes = []
+    quarter_range.each_with_index do |quarter_range, index|
+      quotes << [index + 1, self.quotes.turned_in.where(created_at: quarter_range).size]
+    end
+    quotes
+  end
+
 end

@@ -134,13 +134,10 @@
                             <div class="col-md-12 clearfix">
                               <h4 class="pull-left" style="margin: 0 0 20px;">Closing Sales <small>(by quarter)</small></h4>
                               <div class="btn-group pull-right">
-                                <a href="javascript:;" class="btn btn-default btn-sm active">2012</a>
-                                <a href="javascript:;" class="btn btn-default btn-sm ">2011</a>
-                                <a href="javascript:;" class="btn btn-default btn-sm ">2010</a>
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div id="budget-variance" style="height:250px;"></div>
+                              <div id="budget-variance" data-unclosed="<%= current_user.unclosed_data %>"  data-turned-in="<%= current_user.turned_in_data %>"style="height:250px;"></div>
                             </div>
                           </div>
                         </div>

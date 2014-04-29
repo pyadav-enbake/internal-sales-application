@@ -66,6 +66,8 @@ class Rcadmin::Quote < ActiveRecord::Base
     scope method_name, lambda { where(status: index) }
   end
 
+  scope :unclosed, lambda { where.not(status: STATUSES[0]) }
+
 
   def selection_value_for category_id, type
     product_selector = self.product_type_selections.joins(:product_type).

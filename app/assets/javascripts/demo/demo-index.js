@@ -241,8 +241,8 @@ jQuery(document).ready(function() {
     var ds = new Array();
 
     ds.push({
-    data:d1,
-    label: "Estimated",
+    data: $("#budget-variance").data('unclosed'),
+    label: "Unclosed Jobs",
     bars: {
         show: true,
         barWidth: 0.2,
@@ -250,8 +250,8 @@ jQuery(document).ready(function() {
     }
     });
     ds.push({
-        data:d2,
-        label: "Actual",
+        data: $("#budget-variance").data('turnedIn'),
+        label: "Turned In Jobs",
         bars: {
             show: true,
             barWidth: 0.2,
@@ -290,9 +290,6 @@ jQuery(document).ready(function() {
             font: {
                 color: '#8c8c8c',
                 size: 12
-            },
-            tickFormatter: function (val, axis) {
-                return "$" + val + "K";
             }
         },
         legend : {
@@ -335,7 +332,7 @@ jQuery(document).ready(function() {
                 var x = item.datapoint[0].toFixed(2),
                     y = item.datapoint[1].toFixed(2);
 
-                showTooltip(item.pageX+20, item.pageY, item.series.label + ": $" + Math.round(y)+"K");
+                showTooltip(item.pageX+20, item.pageY, item.series.label + " " + Math.round(y));
 
             }
         } else {
@@ -354,43 +351,6 @@ jQuery(document).ready(function() {
         }).appendTo("body").fadeIn(200);
     }
 
-
-
-    var container = $("#server-load");
-
-    // Determine how many data points to keep based on the placeholder's initial size;
-    // this gives us a nice high-res plot while avoiding more than one point per pixel.
-
-    var maximum = container.outerWidth() / 2 || 300;
-    var data = [];
-
-    function getRandomData() {
-
-        if (data.length) {
-            data = data.slice(1);
-        }
-
-        while (data.length < maximum) {
-            var previous = data.length ? data[data.length - 1] : 50;
-            var y = previous + Math.random() * 10 - 5;
-            data.push(y < 0 ? 0 : y > 100 ? 100 : y);
-        }
-
-        // zip the generated y values with the x values
-        var res = [];
-        for (var i = 0; i < data.length; ++i) {
-            res.push([i, data[i]])
-        }
-        return res;
-    }
-
-    //
-
-    series = [{
-        data: getRandomData()
-    }];
-
-    //
 
 
 

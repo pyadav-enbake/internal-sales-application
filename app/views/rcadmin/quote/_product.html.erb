@@ -66,8 +66,10 @@
             <div id="subtabs-<%= "#{product_type}-#{index}" %>">
               <a href="#" class="expand">Expand All</a>
               <a href="#" data-id="<%= room.id %>"  data-toggle="modal" data-target="#live-data">Base Calculator</a>
+              <!--
               <input type="text" name="quote[quote_categories_attributes][<%= index %>][markup]" value="" placeholder="Margin Percentage" data-inputmask="'mask':'99.9'" class="markup-factor mask" data-category-id="<%= room.id %>" />
               <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
+              -->
 
               <div id="accordion" class="accordion">
                 <h3>MISCS <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a></h3>

@@ -111,8 +111,8 @@
                               <tbody class="selects">
                                 <% @recent_quotes.each do |quote| %>
                                 <tr>
-                                  <td><%= quote.contractor %></td>
-                                  <td><%= quote.customer %></td>
+                                  <td><%= link_to quote.contractor, rcadmin_display_quotes_path(id: quote.contractor) %></td>
+                                  <td><%= link_to quote.customer, rcadmin_display_quotes_path(customer_id: quote.customer) %></td>
                                   <td><%= quote.created_at.strftime("%d-%m-%Y") %></td>
                                   <td>$ <%= quote.grand_total %></td>
                                   <td><%= quote.status %></td>

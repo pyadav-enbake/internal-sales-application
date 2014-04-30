@@ -20,11 +20,30 @@ class Rcadmin::Admin < ActiveRecord::Base
   has_many :categories, dependent: :destroy
 
 
+  def role
+    self.read_attribute(:role).inquiry
+  end
+
   %w(turned_in negotiations).each do |status|
     method_name = "quotes_#{status}_count"
     define_method method_name do
       quotes.send(status.to_sym).count
     end
+  end
+
+
+  DEFAULT_ROOMS = [
+    "Kitchen", "Bath 1", "Mstrr Bath", "Mud Bath", "2nd Lndry", "1st Lndry",
+    "Ldry Top", "Powder 1", "Living Room", "Powder 2", "Mstr Bedroom", "4 Baths",
+    "Closets", "Baths", "Bath 4", "Bath 5", "Bath 6", "Bsmt Bath", "Wetbar",
+    "Office", "Fam Rm", "Xtra1", "Xtra 2", "Xtra 3", "Xtra 4"
+  ]
+
+  after_create :create_default_rooms
+  def create_default_rooms
+    DEFAULT_ROOMS.each do |room|
+      self.categories.create_with(name: room, description: room, status: 0).find_or_create_by(name: room)
+    end if role.sales_admin?
   end
 
 

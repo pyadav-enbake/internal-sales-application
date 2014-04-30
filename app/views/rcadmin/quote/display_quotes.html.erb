@@ -56,7 +56,7 @@
                     <td><%=c.contractor.email%></td>
                     <td><%=c.category%></td>
                     <td><%=c.delivery_date%></td>
-                    <td><%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, c.status) %></td>
+                    <td><%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, c.read_attribute(:status) ), class: 'quote-status', data: {url:  rcadmin_quote_path(c) }  %></td>
                     <td>
                       <a href="<%= docs_rcadmin_quote_path(c) %>" class="btn btn-primary">Docs</a>
                       <a href="<%= rcadmin_show_path(id: c.id) %>" class="btn btn-primary">Quotes</a>

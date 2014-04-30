@@ -27,7 +27,7 @@
         </div>
 
         <div class="panel-body collapse in">
-          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Quote ID:</label>
@@ -47,7 +47,7 @@
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Status:</label>
-              <%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, @rcadmin_quotes.status) %>
+              <%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, @rcadmin_quotes.read_attribute(:status) ), class: 'quote-status' %>
               <%=  %>
             </div>
 

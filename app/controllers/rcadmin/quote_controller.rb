@@ -266,7 +266,10 @@ class Rcadmin::QuoteController < ApplicationController
   def update
     @quote = Rcadmin::Quote.find params[:id]
     @quote.update(params[:quote])
-    redirect_to :back || selections_rcadmin_quote_path(id: @quote.id)
+    respond_to do |format|
+     format.html {  redirect_to :back || selections_rcadmin_quote_path(id: @quote.id) }
+     format.js
+    end
   end
 
   def show

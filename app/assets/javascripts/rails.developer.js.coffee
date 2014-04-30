@@ -1,5 +1,20 @@
 jQuery ->
 
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  })
+
+  $('.quote-status').on 'change', (evt) ->
+    data = { quote: { status: $(this).val() } }
+    $.ajax({
+      method: 'PATCH',
+      data: data,
+      url: $(this).data('url'),
+      dataType: 'script'
+    })
+
   $('.selection-select').on 'change', (evt) ->
     selectionValue = $(this).find('option:selected').text()
 

@@ -9,7 +9,14 @@ jQuery ->
 
   $(document).on('change', '.page-cabinet', (evt) ->
     $this = $(this)
-    $.get(window.location.href, {category_id: $(this).val()}).success((html) ->
+    $.get(window.location.href, {category_id: $(this).val()}).success( (html) ->
+      $this.closest('.page').html(html)
+    )
+  )
+
+  $(document).on('change', '.page-categories', (evt) ->
+    $this = $(this)
+    $.get(window.location.href, $this.closest('form').serialize()).success( (html) ->
       $this.closest('.page').html(html)
     )
   )

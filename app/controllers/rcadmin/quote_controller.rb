@@ -31,7 +31,14 @@ class Rcadmin::QuoteController < ApplicationController
     @contractor = @quote.contractor || Rcadmin::Contractor.new
     @customer = @quote.customer || Rcadmin::Customer.new
     @categories = @quote.categories
-    render template: "rcadmin/quote/templates/grid#{params[:template_id]||1}", layout: false
+    respond_to do |format|
+      if request.xhr?
+        format.html { render partial: "rcadmin/quote/templates/grid#{params[:template_id]||1}_page", locals: { category_id: params[:category_id], page: 0 } }
+      else
+        format.html { render template: "rcadmin/quote/templates/grid#{params[:template_id]||1}", layout: false }
+      end
+      format.js { render template: "rcadmin/quote/templates/grid#{params[:template_id]||1}" }
+    end
   end
 
   def remove_category

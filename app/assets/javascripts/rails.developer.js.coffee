@@ -1,5 +1,19 @@
 jQuery ->
 
+  # Print logic goes here 
+
+  $(document).on('click', '.add-page', (evt) ->
+    evt.preventDefault()
+    $.getScript(window.location.href)
+  )
+
+  $(document).on('change', '.page-cabinet', (evt) ->
+    $this = $(this)
+    $.get(window.location.href, {category_id: $(this).val()}).success((html) ->
+      $this.closest('.page').html(html)
+    )
+  )
+
   $.ajaxSetup({
     headers: {
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

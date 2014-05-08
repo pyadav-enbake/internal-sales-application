@@ -15,6 +15,10 @@ class Rcadmin::Category < ActiveRecord::Base
       "#{name}"
     end
 
+
+    def dom_class
+      self.name.to_s.parameterize
+    end
     #has_many :subcategories, dependent: :destroy
     #has_many :products, dependent: :destroy
 end

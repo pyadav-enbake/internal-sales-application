@@ -63,7 +63,7 @@
           <% @quote.quote_categories.includes(:category).each_with_index do |quote_category, index| %>
             <% room = quote_category.category %>
 
-            <div id="subtabs-<%= "#{product_type}-#{index}" %>">
+            <div id="subtabs-<%= "#{product_type}-#{index}" %>" data-class="<%= "#{room.dom_class}" %>">
               <a href="#" class="expand">Expand All</a>
               <a href="#" data-id="<%= room.id %>"  data-toggle="modal" data-target="#live-data">Base Calculator</a>
               <!--

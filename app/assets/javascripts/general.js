@@ -61,16 +61,22 @@ $(document).ready(function() {
     // Handles all calculation logic in view and for form
 
     var products = {}; 
+    var rooms = {}
 
     $('#cabinet, #laminate').on('keyup', '.quantity', function(evt) {
 
       var quantity = Number($(this).val());
       var id = $(this).attr('id');
       var $parent = $(this).closest('tr');
+      var $room = $parent.closest('.ui-tabs-panel');
+      var roomName = $room.data('class');
 
-      if(isNaN(quantity)) {
+      if(quantity === 0 || isNaN(quantity)) {
 
         delete products[id];
+        if(_.isObject(rooms[roomName]) ) {
+          delete rooms[roomName][id];
+        }
         $parent.find('.total-price-text').text('0.00');
         $parent.find('.total-price-field').val('0.00');
       } else {
@@ -93,7 +99,11 @@ $(document).ready(function() {
           quantity = productPercentage($(this).data('measurement'));
         }
 
-        products[id] = {
+        if(! _.isObject(rooms[roomName]) ) {
+          rooms[roomName] = {}
+        }
+
+        rooms[roomName][id] =  products[id] = {
           totalPrice: price * quantity,
           isWood: $(this).hasClass('wood'),
           isMaple: $(this).hasClass('maple'),

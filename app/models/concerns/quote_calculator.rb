@@ -47,6 +47,7 @@ module QuoteCalculator
   end
 
   def delivery
+    return grand_total if grand_total.zero?
     @deliver ||= ( ( grand_total / 5000  + 1 ) * 75 ).to_f.round(2)
   end
 

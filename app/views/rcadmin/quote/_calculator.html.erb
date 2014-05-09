@@ -1,0 +1,80 @@
+<h1><%= category = object.category %></h1>
+<% field_name = lambda { |field| "quote[quote_categories_attributes][#{object.id}][#{field}]" } %>
+<input type="hidden" name="<%= field_name.call(:id) %>" value="<%= object.id %>" />
+<div class="row quote-categories <%= category.dom_class %>" data-category-class=" <%= category.dom_class %>">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cabinet</td>
+          <td class="cabinet-total"><%= object.cabinet_total %></td>
+        </tr>
+        <tr>
+          <td>Laminate tops</td>
+          <td class="laminate-tops-total"><%= object.laminate_top_total %></td>
+        </tr>
+        <tr>
+          <td>Product total</td>
+          <td class="product-total"><%= object.product_total %></td>
+        </tr>
+        <tr>
+          <td><span class="quote-percentage"><%= object.percentage %></span>%</td>
+          <td class="percentage-total"><%= object.percentage_value %></td>
+        </tr>
+        <tr>
+          <td>Factor(<span class="quote-factor"><%= object.factor %></span>)</td>
+          <td >
+            <input type=text" value="<%= object.factor || 1.0 %>" name="<%= field_name.call(:miscs) %>[factor]" class="factor-total form-control" />
+            <span class="factor-calculated-value"><%= object.factor_value %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Corian</td>
+          <td><input type="text" class="corian-total form-control" value="0.0" name="<%= field_name.call(:miscs) %>[corian]"/></td>
+        </tr>
+        <tr class="misc-td">
+          <td>MISC</td>
+          <td class="misc-total"></td>
+        </tr>
+        <tr>
+          <td>Misc Item</td>
+          <td>
+            <input type="text" value="" placeholder="Enter field name" class="misc-field-name form-control" />
+            <a href="#" class="create-field">Create</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Pre Tax</td>
+          <td class="pre-tax-total"><%= object.pre_tax %></td>
+        </tr>
+        <tr>
+          <td>Tax <span class="quote-tax-percentage"><%= object.tax_percentage %></span>%</td>
+          <td class="tax-total"><%= object.tax_value %></td>
+        </tr>
+        <tr>
+          <td>Subtotal</td>
+          <td class="subtotal-total"><%= object.sub_total %></td>
+        </tr>
+        <tr>
+          <td>Labor</td>
+          <td><input type="text" class="labor-total form-control" name="<%= field_name.call(:miscs) %>[labor]"/></td>
+        </tr>
+        <tr>
+          <td>Delivery</td>
+          <td class="delivery-total"><%= object.delivery %></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td class="grand-total"><%= object.grand_total %></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

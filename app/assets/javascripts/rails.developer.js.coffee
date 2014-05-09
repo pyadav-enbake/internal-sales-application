@@ -1,5 +1,61 @@
 jQuery ->
 
+
+  $('.rooms').on('keyup', '.factor-total, .corian-total, .labor-total', (evt) ->
+    evt.preventDefault()
+    $ancestor = $(this).closest('.quote-categories')
+    categoryName = $ancestor.data('categoryClass')
+    room = new RoomCalculator(".#{categoryName.trim()}")
+    room.updateView()
+  )
+
+  categoriesMiscsSum = (object) ->
+    sum = 0
+    for name, value of object
+      sum += value
+    sum
+
+  categoryMisc = ($element, miscsInputs) ->
+    fieldName = $element.find('.misc-field-name').val()
+    if fieldName.length
+      hidden_field = $element.find('.factor-total').attr('name')
+      dbName = fieldName.replace(/[^a-zA-Z0-9\-_]+/g, '-').replace(/(^-|-$)/g, '').replace(/-/g, '_').toLowerCase()
+      $div = $('<tr />')
+      $label = $('<td />', {text: fieldName})
+
+      $td = $('<td />')
+      $input = $('<input />', {type: 'text', value: '', name: hidden_field.replace('factor', dbName), class: 'form-control'})
+      $td.append($input)
+
+      $div.append($label)
+      $div.append($td)
+
+      $input.on 'keyup', (evt) ->
+        miscsInputs[$(this).attr('name')] = Number($(this).val())
+        $element.find('.misc-total').text(categoriesMiscsSum(miscsInputs))
+        new RoomCalculator("."+$element.data('categoryClass').trim()).updateView()
+
+
+      $element.find('.misc-td').after($div)
+      $element.find('.misc-field-name').val('')
+      $element.find('.misc-field-name').focus()
+
+
+  categoriesMiscTotal = {}
+
+  $('.rooms').on('click', '.create-field', (evt) ->
+    evt.preventDefault()
+    $ancestor = $(this).closest('.quote-categories')
+    categoryName = $ancestor.data('categoryClass').trim()
+
+    $element = $(".#{categoryName}")
+    unless _.isObject(categoriesMiscTotal[categoryName] )
+      categoriesMiscTotal[categoryName] = {}
+
+    categoryMisc($element, categoriesMiscTotal[categoryName])
+
+  )
+
   # Print logic goes here 
 
   $(document).on('click', '.add-page', (evt) ->
@@ -137,9 +193,8 @@ jQuery ->
     sum
 
   quoteMiscs = ->
-    fieldName = $('.misc-field-name').val()
+    fieldName = $('#quoter .misc-field-name').val()
     if fieldName.length
-      console.log(fieldName)
       dbName = fieldName.replace(/[^a-zA-Z0-9\-_]+/g, '-').replace(/(^-|-$)/g, '').replace(/-/g, '_').toLowerCase()
       $div = $('<tr />')
       $label = $('<td />', {text: fieldName})
@@ -162,11 +217,11 @@ jQuery ->
       $('.misc-field-name').focus()
 
 
-  $('.create-field').on 'click', (evt) ->
+  $('#quoter .create-field').on 'click', (evt) ->
     evt.preventDefault()
     quoteMiscs()
 
-  $('.misc-field-name').on 'keypress', (evt) ->
+  $('#quoter .misc-field-name').on 'keypress', (evt) ->
     if evt.which == 13
       evt.preventDefault()
       quoteMiscs()

@@ -302,7 +302,11 @@ class Rcadmin::QuoteController < ApplicationController
     if params.has_key?(:draft)
       redirect_to create_quote_path, notice: 'Your Quote has been saved as a draft.'
     else
-      render template: 'welcome_mailer/send_quote_mail_customer'
+      if params.has_key?(:calculator)
+        render partial: 'rcadmin/quote/calculator', collection: @quote.quote_categories, as: :object 
+      else
+        render template: 'welcome_mailer/send_quote_mail_customer'
+      end
     end
   end
 end

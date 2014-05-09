@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418124845) do
+ActiveRecord::Schema.define(version: 20140509100557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20140418124845) do
     t.decimal  "markup",      precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "miscs"
   end
 
   add_index "quote_categories", ["category_id"], name: "index_quote_categories_on_category_id", using: :btree

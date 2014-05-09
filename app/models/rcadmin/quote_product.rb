@@ -4,6 +4,8 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
 
   belongs_to :quote
   belongs_to :category
+  has_one :quote_category, -> (object) { where(quote_id: object.quote_id) },
+    foreign_key: :category_id, primary_key: :category_id
 
   belongs_to :product, polymorphic: true
 

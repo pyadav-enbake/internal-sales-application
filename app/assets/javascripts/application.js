@@ -38,7 +38,6 @@
 //= require rails.developer
 //= require applicationn.js
 //= require demo/demo.js
-//= require_tree ./templates
 //= require template_handler
 //= require general.js
 //= require autocomplete/chosen.jquery.js

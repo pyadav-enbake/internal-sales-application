@@ -536,7 +536,7 @@
                                             <% grand_total += with_hidden_total %>
 
                                             <tr>
-                                              <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Total Price:$ <%= product and product.quote_category.grand_total.round(2) %></td>
+                                              <td style="border: 1px solid #000000;text-align: left;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Total Price:$ <%= product and sprintf("%.2f", product.quote_category.grand_total) %></td>
                                             </tr>
                                           </tbody>
                                         </table>

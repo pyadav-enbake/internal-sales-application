@@ -30,6 +30,7 @@ class Rcadmin::Product < ActiveRecord::Base
     wording = read_attribute(:customer_wording)
     wording.presence || title
   end
+  alias to_s customer_wording
 
   def self.base_products
     @base_subcategory ||= begin 

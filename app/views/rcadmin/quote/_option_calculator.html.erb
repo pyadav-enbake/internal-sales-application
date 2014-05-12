@@ -1,0 +1,24 @@
+<h1>OPTIONS</h1>
+<% @quote.quote_categories.each do |quote_category| %>
+  <% category = quote_category.category %>
+  <h2><%= category %></h2>
+  <div class="row quote-categories <%= category.dom_class %>" data-category-class=" <%= category.dom_class %>">
+    <div class="col-sm-12">
+      <table class="table">
+        <tbody>
+          <% quote_category.quote_products.options.includes(:product).each do |quote_product| %>
+            <tr>
+              <td><%= quote_product.product %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td class="options-product-total" data-options-product-total="<%= quote_category.options_product_total %>">
+              Total Price: $ <span class="options-grand-total"><%= quote_category.options_grand_total %></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+<% end %>

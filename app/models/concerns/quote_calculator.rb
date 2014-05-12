@@ -4,6 +4,14 @@ module QuoteCalculator
   included do
   end
 
+  def options_product_total
+    @options_product_total ||= self.quote_products.options.sum(:total_price).to_f
+  end
+
+  def options_grand_total
+    ( options_product_total * (percentage/100.0) * factor ).round(2)
+  end
+
   def cabinet_total
     @cabinet_total ||= (
       self.quote_products.cabinets.sum(:total_price).to_f +

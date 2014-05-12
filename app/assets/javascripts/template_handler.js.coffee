@@ -1,6 +1,12 @@
 class window.RoomCalculator
   constructor: (@el) ->
 
+  optionsProductTotal: ->
+    Number( $(@el).find('.options-product-total').data('optionsProductTotal') )
+
+  optionsGrandTotal: ->
+    @optionsProductTotal() * @percentage() * @factor()
+
   cabinetTotal: ->
     Number( $(@el).find('.cabinet-total').text() )
 
@@ -63,4 +69,5 @@ class window.RoomCalculator
     $(@el).find('.subtotal-total').text( @subTotal().toFixed(2) )
     $(@el).find('.delivery-total').text( @delivery().toFixed(2) )
     $(@el).find('.grand-total').text( @grandTotal().toFixed(2) )
+    $(@el).find('.options-grand-total').text( @optionsGrandTotal().toFixed(2) )
 

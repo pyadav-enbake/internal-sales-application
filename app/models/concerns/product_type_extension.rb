@@ -8,4 +8,8 @@ module ProductTypeExtension
     end
 
   end
+
+  def options(option = 'Yes')
+    self.where(header_option: option)
+  end
 end

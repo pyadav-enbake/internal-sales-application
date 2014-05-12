@@ -456,69 +456,6 @@
               </td>
             </tr>
 
-            <tr>
-              <td>
-                <% @quote.quote_categories.each do |quote_category| %>
-                  <% category = quote_category.category %>
-                  <table class="table">
-                    <thead>
-                      <h1><%= category %></h1>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Cabinet Total</td>
-                        <td>$ <%= "%.2f" % quote_category.cabinet_total %></td>
-                      </tr>
-                      <tr>
-                        <td>Laminate Total</td>
-                        <td>$ <%= "%.2f" % quote_category.laminate_top_total %></td>
-                      </tr>
-                      <tr>
-                        <td>Product Total</td>
-                        <td>$ <%= "%.2f" % quote_category.product_total %></td>
-                      </tr>
-                      <tr>
-                        <td><%= quote_category.percentage %>%</td>
-                        <td>$ <%= "%.2f" % quote_category.percentage_value %></td>
-                      </tr>
-                      <tr>
-                        <td>Factor(<%= quote_category.factor %>)</td>
-                        <td>$ <%= "%.2f" % quote_category.factor_value %></td>
-                      </tr>
-                      <tr>
-                        <td>Corian</td>
-                        <td>$ <%= "%.2f" % quote_category.corian %></td>
-                      </tr>
-                      <tr>
-                        <td>Miscs</td>
-                        <td>$ <%= "%.2f" % quote_category.extra_misc %></td>
-                      </tr>
-                      <tr>
-                        <td>Pre Tax</td>
-                        <td>$ <%= "%.2f" % quote_category.pre_tax %></td>
-                      </tr>
-                      <tr>
-                        <td>Tax <%= quote_category.tax_percentage %>%</td>
-                        <td>$ <%= "%.2f" % quote_category.tax_value %></td>
-                      </tr>
-                      <tr>
-                        <td>Labor</td>
-                        <td>$ <%= "%.2f" % quote_category.labor %></td>
-                      </tr>
-                      <tr>
-                        <td>Delivery</td>
-                        <td>$ <%= "%.2f" % quote_category.delivery %></td>
-                      </tr>
-                      <tr>
-                        <td>Total</td>
-                        <td>$ <%= "%.2f" % quote_category.grand_total %></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                <% end %>
-                <%= render partial: 'rcadmin/quote/option_calculator' %>
-              </td>
-            </tr>
 
             <tr>
               <td align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">

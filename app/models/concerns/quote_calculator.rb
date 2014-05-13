@@ -4,8 +4,21 @@ module QuoteCalculator
   included do
   end
 
+
+  def total
+    @total ||= self.quote_products.group([:product_type, :header_option]).sum(:total_price)
+  end
+
   def options_product_total
-    @options_product_total ||= self.quote_products.options.sum(:total_price).to_f
+    @options_product_total ||= (
+      total[['CabinetProduct', 'Yes']].to_f + total[['MiscCabinetProduct', 'Yes']].to_f
+      total[['LaminateProduct', 'Yes']].to_f + total[['MiscLaminateProduct', 'Yes']].to_f
+    ).round(2)
+  end
+
+  def options_sipping_charges
+    return options_grand_total if options_grand_total.zero?
+    @options_shipping ||= ( ( options_grand_total / 5000  + 1 ) * 75 ).to_f.round
   end
 
   def options_grand_total
@@ -14,15 +27,13 @@ module QuoteCalculator
 
   def cabinet_total
     @cabinet_total ||= (
-      self.quote_products.cabinets.sum(:total_price).to_f +
-      self.quote_products.misc_cabinets.sum(:total_price).to_f
+      total[['CabinetProduct', 'No']].to_f + total[['MiscCabinetProduct', 'No']].to_f
     ).round(2)
   end
 
   def laminate_top_total
     @laminate_top_total ||= (
-      self.quote_products.laminates.sum(:total_price).to_f + 
-      self.quote_products.misc_laminates.sum(:total_price).to_f
+      total[['LaminateProduct', 'No']].to_f + total[['MiscLaminateProduct', 'No']].to_f
     )
   end
 

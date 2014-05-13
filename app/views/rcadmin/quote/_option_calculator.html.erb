@@ -1,4 +1,5 @@
 <h1>OPTIONS</h1>
+<% shipping = 0.0 %>
 <% @quote.quote_categories.each do |quote_category| %>
   <% category = quote_category.category %>
   <h2><%= category %></h2>
@@ -21,7 +22,7 @@
           <tr>
             <td>Total Price </td>
             <td class="options-product-total" data-options-product-total="<%= quote_category.options_product_total %>">
-               $ <span class="options-grand-total"><%= quote_category.options_grand_total %></span>
+               $ <span class="options-grand-total"><%= shipping += quote_category.options_grand_total %></span>
             </td>
           </tr>
         </tbody>

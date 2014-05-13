@@ -24,8 +24,6 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
     (self.total_price * (percentage/100) * factor).round(2)
   end
 
-
-
   def has_option?
     self.header_option == 'Yes'
   end

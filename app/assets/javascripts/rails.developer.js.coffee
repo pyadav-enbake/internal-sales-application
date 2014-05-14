@@ -272,7 +272,8 @@ jQuery ->
     $('.live-data').modal('hide')
     $('.total[data-product-id]').each ->
       value = parseInt($(this).text())
-      id = ".quantity1.#{$(this).attr('klass')}"
+      id = ".quantity##{$(this).attr('klass')}"
+      console.log id
       unless isNaN(value)
         $(id).val(value)
       $(id).trigger('keyup')

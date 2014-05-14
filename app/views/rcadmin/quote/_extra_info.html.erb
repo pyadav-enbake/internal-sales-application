@@ -8,32 +8,35 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Modal title</h4>
       </div>
-      <% base_products = Rcadmin::Product.base_products.limit(6).to_a %>
+      <% base_products = CabinetProduct.base_products %>
+      <% category_id = @quote.quote_categories.first.try(:category_id) %>
       <div class="modal-body">
-        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="editable">
-          <thead>
-            <tr>
-              <% base_products.each do |product| %>
-                <th><%= product.title %></th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% categories = current_admin.categories %>
-            <% 1.upto(15).each do |n| %>
-              <tr class="odd gradeX">
+        <div class="table-responsive">
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="editable">
+            <thead>
+              <tr>
                 <% base_products.each do |product| %>
-                  <td class="editable" data-id="<%= "#{product.subcategory_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
+                  <th><%= product.title %></th>
                 <% end %>
               </tr>
-            <% end %>
-            <tr class="even">
-              <% base_products.each do |product| %>
-                <td class="total" data-id="<%= "#{product.subcategory_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
+            </thead>
+            <tbody>
+              <% categories = current_admin.categories %>
+              <% 1.upto(15).each do |n| %>
+                <tr class="odd gradeX">
+                  <% base_products.each do |product| %>
+                    <td class="editable" data-id="<%= "#{category_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
+                  <% end %>
+                </tr>
               <% end %>
-            </tr>
-          </tbody>
-        </table>
+              <tr class="even">
+                <% base_products.each do |product| %>
+                  <td class="total" data-id="<%= "#{category_id}#{product.id}" %>" data-product-id="<%= product.id %>"></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -16,13 +16,13 @@
           <% quote_category.quote_products.options.includes(:product).each do |quote_product| %>
             <tr>
               <td><%= quote_product.product %></td>
-              <td><%= quote_product.options_total_price %></td>
+              <td><%= '%.2f' % quote_product.options_total_price %></td>
             </tr>
           <% end %>
           <tr>
             <td>Total Price </td>
             <td class="options-product-total" data-options-product-total="<%= quote_category.options_product_total %>">
-               $ <span class="options-grand-total"><%= shipping += quote_category.options_grand_total %></span>
+               $ <span class="options-grand-total"><%= '%.2f' % shipping += quote_category.options_grand_total %></span>
             </td>
           </tr>
         </tbody>

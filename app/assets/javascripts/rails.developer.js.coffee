@@ -263,7 +263,7 @@ jQuery ->
           
       
 
-        console.log($('.total[klass=' +  id + ']').text(sum))
+        $('.total[klass=' +  id + ']').text(sum)
 
 
 
@@ -272,8 +272,7 @@ jQuery ->
     $('.live-data').modal('hide')
     $('.total[data-product-id]').each ->
       value = parseInt($(this).text())
-      id = ".quantity##{$(this).attr('klass')}"
-      console.log id
+      id = ".quantity##{categoryId}#{$(this).attr('klass')}"
       unless isNaN(value)
         $(id).val(value)
       $(id).trigger('keyup')
@@ -283,12 +282,12 @@ jQuery ->
 
     $('td.total').each ->
       productId = $(this).data('productId')
-      $(this).attr('id', "#{categoryId}#{productId}")
+      $(this).attr('id', "#{productId}")
       $(this).removeAttr('klass')
-      $(this).attr('klass', "#{categoryId}#{productId}")
+      $(this).attr('klass', "#{productId}")
 
     $('td.editable').each ->
       productId = $(this).data('productId')
       $(this).removeAttr('klass')
-      $(this).data('id', "#{categoryId}#{productId}")
-      $(this).attr('klass', "#{categoryId}#{productId}")
+      $(this).data('id', "#{productId}")
+      $(this).attr('klass', "#{productId}")

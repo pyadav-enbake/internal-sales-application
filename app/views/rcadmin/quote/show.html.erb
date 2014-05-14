@@ -24,6 +24,13 @@
         <div class="panel-heading">
 
           <h4>Quote</h4>
+
+          <div class="options"> 
+            <div class="pull-right">
+              <a href="<%= edit_rcadmin_quote_path(@rcadmin_quotes) %>" class="btn btn-info btn-lg">Edit Quote</a>
+            </div>
+          </div>
+
         </div>
 
         <div class="panel-body collapse in">
@@ -135,58 +142,10 @@
             <% end %>
           <% end %>
 
-          <h4>Shipping Charges: $<%= @rcadmin_quotes.options_sipping_charges %></h4>
-
-
-            <div class="form-group">
-              <h4><label class="col-sm-3 control-label">Cabinet Types Info:</label></h4>
-            </div>
-
-            <div>
-            <% @json_cabinet_types.each do |j| %>
-            <br/>
-            <h4><%= Rcadmin::Category.find(j.first).name %></h4>
-            <table id="example" class="table table-striped table-bordered datatables dataTable">
-
-              <% j.last.each do |cabinet_types| %>
-              <tr>
-                <td>
-                  <%= Rcadmin::CabinetType.find(cabinet_types.first).name %>
-                </td>
-                <td>
-                  <%= "Selection #{cabinet_types.last.first}"%>
-                </td>
-              </tr>
-              <% end %>
-                          </table>
-
-              <% end %>
-          </div>
-<br/>
-            <div class="form-group">
-              <h4><label class="col-sm-3 control-label">Countertop Designs Info:</label></h4>
-              <%#= #@rcadmin_quotes.countertop_designs_info %>
-            </div>
-          <div>
-            <% @json_countertop.each do |j| %>
-            <br/>
-            <h4><%= Rcadmin::Category.find(j.first).name %></h4>
-            <table id="example" class="table table-striped table-bordered datatables dataTable">
-
-              <% j.last.each do |countertop| %>
-              <tr>
-                <td>
-                  <%= Rcadmin::CountertopDesign.find(countertop.first).name %>
-                </td>
-                <td>
-                  <%= "Selection #{countertop.last.first}"%>
-                </td>
-              </tr>
-              <% end %>
-                          </table>
-
-              <% end %>
-          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><h4>Shipping Charges:</h4></label>
+            <h3>$<%= @rcadmin_quotes.options_sipping_charges %></h3>
+        </div>
         </div>
     </div>
   </div>

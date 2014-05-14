@@ -11,14 +11,14 @@ module QuoteCalculator
 
   def options_product_total
     @options_product_total ||= (
-      total[['CabinetProduct', 'Yes']].to_f + total[['MiscCabinetProduct', 'Yes']].to_f
+      total[['CabinetProduct', 'Yes']].to_f + total[['MiscCabinetProduct', 'Yes']].to_f +
       total[['LaminateProduct', 'Yes']].to_f + total[['MiscLaminateProduct', 'Yes']].to_f
     ).round(2)
   end
 
   def options_sipping_charges
     return options_grand_total if options_grand_total.zero?
-    @options_shipping ||= ( ( options_grand_total / 5000  + 1 ) * 75 ).to_f.round
+    @options_shipping ||= ( ( options_grand_total / 5000  + 1 ).round * 75 )
   end
 
   def options_grand_total
@@ -67,7 +67,7 @@ module QuoteCalculator
 
   def delivery
     return grand_total if grand_total.zero?
-    @deliver ||= ( ( grand_total / 5000  + 1 ) * 75 ).to_f.round(2)
+    @deliver ||= ( grand_total / 5000  + 1 ).round * 75
   end
 
 

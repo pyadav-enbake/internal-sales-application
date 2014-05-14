@@ -58,9 +58,11 @@
                     <td><%=c.delivery_date%></td>
                     <td><%= select_tag :quote_status, options_for_select(Rcadmin::Quote::STATUSES.my_hash.invert, c.read_attribute(:status) ), class: 'quote-status', data: {url:  rcadmin_quote_path(c) }  %></td>
                     <td>
+                      <a href="<%= edit_rcadmin_quote_path(c) %>" class="btn btn-primary">Edit</a>
                       <a href="<%= docs_rcadmin_quote_path(c) %>" class="btn btn-primary">Docs</a>
                       <a href="<%= rcadmin_show_path(id: c.id) %>" class="btn btn-primary">Quotes</a>
                       <a href="<%= cover_sheet_rcadmin_quote_path(id: c.id) %>" class="btn btn-primary">Cover Sheet</a>
+                      <a href="<%= selections_rcadmin_quote_path(id: c.id) %>" class="btn btn-primary">Selections</a>
                     </td>
                     </tr>
                 <%end%>

@@ -11,7 +11,33 @@
       <% base_products = CabinetProduct.base_products %>
       <div class="modal-body">
         <div class="table-responsive">
-          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="editable">
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered cabinet-product" id="editable">
+            <thead>
+              <tr>
+                <% base_products.each do |product| %>
+                  <th><%= product.title %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% categories = current_admin.categories %>
+              <% 1.upto(15).each do |n| %>
+                <tr class="odd gradeX">
+                  <% base_products.each do |product| %>
+                    <td class="editable" data-id="<%= product.id %>" data-product-id="<%= product.id %>"></td>
+                  <% end %>
+                </tr>
+              <% end %>
+              <tr class="even">
+                <% base_products.each do |product| %>
+                  <td class="total" data-id="<%= product.id %>" data-product-id="<%= product.id %>"></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+
+          <% base_products = LaminateProduct.base_products %>
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered laminate-product" id="editable">
             <thead>
               <tr>
                 <% base_products.each do |product| %>

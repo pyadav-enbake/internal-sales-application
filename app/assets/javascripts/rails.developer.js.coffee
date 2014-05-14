@@ -240,7 +240,7 @@ jQuery ->
       evt.preventDefault()
       alert("You can not hide options")
 
-  categoryId = null
+  productType = categoryId = null
   if $('.editable').length
     $('.editable').editable
       event: 'click'
@@ -279,6 +279,14 @@ jQuery ->
 
   $('[data-target="#live-data"]').on 'click', ->
     categoryId = $(this).data('id')
+    productType = $(this).data('productType')
+    if productType == 'cabinet'
+      $('.laminate-product').hide()
+      $('.cabinet-product').show()
+    else
+      $('.laminate-product').show()
+      $('.cabinet-product').hide()
+
 
     $('td.total').each ->
       productId = $(this).data('productId')

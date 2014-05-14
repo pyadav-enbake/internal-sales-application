@@ -25,7 +25,7 @@
         </div>
 
         <div class="panel-body collapse in">
-          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+          <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered " id="example">
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Customer</label>
@@ -57,7 +57,7 @@
 
       <div>
 
-        <table id="example" class="table table-striped table-bordered datatables dataTable">
+        <table id="example" class="table table-striped table-bordered  ">
 
           <% @quote_products_sum.each_pair do |category_id, total_price| %>
             <% category = @categories.detect { |category| category.id === category_id } %>

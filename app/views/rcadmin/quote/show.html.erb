@@ -67,14 +67,75 @@
             </div>
           </table>  
           
-          <h3>Miscs</h3>
 
-          <% @rcadmin_quotes.miscs? && @rcadmin_quotes.miscs.each_pair do |field_name, value| %>
+          <% @rcadmin_quotes.quote_categories.each do |quote_category| %>
+            <h3><%= category = quote_category.category %></h3>
             <div class="form-group">
-              <label class="col-sm-3 control-label"><%= field_name.to_s.humanize %></label>
-              <%= value %>
+              <label class="col-sm-3 control-label">Cabinet total:</label>
+              $<%= '%.2f' % quote_category.cabinet_total %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Laminate total:</label>
+              $<%= '%.2f' % quote_category.laminate_top_total %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Product total:</label>
+              $<%= '%.2f' % quote_category.product_total %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><%= quote_category.percentage %>%</label>
+              $<%= '%.2f' % quote_category.percentage_value %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Factor(<%= quote_category.factor %>)</label>
+              $<%= '%.2f' % quote_category.factor_value %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Corian</label>
+              $<%= '%.2f' % quote_category.corian %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Misc</label>
+              $<%= '%.2f' % quote_category.extra_misc %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Pre tax</label>
+              $<%= '%.2f' % quote_category.pre_tax %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Tax <%= quote_category.tax_percentage %>%</label>
+              $<%= '%.2f' % quote_category.tax_value %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Subtotal</label>
+              $<%= '%.2f' % quote_category.sub_total %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Labor</label>
+              $<%= '%.2f' % quote_category.labor %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Delivery</label>
+              $<%= '%.2f' % quote_category.delivery %>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Total</label>
+              $<%= '%.2f' % quote_category.grand_total %>
             </div>
           <% end %>
+
+          <h2>OPTIONS</h2>
+          <% @rcadmin_quotes.quote_categories.each do |quote_category| %>
+            <h3><%= category = quote_category.category %></h3>
+            <% quote_category.quote_products.options.includes(:product).each do |quote_product| %>
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><%= quote_product.product %></label>
+                $<%= '%.2f' % quote_product.options_total_price %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <h4>Shipping Charges: $<%= @rcadmin_quotes.options_sipping_charges %></h4>
 
 
             <div class="form-group">

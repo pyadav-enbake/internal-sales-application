@@ -19,6 +19,10 @@ class Rcadmin::Admin < ActiveRecord::Base
   has_many :quotes, through: :contractors
   has_many :categories, dependent: :destroy
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 
   def role
     self.read_attribute(:role).inquiry

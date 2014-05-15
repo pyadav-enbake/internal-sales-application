@@ -1,4 +1,17 @@
 module ApplicationHelper
+
+  def format_date time
+    '%02d-%02d-%d' % [time.day, time.month, time.year]
+  end
+
+  def format_phone number
+    "#{number[0..2]}-#{number[3..5]}-#{number[6..-1]}"
+  end
+
+  def calculate_options_price quote_category, quote_product
+    (quote_product.total_price * quote_category.percentage * quote_category.factor / 100).round(2)
+  end
+
  def current_user
      @current_user ||= session[:admin_id] && @current_user = Rcadmin::Admin.find(session[:admin_id]) # Use find_by_id to get nil instead of an error if user doesn't exist
   end

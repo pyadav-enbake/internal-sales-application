@@ -18,6 +18,8 @@ class WelcomeMailer < ActionMailer::Base
   def send_quote_mail_customer(quote_id)
     @quote = Rcadmin::Quote.find(quote_id)
     @customer = @quote.customer
+    @contractor = @quote.contractor
+    @admin = @contractor.admin
     mail :to => "#{@customer.email}", :from => "email@domain.com", :subject => "Quote Request"
   end
 

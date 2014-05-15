@@ -4,7 +4,15 @@ class Rcadmin::QuoteCategory < ActiveRecord::Base
   belongs_to :quote
   belongs_to :category
 
-  has_many :quote_products, -> (object){ where(quote_id: object.quote_id) },
+  has_many :quote_products, -> (object){ 
+    if object.is_a? JoinDependency::JoinAssociation
+      where(quote_id: Rcadmin::QuoteProduct.arel_table[:quote_id])
+    elsif object.nil?
+      none
+    else
+      where(quote_id: object.quote_id) 
+    end
+  },
     foreign_key: :category_id, primary_key: :category_id do
     include ProductTypeExtension
   end

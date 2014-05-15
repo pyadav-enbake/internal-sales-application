@@ -59,6 +59,12 @@ class Rcadmin::Quote < ActiveRecord::Base
   scope :unclosed, lambda { where.not(status: STATUSES[0]) }
 
 
+  def  quote_products_grouped_by_quote_category_with option = 'Yes'
+    self.quote_products.has_option(option).
+      includes([:product, {quote_category: :category}]).
+      group_by { |quote_product| quote_product.quote_category }
+  end
+
   def selection_value_for category_id, type
     product_selector = self.product_type_selections.joins(:product_type).
       where(category_id: category_id).where("LOWER(product_types.name) = ?", type.downcase).first

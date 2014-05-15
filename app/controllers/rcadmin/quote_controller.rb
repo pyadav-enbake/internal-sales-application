@@ -307,6 +307,7 @@ class Rcadmin::QuoteController < ApplicationController
         content += render_to_string(partial: 'rcadmin/quote/option_calculator')
         self.response_body = content
       else
+        @admin = current_user
         render template: 'welcome_mailer/send_quote_mail_customer'
       end
     end

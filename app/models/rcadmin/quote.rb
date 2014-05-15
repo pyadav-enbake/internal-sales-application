@@ -61,7 +61,7 @@ class Rcadmin::Quote < ActiveRecord::Base
 
   def  quote_products_grouped_by_quote_category_with option = 'Yes'
     self.quote_products.has_option(option).
-      includes([:product, {quote_category: :category}]).
+      includes(:product).
       group_by { |quote_product| quote_product.quote_category }
   end
 

@@ -7,8 +7,6 @@ class Rcadmin::QuoteCategory < ActiveRecord::Base
   has_many :quote_products, -> (object){ 
     if object.is_a? JoinDependency::JoinAssociation
       where(quote_id: Rcadmin::QuoteProduct.arel_table[:quote_id])
-    elsif object.nil?
-      none
     else
       where(quote_id: object.quote_id) 
     end

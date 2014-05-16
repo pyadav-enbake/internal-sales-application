@@ -109,14 +109,16 @@ jQuery ->
     matches = new Object()
 
     # Clear old search changes and unexpand accordions
-    $('#accordion .ui-widget-content').hide()
-    $('.ui-accordion-content .table tr').removeAttr('style')
+    $('.panel-collapse.collapse').removeClass('in')
+    $('.panel-collapse.collapse .table tr').removeAttr('style')
     
     # Search each title for search term and highligh it
-    $('.ui-accordion-content .table .title').each (index) ->
+    $('.panel-collapse.collapse .table .title').each (index) ->
       title = $(this).text().trim()
       if regex.test title
-        id = $(this).closest('.ui-accordion-content').attr('id')
+        $parent = $(this).closest('.panel-collapse.collapse')
+        id = $parent.attr('id')
+        $parent.addClass('in')
         matches[id] = "##{id}"
         $(this).parent().css({'background-color': 'yellow'})
 
@@ -147,7 +149,7 @@ jQuery ->
         evt.preventDefault()
         $(".search-controls").hide()
         $('.search-products-text').val("")
-        $('#accordion .ui-widget-content').hide()
+        $('.panel-collapse.collapse').removeClass('in')
         $(window).scrollTop $('.search-products-text').offset().top - 100
         
 

@@ -103,6 +103,7 @@
               </thead>
               <tbody>
                 <% quote_products.each do |quote_product| %>
+                  <% next if quote_product.hidden? %>
                   <tr>
                     <th><%= quote_product.product %></th>
                     <th></th> 
@@ -142,6 +143,7 @@
                 </thead>
                 <tbody>
                   <% quote_products.each do |quote_product| %>
+                    <% next if quote_product.hidden? %>
                     <tr>
                       <th><%= quote_product.product %></th>
                       <th>$<%= '%.2f' % calculate_options_price(quote_category, quote_product) %></th> 

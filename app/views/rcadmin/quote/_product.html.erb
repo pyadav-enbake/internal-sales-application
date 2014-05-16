@@ -71,56 +71,81 @@
               <input type="hidden" name="quote[quote_categories_attributes][<%= index %>][id]" value="<%= quote_category.id %>" />
               -->
 
-              <div id="accordion" class="accordion">
-                <h3>MISCS <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a></h3>
-                <div>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Enter Qty.</th>
-                        <th></th>
-                        <th>Title</th>
-                        <th>Price per unit</th>
-                        <th>Measure Type</th>
-                        <th>Total Price</th>
-                        <th>Option</th>
-                        <th>Hide</th>
-                      </tr>
-                    </thead>
-                    <tbody class="misc-products-<%= "#{product_type}-#{room.id}" %>">
-                      <%= render partial: 'rcadmin/quote/misc_product',
-                        collection: @quote.send("misc_#{product_association}".to_sym), as: :product, locals: {cat: room, product_type: product_type} %>
-                    </tbody>
-                  </table>
+              <div class="panel-group collapser" >
+                <div class="panel panel-default">
+                  <% collapsable_id = "misc-category-#{room.id}-#{product_type}" %>
+                  <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
+                    <h3 class="panel-title">
+                      MISC
+                      <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a>
+                    </h3>
+                  </div>
+                  <div id="<%= collapsable_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Enter Qty.</th>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Price per unit</th>
+                            <th>Measure Type</th>
+                            <th>Total Price</th>
+                            <th>Option</th>
+                            <th>Hide</th>
+                          </tr>
+                        </thead>
+                        <tbody class="misc-products-<%= "#{product_type}-#{room.id}" %>">
+                          <%= render partial: 'rcadmin/quote/misc_product',
+                            collection: @quote.send("misc_#{product_association}".to_sym), as: :product, locals: {cat: room, product_type: product_type} %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-
                 <% Rcadmin::Subcategory.joins(product_association).includes(product_association).order(:id).uniq(:id).each_with_index do |subcat, index|%>
-                  <h3><%= subcat.name %></h3>
-                  <div>
-                    <% @products = subcat.send(product_association) %>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Enter Qty.</th>
-                          <th></th>
-                          <th>Title</th>
-                          <th>Price per unit</th>
-                          <th>Measure Type</th>
-                          <th>Total Price</th>
-                          <th>Option</th>
-                          <th>Hide</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <%= render partial: 'rcadmin/quote/misc_product',
-                          collection: @products, as: :product, locals: {cat: room, product_type: product_type} %>
+                  <% collapsable_id = "collapsable-#{subcat.id}-#{room.id}-#{product_type}" %>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
+                      <h3 class="panel-title">
+                        <%= subcat.name %>
+                      </h3>
+                    </div>
+                    <div id="<%= collapsable_id %>" class="panel-collapse collapse <%= 'in' if index.zero? %>">
+                      <div class="panel-body">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Enter Qty.</th>
+                              <th></th>
+                              <th>Title</th>
+                              <th>Price per unit</th>
+                              <th>Measure Type</th>
+                              <th>Total Price</th>
+                              <th>Option</th>
+                              <th>Hide</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @products = subcat.send(product_association) %>
+                            <%= render partial: 'rcadmin/quote/misc_product',
+                              collection: @products, as: :product, locals: {cat: room, product_type: product_type} %>
 
-                      </tbody>
-                    </table>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 <% end %>
 
+
+
               </div>
+
+
+
+
+              
             </div>
           <% end %>
 
@@ -172,8 +197,8 @@
 </style>
 <script>
   $(document).ready(function() {
-    $('#tabs input[type=checkbox]').prop('checked',false);
-    $('#tabs input[type=text]').attr('disabled',false);
+    // $('#tabs input[type=checkbox]').prop('checked',false);
+    // $('#tabs input[type=text]').attr('disabled',false);
 
     $.ajaxSetup({
       beforeSend: function(jqXHR) {
@@ -181,9 +206,7 @@
       }
     });
 
-    $('[data-is-edit=true]').find('.quantity').trigger('keyup').end().
-      find('.option-product[data-checked=true]').trigger('click').end().
-      find('.hide-product[data-checked=true]').trigger('click');
+    $('[data-is-edit=true]').find('.quantity').trigger('keyup');
 
 
     $(document).on('click', '.someclass', function(evt) {

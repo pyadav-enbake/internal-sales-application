@@ -21,6 +21,8 @@
     <input class="option-product" type="checkbox" data-checked="<%= quote_product.try(:has_option?) %>"
     name="<%= quote_product_attr.call(:header_option) %>" value="Yes" >
   </td>
-  <td><input class="hide-product" type="checkbox" data-checked="<%= quote_product.try(:hidden) %>"
+  <td>
+    <input type="hidden" name="<%= quote_product_attr.call(:hidden) %>" value="false" />
+    <input class="hide-product" type="checkbox" data-checked="<%= check = quote_product && quote_product.hidden? == true || quote_product.nil?%>" <%= 'checked=checked' if check %>
     name="<%= quote_product_attr.call(:hidden) %>"></td>
 </tr>

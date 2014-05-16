@@ -17,7 +17,6 @@
 //= require underscore
 //= require jqueryui-1.10.3.min.js
 //= require bootstrap.min.js
-//= require bootstrap-collapse.js
 //= require enquire.js
 //= require jquery.cookie.js
 //= require jquery.nicescroll.min.js

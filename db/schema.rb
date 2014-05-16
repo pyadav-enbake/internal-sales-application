@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509100557) do
+ActiveRecord::Schema.define(version: 20140516183055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 20140509100557) do
     t.string   "header_option",           default: "No"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",                  default: false
+    t.boolean  "hidden",                  default: true
     t.string   "product_type",            default: "Rcadmin::Product"
   end
 

@@ -56,6 +56,12 @@ $(document).ready(function() {
   });
 
 
+  $('.tabs .delete-tab a').click(function(evt) {
+    var tabId = $(this).attr('href');
+    $(window).scrollTop( $(tabId).offset().top - 80 );
+  });
+
+
   (function() {
 
     // Handles all calculation logic in view and for form
@@ -70,6 +76,12 @@ $(document).ready(function() {
       var $parent = $(this).closest('tr');
       var $room = $parent.closest('.ui-tabs-panel');
       var roomName = $room.data('class');
+
+      var $checkbox = $parent.find('.hide-product');
+      if( $checkbox.data('checked') ) {
+      console.log( $checkbox.data('checked') );
+        $checkbox.prop('checked', true);
+      }
 
       if(quantity === 0 || isNaN(quantity)) {
 
@@ -405,25 +417,27 @@ $(document).ready(function() {
   //Expand and collaps
 
   $(".accordion" ).accordion({
-    collapsible: true,
-    heightStyle: "fill",
+    active: 1,
+    collapsible: false,
+    heightStyle: "content",
     create: function(evt, ui) {
       $('.overlay-active').removeClass('overlay-active');
     }
   })
 
+  $('.overlay-active').removeClass('overlay-active');
+
   $('.expand').click(function() {
-      var inhtml = $('.expand').html();
-      if(inhtml == 'Expand All'){
-          $('.expand').html('Collapse All');
-          $('#accordion .ui-widget-content').fadeIn(1000);
-      }else{
+    var inhtml = $('.expand').html();
+    if(inhtml == 'Expand All'){
+      $('.expand').html('Collapse All');
+      $('.panel-collapse.collapse').addClass('in');
+    }else{
 
-          $('.expand').html('Expand All');
-          $('#accordion .ui-widget-content').fadeOut(1000);
-          $(".accordion" ).accordion( "option", "active",-90);
+      $('.expand').html('Expand All');
+      $('.panel-collapse.collapse').removeClass('in');
 
-      }
+    }
 
       //$('#accordion .ui-widget-content').toggle('slow');
   });

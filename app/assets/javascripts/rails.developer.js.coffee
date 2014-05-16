@@ -249,21 +249,21 @@ jQuery ->
         id = data.$el.attr('klass')
 
 
-        content = parseInt(data.content)
-        if isNaN(content)
+        content = Number(data.content)
+        if content == 0
           data.$el.text(0)
         else
           data.$el.text(content)
 
-        sum = 0
+        sum = 0.0
         $('.editable[klass=' + id + ']').each ->
-          value = parseInt($(this).text())
-          unless isNaN(value)
+          value = Number($(this).text())
+          if value > 0
             sum += value
           
       
 
-        $('.total[klass=' +  id + ']').text(sum)
+        $('.total[klass=' +  id + ']').text(sum.toFixed(2))
 
 
 
@@ -271,9 +271,9 @@ jQuery ->
     evt.preventDefault()
     $('.live-data').modal('hide')
     $('.total[data-product-id]').each ->
-      value = parseInt($(this).text())
+      value = Number($(this).text())
       id = ".quantity##{categoryId}#{$(this).attr('klass')}"
-      unless isNaN(value)
+      if value > 0
         $(id).val(value)
       $(id).trigger('keyup')
 

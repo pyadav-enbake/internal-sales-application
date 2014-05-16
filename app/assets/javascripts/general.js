@@ -76,10 +76,10 @@ $(document).ready(function() {
       var $parent = $(this).closest('tr');
       var $room = $parent.closest('.ui-tabs-panel');
       var roomName = $room.data('class');
+      $parent.closest('.panel-collapse.in').addClass('product-seen');
 
       var $checkbox = $parent.find('.hide-product');
       if( $checkbox.data('checked') ) {
-      console.log( $checkbox.data('checked') );
         $checkbox.prop('checked', true);
       }
 
@@ -425,17 +425,21 @@ $(document).ready(function() {
     }
   })
 
-  $('.overlay-active').removeClass('overlay-active');
 
-  $('.expand').click(function() {
+
+  $('.overlay-active').removeClass('overlay-active');
+  $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show');
+
+  $('.expand').click(function(evt) {
+    evt.preventDefault();
     var inhtml = $('.expand').html();
     if(inhtml == 'Expand All'){
       $('.expand').html('Collapse All');
-      $('.panel-collapse.collapse').addClass('in');
+      $('.panel-collapse.collapse').collapse('show');
     }else{
 
       $('.expand').html('Expand All');
-      $('.panel-collapse.collapse').removeClass('in');
+      $('.panel-collapse.in').collapse('hide');
 
     }
 

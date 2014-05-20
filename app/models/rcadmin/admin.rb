@@ -33,7 +33,8 @@ class Rcadmin::Admin < ActiveRecord::Base
       phone: '8154679900',
       status: 0
     }
-    contractor = self.contractors.where(email: self.email).first_or_create! attributes
+    contractor = self.contractors.where(email: self.email).first
+    contractor && contractor.update!(attributes) || self.contractors.create!(attributes)
   end
 
   def full_name

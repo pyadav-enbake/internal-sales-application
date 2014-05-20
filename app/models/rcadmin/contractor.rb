@@ -17,6 +17,27 @@ class Rcadmin::Contractor < ActiveRecord::Base
   scope :default, -> {  where(:status => 0)  }
   #composed_of :name, :mapping => %w(first_name last_name)
   scope :find_by_adminid, ->(admin_id) { where("admin_id = ? OR admin_id = 0", admin_id).order(:id) }
+
+  after_create :create_default_customer, if: :default_contractor?
+  def create_default_customer
+    attributes = {
+      first_name: 'Romar',
+      last_name: 'Retail',
+      email: self.email,
+      address: '23949 S Northern Illinois Dr',
+      city: 'Channahon',
+      state: 'IL',
+      zip: '60410',
+      phone: '8154679900',
+      status: 0
+    }
+    customer = self.customers.where(email: self.email).first_or_create! attributes
+  end
+
+  def default_contractor?
+    self.company_name == 'Romar Cabinets'
+  end
+
   def fullname
     "#{first_name} #{last_name}"
   end

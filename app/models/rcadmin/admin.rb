@@ -19,6 +19,23 @@ class Rcadmin::Admin < ActiveRecord::Base
   has_many :quotes, through: :contractors
   has_many :categories, dependent: :destroy
 
+  after_create :create_default_contractor
+  def create_default_contractor
+    attributes = {
+      first_name: 'Romar',
+      last_name: 'Retail',
+      company_name: 'Romar Cabinets',
+      email: self.email,
+      address: '23949 S Northern Illinois Dr',
+      city: 'Channahon',
+      state: 'IL',
+      zip: '60410',
+      phone: '8154679900',
+      status: 0
+    }
+    contractor = self.contractors.where(email: self.email).first_or_create! attributes
+  end
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

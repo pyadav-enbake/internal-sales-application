@@ -31,7 +31,8 @@ class Rcadmin::Contractor < ActiveRecord::Base
       phone: '8154679900',
       status: 0
     }
-    customer = self.customers.where(email: self.email).first_or_create! attributes
+    customer = self.customers.where(email: self.email).first
+    customer && customer.update!(attributes) || self.customers.create(attributes)
   end
 
   def default_contractor?

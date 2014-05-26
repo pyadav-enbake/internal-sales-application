@@ -67,7 +67,8 @@ $(document).ready(function() {
     // Handles all calculation logic in view and for form
 
     var products = {}; 
-    window.rooms = {}
+    window.rooms = {};
+    var percentage = {};
 
     $('#cabinet, #laminate').on('keyup', '.quantity', function(evt) {
 
@@ -77,6 +78,7 @@ $(document).ready(function() {
       var $room = $parent.closest('.ui-tabs-panel');
       var roomName = $room.data('class');
       $parent.closest('.panel-collapse.in').addClass('product-seen');
+
 
       var $checkbox = $parent.find('.hide-product');
       if( $checkbox.data('checked') ) {
@@ -101,13 +103,14 @@ $(document).ready(function() {
         var delegatedTarget = $(evt.delegateTarget).attr('id');
 
         if(isWoodPercentage) {
+          percentage[id] = ['wood', delegatedTarget];
           price = woodProductsTotal()[delegatedTarget];
           quantity = productPercentage($(this).data('measurement'));
         }
 
         if (isMaplePercentage) {
+          percentage[id] = ['maple', delegatedTarget];
           price = mapleProductsTotal()[delegatedTarget];
-          console.log( price );
           quantity = productPercentage($(this).data('measurement'));
         }
 
@@ -127,6 +130,9 @@ $(document).ready(function() {
         $parent.find('.total-price-text').text(totalProductPrice);
         $parent.find('.total-price-field').val(totalProductPrice);
 
+        if(! (isWoodPercentage || isMaplePercentage) )
+          updatePercentageProduct(percentage)
+
       }
       var total = countProductTotal();
       $('#cabinet-total').text(total.cabinet);
@@ -135,6 +141,11 @@ $(document).ready(function() {
       $('#total_price').text(totalPrice);
     });
 
+    function updatePercentageProduct(percentage) {
+      for(var id in percentage) {
+        $('#'+id).trigger('keyup');
+      }
+    }
 
     var productPercentage = function(percentageString) {
       var percentage = percentageString.replace(/^%/, '')

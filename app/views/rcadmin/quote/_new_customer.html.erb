@@ -24,7 +24,7 @@
                 <label class="col-sm-3 control-label">Contractor Company Name</label>
                 <div class="col-sm-6">
                   <%#= select(:rcadmin_customer,:contractor_id, Rcadmin::Contractor.find_by_adminid("#{@current_user.id}").collect {|c| [ c.fullname, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control') %>
-                  <%= select(:rcadmin_customer,:contractor_id, [['None', 0]] + Rcadmin::Contractor.find_by_adminid("#{@current_user.id}").collect {|c| [ c.company_name, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control') %>
+                  <%= select(:rcadmin_customer,:contractor_id, Rcadmin::Contractor.find_by_adminid("#{@current_user.id}").collect {|c| [ c.company_name, c.id ] }, {:prompt => "Select Contractor"},:class => 'form-control') %>
                 </div>
               </div>
               <div class="form-group">

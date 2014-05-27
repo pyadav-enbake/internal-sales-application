@@ -33,8 +33,8 @@ class Rcadmin::Admin < ActiveRecord::Base
       phone: '8154679900',
       status: 0
     }
-    contractor = self.contractors.where(email: self.email).first
-    contractor && contractor.update!(attributes) || self.contractors.create!(attributes)
+    contractor = self.contractors.where(email: self.email).find_or_create_by!(attributes.except(:email))
+    contractor.update!(attributes.except(:email)) if contractor.persisted?
   end
 
   def full_name

@@ -212,8 +212,8 @@ class Rcadmin::QuoteController < ApplicationController
 
   def get_customer
       contractor_id = params["contractor_id"]
-      @customer =  Rcadmin::Customer.by_contractor(contractor_id)
-      render :partial => "get_customer", :object => @customer
+      @contractor = Rcadmin::Contractor.find(contractor_id)
+      render :partial => "get_customer", :object => @contractor
   end
 
   def get_new_customer

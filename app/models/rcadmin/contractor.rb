@@ -21,8 +21,8 @@ class Rcadmin::Contractor < ActiveRecord::Base
   after_create :create_default_customer, if: :default_contractor?
   def create_default_customer
     attributes = {
-      first_name: 'Romar',
-      last_name: 'Retail',
+      first_name: 'Quick',
+      last_name: 'Quote',
       email: self.email,
       address: '23949 S Northern Illinois Dr',
       city: 'Channahon',
@@ -31,8 +31,8 @@ class Rcadmin::Contractor < ActiveRecord::Base
       phone: '8154679900',
       status: 0
     }
-    customer = self.customers.where(email: self.email).first
-    customer && customer.update!(attributes) || self.customers.create!(attributes)
+    customer = self.customers.where(email: self.email).find_or_create_by!(attributes.except(:email))
+    customer.update!(attributes.except(:email)) if customer.persisted?
   end
 
   def default_contractor?

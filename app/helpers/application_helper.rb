@@ -1,5 +1,22 @@
 module ApplicationHelper
 
+
+  def contractor_list
+    contractors = current_user.contractors.order(:created_at).map { |c| [c.fullname, c.id] }
+    contractors.insert(1, ["New Contractor", 'new-contractor'])
+    contractors.insert(2, ['--------------', nil])
+  end
+
+  def customer_list contractor
+    p contractor
+    customers = contractor.customers.map { |c| [c.fullname, c.id] }
+    unless contractor.fullname.eql?("Romar Retail")
+      customers.insert(1, ["New Customer", 'new-customer'])
+      customers.insert(2, ['--------------', nil])
+    end
+    customers
+  end
+
   def format_date time
     '%02d-%02d-%d' % [time.day, time.month, time.year]
   end

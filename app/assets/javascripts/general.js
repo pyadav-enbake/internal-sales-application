@@ -522,13 +522,32 @@ function check_product(){
     }
 }
 
+function check_customer(id) {
+  if(id == 'new-customer') {
+    window.location = '/rcadmin/customers/new'
+    return false;
+  }
+  if(id == '') {
+    alert("Please select a valid customer");
+    return false;
+  }
+}
+
 function get_customer(id){
-    $.ajax({
-        url: "/quote/get_customer",
-        type: "POST",
-        data: {"contractor_id" : id},
-        success: function(data) {
-            $("#part_cust").html(data);
-        }
-    });
+  if(id == 'new-contractor') {
+    window.location = '/rcadmin/contractors/new'
+    return false;
+  }
+  if(id == '') {
+    alert("Please select a valid contractor");
+    return false;
+  }
+  $.ajax({
+    url: "/quote/get_customer",
+    type: "POST",
+    data: {"contractor_id" : id},
+    success: function(data) {
+      $("#part_cust").html(data);
+    }
+  });
 }

@@ -76,10 +76,10 @@
                 <div class="panel panel-default">
                   <% collapsable_id = "misc-category-#{room.id}-#{product_type}" %>
                   <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
-                    <h3 class="panel-title">
+                    <h5 class="panel-title">
                       MISC
                       <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a>
-                    </h3>
+                    </h5>
                   </div>
                   <div id="<%= collapsable_id %>" class="panel-collapse collapse">
                     <div class="panel-body">
@@ -109,13 +109,13 @@
                   <% @products = subcat.send(product_association) %>
                   <div class="panel panel-default">
                     <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
-                      <h3 class="panel-title">
+                      <h5 class="panel-title">
                         <%= subcat.name %>
-                      </h3>
+                      </h5>
                     </div>
                     <div id="<%= collapsable_id %>" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <table class="table">
+                        <table class="table table-condensed">
                           <thead>
                             <tr>
                               <th>Enter Qty.</th>

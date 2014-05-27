@@ -8,7 +8,7 @@
   <input type="hidden" name="<%= quote_product_attr.call(:product_id) %>" value="<%= product.id %>" />
   <td>
     <input type="text" name="<%= quote_product_attr.call(:quantity) %>" 
-    id="<%= "#{cat.id}#{product.id}" %>" style="width: 60px;" value="<%= quote_product.try(:quantity) %>" 
+    id="<%= "#{cat.id}#{product.id}" %>" style="width: 50px;" value="<%= quote_product.try(:quantity) %>" 
     class="quantity <%= "#{product.type} #{product_type}" %>" 
     data-measurement="<%= product.measurement_type %>" onkeypress="return isNumber(event)"></td>
   <td></td>

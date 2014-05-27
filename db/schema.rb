@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516183055) do
+ActiveRecord::Schema.define(version: 20140527132506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20140516183055) do
     t.string   "selectable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "abbr"
   end
 
   add_index "selection_types", ["selectable_id", "selectable_type"], name: "index_selection_types_on_selectable_id_and_selectable_type", using: :btree

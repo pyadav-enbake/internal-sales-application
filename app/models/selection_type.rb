@@ -3,5 +3,7 @@ class SelectionType < ActiveRecord::Base
 
   attr_protected :id
 
-  def to_s; self.name; end
+  def to_s
+    self.abbr.presence || self.name
+  end
 end

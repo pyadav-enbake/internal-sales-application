@@ -9,6 +9,7 @@
         <h4 class="modal-title">Modal title</h4>
       </div>
       <% base_products = CabinetProduct.base_products %>
+      <% base_products.reject! { |product| product.title.to_s.match(/OVER DEPTH UPPERS/i) } %>
       <div class="modal-body">
         <div class="table-responsive">
           <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered cabinet-product" id="editable">

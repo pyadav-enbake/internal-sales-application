@@ -52,6 +52,16 @@
         </ul>
       </li>
     <%else%>
+
+      <li>
+        <a href="javascript:;"><i class="fa fa-group"></i><span>Customers</span></a>
+        <ul class="acc-menu">
+          <li><%= link_to "Contractors", rcadmin_contractors_path %></li>
+          <li><%= link_to "Retail", rcadmin_display_quotes_path(id: current_admin.retail)  %></li>
+        </ul>
+      </li>
+
+      <!--
       <li><a href="javascript:;"><i class="fa fa-group"></i><span>Contractors</span></a>
         <ul class="acc-menu">
           <li><%=link_to "Contractor List",rcadmin_contractors_path%></li>
@@ -66,6 +76,8 @@
           <li><%=link_to "Quotations", rcadmin_quotations_path %></li>
         </ul>
       </li>
+
+      -->
 
       <li>
         <%=link_to(create_quote_path) do %>

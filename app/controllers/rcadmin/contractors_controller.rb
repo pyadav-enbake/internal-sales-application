@@ -9,9 +9,8 @@ class Rcadmin::ContractorsController < ApplicationController
     if (@current_user.role == "admin")
       @rcadmin_contractors = Rcadmin::Contractor.all
     else
-      @rcadmin_contractors = Rcadmin::Contractor.find_by_adminid(@current_user.id)
+      @rcadmin_contractors = current_admin.non_retails
     end
-   # render :text => @rcadmin_contractors.inspect and return false
   end
 
   # GET /rcadmin/contractors/1

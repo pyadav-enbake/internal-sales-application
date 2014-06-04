@@ -249,7 +249,7 @@ jQuery(document).ready(function() {
 
     ds.push({
         data: $("#budget-variance").data('turnedIn'),
-        label: "Turned In Jobs",
+        label: "Turned In Jobs $",
         bars: {
             show: true,
             barWidth: 0.2,

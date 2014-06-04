@@ -242,20 +242,11 @@ jQuery(document).ready(function() {
 
 
     var monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var xaxisData = _.map( $("#budget-variance").data('unclosed'), function(ary) { return [ary[0], monthsAbbr[ary[0]-1]] });
+    var xaxisData = _.map( $("#budget-variance").data('turnedIn'), function(ary) { return [ary[0], monthsAbbr[ary[0]-1]] });
 
     console.log(xaxisData);
 
 
-    ds.push({
-    data: $("#budget-variance").data('unclosed'),
-    label: "Unclosed Jobs",
-    bars: {
-        show: true,
-        barWidth: 0.2,
-        order: 1
-    }
-    });
     ds.push({
         data: $("#budget-variance").data('turnedIn'),
         label: "Turned In Jobs",
@@ -286,21 +277,16 @@ jQuery(document).ready(function() {
             autoscaleMargin: 0.05,
             tickColor: "transparent",
             ticks: xaxisData,
-            tickDecimals: 0,
             font: {
                 color: '#8c8c8c',
                 size: 12
-            }
+            },
         },
         yaxis: {
-            ticks: [0, 25, 50, 75, 100],
-            font: {
-                color: '#8c8c8c',
-                size: 12
-            }
-        },
-        legend : {
-            labelBoxBorderColor: 'transparent'
+          tickFormatter: function(number, object) {
+            console.log(number, object);
+            return "$"+number;
+          }
         }
     });
 

@@ -53,6 +53,13 @@ class Rcadmin::Admin < ActiveRecord::Base
     define_method method_name do
       quotes.send(status.to_sym).where(created_at: Time.zone.now.all_year).count
     end
+
+    method_name = "quotes_#{status}_ytd"
+    define_method method_name do
+      quotes.send(status.to_sym).where(created_at: Time.zone.now.all_year).
+        joins(:quote_products).sum("quote_products.total_price")
+    end
+
   end
 
 
@@ -78,6 +85,18 @@ class Rcadmin::Admin < ActiveRecord::Base
     end
   end
 
+  def turned_in_data 
+    now = Time.zone.now
+    range = ( now - 1.year)..now
+    data = quotes.joins(:quote_products).where(quotes: { created_at: range}).
+      group("date_part('month', quotes.created_at)").sum("quote_products.total_price")
+    months_range = 1.upto(12).map { |n| (now + n.month).month.to_f }
+    data = months_range.inject({}) do |memo, month|
+      data.has_key?(month)  ? (memo[month] = data[month]) : memo[month] = 0.0
+      memo
+    end.to_a
+  end
+
   def unclosed_data
     quotes = []
     month_range.each_with_index do |range, index|
@@ -86,7 +105,7 @@ class Rcadmin::Admin < ActiveRecord::Base
     quotes
   end
 
-  def turned_in_data
+  def _turned_in_data
     quotes = []
     month_range.each_with_index do |range, index|
       quotes << [range.begin.month , self.quotes.turned_in.where(created_at: range).size]

@@ -232,18 +232,23 @@ $(document).ready(function() {
     window.QuoteCalculator = QuoteCalculator;
 
 
+    function roundUp(number) {
+      return Math.ceil(number * 100) / 100;
+    }
+
+
     function QuoteCalculator() {
 
       this.cabinetTotal = function() {
-        return countProductTotal().cabinet;
+        return roundUp(countProductTotal().cabinet);
       };
 
       this.laminateTopTotal = function() {
-        return countProductTotal().laminate;
+        return roundUp(countProductTotal().laminate);
       };
 
       this.productTotal = function() {
-        return this.cabinetTotal() + this.laminateTopTotal();
+        return roundUp(this.cabinetTotal() + this.laminateTopTotal());
       };
 
       this.grandTotal = function() {
@@ -251,53 +256,53 @@ $(document).ready(function() {
       };
 
       this.percentage = function() {
-        return ( Number($('.quote-percentage').text() ) / 100.0 ) || 0.59;
+        return roundUp( ( Number($('.quote-percentage').text() ) / 100.0 ) || 0.59);
       };
 
       this.factor = function() {
-        return ( Number( $('.factor-total').val() ) || 1.0 );
+        return roundUp( Number( $('.factor-total').val() ) || 1.0 );
       };
 
       this.percentageValue = function() {
-        return ( this.productTotal() * this.percentage() );
+        return roundUp( this.productTotal() * this.percentage() );
       };
 
       this.delivery = function() {
-        return ( ( parseInt(this.grandTotal() / 5000 ) + 1 ) * 75 );
+        return roundUp( ( parseInt(this.grandTotal() / 5000 ) + 1 ) * 75 );
       };
 
       this.subTotal = function() {
-        return ( this.grandTotal() - this.delivery() );
+        return roundUp( this.grandTotal() - this.delivery() );
       };
 
       this.factorValue = function() {
-        return ( this.preTax() - this.percentageValue() );
+        return roundUp( this.preTax() - this.percentageValue() );
       };
 
       this.preTax = function() {
-        return ( this.subTotal() / ( 1 + this.taxPercentage() ) );
+        return roundUp( this.subTotal() / ( 1 + this.taxPercentage() ) );
       };
 
       this.taxPercentage = function() {
-        return ( ( parseFloat( $('.quote-tax-percentage').text() ) / 100.0 ) || 0.01 );
+        return roundUp( ( parseFloat( $('.quote-tax-percentage').text() ) / 100.0 ) || 0.01 );
       };
 
       this.taxValue = function() {
-        return ( this.preTax() * this.taxPercentage() );
+        return roundUp( this.preTax() * this.taxPercentage() );
       };
 
 
       this.labor = function() {
-        return ( ( parseFloat( $('.labor-total').val() ) ) || 0.0 );
+        return roundUp( ( parseFloat( $('.labor-total').val() ) ) || 0.0 );
       };
 
       this.corian = function() {
-        return ( Number( $('.corian-total').val() ) ) || 0.0;
+        return roundUp( Number( $('.corian-total').val() ) ) || 0.0;
       };
 
 
       this.miscs = function() {
-        return ( ( parseFloat( $('.misc-total').text() ) * 1.0) || 0.0);
+        return roundUp( ( parseFloat( $('.misc-total').text() ) * 1.0) || 0.0);
       };
 
       this.updateDOM = function() {

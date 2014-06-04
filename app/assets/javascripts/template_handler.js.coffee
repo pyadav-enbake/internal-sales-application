@@ -1,60 +1,63 @@
 class window.RoomCalculator
   constructor: (@el) ->
 
+  roundUp: (number) ->
+    Math.ceil(number * 100) / 100
+
   optionsProductTotal: ->
-    Number( $(@el).find('.options-product-total').data('optionsProductTotal') )
+    @roundUp Number( $(@el).find('.options-product-total').data('optionsProductTotal') )
 
   optionsGrandTotal: ->
-    @optionsProductTotal() * @percentage() * @factor()
+    @roundUp @optionsProductTotal() * @percentage() * @factor()
 
   cabinetTotal: ->
-    Number( $(@el).find('.cabinet-total').text() )
+    @roundUp Number( $(@el).find('.cabinet-total').text() )
 
   laminateTotal: ->
-    Number( $(@el).find('.laminate-tops-total').text() )
+    @roundUp Number( $(@el).find('.laminate-tops-total').text() )
 
   productTotal: ->
-    @laminateTotal() + @cabinetTotal()
+    @roundUp @laminateTotal() + @cabinetTotal()
 
   grandTotal: ->
-    Math.round( @productTotal() * @percentage() * @factor() + @miscs() + @corian() + @labor() )
+    @roundUp Math.round( @productTotal() * @percentage() * @factor() + @miscs() + @corian() + @labor() )
 
   percentage: ->
-    ( parseFloat( $(@el).find('.quote-percentage').text() ) / 100.0 ) || 0.59
+    @roundUp ( parseFloat( $(@el).find('.quote-percentage').text() ) / 100.0 ) || 0.59
 
   factor: ->
-    parseFloat( $(@el).find('.factor-total').val() ) || 1.0
+    @roundUp parseFloat( $(@el).find('.factor-total').val() ) || 1.0
 
   percentageValue: ->
-    @productTotal() * @percentage()
+    @roundUp @productTotal() * @percentage()
 
   delivery: ->
     return 0.0 if @grandTotal() == 0
-    parseInt( ( @grandTotal() / 5000 ) + 1 ) * 75
+    @roundUp parseInt( ( @grandTotal() / 5000 ) + 1 ) * 75
 
   subTotal: ->
-    @grandTotal() - @delivery()
+    @roundUp @grandTotal() - @delivery()
 
   factorValue: ->
-    @preTax() - @percentageValue()
+    @roundUp @preTax() - @percentageValue()
 
   preTax: ->
-    @subTotal() / ( 1 + @taxPercentage() )
+    @roundUp @subTotal() / ( 1 + @taxPercentage() )
 
   taxPercentage: ->
-    ( Number( $(@el).find('.quote-tax-percentage').text() ) / 100.0 ) || 0.01
+    @roundUp ( Number( $(@el).find('.quote-tax-percentage').text() ) / 100.0 ) || 0.01
 
   taxValue: ->
-    @preTax() * @taxPercentage()
+    @roundUp @preTax() * @taxPercentage()
 
   miscs: ->
-    ( Number( $(@el).find('.misc-total').text() ) * 1.0) || 0.0
+    @roundUp ( Number( $(@el).find('.misc-total').text() ) * 1.0) || 0.0
 
   corian: ->
-    Number( $(@el).find('.corian-total').val()  ) || 0.0
+    @roundUp Number( $(@el).find('.corian-total').val()  ) || 0.0
 
   labor: ->
-    ( Number( $(@el).find('.labor-total').val() ) ) || 0.0
+    @roundUp ( Number( $(@el).find('.labor-total').val() ) ) || 0.0
 
   updateView: ->
     $(@el).find('.cabinet-total').text( @cabinetTotal().toFixed(2) )

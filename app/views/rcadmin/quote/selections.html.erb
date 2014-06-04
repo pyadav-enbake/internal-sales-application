@@ -26,7 +26,9 @@
 
       <%= form_for @quote do |f| %>
 
-        <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+        <% unless @categories.length.zero? %>
+          <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+        <% end %>
 
         <% @categories.each do |category| %>
           <div class="panel panel-sky">
@@ -82,7 +84,13 @@
             </div>
           </div>
         <% end %>
-        <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+        <% if @categories.length.zero? %>
+          <div class="header">
+            <h1 class="text-center">Please select a category</h1>
+          </div>
+        <% else %>
+          <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
+        <% end %>
       <% end %>
     </div>
   </div>

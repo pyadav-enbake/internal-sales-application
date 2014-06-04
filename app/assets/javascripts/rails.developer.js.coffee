@@ -10,7 +10,8 @@ jQuery ->
 
   $('#new_rcadmin_quote').on 'change', '.customer-select', (evt) ->
     evt.preventDefault()
-    if $(this).val().trim()
+    customer_name = $(this).val().trim()
+    if customer_name and customer_name != 'new-customer'
       $(evt.delegateTarget).submit()
 
 

@@ -35,7 +35,6 @@
 	      </div>
 	      <span id="part_cust"></span>
 	      <br>
-	      <span ><%=link_to "Add Customer","javascript:void(0)",:id=>"new_customer"%></span>
 	      
 	      <%= f.hidden_field :admin_id ,:value=>"#{current_user.id}",:class=>"form-control",:placeholder=>"Phone Number"%>
 	    </div>
@@ -44,11 +43,6 @@
 	<div class="panel-footer">
 	  <div class="row">
 	    <div class="col-sm-6 col-sm-offset-3">
-	      <div class="btn-toolbar">
-		<%= f.submit "Next step" ,:class=>"btn-primary btn"%>
-		  <%#=link_to "Back",rcadmin_customers_path,:class=>"btn-default btn"%>
-		</div>
-	      </div>
 	    </div>
 	  </div>
 	</div>

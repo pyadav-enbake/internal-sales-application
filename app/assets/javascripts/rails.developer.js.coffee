@@ -1,5 +1,13 @@
 jQuery ->
 
+
+  $('#new_rcadmin_quote').on 'change', '.customer-select', (evt) ->
+    evt.preventDefault()
+    if $(this).val().trim()
+      $(evt.delegateTarget).submit()
+
+
+
   $('.show-selected').on 'click', (evt) ->
     evt.preventDefault()
     $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')

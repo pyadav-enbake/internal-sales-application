@@ -240,6 +240,13 @@ jQuery(document).ready(function() {
  
     var ds = new Array();
 
+
+    var monthsAbbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var xaxisData = _.map( $("#budget-variance").data('unclosed'), function(ary) { return [ary[0], monthsAbbr[ary[0]-1]] });
+
+    console.log(xaxisData);
+
+
     ds.push({
     data: $("#budget-variance").data('unclosed'),
     label: "Unclosed Jobs",
@@ -278,7 +285,7 @@ jQuery(document).ready(function() {
         xaxis: {
             autoscaleMargin: 0.05,
             tickColor: "transparent",
-            ticks: [[1, "Q1"], [2, "Q2"], [3, "Q3"], [4, "Q4"]],
+            ticks: xaxisData,
             tickDecimals: 0,
             font: {
                 color: '#8c8c8c',

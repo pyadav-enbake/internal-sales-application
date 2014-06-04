@@ -51,7 +51,7 @@ class Rcadmin::Admin < ActiveRecord::Base
   %w(turned_in negotiations).each do |status|
     method_name = "quotes_#{status}_count"
     define_method method_name do
-      quotes.send(status.to_sym).count
+      quotes.send(status.to_sym).where(created_at: Time.zone.now.all_year).count
     end
   end
 
@@ -71,25 +71,25 @@ class Rcadmin::Admin < ActiveRecord::Base
   end
 
 
-  def quarter_range now = Time.now
-    now = now.beginning_of_year
-    ranges = [0, 3, 6, 9].map do |quarter|
-      (now + quarter.month).all_quarter
+  def month_range now = Time.now
+    now = now - 4.months
+    ranges = 1.upto(4).map do |month|
+      (now + month.month).all_month
     end
   end
 
   def unclosed_data
     quotes = []
-    quarter_range.each_with_index do |quarter_range, index|
-      quotes << [index + 1, self.quotes.unclosed.where(created_at: quarter_range).size]
+    month_range.each_with_index do |range, index|
+      quotes << [range.begin.month , self.quotes.unclosed.where(created_at: range).size]
     end
     quotes
   end
 
   def turned_in_data
     quotes = []
-    quarter_range.each_with_index do |quarter_range, index|
-      quotes << [index + 1, self.quotes.turned_in.where(created_at: quarter_range).size]
+    month_range.each_with_index do |range, index|
+      quotes << [range.begin.month , self.quotes.turned_in.where(created_at: range).size]
     end
     quotes
   end

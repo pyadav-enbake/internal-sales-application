@@ -274,8 +274,9 @@ class Rcadmin::QuoteController < ApplicationController
     @quote = Rcadmin::Quote.find params[:id]
     @quote.update(params[:quote])
     respond_to do |format|
-     format.html {  redirect_to :back || selections_rcadmin_quote_path(id: @quote.id) }
-     format.js
+      message = ' Your selections has been successfully saved'
+      format.html {  redirect_to( (:back || selections_rcadmin_quote_path(id: @quote.id)), notice: message) }
+      format.js
     end
   end
 

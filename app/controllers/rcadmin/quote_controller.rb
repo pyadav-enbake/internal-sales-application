@@ -216,6 +216,14 @@ class Rcadmin::QuoteController < ApplicationController
       render :partial => "get_customer", :object => @contractor
   end
 
+  def print
+    @quote = current_user.quotes.find(params[:id])
+    @contractor = @quote.contractor
+    @customer = @quote.customer
+    @admin = current_user
+    render layout: false, template: 'rcadmin/quote/print'
+  end
+
   def get_new_customer
       @rcadmin_customer = Rcadmin::Customer.new
       render :partial => "new_customer", :object => @rcadmin_customer

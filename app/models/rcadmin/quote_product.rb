@@ -12,9 +12,11 @@ class  Rcadmin::QuoteProduct < ActiveRecord::Base
     end
   }, foreign_key: :category_id, primary_key: :category_id
 
-  delegate :factor, :percentage, to: :quote_category
-
   belongs_to :product, polymorphic: true
+
+  delegate :factor, :percentage, to: :quote_category
+  delegate :title, :price, :measurement_type, to: :product
+
 
   scope :find_by_quote, ->(quote_id) { where(:quote_id=>quote_id) }
 

@@ -36,6 +36,7 @@ RomarCabinates::Application.routes.draw do
         get 'docs/:template_id', action: 'grid', as: :print_templates
         get 'cover-sheet', action: :cover_sheet, as: :cover_sheet
         get 'selections', action: :selections, as: :selections
+        get :print
       end
     end
     get 'quotations', to: 'quote#quotations', as: :quotations

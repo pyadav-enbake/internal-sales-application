@@ -1,6 +1,13 @@
 jQuery ->
 
 
+  $('.print-quote').on 'click', (evt) ->
+    evt.preventDefault()
+    url = $(this).attr('href')
+    form = $('#send_quote_frm')
+    $.ajax(type: form.attr('method'), url: 'quote_preview', data: form.serialize()).success (data) ->
+      window.location = url
+
   $('#new_rcadmin_quote').on 'change', '.customer-select', (evt) ->
     evt.preventDefault()
     if $(this).val().trim()

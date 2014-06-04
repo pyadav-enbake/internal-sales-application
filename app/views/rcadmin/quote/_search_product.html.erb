@@ -2,5 +2,7 @@
   <div class="search_pro">
     <%= text_field_tag :search, :sender, :value => '' , :placeholder => "Enter Title to Search", :class=>"form-control search_pro_in search-products-text" %>
     <%= button_tag "Search", :class => "btn-primary btn search-products-btn" %>
+    <%= link_to "Print", print_rcadmin_quote_path(@quote), class: 'btn btn-primary print-quote pull-right', style: "color: white;" %>
   </div>
 <% end %>
+

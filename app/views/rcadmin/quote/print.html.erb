@@ -1,0 +1,156 @@
+<!doctype html>
+<html dir="ltr" lang="en" class="no-js">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Romar Cabinets Quote</title>
+    <%= render 'welcome_mailer/stylesheet' %>
+
+    <!-- give life to HTML5 objects in IE -->
+    <!--[if lte IE 8]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- js HTML class -->
+    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  </head>
+  <body onload="window.print()">
+    <!-- begin markup -->
+
+
+
+    <div id="invoice" class="new">
+        <%= image_tag "email-header.png", style: 'width: 100%' %>
+
+
+      <div class="this-is">
+        <strong>Product Quote</strong>
+      </div><!-- invoice headline -->
+
+
+      <header id="header">
+        <div class="invoice-intro">
+          <h1>Romar Cabinet and <br/> <br/> Top Company</h1>
+
+        </div>
+
+        <dl class="invoice-meta">
+          <dt class="invoice-number">Quote #</dt>
+          <dd><%= @quote.id %></dd>
+          <dt class="invoice-date">Date of Quote</dt>
+          <dd><%= format_date @quote.created_at %></dd>
+
+        </dl>
+      </header>
+      <!-- e: invoice header -->
+
+
+      <section id="parties">
+
+        <div class="invoice-to">
+          <h2>Customer Information:</h2>
+          <div id="hcard-Hiram-Roth" class="vcard">
+            <a class="url fn" href="#"><%= @customer.fullname %></a>
+            <div class="org">&nbsp;</div>
+            <%= mail_to @customer.email, @customer.email, {class: 'email'} %>
+
+            <div class="adr">
+              <div class="street-address"><%= @customer.address %></div>
+              <span class="locality"><%= "#{@customer.city}, #{@customer.zip}" %></span>
+              <span class="country-name"><%= @customer.state %></span>
+            </div>
+
+            <div class="tel"><%= format_phone @customer.phone %></div>
+            <div class="tel">&nbsp;</div>
+          </div><!-- e: vcard -->
+        </div><!-- e invoice-to -->
+
+
+        <div class="invoice-from">
+          <h2>Sales Agent:</h2>
+          <div id="hcard-Admiral-Valdore" class="vcard">
+            <a class="url fn" href="#"><%= @admin.full_name %></a>
+            <div class="org">&nbsp;</div>
+            <%= mail_to @admin.email, @admin.email, class: 'email' %>
+
+            <div class="adr">
+              <div class="street-address">&nbsp;</div>
+              <span class="locality">&nbsp;</span>
+              <span class="country-name">&nbsp;</span>
+            </div>
+
+            <div class="tel">&nbsp;</div>
+          </div><!-- e: vcard -->
+        </div><!-- e invoice-from -->
+
+        <div class="clearfix"></div>
+
+
+
+
+        <section class="invoice-financials">
+
+          <div class="invoice-items">
+            <table>
+              <caption></caption>
+              <thead>
+                <tr>
+                  <th>Qty.</th>
+                  <th>Title</th> 
+                  <th>Price per unit</th> 
+                  <th>Measure Type</th> 
+                  <th>Total Price</th> 
+                  <th>Option</th> 
+                  <th>Hidden</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <% @quote.quote_products.includes(:product).each do |quote_product| %>
+                  <tr>
+                    <th><%= quote_product.quantity %></th>
+                    <th><%= quote_product.title %></th>
+                    <th>$<%= quote_product.price %></th>
+                    <th><%= quote_product.measurement_type %></th>
+                    <th>$<%= quote_product.total_price %></th>
+                    <th><%= quote_product.header_option %></th>
+                    <th><%= quote_product.hidden? ? 'Yes' : 'No' %></th>
+                  </tr>
+                <% end %>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="7"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div><!-- e: invoice items -->
+
+
+
+
+
+          
+
+
+          <div class="invoice-notes">
+            <h6>Terms:</h6>
+            <p>ROMAR hereby Contracts to furnish material and manufacturing labor in accordance with the above estimate. Dimensions of tops and cabinets given herein above are maximum dimensions for which ROMAR CABINET AND TOP COMPANY, INC. will be responsible to maintain the above estimated prices for 30 days. Installation is not included unless otherwise stated in writing by ROMAR. Otherwise, this Agreement is binding upon execution by Purchaser and ROMAR. ALL SALES ARE FINAL. NO RETURNS WILL BE ACCEPTED WITHOUT WRITTEN AUTHORIZATION.</p>  <br /> <br />
+            <p> <strong>Date: </strong> </p> <br />
+            <p> <strong>Signature: </strong> </p>
+          </div><!-- e: invoice-notes -->
+
+        </section><!-- e: invoice financials -->
+
+
+        <footer id="footer">
+          <p>
+            Gus Frain  |  Romar Cabinet and Top Company | gus@romarcab.com</a>.
+        </p>
+      </footer>
+
+
+    </div><!-- e: invoice -->
+
+
+  </body>
+</html>

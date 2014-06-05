@@ -29,7 +29,7 @@
           <p><span>Name</span><%= @customer.fullname %></p>
           <p><span>Address</span><%= @customer.full_address %></p>
           <p><span>Phone#</span> <%= @customer.phone %></p>
-          <p><span>Schedule Date & Time</span><%= @quote.delivery_date.strftime("%d.%m.%Y") %></p>
+          <p><span>Schedule Date & Time</span><%= @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
           <p></p>
           <p><span>Work To Be Performed</span><%= @quote.notes %></p>
           <p></p>

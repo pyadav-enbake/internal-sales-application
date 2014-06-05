@@ -38,7 +38,7 @@
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                          <a class="info-tiles tiles-toyo" href="<%= rcadmin_customers_path %>">
+                          <span class="info-tiles tiles-toyo">
                             <div class="tiles-heading">Quotes for Month</div>
                             <div class="tiles-body-alt">
                               <!--i class="fa fa-bar-chart-o"></i-->
@@ -46,10 +46,10 @@
                               <small>in <%= Time.zone.now.strftime("%B") %></small>
                             </div>
                             <div class="tiles-footer">more info</div>
-                          </a>
+                          </span>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                          <a class="info-tiles tiles-success" href="<%= rcadmin_customers_path %>">
+                          <span class="info-tiles tiles-success" >
                             <div class="tiles-heading">Quotes YTD</div>
                             <div class="tiles-body-alt">
                               <!--i class="fa fa-money"></i-->
@@ -57,10 +57,10 @@
                               <small>in <%= Time.zone.now.strftime("%Y") %></small>
                             </div>
                             <div class="tiles-footer">more info</div>
-                          </a>
+                          </span>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                          <a class="info-tiles tiles-orange" href="#">
+                          <span class="info-tiles tiles-orange">
                             <div class="tiles-heading">Sales YTD</div>
                             <div class="tiles-body-alt">
                               <i class="fa "></i>
@@ -68,17 +68,17 @@
                               <small>&nbsp;</small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>
-                          </a>
+                          </span>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                          <a class="info-tiles tiles-alizarin" href="#">
+                          <span class="info-tiles tiles-alizarin">
                             <div class="tiles-heading">Jobs Turned In</div>
                             <div class="tiles-body-alt">
                               <div class="text-center"><%= current_user.quotes_turned_in_count %></div>
                               <small>&nbsp;</small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>
-                          </a>
+                          </span>
                         </div>
                       </div>
                     </div>

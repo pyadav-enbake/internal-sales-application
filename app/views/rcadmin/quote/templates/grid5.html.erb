@@ -17,7 +17,7 @@
 
   <body>
 
-    <button onclick="window.print()">Print</button>
+    <button onclick="window.print()" class="hidden-print" style="position:relative;left: 40%;font-size:24px">Print</button>
 
     <div class="pages">
       <%= render partial: 'rcadmin/quote/templates/grid5_page', locals: { category_id: nil, page: 1 } %>

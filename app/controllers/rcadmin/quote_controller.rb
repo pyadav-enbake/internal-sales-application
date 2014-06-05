@@ -114,6 +114,9 @@ class Rcadmin::QuoteController < ApplicationController
     #@extra_quote_categories = Rcadmin::ExtraCategory.where(quote_id: session[:quote_id] )
     @search_term = (params[:search] != "") ? params[:search] : ''
     @categories =  @quote.categories # Rooms 
+    if @categories.empty?
+      redirect_to select_quote_category_url and return;
+    end
   end
 
   def send_quote

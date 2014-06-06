@@ -1,4 +1,7 @@
 <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <%if session[:first_name]%>
+    <a id="leftmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
+  <%end%>
 
 	<div class="navbar-header pull-left">
 		<a class="navbar-brand" href="/">Avant</a>

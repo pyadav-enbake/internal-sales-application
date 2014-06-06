@@ -299,11 +299,11 @@ jQuery ->
       $(id).trigger('keyup')
 
 
-  $('td.editable').on 'keyup', (evt) ->
+  $('td.editable').on 'keypress', (evt) ->
     if evt.which == 13
       productId = $(this).data('productId')
-      $nextInput = $(this).closest('tr').next().find("[data-product-id=#{productId}]")
-      $nextInput.trigger('click') if $nextInput.length
+      $nextInput = $(this).closest('tr').next().find(".editable[data-product-id=#{productId}]")
+      $nextInput.trigger('click') if $nextInput.length > 0
       return false
 
   $('[data-target="#live-data"]').on 'click', ->

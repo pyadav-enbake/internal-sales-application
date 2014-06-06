@@ -272,8 +272,8 @@ jQuery ->
 
 
         content = Number(data.content)
-        if content == 0
-          data.$el.text(0)
+        if content == 0 or isNaN(content)
+          data.$el.text('')
         else
           data.$el.text(content)
 

@@ -1,8 +1,4 @@
 <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-	<%if session[:first_name]%>
-		<a id="leftmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
-		<a id="rightmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="left" title="Toggle Infobar"></a>
-	<%end%>
 
 	<div class="navbar-header pull-left">
 		<a class="navbar-brand" href="/">Avant</a>
@@ -11,11 +7,11 @@
 	<%if session[:first_name]%>
 	<ul class="nav navbar-nav pull-right toolbar">
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs"><%=current_user.first_name%><%#=session[:first_name]%> <%=current_user.last_name%><%#=session[:last_name]%><i class="fa fa-caret-down"></i></span><%=image_tag('demo/avatar/dangerfield.png',:alt=>"Dangerfield")%></a>
+			<a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs"><%=current_user.first_name%><%=current_user.last_name%><i class="fa fa-caret-down"></i></span></a>
 			<ul class="dropdown-menu userinfo arrow">
 				<li class="username">
 					<a href="#">
-						<div class="pull-left"><%=image_tag('demo/avatar/dangerfield.png',:class=>"userimg",:alt=>"Jeff Dangerfield")%></div>
+						<div class="pull-left"></div>
 						<div class="pull-right"><h5><%=current_user.username%><%#=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=current_user.email%><%#=session[:email]%></span></small></div>
 					</a>
 				</li>

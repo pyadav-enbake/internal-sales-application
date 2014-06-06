@@ -4791,15 +4791,15 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .navbar-inner {
-  background-color: #032013;
-  background-image: -moz-linear-gradient(top, #222222, #032013);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#032013));
-  background-image: -webkit-linear-gradient(top, #222222, #032013);
-  background-image: -o-linear-gradient(top, #222222, #032013);
-  background-image: linear-gradient(to bottom, #222222, #032013);
+  background-color: #006400;
+  background-image: -moz-linear-gradient(top, #222222, #006400);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#006400));
+  background-image: -webkit-linear-gradient(top, #222222, #006400);
+  background-image: -o-linear-gradient(top, #222222, #006400);
+  background-image: linear-gradient(to bottom, #222222, #006400);
   background-repeat: repeat-x;
   border-color: #252525;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff032013', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff006400', GradientType=0);
 }
 
 .navbar-inverse .brand,
@@ -4833,7 +4833,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
   color: #ffffff;
-  background-color: #032013;
+  background-color: #006400;
 }
 
 .navbar-inverse .navbar-link {

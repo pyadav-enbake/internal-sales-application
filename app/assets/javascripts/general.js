@@ -71,6 +71,10 @@ $(document).ready(function() {
     var percentage = {};
 
     $('#cabinet, #laminate').on('keyup', '.quantity', function(evt) {
+      if(evt.which == 13) {
+        $(this).closest('tr').next().find('.quantity').focus();
+        return false;
+      }
 
       var quantity = Number($(this).val());
       var id = $(this).attr('id');

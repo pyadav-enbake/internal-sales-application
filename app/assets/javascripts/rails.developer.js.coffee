@@ -1,6 +1,5 @@
 jQuery ->
 
-
   $('.print-quote').on 'click', (evt) ->
     evt.preventDefault()
     url = $(this).attr('href')
@@ -298,6 +297,14 @@ jQuery ->
       if value > 0
         $(id).val(value)
       $(id).trigger('keyup')
+
+
+  $('td.editable').on 'keyup', (evt) ->
+    if evt.which == 13
+      productId = $(this).data('productId')
+      $nextInput = $(this).closest('tr').next().find("[data-product-id=#{productId}]")
+      $nextInput.trigger('click') if $nextInput.length
+      return false
 
   $('[data-target="#live-data"]').on 'click', ->
     categoryId = $(this).data('id')

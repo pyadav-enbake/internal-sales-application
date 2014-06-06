@@ -14,15 +14,12 @@
 			<ul class="dropdown-menu userinfo arrow">
 				<li class="username">
 					<a href="#">
-						<div class="pull-left"></div>
-						<div class="pull-right"><h5><%=current_user.username%><%#=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=current_user.email%><%#=session[:email]%></span></small></div>
+						<div class=""><h5><%=current_user.username%><%#=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=current_user.email%><%#=session[:email]%></span></small></div>
 					</a>
 				</li>
 				<li class="userlinks">
 					<ul class="dropdown-menu">
 						<li><a href="/rcadmin/administrators/<%=session[:admin_id]%>/edit">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-						<li><a href="#">Account <i class="pull-right fa fa-cog"></i></a></li>
-						<li><a href="#">Help <i class="pull-right fa fa-question-circle"></i></a></li>
 						<li class="divider"></li>
 						<%= link_to "Sign Out", destroy_admin_session_path,:method => :delete,:class=>"text-right" %>
 					</ul>

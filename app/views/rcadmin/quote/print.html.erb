@@ -14,7 +14,7 @@
     <!-- js HTML class -->
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   </head>
-  <body onload="window.print()">
+  <body onload="">
     <!-- begin markup -->
 
 
@@ -91,38 +91,43 @@
         <section class="invoice-financials">
 
           <div class="invoice-items">
-            <table>
-              <caption></caption>
-              <thead>
-                <tr>
-                  <th>Qty.</th>
-                  <th>Title</th> 
-                  <th>Price per unit</th> 
-                  <th>Measure Type</th> 
-                  <th>Total Price</th> 
-                  <th>Option</th> 
-                  <th>Hidden</th> 
-                </tr>
-              </thead>
-              <tbody>
-                <% @quote.quote_products.includes(:product).each do |quote_product| %>
-                  <tr>
-                    <th><%= quote_product.quantity %></th>
-                    <th><%= quote_product.title %></th>
-                    <th>$<%= quote_product.price %></th>
-                    <th><%= quote_product.measurement_type %></th>
-                    <th>$<%= quote_product.total_price %></th>
-                    <th><%= quote_product.header_option %></th>
-                    <th><%= quote_product.hidden? ? 'Yes' : 'No' %></th>
-                  </tr>
-                <% end %>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="7"></td>
-                </tr>
-              </tfoot>
-            </table>
+
+            <% @quote.quote_categories.each do |quote_category| %>
+              <% quote_category.quote_products.group_by(&:product_type).each do |product_type, quote_products| %>
+                <table>
+                  <caption><%= "#{quote_category.category} - #{product_type.sub('Product', '')}"  %></caption>
+                  <thead>
+                    <tr>
+                      <th>Qty.</th>
+                      <th>Title</th> 
+                      <th>Price per unit</th> 
+                      <th>Measure Type</th> 
+                      <th>Total Price</th> 
+                      <th>Option</th> 
+                      <th>Hidden</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% quote_products.each do |quote_product| %>
+                      <tr>
+                        <th><%= quote_product.quantity %></th>
+                        <th><%= quote_product.title %></th>
+                        <th>$<%= quote_product.price %></th>
+                        <th><%= quote_product.measurement_type %></th>
+                        <th>$<%= quote_product.total_price %></th>
+                        <th><%= quote_product.header_option %></th>
+                        <th><%= quote_product.hidden? ? 'Yes' : 'No' %></th>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="7"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              <% end %>
+            <% end %>
           </div><!-- e: invoice items -->
 
 

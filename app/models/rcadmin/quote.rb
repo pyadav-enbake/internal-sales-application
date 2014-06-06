@@ -59,7 +59,8 @@ class Rcadmin::Quote < ActiveRecord::Base
   scope :unclosed, lambda { where.not(status: STATUSES[0]) }
 
 
-  def  quote_products_grouped_by_quote_category_with option = 'Yes'
+
+  def quote_products_grouped_by_quote_category_with option = 'Yes'
     self.quote_products.has_option(option).
       includes(:product).
       group_by { |quote_product| quote_product.quote_category }

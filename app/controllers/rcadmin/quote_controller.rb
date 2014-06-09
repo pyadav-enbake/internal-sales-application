@@ -3,6 +3,9 @@ class Rcadmin::QuoteController < ApplicationController
   protect_from_forgery except: :get_customer
   before_action :check_auth,:authenticate
 
+  before_action :find_quote, only: [:docs, :cover_sheet, :grid, :remove_category, :print, :show, :update, :edit]
+  before_action :find_quote_by_session, only: [:show_category, :quote_preview]
+
   def index
     @rcadmin_customer = Rcadmin::Customer.new
     session[:quote_id] = nil
@@ -16,18 +19,15 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def docs
-    @quote = Rcadmin::Quote.find params[:id] 
   end
 
   def cover_sheet
-    @quote = Rcadmin::Quote.find params[:id] 
     @categories = @quote.categories
     @customer = @quote.customer
     @quote_products_sum = @quote.quote_product.group(:category_id).sum(:total_price)
   end
 
   def grid
-    @quote = Rcadmin::Quote.find params[:id] 
     @contractor = @quote.contractor || Rcadmin::Contractor.new
     @customer = @quote.customer || Rcadmin::Customer.new
     @categories = @quote.categories
@@ -42,7 +42,6 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def remove_category
-    @quote = Rcadmin::Quote.find params[:id] 
     @quote.remove_category params[:category_id]
     render  json: {success: true, count: @quote.category_ids.length}
   end
@@ -61,7 +60,6 @@ class Rcadmin::QuoteController < ApplicationController
 
   def show_category
     if session[:quote_id] != nil
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
       @categories = current_admin.categories
       @selected_category = @quote.category.split(',') if !@quote.category.nil?
     else
@@ -172,55 +170,15 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
-  def show_cabinet_selection
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
-      @categories = @quote.categories
-      @cabinet_types = Rcadmin::CabinetType.all
-  end
 
-  def save_cabinet
-      if params["quote"]["cabinet_types_info"].blank?
-          flash[:error] = 'Please select one cabinet type'
-          render :action => 'show_cabinet_selection'
-      else
-          @quote = Rcadmin::Quote.find(session[:quote_id] )
-          @quote.cabinet_type_id = params[:quote][:cabinet_type_id]
-          @quote.cabinet_types_info = params[:quote][:cabinet_types_info].to_hash.to_s
-
-          if @quote.save
-              redirect_to :action => 'show_countertop_design'
-          end
-      end  
-  end
-
-  def show_countertop_design
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
-      @categories = @quote.categories
-      @countertop_designs = Rcadmin::CountertopDesign.all
-  end
-
-  def save_countertop
-      if params[:quote][:countertop_designs_info].blank? 
-          flash[:error] = 'Please select one countertop design'
-          render :action => 'show_countertop_design'
-      else
-          @quote = Rcadmin::Quote.find(session[:quote_id] )
-          @quote.countertop_design_id = params[:quote][:countertop_design_id]
-          @quote.countertop_designs_info = params[:quote][:countertop_designs_info].to_hash.to_s
-          if @quote.save
-              redirect_to :action => 'show_product'
-          end
-      end  
-  end
 
   def get_customer
       contractor_id = params["contractor_id"]
-      @contractor = Rcadmin::Contractor.find(contractor_id)
+      @contractor = current_user.contractors.find(contractor_id)
       render :partial => "get_customer", :object => @contractor
   end
 
   def print
-    @quote = current_user.quotes.find(params[:id])
     @contractor = @quote.contractor
     @customer = @quote.customer
     @admin = current_user
@@ -259,21 +217,21 @@ class Rcadmin::QuoteController < ApplicationController
 
   def display_quotes
     if params[:customer_id]
-      @customer = Rcadmin::Customer.where(id: params[:customer_id]).first
-      @rcadmin_quotes = @customer.quotes
+      @customer = current_user.customers.find(params[:customer_id])
+      @rcadmin_quotes = @customer.quotes.preload(:contractor)
 
     elsif params[:search].blank?
-      @rcadmin_quotes = Rcadmin::Quote.where(:contractor_id => params[:id])
+      @rcadmin_quotes = current_user.quotes.joins(:contractor).where(contractors: { id: params[:id] }).
+        preload(:contractor)
     else
       #@rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}% or email like '%#{params[:search]}%'").map{|c|c.quotes}
-      @rcadmin_quotes = Rcadmin::Contractor.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}%' or email like '%#{params[:search]}%'").map{|c|c.quotes}.flatten
+      @rcadmin_quotes = current_user.contractors.where("first_name like '%#{params[:search]}%' or last_name like '%#{params[:search]}%' or email like '%#{params[:search]}%'").map{|c|c.quotes}.flatten
     end
 
     @rcadmin_quotes = @rcadmin_quotes.order("created_at DESC")
   end
 
   def edit
-    @quote = Rcadmin::Quote.find params[:id]
     session[:quote_id] = @quote.id
     redirect_to select_quote_product_path
   end
@@ -282,7 +240,6 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def update
-    @quote = Rcadmin::Quote.find params[:id]
     @quote.update(params[:quote])
     respond_to do |format|
       message = ' Your selections has been successfully saved'
@@ -292,20 +249,9 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def show
-      @rcadmin_quotes = Rcadmin::Quote.find(params[:id])
-      unless  @rcadmin_quotes.cabinet_types_info.nil?
-        cabinet_types = @rcadmin_quotes.cabinet_types_info.gsub("=>", ":")
-      end
-      @json_cabinet_types = JSON.parse(cabinet_types || '{}')
-      unless  @rcadmin_quotes.countertop_designs_info.nil?
-        countertop = @rcadmin_quotes.countertop_designs_info.gsub("=>", ":")
-      end
-      @json_countertop = JSON.parse(countertop || '{}')
-
   end
 
   def quote_preview
-      @quote = Rcadmin::Quote.find(session[:quote_id] )
       @quote.quote_product.destroy_all
       @quote.status = 0
       @quote.update_attributes(params[:quote])
@@ -323,5 +269,16 @@ class Rcadmin::QuoteController < ApplicationController
         render template: 'welcome_mailer/send_quote_mail_customer'
       end
     end
+  end
+
+  private
+
+
+  def find_quote
+    @rcadmin_quotes = @quote = current_user.quotes.find params[:id] 
+  end
+
+  def find_quote_by_session
+    @quote = current_user.quotes.find(session[:quote_id] ) if session[:quote_id]
   end
 end

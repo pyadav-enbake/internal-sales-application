@@ -16,6 +16,7 @@ class Rcadmin::Admin < ActiveRecord::Base
   #validates :username, :presence => true
 
   has_many :contractors, dependent: :destroy
+  has_many :customers, through: :contractors
   has_one :retail, ->{ where(last_name: 'Retail') }, class_name: "Contractor"
   has_many :non_retails, ->{ where.not(last_name: 'Retail') }, class_name: "Contractor"
   has_many :quotes, through: :contractors

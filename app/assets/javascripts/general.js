@@ -448,18 +448,18 @@ $(document).ready(function() {
 
 
   $('.overlay-active').removeClass('overlay-active');
-  $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show');
+  $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse');
 
   $('.expand').click(function(evt) {
     evt.preventDefault();
     var inhtml = $('.expand').html();
     if(inhtml == 'Expand All'){
       $('.expand').html('Collapse All');
-      $('.panel-collapse.collapse').collapse('show');
+      $('.panel-collapse.collapse').addClass('in').removeClass('collapse');
     }else{
 
       $('.expand').html('Expand All');
-      $('.panel-collapse.in').collapse('hide');
+      $('.panel-collapse.in').addClass('collapse').removeClass('in');
 
     }
 

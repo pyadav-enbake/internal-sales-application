@@ -17,8 +17,9 @@ jQuery ->
 
   $('.show-selected').on 'click', (evt) ->
     evt.preventDefault()
-    $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')
-    $('.panel-collapse.collapse.product-seen').collapse('show')
+    $('.panel-collapse.in').addClass('collapse').removeClass('in')
+    $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse')
+    $('.panel-collapse.collapse.product-seen').addClass('in').removeClass('collapse')
 
   $('.rooms').on('keyup', '.factor-total, .corian-total, .labor-total', (evt) ->
     evt.preventDefault()
@@ -128,7 +129,7 @@ jQuery ->
     matches = new Object()
 
     # Clear old search changes and unexpand accordions
-    $('.panel-collapse.in').collapse('hide')
+    $('.panel-collapse.in').addClass('collapse').removeClass('in')
     $('.panel-collapse.collapse .table tr').removeAttr('style')
     
     # Search each title for search term and highligh it
@@ -137,7 +138,7 @@ jQuery ->
       if regex.test title
         $parent = $(this).closest('.panel-collapse.collapse')
         id = $parent.attr('id')
-        $parent.collapse('show')
+        $parent.addClass('in').removeClass('collapse')
         matches[id] = "##{id}"
         $(this).parent().css({'background-color': 'yellow'})
 
@@ -168,7 +169,7 @@ jQuery ->
         evt.preventDefault()
         $(".search-controls").hide()
         $('.search-products-text').val("")
-        $('.panel-collapse.in').collapse('hide')
+        $('.panel-collapse.in').addClass('collapse').removeClass('in')
         $(window).scrollTop $('.search-products-text').offset().top - 100
         
 

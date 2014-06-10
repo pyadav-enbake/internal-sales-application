@@ -436,19 +436,9 @@ $(document).ready(function() {
   });
   //Expand and collaps
 
-  $(".accordion" ).accordion({
-    active: 1,
-    collapsible: false,
-    heightStyle: "content",
-    create: function(evt, ui) {
-      $('.overlay-active').removeClass('overlay-active');
-    }
-  })
 
-
-
-  $('.overlay-active').removeClass('overlay-active');
   $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse');
+  $('.overlay-active').removeClass('overlay-active');
 
   $('.expand').click(function(evt) {
     evt.preventDefault();

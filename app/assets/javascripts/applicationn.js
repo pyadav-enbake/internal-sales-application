@@ -111,9 +111,6 @@ $(function () {
         leftbarScrollShow();
     });
 
-    //set minimum height of page
-    dh=($(document).height()-40);
-    $("#page-content").css("min-height",dh+"px");
 
     // On click of right menu
     $("a#rightmenu-trigger").click(function () {

@@ -1,0 +1,97 @@
+<div class="container">
+  <%= form_for(@retailer,url: quote_retailers_path, :html=>{:class=>"form-horizontal row-border"})  do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-orange">
+          <div class="panel-heading">
+            <h4><%if @retailer.id.nil? %>Add<%else%>Edit<%end%> Customer</h4>
+            <div class="options">
+
+            </div>
+          </div><br>
+          <%if @retailer.errors.any? %>
+            <div class="alert alert-dismissable alert-danger">
+              <%=@retailer.errors.full_messages[0] %>.
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            </div>
+
+          <%end%>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">First Name</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :first_name ,:class=>"form-control",:placeholder=>"First Name"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Last Name</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :last_name ,:class=>"form-control",:placeholder=>"Last Name"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Title</label>
+                  <div class="col-sm-6">
+                     <%= f.select :title, ['Mr.', 'Mrs.', 'Miss'], {}, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :email ,:class=>"form-control",:placeholder=>"Email"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Address</label>
+                  <div class="col-sm-6">
+                    <%= f.text_area :address ,:class=>"form-control",:placeholder=>"Address"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">City</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :city ,:class=>"form-control",:placeholder=>"city"%>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">State</label>
+                  <div class="col-sm-6">
+                  <%= f.select :state, State.pluck(:name), {selected: 'Illinois'}, class: "form-control" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Zipcode</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :zip ,:class=>"form-control",:placeholder=>"Zipcode"%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Phone</label>
+                  <div class="col-sm-6">
+                    <%= f.text_field :phone ,:class=>"form-control mask",:placeholder=>"Phone Number", data: {inputmask: "'mask':'(999) 999-9999'"} %>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <div class="btn-toolbar">
+                  <% unless @retailer.persisted? %>
+                    <%= f.submit "Save Retailer Info" ,:class=>"btn-primary btn"%>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>

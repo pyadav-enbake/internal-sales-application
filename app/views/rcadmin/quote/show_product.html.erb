@@ -1,6 +1,7 @@
 <div id="tabs">
   <ul class="tabs">
     <li class=""><a href="#tabs-1">Create Customer</a></li>
+    <li class=""><a href="#tabs-1">Create Retailer</a></li>
     <li ><a  href="#tabs-2">Select Category</a></li>
     <li><a href="#tabs-5">Product List</a></li>
   </ul>
@@ -30,7 +31,9 @@ $(document).ready(function() {
 //$('#tabs input[type=checkbox]').prop('checked',false);
 //$('#tabs input[type=text]').attr('disabled',false);
 //$('.quantity1').val(0);
-$( "#tabs" ).tabs({ active: 2 });
+var disabled = [];
+disabled.push(<%= 1 if @quote.retailer.nil? %>);
+$( "#tabs" ).tabs({ active: 3, disabled: disabled });
 	$('.ui-tabs-anchor').click(function(){
 		var tabname = $(this).html();
 		if(tabname == 'Select Category'){
@@ -42,9 +45,11 @@ $( "#tabs" ).tabs({ active: 2 });
 		if(tabname == 'Product List'){
 			window.location = "/rcadmin/quote/product";
 		}
-		if(tabname == 'Cabinet Selection'){
-			window.location = "/rcadmin/quote/cabinet_selection";
-		}
+                <% if @quote.retailer %>
+                  if(tabname == 'Create Retailer'){
+                    window.location = "/quotes/<%= session[:quote_id] %>/retailers/new";
+                  }
+                <% end %>
 		if(tabname == 'Countertop Design'){
 			window.location = "/rcadmin/quote/countertop_design";
 		}

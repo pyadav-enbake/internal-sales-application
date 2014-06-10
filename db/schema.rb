@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527132506) do
+ActiveRecord::Schema.define(version: 20140610170522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,23 @@ ActiveRecord::Schema.define(version: 20140527132506) do
     t.text     "notes"
     t.hstore   "miscs"
   end
+
+  create_table "retailers", force: true do |t|
+    t.integer  "quote_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "retailers", ["quote_id"], name: "index_retailers_on_quote_id", using: :btree
 
   create_table "selection_types", force: true do |t|
     t.string   "name"

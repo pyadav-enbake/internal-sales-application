@@ -14,11 +14,17 @@ class Rcadmin::Quote < ActiveRecord::Base
 
   belongs_to :contractor
   belongs_to :customer
+  has_one :retailer
+
   has_many :quote_product, dependent: :destroy # TODO: remove this after replacing all occurences 
 
   has_many :quote_products, -> { extending ::ProductTypeExtension }, dependent: :destroy
 
   accepts_nested_attributes_for :quote_products, reject_if: proc { |attrs| attrs['quantity'].blank? }
+
+  def customer
+    contractor.default_contractor? and retailer.presence or super
+  end
 
 
   has_many :product_type_selections, dependent: :destroy

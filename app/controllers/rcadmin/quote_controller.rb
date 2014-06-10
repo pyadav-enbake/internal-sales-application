@@ -52,7 +52,11 @@ class Rcadmin::QuoteController < ApplicationController
     @quote.customer_id = params[:rcadmin_quote][:customer_id]
     if @quote.save
       session[:quote_id] = @quote.id
-      redirect_to :action => 'show_category'
+      if @quote.retailer.nil? and @quote.contractor.default_contractor?
+        redirect_to new_quote_retailer_url(@quote)
+      else
+        redirect_to :action => 'show_category'
+      end
     else
       render :action=> 'index'
     end
@@ -122,7 +126,7 @@ class Rcadmin::QuoteController < ApplicationController
     @quote.quote_product.destroy_all
     @quote.status = 0
     @quote.update_attributes(params[:quote])
-    @customer = Rcadmin::Customer.find(@quote.customer_id)
+    @customer = @quote.customer
     WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
     @quote.sent_to_client!
     render :text => 'ok'
@@ -255,7 +259,8 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.quote_product.destroy_all
       @quote.status = 0
       @quote.update_attributes(params[:quote])
-      @customer = Rcadmin::Customer.find(@quote.customer_id)
+
+      @customer = @quote.customer
 
     if params.has_key?(:draft)
       redirect_to create_quote_path, notice: 'Your Quote has been saved as a draft.'
@@ -281,4 +286,5 @@ class Rcadmin::QuoteController < ApplicationController
   def find_quote_by_session
     @quote = current_user.quotes.find(session[:quote_id] ) if session[:quote_id]
   end
+
 end

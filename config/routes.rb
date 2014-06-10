@@ -3,6 +3,7 @@ RomarCabinates::Application.routes.draw do
 
   resources :quotes, controller: :quote, only: :none do
     resources :misc_products, only: [:create, :update, :destroy]
+    resources :retailers, only: [:new, :create, :index]
   end
 
 

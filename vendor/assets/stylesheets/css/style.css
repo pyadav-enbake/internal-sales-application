@@ -427,3 +427,30 @@ b {
   } 
 }
 
+.half {
+  width: 45%;
+  float: left;
+}
+
+.half-r {
+  float: left;
+  width: 45%;
+  margin-left: 10%;
+}
+
+.m-top {
+  margin-top: 30px !important;
+}
+
+.m-bott {
+  margin-bottom: 30px;
+  float: left;
+  width: 100%;
+}
+
+span.cont b {
+  display: inline-block;
+  width: auto;
+  margin-top: 0px;
+}
+

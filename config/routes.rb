@@ -5,6 +5,7 @@ RomarCabinates::Application.routes.draw do
     resources :misc_products, only: [:create, :update, :destroy]
     resources :retailers, only: [:new, :create, :index]
   end
+  get 'retailers/:id', to: 'retailers#show', as: :retailer
 
 
   scope :admin do
@@ -32,6 +33,7 @@ RomarCabinates::Application.routes.draw do
     resources :faq_categories
     resources :static_pages
     resources :quotes, controller: :quote, only: [:index, :show, :update, :edit] do
+      get :search, on: :collection
       member do
         get :docs
         get 'docs/:template_id', action: 'grid', as: :print_templates

@@ -1,5 +1,14 @@
 class Rcadmin::Quote < ActiveRecord::Base
   include ::QuoteCalculator
+  include PgSearch
+
+  pg_search_scope :search, associated_against: {
+    contractor: [:first_name, :last_name, :email],
+    customer: [:first_name, :last_name, :email],
+    retailer: [:first_name, :last_name, :email]
+  }, against: :id, using: [:tsearch]
+
+
   validates_presence_of :contractor_id,:customer_id
   attr_accessible :contractor_id, :customer_id, :category, :status,
     :delivery_date,:sales_closing_potential, :cabinet_types_info, 

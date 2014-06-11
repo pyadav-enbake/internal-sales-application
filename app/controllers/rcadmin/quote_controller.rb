@@ -14,6 +14,11 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
 
+  def search
+    @quotes = current_user.quotes.search(params[:query])
+  end
+
+
   def quotations
     @rcadmin_quotes = current_user.quotes.includes(:contractor).order("created_at DESC")
   end

@@ -4,6 +4,8 @@ ruby "2.1.2"
 
 gem "spring", group: :development
 
+gem 'pg_search'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.0'
 # gem 'mysql2'

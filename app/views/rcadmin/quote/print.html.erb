@@ -20,7 +20,7 @@
 
 
     <div id="invoice" class="new">
-        <%= image_tag "email-header.png", style: 'width: 100%' %>
+        <%= image_tag "email-header.png", style: 'width: 100%, height: 150px;' %>
 
 
       <div class="this-is">
@@ -30,7 +30,7 @@
 
       <header id="header">
         <div class="invoice-intro">
-          <h1>Romar Cabinet and <br/> <br/> Top Company</h1>
+          <h1>Romar Cabinet and Top Company</h1>
 
         </div>
 
@@ -51,7 +51,6 @@
           <h2>Customer Information:</h2>
           <div id="hcard-Hiram-Roth" class="vcard">
             <a class="url fn" href="#"><%= @customer.fullname %></a>
-            <div class="org">&nbsp;</div>
             <%= mail_to @customer.email, @customer.email, {class: 'email'} %>
 
             <div class="adr">
@@ -61,7 +60,6 @@
             </div>
 
             <div class="tel"><%= format_phone @customer.phone %></div>
-            <div class="tel">&nbsp;</div>
           </div><!-- e: vcard -->
         </div><!-- e invoice-to -->
 
@@ -70,16 +68,9 @@
           <h2>Sales Agent:</h2>
           <div id="hcard-Admiral-Valdore" class="vcard">
             <a class="url fn" href="#"><%= @admin.full_name %></a>
-            <div class="org">&nbsp;</div>
             <%= mail_to @admin.email, @admin.email, class: 'email' %>
 
-            <div class="adr">
-              <div class="street-address">&nbsp;</div>
-              <span class="locality">&nbsp;</span>
-              <span class="country-name">&nbsp;</span>
-            </div>
 
-            <div class="tel">&nbsp;</div>
           </div><!-- e: vcard -->
         </div><!-- e invoice-from -->
 

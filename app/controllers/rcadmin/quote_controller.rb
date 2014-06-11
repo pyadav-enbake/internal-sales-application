@@ -15,7 +15,7 @@ class Rcadmin::QuoteController < ApplicationController
 
 
   def search
-    @quotes = current_user.quotes.search(params[:query])
+    @quotes = current_user.quotes.includes([:contractor, :customer, :retailer]).search(params[:query])
   end
 
 

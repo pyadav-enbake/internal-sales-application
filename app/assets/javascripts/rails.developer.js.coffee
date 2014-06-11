@@ -18,8 +18,7 @@ jQuery(window).load ->
   $('.show-selected').on 'click', (evt) ->
     evt.preventDefault()
     $('.panel-collapse.in').addClass('collapse').removeClass('in')
-    $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse')
-    $('.panel-collapse.collapse.product-seen').addClass('in').removeClass('collapse')
+    $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')
 
   $('.rooms').on('keyup', '.factor-total, .corian-total, .labor-total', (evt) ->
     evt.preventDefault()

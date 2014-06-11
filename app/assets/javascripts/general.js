@@ -84,7 +84,7 @@ $(window).load(function() {
       var $parent = $(this).closest('tr');
       var $room = $parent.closest('.ui-tabs-panel');
       var roomName = $room.data('class');
-      $parent.closest('.panel-collapse.in').addClass('product-seen');
+      $parent.closest('tr').attr('data-is-edit', true);
 
 
       var $checkbox = $parent.find('.hide-product');

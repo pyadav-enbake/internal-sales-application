@@ -1,5 +1,8 @@
 
-$(document).ready(function() {
+
+$(window).load(function() {
+
+
   $("#new_customer").on('click',function() {
     $.get("/quote/new_customer",function(data,status){
      $("#formchng").html(data);

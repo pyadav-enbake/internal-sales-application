@@ -1,41 +1,41 @@
 <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
   <%if session[:first_name]%>
     <a id="leftmenu-trigger" class="tooltips" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
   <%end%>
 
-	<div class="navbar-header pull-left">
-		<a class="navbar-brand" href="/">Avant</a>
-	</div>
+  <div class="navbar-header pull-left">
+    <a class="navbar-brand" href="/">Avant</a>
+  </div>
 
 
-	<%#=@current_user.inspect%>
-	<%if session[:first_name]%>
-	<ul class="nav navbar-nav pull-right toolbar">
-          <% end %>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs"><%=current_user.first_name%><%=current_user.last_name%><i class="fa fa-caret-down"></i></span></a>
-			<ul class="dropdown-menu userinfo arrow">
-				<li class="username">
-					<a href="#">
-						<div class=""><h5><%=current_user.username%><%#=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=current_user.email%><%#=session[:email]%></span></small></div>
-					</a>
-				</li>
-				<li class="userlinks">
-					<ul class="dropdown-menu">
-						<li><a href="/rcadmin/administrators/<%=session[:admin_id]%>/edit">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-						<li class="divider"></li>
-						<%= link_to "Sign Out", destroy_admin_session_path,:method => :delete,:class=>"text-right" %>
-					</ul>
-				</li>
-			</ul>
-		</li>
-          <%= form_tag search_rcadmin_quotes_path, method: :get, class: 'navbar-form navbar-right' do %>
-            <div class="input-group">
-              <%= search_field_tag :query, params[:query], class: 'form-control', placeholder: 'Enter search term' %>
-              <span class="input-group-btn">
-                <%= button_tag 'Search', class: 'btn btn-default', style: 'height: 34px;' %>
-              </span>
-            </div>
-	</ul>
-	<%end%>
+  <% if session[:first_name] %>
+    
+    <ul class="nav navbar-nav pull-right toolbar">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs"><%=current_user.first_name%><%=current_user.last_name%><i class="fa fa-caret-down"></i></span></a>
+        <ul class="dropdown-menu userinfo arrow">
+          <li class="username">
+            <a href="#">
+              <div class=""><h5><%=current_user.username%><%#=session[:username]%>(<%if current_user.role == 'admin'%>Admin<%else%>Sales Admin<%end%>)</h5><small>Logged in as <br><span><%=current_user.email%><%#=session[:email]%></span></small></div>
+            </a>
+          </li>
+          <li class="userlinks">
+            <ul class="dropdown-menu">
+              <li><a href="/rcadmin/administrators/<%=session[:admin_id]%>/edit">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
+              <li class="divider"></li>
+              <%= link_to "Sign Out", destroy_admin_session_path,:method => :delete,:class=>"text-right" %>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <%= form_tag search_rcadmin_quotes_path, class: 'navbar-form navbar-right', method: :get do %>
+      <%= content_tag :div, class: 'form-group' do %>
+        <%= search_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search...' %>
+      <% end %>
+      <%= button_tag "Search", class: 'btn btn-default', style: 'height: 34px;' %>
+    <% end %>
+  <%end%>
+</div>
 </header>

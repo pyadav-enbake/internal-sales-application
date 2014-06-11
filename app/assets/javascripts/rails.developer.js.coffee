@@ -1,4 +1,4 @@
-jQuery ->
+jQuery(window).load ->
 
   $('.print-quote').on 'click', (evt) ->
     evt.preventDefault()

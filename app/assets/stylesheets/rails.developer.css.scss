@@ -1,5 +1,5 @@
 body {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 table tr td{
@@ -46,6 +46,14 @@ a.show-misc-modal {
 }
 .panel-group .panel-heading {
     border-bottom: 0 none;
+    padding: 0px !important;
+    margin: 0px !important;
+    height: 20px;
+}
+
+.panel-group .panel-heading .panel-title {
+  padding: 0px 5px !important;
+  margin: 0px !important;
 }
 
 .panel-group .panel-heading:hover {

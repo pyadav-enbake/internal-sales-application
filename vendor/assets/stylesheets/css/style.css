@@ -146,13 +146,14 @@ h1 {
 }
 
 .table.green ul.head {
-	-moz-transform: rotate(270deg); /* Для Firefox */
-    -ms-transform: rotate(270deg); /* Для IE */
-    -webkit-transform: rotate(270deg); /* Для Safari, Chrome, iOS */
-    -o-transform: rotate(270deg); /* Для Opera */
-    transform: rotate(270deg);
-    width: 1043px;
-    margin-left: -446px;
+    width: 600px;
+    height: 151px;
+    -webkit-transform-origin: left top;
+    -moz-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform:rotate(-90deg) translateX(-100%);
+    -moz-transform:rotate(-90deg) translateX(-100%);
+    transform:rotate(-90deg) translateX(-100%);
 }
 
 .table.green ul.foot {

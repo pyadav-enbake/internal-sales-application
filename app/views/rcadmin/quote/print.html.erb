@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width" />
 
     <title>Romar Cabinets Quote</title>
-    <%= render 'welcome_mailer/stylesheet' %>
+    <%= stylesheet_link_tag 'print', media: 'all' %>
 
     <!-- give life to HTML5 objects in IE -->
     <!--[if lte IE 8]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -20,7 +20,6 @@
 
 
     <div id="invoice" class="new">
-        <%= image_tag "email-header.png", style: 'width: 100%, height: 150px;' %>
 
 
       <div class="this-is">
@@ -46,6 +45,8 @@
 
 
       <section id="parties">
+
+        <div class="info-section">
 
         <div class="invoice-to">
           <h2>Customer Information:</h2>
@@ -74,7 +75,8 @@
           </div><!-- e: vcard -->
         </div><!-- e invoice-from -->
 
-        <div class="clearfix"></div>
+      </div>
+
 
 
 

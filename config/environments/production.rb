@@ -90,7 +90,7 @@ RomarCabinates::Application.configure do
   
   
   config.action_mailer.default_url_options = {
-    :host => "romarcabinates.herokuapp.com",
+    :host => "internal-sales-application.herokuapp.com",
   }
   
   

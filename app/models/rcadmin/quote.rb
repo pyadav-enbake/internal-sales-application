@@ -4,8 +4,8 @@ class Rcadmin::Quote < ActiveRecord::Base
 
   pg_search_scope :search, associated_against: {
     contractor: [:first_name, :last_name, :email],
-    customer: [:first_name, :last_name, :email],
-    retailer: [:first_name, :last_name, :email]
+    customer: [:first_name, :last_name, :email, :job_title],
+    retailer: [:first_name, :last_name, :email, :job_title]
   }, against: :id, using: [:tsearch]
 
 

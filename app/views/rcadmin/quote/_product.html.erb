@@ -39,6 +39,8 @@
   <button class="btn search-cancel">Cancel</button>
 </span>
 
+<%= content_tag :h1, (@quote.customer.job_title.presence || @quote.contractor.fullname), class: 'text-center'  %>
+
 <%= render 'search_product' %>
 
 <%= form_tag("send_quote", method: "post", :id=>"send_quote_frm") do %>

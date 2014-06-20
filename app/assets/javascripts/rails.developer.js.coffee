@@ -252,8 +252,7 @@ jQuery(window).load ->
   $('#page-content').on 'click', '.option-product', (evt) ->
     hideProduct = $(this).closest('tr').find('.hide-product')
     if hideProduct.length and hideProduct.is(":checked")
-      evt.preventDefault()
-      alert("You can not hide options")
+      hideProduct.attr('checked', false)
 
   $('#page-content').on 'click', '.hide-product', (evt) ->
     optionProduct = $(this).closest('tr').find('.option-product')

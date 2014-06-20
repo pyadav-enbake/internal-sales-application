@@ -42,7 +42,18 @@
                             <div class="tiles-heading">Quotes for Month</div>
                             <div class="tiles-body-alt">
                               <!--i class="fa fa-bar-chart-o"></i-->
-                              <div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_month_quotes.size %></div>
+                              <% if current_user.role.admin? %>
+                                <% month_quotes_count = Rcadmin::Quote.current_month_quotes.count %>
+                                <% year_quotes_count  = Rcadmin::Quote.current_year_quotes.count %>
+                                <% year_turned_in_total = Rcadmin::Quote.turned_in_total %>
+                                <% year_turned_in_count = Rcadmin::Quote.current_year_quotes.turned_in.count %>
+                              <% else %>
+                                <% month_quotes_count = current_user.quotes.current_month_quotes.count %>
+                                <% year_quotes_count  = current_user.quotes.current_year_quotes.count %>
+                                <% year_turned_in_total = current_user.quotes.turned_in_total %>
+                                <% year_turned_in_count = current_user.quotes.current_year_quotes.turned_in.count %>
+                              <% end %>
+                              <div class="text-center"><span class="text-top"></span><%= month_quotes_count  %></div>
                               <small>in <%= Time.zone.now.strftime("%B") %></small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>
@@ -53,7 +64,7 @@
                             <div class="tiles-heading">Quotes YTD</div>
                             <div class="tiles-body-alt">
                               <!--i class="fa fa-money"></i-->
-                              <div class="text-center"><span class="text-top"></span><%= Rcadmin::Quote.current_year_quotes.size %><span class="text-smallcaps"></span></div>
+                              <div class="text-center"><span class="text-top"></span><%= year_quotes_count %><span class="text-smallcaps"></span></div>
                               <small>in <%= Time.zone.now.strftime("%Y") %></small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>
@@ -64,7 +75,7 @@
                             <div class="tiles-heading">Sales YTD</div>
                             <div class="tiles-body-alt">
                               <i class="fa "></i>
-                              <div class="text-center">$<%= current_user.quotes_turned_in_ytd %></div>
+                              <div class="text-center">$<%= year_turned_in_total %></div>
                               <small>&nbsp;</small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>
@@ -74,7 +85,7 @@
                           <span class="info-tiles tiles-alizarin">
                             <div class="tiles-heading">Jobs Turned In</div>
                             <div class="tiles-body-alt">
-                              <div class="text-center"><%= current_user.quotes_turned_in_count %></div>
+                              <div class="text-center"><%= year_turned_in_count %></div>
                               <small>&nbsp;</small>
                             </div>
                             <div class="tiles-footer">&nbsp;</div>

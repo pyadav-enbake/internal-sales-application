@@ -50,8 +50,8 @@ class Rcadmin::Quote < ActiveRecord::Base
   accepts_nested_attributes_for :quote_categories
   
   scope :find_by_customer, ->(customer_id) { where(:customer_id=>customer_id) }
-  scope :current_month_quotes, -> { where("created_at >= ? AND created_at <= ?", Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
-  scope :current_year_quotes, -> { where("created_at >= ? AND created_at <= ?", Time.zone.now.beginning_of_year, Time.zone.now.end_of_year) }
+  scope :current_month_quotes, -> { where(created_at: Time.zone.now.all_month) }
+  scope :current_year_quotes,  -> { where(created_at: Time.zone.now.all_year) }
 
 
   STATUSES = ['Draft', 'Sent to Client', 'Negotiations', 'In Contract', 'Turned In']
@@ -70,6 +70,7 @@ class Rcadmin::Quote < ActiveRecord::Base
 
     scope method_name, lambda { where(status: index) }
   end
+  scope :turned_in_total, -> { current_year_quotes.turned_in.joins(:quote_products).sum("quote_products.total_price") }
 
   scope :unclosed, lambda { where.not(status: STATUSES[0]) }
 

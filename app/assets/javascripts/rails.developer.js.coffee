@@ -11,7 +11,10 @@ jQuery(window).load ->
     url = "/rcadmin/quotes/#{quoteId}/room/#{roomId}"
     $('.overlay').addClass('overlay-active')
     $.getScript(url).success ->
+      $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')
+      $('.quantity.selected').trigger('keyup')
       $('.overlay').removeClass('overlay-active')
+
 
 
   $('.print-quote').on 'click', (evt) ->
@@ -168,17 +171,18 @@ jQuery(window).load ->
         $(window).scrollTop $(selectorArray[0]).offset().top - 80
 
       current = 0
-      $('.search-next').click (evt) ->
+      $(document).on 'click', '.search-next', (evt) ->
         evt.preventDefault()
         if current < ( selectorArray.length - 1 )
           $(window).scrollTop $(selectorArray[++current]).offset().top - 80
 
-      $('.search-prev').click (evt) ->
+      
+      $(document).on 'click', '.search-prev', (evt) ->
         evt.preventDefault()
         if current > 0
           $(window).scrollTop $(selectorArray[--current]).offset().top - 80
 
-      $('.search-cancel').click (evt) ->
+      $(document).on 'click', '.search-cancel', (evt) ->
         evt.preventDefault()
         $(".search-controls").hide()
         $('.search-products-text').val("")

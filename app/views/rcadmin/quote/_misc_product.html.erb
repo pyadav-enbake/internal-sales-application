@@ -9,7 +9,7 @@
   <td>
     <input type="text" data-name="<%= quote_product_attr.call(:quantity) %>" 
     id="<%= "#{cat.id}#{product.id}" %>" style="width: 50px;" value="<%= quote_product.try(:quantity) %>" 
-    class="quantity <%= "#{product.type} #{product_type}" %>" 
+    class="quantity <%= "#{product.type} #{product_type}" %> <%= 'selected' if quote_product %>" 
     data-measurement="<%= product.measurement_type %>" onkeypress="return isNumber(event)"></td>
   <td></td>
   <td class="title"><%= product.title %></td>

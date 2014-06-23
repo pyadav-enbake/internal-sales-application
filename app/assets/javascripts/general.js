@@ -448,10 +448,12 @@ $(window).load(function() {
 
   $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse');
   var roomIds = $('.overlay').data('selectedRoomsIds');
-  roomIds.forEach(function(id) {
-    console.log('.room-product-tab[data-room-id='+id+']');
-    $('.room-product-tab[data-room-id='+id+']').click();
-  });
+  if(roomIds) {
+    roomIds.forEach(function(id) {
+      console.log('.room-product-tab[data-room-id='+id+']');
+      $('.room-product-tab[data-room-id='+id+']').click();
+    });
+  }
   $('.room-product-tab').first().click();
 
   $(document).on('click', '.expand', function(evt) {
@@ -537,7 +539,9 @@ function check_product(){
 
 function check_customer(id) {
   if(id == 'new-customer') {
-    window.location = '/rcadmin/customers/new'
+    contractorId = $('#rcadmin_quote_contractor_id').val()
+
+    window.location = '/rcadmin/customers/new?contractor_id=' + contractorId;
     return false;
   }
   if(id == '') {

@@ -18,6 +18,7 @@ class Rcadmin::CustomersController < ApplicationController
   def new
      
     @rcadmin_customer = Rcadmin::Customer.new
+    session['act'] = "qcustomer" if params[:contractor_id]
   end
 
   # GET /rcadmin/customers/1/edit

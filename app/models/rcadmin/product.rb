@@ -34,7 +34,7 @@ class Rcadmin::Product < ActiveRecord::Base
 
   def self.base_products
     @base_subcategory ||= begin 
-      base_subcategory = Rcadmin::Subcategory.find_by(name: "Base")
+      base_subcategory = Rcadmin::Subcategory.where("LOWER(name) = ?", 'BASE'.downcase).first
       if base_subcategory
         where(subcategory_id: base_subcategory.id)
       else

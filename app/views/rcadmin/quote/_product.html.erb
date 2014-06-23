@@ -55,7 +55,7 @@
 
   <ul class="nav nav-pills">
     <% @categories.each_with_index do |room, index|%>
-      <li class="delete">
+      <li class="delete-tab">
         <%= link_to room.name, "#room-#{room.id}", class: 'room-product-tab', data: {toggle: 'tab', room_id: room.id, quote_id: @quote.id} %>
         <%= content_tag :span, "", data: { url: rcadmin_remove_quote_category_path(@quote, room) } %>
       </li>

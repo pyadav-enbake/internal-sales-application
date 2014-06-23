@@ -4,6 +4,7 @@ jQuery(window).load ->
     roomId = $(this).data('roomId')
 
     $roomSelector = $('#room-' + roomId)
+    $(window).scrollTop( $roomSelector.offset().top - 80 )
     return if $roomSelector.text().trim().length
 
     quoteId = $(this).data('quoteId')

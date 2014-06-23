@@ -2,7 +2,7 @@ module ApplicationHelper
 
 
   def contractor_list
-    contractors = current_user.contractors.order(:created_at).map { |c| [c.fullname, c.id] }
+    contractors = current_user.contractors.order(:created_at).map { |c| [c.company_name, c.id] }
     contractors.insert(1, ["New Contractor", 'new-contractor'])
     contractors.insert(2, ['--------------', nil])
   end

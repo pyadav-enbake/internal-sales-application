@@ -1,0 +1,88 @@
+<% product_association = "#{product_type}_products".to_sym %>
+<% index = product_type_counter %>
+
+<div class="tab-pane <%= 'active' if index.zero? %>" id="<%= "#{product_type}-#{room.id}" %>" data-product-type="<%= product_type %>">
+
+
+  <div id="subtabs-<%= "#{product_type}-#{index}" %>" data-class="<%= "#{room.dom_class}" %>">
+    <a href="#" class="expand">Expand All</a>
+    <a href="#" class="show-selected">Show Selected</a>
+    <a href="#" data-id="<%= room.id %>"  data-product-type="<%= product_type %>" data-toggle="modal" data-target="#live-data">Base Calculator</a>
+
+    <div class="panel-group collapser" >
+      <div class="panel panel-default">
+        <% collapsable_id = "misc-category-#{room.id}-#{product_type}" %>
+        <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
+          <h5 class="panel-title">
+            MISC
+            <a href="#" data-product-type="<%= product_type %>" class="show-misc-modal">Add Misc Product </a>
+          </h5>
+        </div>
+        <div id="<%= collapsable_id %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Enter Qty.</th>
+                  <th></th>
+                  <th>Title</th>
+                  <th>Price per unit</th>
+                  <th>Measure Type</th>
+                  <th>Total Price</th>
+                  <th>Option</th>
+                  <th>Hide</th>
+                </tr>
+              </thead>
+              <tbody class="misc-products-<%= "#{product_type}-#{room.id}" %>">
+                <%= render partial: 'rcadmin/quote/misc_product',
+                  collection: @quote.send("misc_#{product_association}".to_sym), as: :product, locals: {cat: room, product_type: product_type} %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <% Rcadmin::Subcategory.joins(product_association).includes(product_association).order(:id).uniq(:id).each_with_index do |subcat, index|%>
+        <% collapsable_id = "collapsable-#{subcat.id}-#{room.id}-#{product_type}" %>
+        <% @products = subcat.send(product_association) %>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="false" href="#<%= collapsable_id %>">
+            <h5 class="panel-title">
+              <%= subcat.name %>
+            </h5>
+          </div>
+          <div id="<%= collapsable_id %>" class="panel-collapse collapse">
+            <div class="panel-body">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Enter Qty.</th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Price per unit</th>
+                    <th>Measure Type</th>
+                    <th>Total Price</th>
+                    <th>Option</th>
+                    <th>Hide</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%= render partial: 'rcadmin/quote/misc_product',
+                    collection: @products, as: :product, locals: {cat: room, product_type: product_type} %>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+</div>

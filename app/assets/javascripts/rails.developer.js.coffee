@@ -1,5 +1,19 @@
 jQuery(window).load ->
 
+  $('.room-product-tab').on 'click', (evt) ->
+    roomId = $(this).data('roomId')
+
+    $roomSelector = $('#room-' + roomId)
+    return if $roomSelector.text().trim().length
+
+    quoteId = $(this).data('quoteId')
+    #  /rcadmin/quotes/:id/room/:category_id
+    url = "/rcadmin/quotes/#{quoteId}/room/#{roomId}"
+    $('.overlay').addClass('overlay-active')
+    $.getScript(url).success ->
+      $('.overlay').removeClass('overlay-active')
+
+
   $('.print-quote').on 'click', (evt) ->
     evt.preventDefault()
     url = $(this).attr('href')
@@ -15,7 +29,7 @@ jQuery(window).load ->
 
 
 
-  $('.show-selected').on 'click', (evt) ->
+  $(document).on 'click', '.show-selected', (evt) ->
     evt.preventDefault()
     $('.panel-collapse.in').addClass('collapse').removeClass('in')
     $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')
@@ -180,7 +194,7 @@ jQuery(window).load ->
 
 
 
-  $('.show-misc-modal').on 'click', (evt) ->
+  $(document).on 'click', '.show-misc-modal', (evt) ->
     evt.preventDefault()
     evt.stopPropagation()
     $('#misc_product_product_type').val($(this).data('productType'))
@@ -305,7 +319,7 @@ jQuery(window).load ->
       $nextInput.trigger('click') if $nextInput.length > 0
       return false
 
-  $('[data-target="#live-data"]').on 'click', ->
+  $(document).on 'click', '[data-target="#live-data"]', (evt) ->
     categoryId = $(this).data('id')
     productType = $(this).data('productType')
     if productType == 'cabinet'

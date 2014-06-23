@@ -1,0 +1,11 @@
+<% product_types = [:cabinet, :laminate] %>
+var content = '<%= j(render partial: 'rcadmin/quote/product_type_tabs_head', locals: { room: @category }) %>';
+
+var roomId = '<%= @category.id %>';
+var $roomSelector = $("#room-" + roomId);
+
+$roomSelector.html(content);
+
+
+$roomSelector.find('.quantity').trigger('keyup');
+$('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')

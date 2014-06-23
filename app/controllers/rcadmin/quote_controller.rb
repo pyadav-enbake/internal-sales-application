@@ -3,7 +3,7 @@ class Rcadmin::QuoteController < ApplicationController
   protect_from_forgery except: :get_customer
   before_action :check_auth,:authenticate
 
-  before_action :find_quote, only: [:docs, :cover_sheet, :grid, :remove_category, :print, :show, :update, :edit]
+  before_action :find_quote, only: [:room, :docs, :cover_sheet, :grid, :remove_category, :print, :show, :update, :edit]
   before_action :find_quote_by_session, only: [:show_category, :quote_preview]
 
   def index
@@ -17,6 +17,12 @@ class Rcadmin::QuoteController < ApplicationController
   def search
     @quotes = current_user.quotes.includes([:contractor, :customer, :retailer]).search(params[:query])
   end
+
+
+  def room
+    @category = @quote.categories.find(params[:category_id])
+  end
+
 
 
   def quotations

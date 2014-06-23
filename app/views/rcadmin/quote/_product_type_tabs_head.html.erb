@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#cabinet-<%= room.id %>" data-toggle="tab">Cabinets</a></li>
+  <li><a href="#laminate-<%= room.id %>" data-toggle="tab">Laminate Tops</a></li>
+</ul>
+<% product_types = [:cabinet, :laminate] %>
+<div class="tab-content">
+  <%= render partial: 'rcadmin/quote/room_products', collection: product_types, as: :product_type, locals: { room: room} %>
+</div>

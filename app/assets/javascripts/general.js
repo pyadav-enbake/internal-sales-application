@@ -61,7 +61,7 @@ $(window).load(function() {
 
   $('.tabs .delete-tab a').click(function(evt) {
     var tabId = $(this).attr('href');
-    $(window).scrollTop( $(tabId).offset().top - 80 );
+    // $(window).scrollTop( $(tabId).offset().top - 80 );
   });
 
 
@@ -73,11 +73,12 @@ $(window).load(function() {
     window.rooms = {};
     var percentage = {};
 
-    $('#cabinet, #laminate').on('keyup', '.quantity', function(evt) {
+    $('#send_quote_frm').on('keyup', '.quantity', function(evt) {
       if(evt.which == 13) {
         $(this).closest('tr').next().find('.quantity').focus();
         return false;
       }
+
 
       var quantity = Number($(this).val());
       var id = $(this).attr('id');
@@ -102,12 +103,17 @@ $(window).load(function() {
         $parent.find('.total-price-field').val('0.00');
       } else {
 
+        $(this).closest('tr').find('[data-name]').each(function(index) {
+          $(this).attr('name', $(this).data('name'))
+        });
+
         var price = Number($parent.find('.price').text());
         var isWoodPercentage  = $(this).hasClass('wood-percentage');
         var isMaplePercentage = $(this).hasClass('maple-percentage');
         var isCabinet = $(this).hasClass('cabinet');
 
-        var delegatedTarget = $(evt.delegateTarget).attr('id');
+        // var delegatedTarget = $(evt.delegateTarget).data('productType');
+        var delegatedTarget = $(this).closest('.tab-pane').data('productType')
 
         if(isWoodPercentage) {
           percentage[id] = ['wood', delegatedTarget];
@@ -441,9 +447,14 @@ $(window).load(function() {
 
 
   $('[data-is-edit=true]').closest('.panel-collapse.collapse').addClass('in').removeClass('collapse');
-  $('.overlay-active').removeClass('overlay-active');
+  var roomIds = $('.overlay').data('selectedRoomsIds');
+  roomIds.forEach(function(id) {
+    console.log('.room-product-tab[data-room-id='+id+']');
+    $('.room-product-tab[data-room-id='+id+']').click();
+  });
+  $('.room-product-tab').first().click();
 
-  $('.expand').click(function(evt) {
+  $(document).on('click', '.expand', function(evt) {
     evt.preventDefault();
     var inhtml = $('.expand').html();
     if(inhtml == 'Expand All'){

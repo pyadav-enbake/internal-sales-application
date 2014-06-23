@@ -23,6 +23,7 @@ RomarCabinates::Application.routes.draw do
 
   namespace :rcadmin do
     put '/quotes/:id/categories/:category_id', to: 'quote#remove_category', as: 'remove_quote_category'
+    get '/quotes/:id/room/:category_id', to: 'quote#room', as: :quote_room
     resources :countertop_designs
     resources :cabinet_types
     resources :subcategories

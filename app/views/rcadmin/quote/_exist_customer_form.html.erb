@@ -30,7 +30,7 @@
 	      <div class="form-group" id="exist_cont">
 		<label class="col-sm-3 control-label">Select Contractor</label>
 		<div class="col-sm-6">
-		  <%= select(:rcadmin_quote,:contractor_id, contractor_list, {:prompt => "Select Contractor"},:class => 'form-control',:onchange=>"get_customer(this.value)") %>
+		  <%= select(:rcadmin_quote,:contractor_id, contractor_list, {selected: params[:contractor_id], :prompt => "Select Contractor"},:class => 'form-control',:onchange=>"get_customer(this.value)") %>
 		</div>
 	      </div>
 	      <span id="part_cust"></span>
@@ -51,3 +51,10 @@
   </div>
 <%end%>
 </div>
+<% if params[:contractor_id] %>
+    <script type="text/javascript">
+      $(function() {
+        $('#rcadmin_quote_contractor_id').trigger('change');
+      });
+    </script>
+<% end %>

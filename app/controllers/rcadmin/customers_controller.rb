@@ -39,7 +39,7 @@ class Rcadmin::CustomersController < ApplicationController
 	   @quote.customer_id = @rcadmin_customer.id
 	   @quote.save
 	   session[:quote_id] = @quote.id
-	   format.html { redirect_to create_quote_url(contractor_id: @quote.contractor_id), notice: 'Customer was successfully created.' }
+	   format.html { redirect_to select_quote_category_path, notice: 'Customer was successfully created.' }
 	else
 	  flash[:notice] = 'Customer was successfully created.'
 	  format.html { redirect_to rcadmin_customers_url, notice: 'Customer was successfully created.' }

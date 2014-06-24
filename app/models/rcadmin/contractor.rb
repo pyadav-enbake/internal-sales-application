@@ -36,7 +36,7 @@ class Rcadmin::Contractor < ActiveRecord::Base
   end
 
   def default_contractor?
-    self.company_name == 'Romar Cabinets'
+    self.company_name == 'Retail'
   end
 
   def fullname

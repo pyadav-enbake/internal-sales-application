@@ -27,7 +27,7 @@ class Rcadmin::Admin < ActiveRecord::Base
     attributes = {
       first_name: 'Romar',
       last_name: 'Retail',
-      company_name: 'Romar Cabinets',
+      company_name: 'Retail',
       email: self.email,
       address: '23949 S Northern Illinois Dr',
       city: 'Channahon',

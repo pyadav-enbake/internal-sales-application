@@ -21,6 +21,7 @@ class Rcadmin::ContractorsController < ApplicationController
   # GET /rcadmin/contractors/new
   def new
     @rcadmin_contractor = Rcadmin::Contractor.new
+    session[:createquote] = true if params[:createquote]
   end
 
   # GET /rcadmin/contractors/1/edit
@@ -35,7 +36,14 @@ class Rcadmin::ContractorsController < ApplicationController
     respond_to do |format|
       if @rcadmin_contractor.save
 	flash[:notice] = 'Contractor was successfully created'
-        format.html { redirect_to rcadmin_contractors_url }
+
+        format.html { 
+          if session[:createquote]
+            redirect_to create_quote_url(contractor_id: @rcadmin_contractor.id)
+          else
+            redirect_to rcadmin_contractors_url 
+          end
+        }
         format.json { render action: 'show', status: :created, location: @rcadmin_contractor }
       else
         format.html { render action: 'new' }

@@ -552,7 +552,7 @@ function check_customer(id) {
 
 function get_customer(id){
   if(id == 'new-contractor') {
-    window.location = '/rcadmin/contractors/new'
+    window.location = '/rcadmin/contractors/new?createquote=true'
     return false;
   }
   if(id == '') {

@@ -30,9 +30,6 @@ class Rcadmin::CustomersController < ApplicationController
   # POST /rcadmin/customers.json
   def create
     @rcadmin_customer = Rcadmin::Customer.new(rcadmin_customer_params)
-    if params['act'] == "qcustomer"
-      session['act'] = "qcustomer"
-    end
     respond_to do |format|
       if @rcadmin_customer.save
 	if(session['act'] == "qcustomer")
@@ -91,6 +88,6 @@ class Rcadmin::CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rcadmin_customer_params
-      params.require(:rcadmin_customer).permit(:first_name, :last_name,:title,:address, :city, :state, :zip, :email, :phone, :status,:contractor_id)
+      params.require(:rcadmin_customer).permit(:job_title, :first_name, :last_name,:title,:address, :city, :state, :zip, :email, :phone, :status,:contractor_id)
     end
 end

@@ -56,7 +56,7 @@
 
 
 
-  <%= form_for(@rcadmin_product,:html=>{:class=>"form-horizontal row-border"})  do |f| %>
+  <%= form_for(@rcadmin_product, as: :rcadmin_product, :html=>{:class=>"form-horizontal row-border"})  do |f| %>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-orange">
@@ -92,7 +92,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Product Type</label>
                   <div class="col-sm-6">
-                    <%= select(:rcadmin_product,:subcategory_id, Rcadmin::Subcategory.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Type"},:class => 'form-control') %>
+                    <%= f.select(:subcategory_id, Rcadmin::Subcategory.all.collect {|c| [ c.name , c.id ] }, {:prompt => "Select Type"},:class => 'form-control') %>
                   </div>
                 </div>
                 <!--div id="scat">

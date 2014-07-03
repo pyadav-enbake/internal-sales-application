@@ -5,7 +5,7 @@ class Rcadmin::ProductsController < ApplicationController
   # GET /rcadmin/products
   # GET /rcadmin/products.json
   def index
-    @rcadmin_products = CabinetProduct.all
+    @rcadmin_products = CabinetProduct.order(:created_at).includes(:subcategory)
   end
 
 

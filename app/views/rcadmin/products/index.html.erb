@@ -53,7 +53,7 @@
 											<tr class="odd gradeX">
 										<%end%>
 											<!--td><%#=p.subcategory.category.name%></td-->
-											<td><%=p.subcategory.name%></td>
+											<td><%=p.subcategory.try(:name) %></td>
 											<td><%=p.title%></td>
 											<td><%=p.price%></td>
 											<td><%=p.measurement_type%></td>

@@ -86,7 +86,7 @@ class Rcadmin::Quote < ActiveRecord::Base
     product_selector = self.product_type_selections.joins(:product_type).
       where(category_id: category_id).where("LOWER(product_types.name) = ?", type.downcase).first
     return if product_selector.nil?
-    product_selector.name.presence || product_selector.selection_type.abbr
+    product_selector.name.presence || product_selector.selection_type.try(:abbr)
   end
 
 

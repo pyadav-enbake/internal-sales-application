@@ -20,7 +20,7 @@ class Rcadmin::Admin < ActiveRecord::Base
   has_one :retail, ->{ where(last_name: 'Retail') }, class_name: "Contractor"
   has_many :non_retails, ->{ where.not(last_name: 'Retail') }, class_name: "Contractor"
   has_many :quotes, through: :contractors
-  has_many :categories, dependent: :destroy
+  has_many :categories, -> { order(:created_at) }, dependent: :destroy
 
   after_create :create_default_contractor
   def create_default_contractor
@@ -65,10 +65,9 @@ class Rcadmin::Admin < ActiveRecord::Base
 
 
   DEFAULT_ROOMS = [
-    "Kitchen", "Bath 1", "Mstrr Bath", "Mud Bath", "2nd Lndry", "1st Lndry",
-    "Ldry Top", "Powder 1", "Living Room", "Powder 2", "Mstr Bedroom", "4 Baths",
-    "Closets", "Baths", "Bath 4", "Bath 5", "Bath 6", "Bsmt Bath", "Wetbar",
-    "Office", "Fam Rm", "Xtra1", "Xtra 2", "Xtra 3", "Xtra 4"
+    "Kitchen", "ISLAND ", "BUTLER ", "MUDROOM", "MUDBATH", "1STLAUNDRY", 
+    "2NDLDRY", "POWDER 1", "POWDER 2", "MASTER BATH", "MASTER BEDRM", 
+    "BATH2", "BATH3", "BATH4", "BATH5", "BATH6", "BSMTBATH", "WETBAR", "OFFICE"
   ]
 
   after_create :create_default_rooms

@@ -21,6 +21,37 @@ class LaminateTask
     end
   end
 
+  def update
+    CSV.open(file_path, headers: true).each do |row|
+      attributes = parsed_attributes_from row
+      types = parsed_types_from attributes
+      update_laminates_from attributes, types
+    end
+  end
+
+  def update_laminates_from attributes, types
+    category_name,    title = attributes[:category],          attributes[:title]
+    measurement_type, price = attributes[:measurement_type],  attributes[:price]
+
+    return if category_name.empty? or title.empty? or measurement_type.empty?
+
+    unless price.empty?
+      category = Rcadmin::Subcategory.where("LOWER(name) = ?", category_name.downcase).
+        first_or_create!(name: category_name, status: 0)
+
+      product = category.laminate_products.where(
+        attributes.slice(:title, :measurement_type, :description, :customer_wording, :status)
+      ).first_or_create!(types: types, price: price)
+
+      old_price = product.price
+
+      product.update(price: price)
+
+      puts "Laminate Product Updated: #{product.customer_wording}, #{old_price} => #{price}"
+    end
+  end
+
+
   def create_laminates_from attributes, types
     category_name,    title = attributes[:category],          attributes[:title]
     measurement_type, price = attributes[:measurement_type],  attributes[:price]

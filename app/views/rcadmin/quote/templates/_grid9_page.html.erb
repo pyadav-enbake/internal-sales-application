@@ -1,0 +1,87 @@
+<section class="page">
+
+  <%= form_tag "", class: 'horizontal-form hidden-print', method: :get do %>
+    <%= select_tag :category_id,  options_from_collection_for_select(@quote.categories, :id, :name, params[:category_id]), class: 'page-cabinet' %>
+    <%= submit_tag :update %>
+    <br />
+    <%= button_tag "Add Page", type: :button, class: 'add-page' %>
+  <% end %>
+  <br /><br />
+
+  <div class="table inch">
+    <ul class="head">
+      <li style="width: 30%;">
+        <div class="logo"><img src="<%= image_path('img/logo.png') %>"></div>
+        <p class="f-right" style="width: 45%;"><span>JOB #</span><%= @quote.id %></p>
+        <div class="row">
+          <p style="width: 51%;"><span>CUSTOMER</span><%= @customer.fullname %> </p>
+          <p style="width: 45%;"><span>JOB NAME </span><%= @customer.job_title %></p>
+        </div>
+        <div class="row">
+          <p style="width: 96%;"><span>JOB ADDRESS</span><%= @customer.full_address %> </p>
+        </div>
+        <div class="row">
+          <p style="width: 25%;" ><span>Date: </span><%= @quote.created_at.strftime("%d.%m.%Y") %></p>
+          <p style="width: 30%;"><span>Del Date: </span><%= @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
+          <p style="width: 38%;"><span>PHONE </span><%= @customer.phone %></p>
+        </div>
+      </li>
+      <li class="v-t">C A B I N E T</li>
+      <li style="width: 27%;">
+        <div class="row">
+          <p style="width: 31%;"><span>WOOD</span><%= @quote.selection_value_for category_id, 'Wood Species' %> </p>
+          <p style="width: 30%;"><span>DR. HD</span> </p>
+          <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for category_id, 'interior' %> </p>
+        </div>
+        <div class="row">
+          <p style="width: 31%;"><span>UP. DE</span> </p>
+          <p style="width: 30%;"><span>DWR. HD</span> </p>
+          <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for category_id, 'Dwr Box' %> </p>
+        </div>
+        <div class="row">
+          <p style="width: 31%;"><span>BS. DR</span> </p>
+          <p style="width: 30%;"><span>HNGE</span><%= @quote.selection_value_for category_id, 'hinge' %> </p>
+          <p style="width: 31%;"><span>DWR SLIDE</span> </p>
+        </div>
+        <div class="row">
+          <p style="width: 31%;"><span>DR. LIP</span> </p>
+          <p style="width: 30%;"><span>T. RAIL</span> </p>
+          <p style="width: 31%;"><span>CONSTR.</span><%= @quote.selection_value_for category_id, 'T rails' %> </p>
+        </div>
+        <div class="row">
+          <p style="width: 33%;"><span>DRW.</span> </p>
+          <p style="width: 63%;"><span>FINISH</span> </p>
+        </div>
+      </li>
+      <li class="v-t">C O U N T E R</li>
+      <li style="width: 18%;">
+        <div class="row">
+          <p style="width: 33%;"><span>BRAND</span> </p>
+          <p style="width: 45%;"><span>LAMINATED</span>  </p><span class="four"></span>
+        </div>
+        <div class="row">
+          <p style="width: 30%;"><span>COLOR</span>  </p>
+          <p style="width: 49%;"><span>SOLID SURFACE </span> </p><span class="four"></span>
+        </div>
+        <div class="row">
+          <p style="width: 50%;"><span>PATTERN #</span> </p>
+          <p style="width: 44%;"><span>OTHER</span> </p>
+        </div>
+        <div class="row">
+          <p style="width: 98%;"><span>EDGE TYPE</span></p>
+        </div>
+        <div class="row">
+          <p style="width: 98%;"><span>SINK</span> </p>
+        </div>
+      </li>
+      <li style="width: 18.07%;">
+        <header>
+          Page 1 of 1
+        </header>
+        <p class="final">SOECIAL NOTE: street first</p>
+      </li>
+    </ul>
+    <h1>EXPRESS / SERVICE</h1>
+    <span>DO NOT PUT WOOD AND LAMINATE WORK ORDERS ON SAME SHEET</span>
+  </div>
+</section>

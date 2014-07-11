@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Cab Draw</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS Files -->
+    <link href="<%= stylesheet_path('new-css/reset') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('new-css/style') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= stylesheet_path('new-css/responsive') %>" rel="stylesheet" type="text/css" />
+    <%= javascript_include_tag :application %>
+    <style type="text/css">
+      .table.inch{
+        height: 10.22in;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <button onclick="window.print()" class="hidden-print" style="position:relative;left: 40%;font-size:24px">Print</button>
+
+    <div class="pages">
+      <%= render partial: 'rcadmin/quote/templates/grid9_page', locals: { category_id: nil, page: 1 } %>
+    </div>
+
+  </body>
+</html>
+

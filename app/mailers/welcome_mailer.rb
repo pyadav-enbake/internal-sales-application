@@ -1,4 +1,5 @@
 class WelcomeMailer < ActionMailer::Base
+  include Roadie::Rails::Automatic
 
   default from: 'rubyonrails4@gmail.com'
   add_template_helper(ApplicationHelper)

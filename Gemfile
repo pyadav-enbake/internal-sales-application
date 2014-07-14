@@ -56,7 +56,8 @@ gem "mail_view", "~> 1.0.3", group: :development
 # web application
 gem 'unicorn'
 
-gem 'roadie-rails'
+# gem 'roadie-rails'
+gem 'premailer-rails'
 
 gem 'rails_12factor', group: :production
 

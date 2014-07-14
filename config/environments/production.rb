@@ -93,6 +93,6 @@ RomarCabinates::Application.configure do
     :host => "internal-sales-application.herokuapp.com",
   }
   
-  config.action_mailer.asset_host = 'http://internal-sales-application.herokuapp.com/'
+  config.action_mailer.asset_host = 'http://internal-sales-application.herokuapp.com'
   
 end

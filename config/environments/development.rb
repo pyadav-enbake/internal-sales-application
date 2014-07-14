@@ -39,6 +39,7 @@ RomarCabinates::Application.configure do
   
   
   config.action_mailer.default_url_options = {
-    :host => "192.168.1.12:3000",
+    :host => "http://localhost:3000/",
   }
+  config.action_mailer.asset_host = 'http://localhost:3000/'
 end

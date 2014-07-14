@@ -13,7 +13,7 @@ class Rcadmin::Quote < ActiveRecord::Base
   attr_accessible :contractor_id, :customer_id, :category, :status,
     :delivery_date,:sales_closing_potential, :cabinet_types_info, 
     :countertop_designs_info,:notes, :quote_categories_attributes, :miscs,
-    :quote_products_attributes, :product_type_selections_attributes
+    :quote_products_attributes, :product_type_selections_attributes, :deliver
   
 
   has_many :misc_products, dependent: :destroy

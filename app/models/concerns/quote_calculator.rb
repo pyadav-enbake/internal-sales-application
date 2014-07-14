@@ -67,6 +67,7 @@ module QuoteCalculator
 
   def delivery
     return grand_total if grand_total.zero?
+    return grand_total if self.respond_to?(:deliver) and !self.deliver?
     @deliver ||= ( grand_total / 5000  + 1 ).round * 75
   end
 

@@ -128,7 +128,7 @@ jQuery(window).load ->
       url: $(this).data('url'),
       dataType: 'script'
     })
-
+  $('.selection-select').trigger('change')
   $('.selection-select').on 'change', (evt) ->
     selectionValue = $(this).find('option:selected').text()
 

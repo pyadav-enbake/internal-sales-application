@@ -17,18 +17,18 @@
     <ul class="head">
       <li style="width: 39.5%;margin-left: 4.5%;">
         <div class="logo2"><img style="width:90%;" src="<%= image_path("logo2.png") %>"></div>
-        <div class="row">
-          <p style="width: 170px;"><span>Customer: </span><%= @customer.fullname %></p>
-          <p style="width: 255px;"><span>Job Name: </span><%= @customer.job_title %></p>
+        <div class="row" >
+          <p style="width: 40%; font-size: 20px;"><span >Customer: </span><%= @customer.fullname %></p>
+          <p style="width: 40%; font-size: 20px;"><span>Job Name: </span><%= @customer.job_title %></p>
         </div>
         <div class="row">
-          <p style="width: 170px;"><span>Phone:</span> <%= @customer.phone %></p>
-          <p style="width: 255px;"><span>Job Address:</span> <%= @customer.full_address %></p>
+          <p style="width: 30%; font-size: 20px;"><span>Phone:</span> <%= @customer.phone %></p>
+          <p style="width: 50%; font-size: 20px;"><span>Job Address:</span> <%= @customer.full_address %></p>
         </div>
         <div class="row">
-          <p style="width: 100px;" ><span>Date: </span><%= @quote.created_at.strftime("%d.%m.%Y") %></p>
-          <p style="width: 100px;"><span>Del Date: </span><%=  @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
-          <p style="width: 215px;"><span>Ship With: </span></p>
+          <p style="width: 25%; font-size: 20px;" ><span>Date: </span><%= @quote.created_at.strftime("%d.%m.%Y") %></p>
+          <p style="width: 30%; font-size: 20px;"><span>Del Date: </span><%=  @quote.delivery_date.try(:strftime, "%d.%m.%Y") %></p>
+          <p style="width: 40%; font-size: 20px;"><span>Ship With: </span></p>
         </div>
       </li>
       <li style="width: 12%;">

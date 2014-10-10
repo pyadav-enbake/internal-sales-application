@@ -26,10 +26,10 @@
         <div class="text">
           <div class="half"><p><span>CONTRACTOR:</span> <%= @contractor.fullname %></p></div>
           <div class="half-r pull-right"><p><span>DATE:</span><%= Date.today.strftime("%d.%m.%Y") %></p></div>
-          <div class="half"><p><span>JOB TITLE:</span> 123-456-789</p></div>
+          <div class="half"><p><span>JOB TITLE:</span> </p></div>
           <div class="half-r pull-right"><p><span>TURN IN DATE:</span><%= @quote.updated_at.strftime("%d.%m.%Y") %></p></div>
           <div class="half"><p><span>TELEPHONE:</span> <%= @contractor.phone %></p></div>
-          <div class="half-r pull-right"><p><span>SALESPERSONE:</span><%= current_user.full_name %></p></div>
+          <div class="half-r pull-right"><p><span>SALES PERSON:</span><%= current_user.full_name %></p></div>
           <div class="half"><p><span>ORDER NO.:</span> <%= @quote.id %></p></div>
           <p class="m-top"><span>CHANGE ORDERED BY:</span><%= current_user.full_name %></p>
           <p class="m-top"><span>REASON FOR CHANGE</span></p>
@@ -45,7 +45,7 @@
           <p></p>
           <p></p>
         </div>
-        <span class="cont"><b>COST OF CHANGES:</b> On all changes charges for the change must immediately be crossed over omto the Billing Sheet</span>
+        <span class="cont"><b>COST OF CHANGES:</b> On all changes charges for the change must immediately be crossed over into the Billing Sheet</span>
         <div class="text m-top">
           <div class="half"><p><span>CHANGE COST: &nbsp; &nbsp; $</span> </p></div>
           <div class="half-r pull-right"><span class="cont">NOTE: Copy of Change Order will be mailed with billing at all times</span></div>       
@@ -56,7 +56,7 @@
         </div>
         <div class="text m-top m-bott">
           <div class="half"><p><span>COSTUMERS SIGNATURE:</span> </p></div>
-          <div class="half-r pull-right"><p><span>PREPARER'S SEGNATURE:</span> 123-456-789</p></div>        
+          <div class="half-r pull-right"><p><span>PREPARER'S SEGNATURE:</span> </p></div>        
         </div>
       </section>
     </div>

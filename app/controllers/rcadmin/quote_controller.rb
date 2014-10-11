@@ -42,6 +42,21 @@ class Rcadmin::QuoteController < ApplicationController
     @contractor = @quote.contractor || Rcadmin::Contractor.new
     @customer = @quote.customer || Rcadmin::Customer.new
     @categories = @quote.categories
+    if params[:template_id] == "9"
+      if params[:category_id].present?
+        @category_id = @quote.categories.find(params[:category_id]).try(:id)
+      else
+        @category_id = @quote.categories.first.try(:id)
+      end
+    end
+    if params[:template_id] == "8"
+      if params[:category_ids].present?
+        @category_ids = @categories.select { |category| params[:category_ids].present? && params[:category_ids].include?(category.id.to_s) }.map(&:id)
+      else
+        @category_ids = @categories.limit(3).map(&:id)
+      end
+    end
+    
     respond_to do |format|
       if request.xhr?
         format.html { render partial: "rcadmin/quote/templates/grid#{params[:template_id]||1}_page", locals: { category_id: params[:category_id], page: 0 } }

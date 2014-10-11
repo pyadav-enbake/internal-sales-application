@@ -29,28 +29,28 @@
       <li class="v-t">C A B I N E T</li>
       <li style="width: 27%;">
         <div class="row">
-          <p style="width: 31%;"><span>WOOD</span><%= @quote.selection_value_for category_id, 'Wood Species' %> </p>
-          <p style="width: 30%;"><span>DR. HD</span><%= @quote.selection_value_for category_id, 'Dr HD ' %></p>
-          <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for category_id, 'interior' %> </p>
+          <p style="width: 31%;"><span>WOOD</span><%= @quote.selection_value_for @category_id, 'Wood Species' %> </p>
+          <p style="width: 30%;"><span>DR. HD</span><%= @quote.selection_value_for @category_id, 'Dr HD ' %></p>
+          <p style="width: 31%;"><span>INTERIOR</span> <%= @quote.selection_value_for @category_id, 'interior' %> </p>
         </div>
         <div class="row">
-          <p style="width: 31%;"><span>UP. DE</span> <%= @quote.selection_value_for category_id, 'Doorstyle Selections' %></p>
-          <p style="width: 30%;"><span>DWR. HD</span><%= @quote.selection_value_for category_id, 'Dr HD ' %></p>
-          <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for category_id, 'Dwr Box' %> </p>
+          <p style="width: 31%;"><span>UP. DE</span> <%= @quote.selection_value_for @category_id, 'Doorstyle Selections' %></p>
+          <p style="width: 30%;"><span>DWR. HD</span><%= @quote.selection_value_for @category_id, 'Dr HD ' %></p>
+          <p style="width: 31%;"><span>DWR BOX</span> <%= @quote.selection_value_for @category_id, 'Dwr Box' %> </p>
         </div>
         <div class="row">
-          <p style="width: 31%;"><span>BS. DR</span><%= @quote.selection_value_for category_id, 'Doorstyle Selections' %></p>
-          <p style="width: 30%;"><span>HNGE</span><%= @quote.selection_value_for category_id, 'hinge' %> </p>
-          <p style="width: 31%;"><span>DWR SLIDE</span><%= @quote.selection_value_for category_id, 'Dwr Slide' %> </p>
+          <p style="width: 31%;"><span>BS. DR</span><%= @quote.selection_value_for @category_id, 'Doorstyle Selections' %></p>
+          <p style="width: 30%;"><span>HNGE</span><%= @quote.selection_value_for @category_id, 'hinge' %> </p>
+          <p style="width: 31%;"><span>DWR SLIDE</span><%= @quote.selection_value_for @category_id, 'Dwr Slide' %> </p>
         </div>
         <div class="row">
-          <p style="width: 31%;"><span>DR. LIP</span><%= @quote.selection_value_for category_id, 'Edge Detail (Doors and Drawers)' %></p>
-          <p style="width: 30%;"><span>T. RAIL</span><%= @quote.selection_value_for category_id, 'Top Rail' %></p>
-          <p style="width: 31%;"><span>CONSTR.</span><%= @quote.selection_value_for category_id, 'Const.' %> </p>
+          <p style="width: 31%;"><span>DR. LIP</span><%= @quote.selection_value_for @category_id, 'Edge Detail (Doors and Drawers)' %></p>
+          <p style="width: 30%;"><span>T. RAIL</span><%= @quote.selection_value_for @category_id, 'Top Rail' %></p>
+          <p style="width: 31%;"><span>CONSTR.</span><%= @quote.selection_value_for @category_id, 'Const.' %> </p>
         </div>
         <div class="row">
           <p style="width: 33%;"><span>DRW.</span> BRITTANY FP</p>
-          <p style="width: 63%;"><span>FINISH</span><%= @quote.selection_value_for category_id, 'Finish' %></p>
+          <p style="width: 63%;"><span>FINISH</span><%= @quote.selection_value_for @category_id, 'Finish' %></p>
         </div>
       </li>
       <li class="v-t">C O U N T E R</li>

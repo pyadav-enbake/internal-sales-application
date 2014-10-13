@@ -150,9 +150,31 @@ $(window).load(function() {
       var total = countProductTotal();
       $('#cabinet-total').text(total.cabinet);
       $('#laminate-total').text(total.laminate);
-      var totalPrice = (total.cabinet + total.laminate).toFixed(2)
+      var totalPrice = (total.cabinet + total.laminate).toFixed(2);
       $('#total_price').text(totalPrice);
+      obj = $(this);
+      SaveProductInfo(obj,quantity,totalProductPrice);
     });
+    
+    function SaveProductInfo(obj,quantity,totalProductPrice){
+    	quote_product_attr_id = $(obj).closest('tr').find("input[name=quote_product_attr_id]").val();
+    	quote_product_id = $(obj).closest('tr').find("input[name=qp_id]").val();
+    	category_id = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[category_id]"+"']").val();
+		product_type = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[product_type]"+"']").val();
+		product_id = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[product_id]"+"']").val();
+		quantity = quantity;
+		totalPrice = totalProductPrice;
+		
+		$.ajax({
+		    type: 'post',
+		    async: false,
+		    data: 'quote_product_id='+quote_product_id+'&category_id=' + category_id + '&product_type=' + product_type +'&product_id='+ product_id + '&quantity='+quantity + '&totalPrice=' + totalPrice,
+		    url: '/rcadmin/quote/auto_save_product',
+		    success: function(data){
+		    	$(obj).closest('tr').find("input[name=qp_id]").val(data.id);
+		    }
+    });
+    }
 
     function updatePercentageProduct(percentage) {
       for(var id in percentage) {

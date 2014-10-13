@@ -146,6 +146,25 @@ class Rcadmin::QuoteController < ApplicationController
       redirect_to select_quote_category_url and return;
     end
   end
+  
+  def auto_save_product
+    @quote = Rcadmin::Quote.find(session[:quote_id] )
+    @quote_product = @quote.quote_products.new
+    if params[:quote_product_id].present?
+      @quote_product = Rcadmin::QuoteProduct.find(params[:quote_product_id])
+    end
+    
+    @quote_product.category_id = params[:category_id]
+    @quote_product.product_id = params[:product_id]
+    @quote_product.quantity = params[:quantity]
+    @quote_product.total_price = params[:totalPrice]
+    @quote_product.product_type = params[:product_type]
+    @quote_product.save
+     
+    respond_to do |format|
+      format.json { render json: {:msg => 'success', :id => @quote_product.id} }
+    end
+  end
 
   def send_quote
     @quote = Rcadmin::Quote.find(session[:quote_id] )

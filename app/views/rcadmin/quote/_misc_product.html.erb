@@ -18,7 +18,8 @@
   <td id="price">$<span class="price"><%= product.price %></span></td>
   <td id="measure"><%= product.measurement_type %></td>
   <input type="hidden" data-name="<%= quote_product_attr.call(:total_price) %>" class="total-price-field" value="">
-  <td >$ <span class="total-price-text">0.00</span></td>
+  <% check = quote_product && quote_product.hidden? == true || quote_product.nil?%>
+  <td > <span class = "toggle_total_price" style = "display: <%= check ? "none" : "block" %>">$ <span class="total-price-text" >0.00</span></span></td>
   <td>
     <input class="option-product" type="checkbox" 
     data-checked="<%= check = !!quote_product.try(:has_option?) %>"  <%= 'checked=checked' if check %> 

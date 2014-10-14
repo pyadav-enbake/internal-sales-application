@@ -484,6 +484,7 @@ $(window).load(function() {
     if(inhtml == 'Expand All'){
       $('.expand').html('Collapse All');
       $('.panel-collapse.collapse').addClass('in').removeClass('collapse');
+      $('[data-is-edit=false]').show();
     }else{
 
       $('.expand').html('Expand All');

@@ -37,7 +37,7 @@ jQuery(window).load ->
     evt.preventDefault()
     $('.panel-collapse.in').addClass('collapse').removeClass('in')
     $('[data-is-edit=true]').closest('.panel-collapse.collapse').collapse('show')
-
+    $('[data-is-edit=false]').hide();
   $('.rooms').on('keyup', '.factor-total, .corian-total, .labor-total', (evt) ->
     evt.preventDefault()
     $ancestor = $(this).closest('.quote-categories')
@@ -275,9 +275,15 @@ jQuery(window).load ->
 
   $('#page-content').on 'click', '.hide-product', (evt) ->
     optionProduct = $(this).closest('tr').find('.option-product')
+    hideProduct = $(this).closest('tr').find('.hide-product')
     if optionProduct.length and optionProduct.is(":checked")
       evt.preventDefault()
       alert("You can not hide options")
+    else
+      if hideProduct.is(":checked")
+        $(this).closest('tr').find('.toggle_total_price').hide()
+      else
+        $(this).closest('tr').find('.toggle_total_price').show()
 
   productType = categoryId = null
   if $('.editable').length

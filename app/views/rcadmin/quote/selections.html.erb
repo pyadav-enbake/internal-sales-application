@@ -29,7 +29,6 @@
         <% unless @categories.length.zero? %>
           <%= f.submit 'Save Selections', class: 'btn btn-primary' %> <br /><br />
         <% end %>
-
         <% @categories.each do |category| %>
           <div class="panel panel-sky">
             <div class="panel-heading">
@@ -52,12 +51,15 @@
                         <%= hidden_field_tag field.call(:product_type_id), cabinet_type.id %>
                         <%= hidden_field_tag field.call(:category_id), category.id %>
                         <td><%= cabinet_type.name %></td>
-                        <td><%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name), class: 'selection-select form-control' %></td>
+                        <td><%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name), class: 'selection-select form-control' %>
+                        <% if cabinet_type.selections.count == 1  && cabinet_type.selections.first.name == "Other"%>
+                            <%= text_field_tag field.call(:name), '', class: 'form-control other-field-name' %>
+                        <%end%>
+                        </td>
                       </tr>
                     <% end %>
 
                   <% else %>
-
                     <% @quote.product_type_selections.order(:id).select {|pts| pts.category_id == category.id }.each do |pts| %>
                       <% field = lambda { |attr| "quote[product_type_selections_attributes][#{category.id}#{pts.id}][#{attr}]" } %>
                       <% cabinet_type = pts.product_type %>
@@ -68,7 +70,7 @@
                         <td><%= cabinet_type.name %></td>
                         <td>
                           <%=  select_tag field.call(:selection_type_id), options_from_collection_for_select(cabinet_type.selections, :id, :name, pts.selection_type_id), class: 'selection-select form-control' %>
-                          <% if pts.name.present?  %>
+                          <% if pts.name.present? || (cabinet_type.selections.count == 1  && cabinet_type.selections.first.name == "Other")%>
                             <%= text_field_tag field.call(:name), pts.name, class: 'form-control other-field-name' %>
                           <% end %>
                         </td>

@@ -138,7 +138,10 @@ jQuery(window).load ->
       $inputField = $('<input />', {name: fieldName, class: 'other-field-name form-control'})
       unless $(this).siblings('.other-field-name').length
         $(this).after($inputField)
-
+    else
+      if $(this).siblings('.other-field-name').length
+        $(this).siblings('.other-field-name').remove();
+      
   $(document).on('click', '.search-products-btn', (evt) ->
     evt.preventDefault()
     searchText = $('.search-products-text').val().trim()

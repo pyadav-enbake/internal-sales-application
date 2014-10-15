@@ -1,12 +1,32 @@
-Attribute,Data,AbbrHinge,"E-Soft, Blum, Other","ESOFT, BLUM, OTHER"Interior,"Standard, Maple UV, Finished, Other","STD, MAPLE, FIN, OTHER"Dwr Box,"STD. Baltic, 5/8"" Soft Maple, Other","STD. BALTIC, MAPLE, OTHER"Dwr Slide,"E-Soft, Blum, Full Extension Slide Guide, Other","ESOFT, BLUM, FLEXT, OTHER"Const.,"Beaded Inset, Inset, Std. Full Overlay, Other","BDINST, INSET, OVRLY, OTHER"Wood Species,"Birch, Maple, White Oak, Rustic Cherry, Alder, Alder (Rustic), Mahogany, Cherry, Walnut, Hickory, Other","BIRCH, MAPLE, WTOAK, RCHRY, ALDER, RALDR, MAHOG, CHRRY, WLNUT, HICKY, OTHER"Edge Detail (Doors and Drawers),"Country Squire, R-100, Esquire, 30 Degree Back Bevel, Box Bead, B-1 1/4 Round, 3/8 Offset, Machine Bead, 1/8"" Bevel, Other","CSQIR, R-100, ESQIR, 30DEG, BOXBD, B-1, 3/8OFF, MBEAD, 1/8BEV, OTHER"Drawer Style,"Brittany Fp, Salem Fp, Colonial Fp, Legacy Fp,
+Attribute,Data,Abbr
+Hinge,"E-Soft, Blum, Other","ESOFT, BLUM, OTHER"
+Interior,"Standard, Maple UV, Finished, Other","STD, MAPLE, FIN, OTHER"
+Dwr Box,"STD. Baltic, 5/8"" Soft Maple, Other","STD. BALTIC, MAPLE, OTHER"
+Dwr Slide,"E-Soft, Blum, Full Extension Slide Guide, Other","ESOFT, BLUM, FLEXT, OTHER"
+Const.,"Beaded Inset, Inset, Std. Full Overlay, Other","BDINST, INSET, OVRLY, OTHER"
+Wood Species,"Birch, Maple, White Oak, Rustic Cherry, Alder, Alder (Rustic), Mahogany, Cherry, Walnut, Hickory, Other","BIRCH, MAPLE, WTOAK, RCHRY, ALDER, RALDR, MAHOG, CHRRY, WLNUT, HICKY, OTHER"
+Edge Detail (Doors and Drawers),"Country Squire, R-100, Esquire, 30 Degree Back Bevel, Box Bead, B-1 1/4 Round, 3/8 Offset, Machine Bead, 1/8"" Bevel, Other","CSQIR, R-100, ESQIR, 30DEG, BOXBD, B-1, 3/8OFF, MBEAD, 1/8BEV, OTHER"
+Drawer Style,"Brittany Fp, Salem Fp, Colonial Fp, Legacy Fp,
 Winston Fp, Garfield Fp 707, Jefferson Fp 701, Jackson Fp 706, Washington Fp
 702, Madison Fp 703, Adams Fp 708, Monroe Fp 704, Harrison Fp 709, Van Buren Fp
 705, Truman Fp 710, Egg & Dart Fp 712, Teitlebaum Fp 711, Clinton Fp 713,
-Roosevelt Rp 704, Lincoln Rp 705, Slab, R-1, Other","BRITT, SALEM, COLON, LEGAC, WINSTN, GARFLD, JEFFRS, JACKSN, WASH, MADSN, ADAM, MONRO, HARRSN, VANBUR, TRUM, EGGDRT, TEITL, CLINTN, ROOS, LINCLN, SLAB, R-1, OTHER" Doorstyle Selections,"Centennial Rp, Avalon Rp, Williamsburg Rp,
+Roosevelt Rp 704, Lincoln Rp 705, Slab, R-1, Other","BRITT, SALEM, COLON, LEGAC, WINSTN, GARFLD, JEFFRS, JACKSN, WASH, MADSN, ADAM, MONRO, HARRSN, VANBUR, TRUM, EGGDRT, TEITL, CLINTN, ROOS, LINCLN, SLAB, R-1, OTHER"
+Lower Doorstyle Selections,"Centennial Rp, Avalon Rp, Williamsburg Rp,
 Camelot Rp, Richmond Rp, Franklin Rp 701, Mckinley Rp 706, Hamilton Rp 702, Grant
 Rp 703, Quincy Rp 708, Roosevelt Rp 704, Cleveland Rp 709, Lincoln Rp 705,
 Buchanan Rp 710, Egg & Dart Rp 712, Brittany Fp, Salem Fp, Colonial Fp,
 Legacy Fp, Winston Fp, Garfield Fp 707, Jefferson Fp 701, Jackson Fp 706,
 Washington Fp 702, Madison Fp 703, Adams Fp 708, Monroe Fp 704, Harrison Fp
 709, Van Buren Fp 705, Truman Fp 710, Egg & Dart Fp 712, Teitlebaum Fp 711,
-Clinton Fp 713, Other","CENT, AVAL, WILL, CAMLT, RCHMND, FRANK, MCKNLY, HAMLTN, GRANT, QUINC, ROOS, CLVLND, LINCLN, BUCHN, EGGDRT, BRITT, SALEM, COLON, LEGAC, WINSTN, GARFLD, JFFRS, JACKSN, WASH, MADSN, ADAMS, MONRO, HARRSN, VANBUR, TRUMN, EGGDRT, TEITL, CLINTN, OTHER"Top Rail,"1 3/4"", 2 1/2"", 3 1/2"", 4 1/4"",  Other",Dr HD ,Other,Finish,Other,
+Clinton Fp 713, Other","CENT, AVAL, WILL, CAMLT, RCHMND, FRANK, MCKNLY, HAMLTN, GRANT, QUINC, ROOS, CLVLND, LINCLN, BUCHN, EGGDRT, BRITT, SALEM, COLON, LEGAC, WINSTN, GARFLD, JFFRS, JACKSN, WASH, MADSN, ADAMS, MONRO, HARRSN, VANBUR, TRUMN, EGGDRT, TEITL, CLINTN, OTHER"
+Upper Doorstyle Selections,"Centennial Rp, Avalon Rp, Williamsburg Rp,
+Camelot Rp, Richmond Rp, Franklin Rp 701, Mckinley Rp 706, Hamilton Rp 702, Grant
+Rp 703, Quincy Rp 708, Roosevelt Rp 704, Cleveland Rp 709, Lincoln Rp 705,
+Buchanan Rp 710, Egg & Dart Rp 712, Brittany Fp, Salem Fp, Colonial Fp,
+Legacy Fp, Winston Fp, Garfield Fp 707, Jefferson Fp 701, Jackson Fp 706,
+Washington Fp 702, Madison Fp 703, Adams Fp 708, Monroe Fp 704, Harrison Fp
+709, Van Buren Fp 705, Truman Fp 710, Egg & Dart Fp 712, Teitlebaum Fp 711,
+Clinton Fp 713, Other","CENT, AVAL, WILL, CAMLT, RCHMND, FRANK, MCKNLY, HAMLTN, GRANT, QUINC, ROOS, CLVLND, LINCLN, BUCHN, EGGDRT, BRITT, SALEM, COLON, LEGAC, WINSTN, GARFLD, JFFRS, JACKSN, WASH, MADSN, ADAMS, MONRO, HARRSN, VANBUR, TRUMN, EGGDRT, TEITL, CLINTN, OTHER"
+Top Rail,"1 3/4"", 2 1/2"", 3 1/2"", 4 1/4"",  Other",
+Dr HD ,Other,
+Finish,Other,

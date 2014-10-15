@@ -1,6 +1,5 @@
 desc 'Delete Doorstyle Selections'
 task delete_doorstyle_selections: :environment do
-  binding.pry
   cabinet_type = CabinetType.find_by_name(' Doorstyle Selections')
   if cabinet_type.present?
     cabinet_type.selections.delete_all

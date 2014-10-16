@@ -30,7 +30,7 @@
 
       <header id="header">
         <div class="invoice-intro">
-          <h1>Romar Cabinet and <br/> <br/> Top Company</h1>
+          <h2>Romar Cabinet and <br/> Top Company</h2>
 
         </div>
 
@@ -98,7 +98,7 @@
               <caption><%= quote_category.category %></caption>
               <thead>
                 <tr>
-                  <th>Item Description</th>
+                  <th></th>
                   <th>Total Price</th> 
                   <!-- <th>Price (GPL)</th> -->
                 </tr>
@@ -108,7 +108,7 @@
                   <% next if quote_product.hidden? %>
                   <tr>
                     <th><%= quote_product.product %></th>
-                    <th></th> 
+                    <th><%= quote_product.total_price %></th> 
                     <!-- <th>Price (GPL)</th> -->
                   </tr>
                 <% end %>
@@ -138,7 +138,7 @@
                 <caption><%= quote_category.category %></caption>
                 <thead>
                   <tr>
-                    <th>Item Description</th>
+                    <th></th>
                     <th>Price</th> 
                     <th></th>
                   </tr>
@@ -173,7 +173,7 @@
         </section><!-- e: invoice financials -->
 
 
-        <footer id="footer">
+        <footer id="footer" style = "padding-bottom: 34px; border-bottom-width: 4px;">
           <p>
             Gus Frain  |  Romar Cabinet and Top Company | gus@romarcab.com</a>.
         </p>

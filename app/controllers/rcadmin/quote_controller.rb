@@ -304,6 +304,10 @@ class Rcadmin::QuoteController < ApplicationController
       @quote.quote_product.destroy_all
       @quote.status = 0
       @quote.update_attributes(params[:quote])
+       # To handle if delivery is false
+       unless params[:quote][:deliver].present?
+       @quote.update_attributes(:deliver => false)
+       end
 
       @customer = @quote.customer
 

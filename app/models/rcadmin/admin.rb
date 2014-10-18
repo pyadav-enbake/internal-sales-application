@@ -65,7 +65,7 @@ class Rcadmin::Admin < ActiveRecord::Base
 
 
   DEFAULT_ROOMS = [
-    "Kitchen", "ISLAND ", "BUTLER ", "MUDROOM", "MUDBATH", "1STLAUNDRY", 
+    "KITCHEN", "ISLAND ", "BUTLER ", "MUDROOM", "MUDBATH", "1STLAUNDRY", 
     "2NDLDRY", "POWDER 1", "POWDER 2", "MASTER BATH", "MASTER BEDRM", 
     "BATH2", "BATH3", "BATH4", "BATH5", "BATH6", "BSMTBATH", "WETBAR", "OFFICE"
   ]

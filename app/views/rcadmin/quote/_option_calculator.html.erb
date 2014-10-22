@@ -16,7 +16,7 @@
           <% quote_category.quote_products.options.includes(:product).each do |quote_product| %>
             <tr>
               <td><%= quote_product.product %></td>
-              <td><%= '%.2f' % quote_product.options_total_price %></td>
+              <td>$<%= '%.2f' % quote_product.options_total_price %></td>
             </tr>
           <% end %>
           <tr>

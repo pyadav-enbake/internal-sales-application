@@ -13,25 +13,25 @@
       <tbody>
         <tr>
           <td>Cabinet</td>
-          <td class="cabinet-total"><%= '%.2f' % object.cabinet_total %></td>
+          <td>$ <span class="cabinet-total"><%= '%.2f' % object.cabinet_total %></span></td>
         </tr>
         <tr>
           <td>Laminate tops</td>
-          <td class="laminate-tops-total"><%= '%.2f' % object.laminate_top_total %></td>
+          <td>$ <span class="laminate-tops-total"><%= '%.2f' % object.laminate_top_total %></span></td>
         </tr>
         <tr>
           <td>Product total</td>
-          <td class="product-total"><%= '%.2f' % object.product_total %></td>
+          <td>$ <span class="product-total"><%= '%.2f' % object.product_total %></span></td>
         </tr>
         <tr>
           <td><span class="quote-percentage"><%= object.percentage %></span>%</td>
-          <td class="percentage-total"><%= '%.2f' % object.percentage_value %></td>
+          <td>$ <span class="percentage-total"><%= '%.2f' % object.percentage_value %></span></td>
         </tr>
         <tr>
           <td>Factor(<span class="quote-factor"><%= object.factor %></span>)</td>
           <td >
             <input type=text" value="<%= object.factor || 1.0 %>" name="<%= field_name.call(:miscs) %>[factor]" class="factor-total form-control" />
-            <span class="factor-calculated-value"><%= '%.2f' % object.factor_value %></span>
+            $ <span class="factor-calculated-value"><%= '%.2f' % object.factor_value %></span>
           </td>
         </tr>
         <tr>
@@ -51,15 +51,15 @@
         </tr>
         <tr>
           <td>Pre Tax</td>
-          <td class="pre-tax-total"><%= '%.2f' % object.pre_tax %></td>
+          <td>$ <span class="pre-tax-total"><%= '%.2f' % object.pre_tax %></span></td>
         </tr>
         <tr>
           <td>Tax <span class="quote-tax-percentage"><%= object.tax_percentage %></span>%</td>
-          <td class="tax-total"><%= '%.2f' % object.tax_value %></td>
+          <td>$ <span class="tax-total"><%= '%.2f' % object.tax_value %></span></td>
         </tr>
         <tr>
           <td>Subtotal</td>
-          <td class="subtotal-total"><%= '%.2f' % object.sub_total %></td>
+          <td>$ <span class="subtotal-total"><%= '%.2f' % object.sub_total %></span></td>
         </tr>
         <tr>
           <td>Labor</td>
@@ -67,11 +67,11 @@
         </tr>
         <tr>
           <td>Delivery</td>
-          <td class="delivery-total"><%= '%.2f' % object.delivery %></td>
+          <td>$ <span class="delivery-total"><%= '%.2f' % object.delivery %></span></td>
         </tr>
         <tr>
           <td>Total</td>
-          <td class="grand-total"><%= '%.2f' % object.grand_total %></td>
+          <td>$ <span class="grand-total"><%= '%.2f' % object.grand_total %></span></td>
         </tr>
       </tbody>
     </table>

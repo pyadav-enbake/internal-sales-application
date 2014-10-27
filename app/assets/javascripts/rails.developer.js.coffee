@@ -275,6 +275,19 @@ jQuery(window).load ->
     hideProduct = $(this).closest('tr').find('.hide-product')
     if hideProduct.length and hideProduct.is(":checked")
       hideProduct.attr('checked', false)
+  
+  $('#page-content').on 'keyup', '.change_price', (evt) ->
+    new_price = parseFloat($(this).val())
+    quantity = parseFloat($(this).closest('tr').find('.quantity').val())
+    total_price = (new_price * quantity).toFixed(2)
+    if isNaN(total_price)
+      evt.preventDefault()
+      alert("Please Enter price in Number for product")
+    else
+      $(this).closest('tr').find('.price').text(new_price.toFixed(2))
+      $(this).closest('tr').find('.total-price-text').text(total_price)
+      element = $(this).closest('tr').find('.quantity')
+      element.trigger('keyup')
 
   $('#page-content').on 'click', '.hide-product', (evt) ->
     optionProduct = $(this).closest('tr').find('.option-product')

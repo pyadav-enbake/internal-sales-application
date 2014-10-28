@@ -282,7 +282,11 @@ jQuery(window).load ->
     total_price = (new_price * quantity).toFixed(2)
     if isNaN(total_price)
       evt.preventDefault()
-      alert("Please Enter price in Number for product")
+      $(this).val('0.0')
+      if isNaN(new_price)
+        alert("Please Enter price in Number for product")
+      else
+        alert("Please Enter Quantity in Number for product")
     else
       $(this).closest('tr').find('.price').text(new_price.toFixed(2))
       $(this).closest('tr').find('.total-price-text').text(total_price)

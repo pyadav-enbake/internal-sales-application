@@ -298,15 +298,9 @@ jQuery(window).load ->
 
   $('#page-content').on 'click', '.hide-product', (evt) ->
     optionProduct = $(this).closest('tr').find('.option-product')
-    hideProduct = $(this).closest('tr').find('.hide-product')
     if optionProduct.length and optionProduct.is(":checked")
       evt.preventDefault()
       alert("You can not hide options")
-    else
-      if hideProduct.is(":checked")
-        $(this).closest('tr').find('.toggle_total_price').hide()
-      else
-        $(this).closest('tr').find('.toggle_total_price').show()
 
   productType = categoryId = null
   if $('.editable').length

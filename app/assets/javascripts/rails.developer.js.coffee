@@ -151,7 +151,10 @@ jQuery(window).load ->
     # Clear old search changes and unexpand accordions
     $('.panel-collapse.in').addClass('collapse').removeClass('in')
     $('.panel-collapse.collapse .table tr').removeAttr('style')
-    
+
+    # remove search box value after search
+    $('.search-products-text').val('')
+
     # Search each title for search term and highligh it
     $('.panel-collapse.collapse .table .title').each (index) ->
       title = $(this).text().trim()

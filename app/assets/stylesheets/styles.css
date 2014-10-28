@@ -13711,5 +13711,9 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 .select_all_categories { 
   padding-top: 0px !important;
  }
+ 
+ .search-products-btn { 
+  padding: 10px 15px !important;
+ }
 
 .select_quote_label { margin-left: 5px; margin-top: 7px; }

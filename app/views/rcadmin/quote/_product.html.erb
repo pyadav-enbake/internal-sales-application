@@ -45,14 +45,6 @@
 
 <%= form_tag("send_quote", method: "post", :id=>"send_quote_frm") do %>
 
-
-  <div class="tab-content">
-    <% @categories.each_with_index do |room, index|%>
-      <%= content_tag :div, class: 'tab-pane', id: "room-#{room.id}" do %>
-      <% end %>
-    <% end %>
-  </div>
-
   <ul class="nav nav-pills">
     <% @categories.each_with_index do |room, index|%>
       <li class="delete-tab">
@@ -61,6 +53,14 @@
       </li>
     <% end %>
   </ul>
+  <br/>
+  <div class="tab-content">
+    <% @categories.each_with_index do |room, index|%>
+      <%= content_tag :div, class: 'tab-pane', id: "room-#{room.id}" do %>
+      <% end %>
+    <% end %>
+  </div>
+  
   <%= render 'extra_info' %>
 <% end %>
 

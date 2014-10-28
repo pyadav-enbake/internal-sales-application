@@ -30,16 +30,16 @@ RomarCabinates::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => "localhost.localdomain",
+    :domain               => "localhost:3000",
     :authentication       => "plain",
     :enable_starttls_auto => true,
-    :user_name            => "justin@acapellahq.com",
-    :password             => "Iamlama/6$"
+    :user_name            => "romarcabinate@gmail.com",
+    :password             => "enbake123"
   }
   
   
   config.action_mailer.default_url_options = {
-    :host => "http://localhost:3000/",
+    :host => "localhost:3000",
   }
-  config.action_mailer.asset_host = 'http://localhost:3000/'
+  config.action_mailer.asset_host = 'localhost:3000'
 end

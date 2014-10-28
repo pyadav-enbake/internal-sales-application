@@ -84,8 +84,8 @@ RomarCabinates::Application.configure do
     :domain               => "gmail.com",
     :authentication       => "plain",
     :enable_starttls_auto => true,
-    :user_name            => "justin@acapellahq.com",
-    :password             => "Iamlama/6$"
+    :user_name            => "romarcabinate@gmail.com",
+    :password             => "enbake123"
   }
   
   

@@ -271,13 +271,6 @@ jQuery(window).load ->
     if evt.which == 13
       evt.preventDefault()
       quoteMiscs()
-
-
-
-  $('#page-content').on 'click', '.option-product', (evt) ->
-    hideProduct = $(this).closest('tr').find('.hide-product')
-    if hideProduct.length and hideProduct.is(":checked")
-      hideProduct.attr('checked', false)
   
   $('#page-content').on 'keyup', '.change_price', (evt) ->
     new_price = parseFloat($(this).val())
@@ -295,12 +288,6 @@ jQuery(window).load ->
       $(this).closest('tr').find('.total-price-text').text(total_price)
       element = $(this).closest('tr').find('.quantity')
       element.trigger('keyup')
-
-  $('#page-content').on 'click', '.hide-product', (evt) ->
-    optionProduct = $(this).closest('tr').find('.option-product')
-    if optionProduct.length and optionProduct.is(":checked")
-      evt.preventDefault()
-      alert("You can not hide options")
 
   productType = categoryId = null
   if $('.editable').length

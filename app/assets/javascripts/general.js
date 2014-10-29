@@ -117,8 +117,11 @@ $(window).load(function() {
 
         if(isWoodPercentage) {
           percentage[id] = ['wood', delegatedTarget];
-          price = woodProductsTotal()[delegatedTarget];
-          quantity = productPercentage($(this).data('measurement'));
+          percentage = productPercentage($(this).data('measurement'));
+          price = price * percentage;
+          // commented for future references
+          // price = woodProductsTotal()[delegatedTarget];
+          // quantity = productPercentage($(this).data('measurement'));
         }
 
         if (isMaplePercentage) {

@@ -89,7 +89,7 @@ $(window).load(function() {
 
 
       var $checkbox = $parent.find('.hide-product');
-      if( $checkbox.data('checked') ) {
+      if( $checkbox.data('checked').toString == 'true' ) {
         $checkbox.prop('checked', true);
       }
 
@@ -125,9 +125,10 @@ $(window).load(function() {
         }
 
         if (isMaplePercentage) {
-          percentage[id] = ['maple', delegatedTarget];
-          price = mapleProductsTotal()[delegatedTarget];
-          quantity = productPercentage($(this).data('measurement'));
+          //percentage[id] = ['maple', delegatedTarget];
+          // commented for future reference
+          // price = mapleProductsTotal()[delegatedTarget];
+          // quantity = productPercentage($(this).data('measurement'));
         }
 
         if(! _.isObject(rooms[roomName]) ) {
@@ -156,22 +157,25 @@ $(window).load(function() {
       var totalPrice = (total.cabinet + total.laminate).toFixed(2);
       $('#total_price').text(totalPrice);
       obj = $(this);
-      SaveProductInfo(obj,quantity,totalProductPrice);
+      SaveProductInfo(obj,quantity,totalProductPrice,price);
     });
     
-    function SaveProductInfo(obj,quantity,totalProductPrice){
+    function SaveProductInfo(obj,quantity,totalProductPrice,price){
     	quote_product_attr_id = $(obj).closest('tr').find("input[name=quote_product_attr_id]").val();
     	quote_product_id = $(obj).closest('tr').find("input[name=qp_id]").val();
     	category_id = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[category_id]"+"']").val();
 		product_type = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[product_type]"+"']").val();
 		product_id = $(obj).closest('tr').find("[data-name='"+quote_product_attr_id+"[product_id]"+"']").val();
+		price = $(obj).closest('tr').find('.price').text();
+		hideProduct = $(obj).closest('tr').find('.hide-product').is(":checked");
+		optionProduct = $(obj).closest('tr').find('.option-product').is(":checked");
 		quantity = quantity;
 		totalPrice = totalProductPrice;
 		
 		$.ajax({
 		    type: 'post',
 		    async: false,
-		    data: 'quote_product_id='+quote_product_id+'&category_id=' + category_id + '&product_type=' + product_type +'&product_id='+ product_id + '&quantity='+quantity + '&totalPrice=' + totalPrice,
+		    data: 'quote_product_id='+quote_product_id+'&category_id=' + category_id + '&product_type=' + product_type +'&product_id='+ product_id + '&quantity='+quantity + '&totalPrice=' + totalPrice + '&price=' + price + '&hideProduct=' + hideProduct + '&optionProduct=' + optionProduct,
 		    url: '/rcadmin/quote/auto_save_product',
 		    success: function(data){
 		    	$(obj).closest('tr').find("input[name=qp_id]").val(data.id);
@@ -355,7 +359,7 @@ $(window).load(function() {
         $('.percentage-total').text( this.percentageValue().toFixed(2) );
         $('.factor-total').text( this.factorValue().toFixed(2) );
         $('.factor-calculated-value').text( this.factorValue().toFixed(2) );
-        $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
+        // $('.cabinet-total').text( this.cabinetTotal().toFixed(2) );
         $('.pre-tax-total').text( this.preTax().toFixed(2) );
         $('.tax-total').text( this.taxValue().toFixed(2) );
         $('.subtotal-total').text( this.subTotal().toFixed(2) );

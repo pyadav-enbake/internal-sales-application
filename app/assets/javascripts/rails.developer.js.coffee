@@ -272,6 +272,21 @@ jQuery(window).load ->
       evt.preventDefault()
       quoteMiscs()
   
+  $('#page-content').on 'click', '.option-product', (evt) ->
+    element = $(this).closest('tr').find('.quantity')
+    element.trigger('keyup')
+  
+  $('#page-content').on 'click', '.hide-product', (evt) ->
+    element = $(this).closest('tr').find('.quantity')
+    hideProduct = $(this).closest('tr').find('.hide-product')
+    if hideProduct.length and hideProduct.data('checked').toString == 'true'
+      hideProduct.attr('checked', false)
+      hideProduct.attr('data-checked', false)
+    else
+      hideProduct.attr('checked', true)
+      hideProduct.attr('data-checked', true)
+    element.trigger('keyup')
+    
   $('#page-content').on 'keyup', '.change_price', (evt) ->
     new_price = parseFloat($(this).val())
     quantity = parseFloat($(this).closest('tr').find('.quantity').val())

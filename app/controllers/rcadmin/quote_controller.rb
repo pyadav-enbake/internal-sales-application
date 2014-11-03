@@ -153,12 +153,14 @@ class Rcadmin::QuoteController < ApplicationController
     if params[:quote_product_id].present?
       @quote_product = Rcadmin::QuoteProduct.find(params[:quote_product_id])
     end
-    
     @quote_product.category_id = params[:category_id]
     @quote_product.product_id = params[:product_id]
     @quote_product.quantity = params[:quantity]
     @quote_product.total_price = params[:totalPrice]
     @quote_product.product_type = params[:product_type]
+    @quote_product.quote_price = params[:price]
+    @quote_product.hidden = params[:hideProduct]
+    @quote_product.header_option = params[:optionProduct] == "true" ? "Yes" : "No"
     @quote_product.save
      
     respond_to do |format|
@@ -168,9 +170,9 @@ class Rcadmin::QuoteController < ApplicationController
 
   def send_quote
     @quote = Rcadmin::Quote.find(session[:quote_id] )
-    @quote.quote_product.destroy_all
+    #@quote.quote_product.destroy_all
     @quote.status = 0
-    @quote.update_attributes(params[:quote])
+    #@quote.update_attributes(params[:quote])
     @customer = @quote.customer
     WelcomeMailer.send_quote_mail_customer(@quote.id).deliver
     @quote.sent_to_client!
@@ -301,21 +303,20 @@ class Rcadmin::QuoteController < ApplicationController
   end
 
   def quote_preview
-      @quote.quote_product.destroy_all
+      #@quote.quote_product.destroy_all
       @quote.status = 0
-      @quote.update_attributes(params[:quote])
+      
+      #@quote.update_attributes(params[:quote])
        # To handle if delivery is false
-       unless params[:quote][:deliver].present?
-       @quote.update_attributes(:deliver => false)
-       end
-
+       @quote.deliver = params[:quote][:deliver].present? ? true : false
+      @quote.update_attributes(:notes => params[:quote][:notes], :delivery_date => params[:quote][:delivery_date] , :sales_closing_potential => params[:quote][:sales_closing_potential])
       @customer = @quote.customer
 
     if params.has_key?(:draft)
       redirect_to create_quote_path, notice: 'Your Quote has been saved as a draft.'
     else
       if params.has_key?(:calculator)
-        content = render_to_string(partial: 'rcadmin/quote/calculator', collection: @quote.quote_categories, as: :object)
+        content = render_to_string(partial: 'rcadmin/quote/calculator', collection: @quote.quote_categories.select{|i| i.product_total > 0.0}, as: :object)
         content += render_to_string(partial: 'rcadmin/quote/option_calculator')
         self.response_body = content
       else

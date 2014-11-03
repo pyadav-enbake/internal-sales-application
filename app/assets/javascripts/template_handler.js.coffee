@@ -66,7 +66,7 @@ class window.RoomCalculator
     $(@el).find('.percentage-total').text( @percentageValue().toFixed(2) )
     $(@el).find('.factor-total').text( @factorValue().toFixed(2) )
     $(@el).find('.factor-calculated-value').text( @factorValue().toFixed(2) )
-    $(@el).find('.cabinet-total').text( @cabinetTotal().toFixed(2) )
+    # $(@el).find('.cabinet-total').text( @cabinetTotal().toFixed(2) )
     $(@el).find('.pre-tax-total').text( @preTax().toFixed(2) )
     $(@el).find('.tax-total').text( @taxValue().toFixed(2) )
     $(@el).find('.subtotal-total').text( @subTotal().toFixed(2) )

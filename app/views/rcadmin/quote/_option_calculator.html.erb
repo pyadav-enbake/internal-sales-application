@@ -1,6 +1,6 @@
 <h1>OPTIONS</h1>
 <% shipping = 0.0 %>
-<% @quote.quote_categories.each do |quote_category| %>
+<% @quote.quote_categories.select{|i| i.options_product_total > 0.0}.each do |quote_category| %>
   <% category = quote_category.category %>
   <h2><%= category %></h2>
   <div class="row quote-categories <%= category.dom_class %>" data-category-class=" <%= category.dom_class %>">

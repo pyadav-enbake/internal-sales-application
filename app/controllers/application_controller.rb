@@ -65,7 +65,9 @@ class ApplicationController < ActionController::Base
   def authenticate
       if current_user
           #render :text => params.inspect and return false
-          if current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard') &&( params[:controller] == 'rcadmin/administrators' && current_user.id != params[:id].to_i)
+          if current_user.role == 'admin'
+            return true
+          elsif current_user.role == 'sales_admin' && (params[:controller] != 'rcadmin/customers' && params[:controller] != 'rcadmin/dashboard') &&( params[:controller] == 'rcadmin/administrators' && current_user.id != params[:id].to_i)
               redirect_to "/error404"
           end
           #if current_user.role == 'admin' && params[:controller] == 'rcadmin/customers'

@@ -298,7 +298,7 @@ $(window).load(function() {
       };
 
       this.percentage = function() {
-      	return roundUp( ( Number($('.quote-percentage').text() ) / 100.0 ) || 0.59);
+      	// return roundUp( ( Number($('.quote-percentage').text() ) / 100.0 ) || 0.59);
         return ( Number($('.quote-percentage').text() ) / 100.0  || 0.59);
       };
 

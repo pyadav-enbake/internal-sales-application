@@ -23,8 +23,9 @@ class window.RoomCalculator
     @roundUp Math.round( @productTotal() * @percentage() * @factor() + @miscs() + @corian() + @labor() )
 
   percentage: ->
-    @roundUp ( parseFloat( $(@el).find('.quote-percentage').text() ) / 100.0 ) || 0.59
-
+    # @roundUp ( parseFloat( $(@el).find('.quote-percentage').text() ) / 100.0 ) || 0.59
+    parseFloat( $(@el).find('.quote-percentage').text() ) / 100.0  || 0.59
+    
   factor: ->
     @roundUp parseFloat( $(@el).find('.factor-total').val() ) || 1.0
 

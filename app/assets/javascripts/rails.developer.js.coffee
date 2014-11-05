@@ -361,12 +361,14 @@ jQuery(window).load ->
 
 
     $('td.total').each ->
+      $(this).text('')
       productId = $(this).data('productId')
       $(this).attr('id', "#{productId}")
       $(this).removeAttr('klass')
       $(this).attr('klass', "#{productId}")
 
     $('td.editable').each ->
+      $(this).text('')
       productId = $(this).data('productId')
       $(this).removeAttr('klass')
       $(this).data('id', "#{productId}")
